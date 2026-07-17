@@ -101,3 +101,24 @@ after the per-zip shortlisting fix above.
 This is still an approximation, not an appraisal - it doesn't match comps
 by bed/bath count or condition, just by zip and percentile. Pull real,
 hand-picked comps before making an offer on anything this script surfaces.
+
+## Recurring check (`hourly_check.py`)
+
+A lighter-weight companion script for running on a schedule (Juan asked for
+hourly). It does NOT rebuild comps or re-enrich every listing every run -
+only a full `flip_scout_redfin.py` scan does that. Instead:
+
+- `comp_benchmarks_cache.json` caches ARV benchmarks; only rebuilt if older
+  than 7 days (`COMP_CACHE_MAX_AGE_DAYS`), since sold comps don't move
+  hour to hour and rebuilding them every run would be ~45 wasted requests
+- `seen_listings.json` tracks every listing URL already checked; each run
+  only searches active listings (cheap, no detail-page fetch) and diffs
+  against this set, so only genuinely new listings get enriched and scored
+- Writes `new_leads.json` only when something new clears the filters, and
+  deletes it if nothing does - the caller (a routine/cron resuming this
+  session) checks for that file's existence to decide whether to update the
+  report artifact and notify Juan, or stay silent
+
+Both cache files are committed back to the repo after each run so state
+survives across sessions - **without doing that, every run would think
+everything is "new" again.**
