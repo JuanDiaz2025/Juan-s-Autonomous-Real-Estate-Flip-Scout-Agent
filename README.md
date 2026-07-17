@@ -38,6 +38,11 @@ markup. `flip_scout_redfin.py` now:
   San Francisco (assigned a higher assumed ARV at the time) crowd out every
   other city before it was ever analyzed
 - Builds ARV from **real sold comps**, not a guess (see below)
+- Excludes listings whose own description says the home is already renovated
+  or move-in ready (`ALREADY_RENOVATED_FLAGS`) - a big spread on an
+  already-updated house just means it's underpriced vs. comps (a wholesale
+  play), not a flip opportunity, since there's no renovation left to add
+  value through
 
 ## ARV methodology
 

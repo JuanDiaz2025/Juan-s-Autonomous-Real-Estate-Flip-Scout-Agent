@@ -67,6 +67,18 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
                      '2 units', '3 units', '4 units', 'two-unit', 'multi-unit',
                      'tenancy in common']
 
+# Listing language indicating the flip has effectively already happened - no
+# renovation upside left for this buy box. Excluded regardless of score/spread,
+# since a big "spread" on an already-renovated house just means it's priced
+# below comps (a wholesale play), not a flip opportunity.
+ALREADY_RENOVATED_FLAGS = [
+    'beautifully updated', 'fully renovated', 'fully updated', 'move-in ready', 'move in ready',
+    'previously remodeled', 'thoughtfully updated', 'beautifully remodeled',
+    'extensive interior updates', 'extensive updates', 'studs-up', 'beautifully reimagined',
+    'updated kitchen', 'updated bath', 'remodeled kitchen', 'remodeled chef', 'designer finishes',
+    'newly remodeled', 'refurbished kitchen', 'reimagined home', 'contemporary design',
+]
+
 # ================================
 # REDFIN SCRAPER ENGINE
 # ================================
@@ -128,6 +140,7 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
                 'url': f"https://www.redfin.com{href}",
                 'status': 'Active',
                 'is_multi_unit': False,
+                'is_already_renovated': False,
             }
             if CONFIG['min_price'] <= price <= CONFIG['max_price'] and sqft > 0 and beds > 0:
                 listings.append(listing)
@@ -157,6 +170,9 @@ def enrich_detail(listing: Dict) -> Dict:
             any(flag in lower_text for flag in MULTI_UNIT_FLAGS)
             or bool(re.search(r'/\d+-\d+-', listing.get('url', '')))
         )
+        # Checked against the listing's OWN description only (not the wider
+        # page) to avoid false positives from unrelated nearby-homes copy.
+        listing['is_already_renovated'] = any(flag in desc.lower() for flag in ALREADY_RENOVATED_FLAGS)
 
         if lot:
             listing['lot_sqft'] = lot
@@ -412,7 +428,7 @@ def run_redfin_scout() -> List[Dict]:
 
     analyzed = []
     for l in shortlist:
-        if l.get('is_multi_unit'):
+        if l.get('is_multi_unit') or l.get('is_already_renovated'):
             continue
         financials = calculate_spread(l)
         if financials is None or financials['spread_percent'] < 0.10:
