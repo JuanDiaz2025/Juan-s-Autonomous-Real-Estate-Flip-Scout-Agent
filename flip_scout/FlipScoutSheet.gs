@@ -6,6 +6,9 @@
  * listing that's already a row here. Dedup key is the Redfin link (each
  * distinct listing has its own URL, so a relisting of the same address
  * later shows up as new, but the same still-active listing never repeats).
+ * Only profitable leads (Spread % >= MIN_SPREAD, 10% by default) are ever
+ * added - negative/marginal leads are filtered out before they reach the
+ * sheet, not after.
  *
  * SETUP (one time):
  *   1. Open your Google Sheet -> Extensions -> Apps Script.
@@ -19,6 +22,9 @@
  *   6. Flip Scout -> Enable Hourly Auto-Refresh : installs a trigger so
  *      this keeps happening on its own. Run this once; it's idempotent
  *      (safe to click again, won't create duplicate triggers).
+ *   7. Flip Scout -> Remove Non-Profitable Leads : a one-time backstop if
+ *      any negative/marginal rows are already in the sheet from before this
+ *      filter existed. Not needed on an ongoing basis.
  *
  * If Juan's repo branch ever changes (e.g. after this work merges to
  * main), update FEED_URL below to match - swap "claude/python-code-goal-nn6zec"
@@ -52,11 +58,14 @@ var COLUMNS = [
 ];
 
 var URL_COL_INDEX = COLUMNS.findIndex(function (c) { return c.key === 'url'; }) + 1; // 1-based
+var SPREAD_COL_INDEX = COLUMNS.findIndex(function (c) { return c.key === 'spread_percent'; }) + 1; // 1-based
+var MIN_SPREAD = 0.10; // Juan only wants profitable leads here - never negative/marginal ones
 
 function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Flip Scout')
     .addItem('Refresh Now', 'refreshFlipScoutSheet')
+    .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
     .addToUi();
@@ -97,7 +106,9 @@ function refreshFlipScoutSheet() {
     });
   }
 
-  var newLeads = leads.filter(function (lead) { return !existingUrls[lead.url]; });
+  var newLeads = leads.filter(function (lead) {
+    return !existingUrls[lead.url] && lead.spread_percent >= MIN_SPREAD;
+  });
 
   ss.toast(newLeads.length + ' new lead(s) found, ' + Object.keys(existingUrls).length + ' already in sheet.', 'Flip Scout', 5);
 
@@ -128,6 +139,46 @@ function refreshFlipScoutSheet() {
   sheet.getRange(1, 1).setNote('Last checked: ' + now +
     '\nFeed generated: ' + feed.generated_at +
     '\n' + newLeads.length + ' new lead(s) added this check.');
+}
+
+/**
+ * One-time cleanup: deletes any row already in the sheet with Spread % below
+ * MIN_SPREAD (10%), including negative ones. Only needed if rows were added
+ * before this profitability check existed (e.g. from an earlier CSV import,
+ * or a feed that hadn't been cleaned up yet) - refreshFlipScoutSheet now
+ * filters these out before they're ever added, so this is a backstop, not
+ * something you need to run regularly.
+ */
+function removeNonProfitableLeads() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    SpreadsheetApp.getUi().alert('No "' + SHEET_NAME + '" sheet found yet - run Refresh Now first.');
+    return;
+  }
+
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    SpreadsheetApp.getUi().alert('No leads to check.');
+    return;
+  }
+
+  var spreadValues = sheet.getRange(2, SPREAD_COL_INDEX, lastRow - 1, 1).getValues();
+  var rowsToDelete = [];
+  for (var i = 0; i < spreadValues.length; i++) {
+    var v = spreadValues[i][0];
+    if (typeof v === 'number' && v < MIN_SPREAD) {
+      rowsToDelete.push(i + 2); // +2: 1-based, plus header row
+    }
+  }
+
+  // delete bottom-up so row indices above don't shift as we go
+  rowsToDelete.sort(function (a, b) { return b - a; });
+  rowsToDelete.forEach(function (rowIndex) {
+    sheet.deleteRow(rowIndex);
+  });
+
+  SpreadsheetApp.getUi().alert(rowsToDelete.length + ' non-profitable lead(s) removed.');
 }
 
 var TRIGGER_HANDLER = 'refreshFlipScoutSheet';

@@ -146,6 +146,11 @@ def merge_into_sheets_feed(new_qualified, now_iso):
         if d["url"] in existing_urls:
             continue
         f = d["financials"]
+        if f["spread_percent"] < 0.10:
+            # belt-and-suspenders: Juan only wants profitable leads in the
+            # sheet, never negative/marginal ones. Callers should already
+            # filter this before reaching here, but don't rely on that.
+            continue
         feed["leads"].append({
             "score": d["score"], "address": d["address"], "city": d["city"], "zip": d["zip"],
             "beds": d["beds"], "baths": d["baths"], "sqft": d["sqft"],
