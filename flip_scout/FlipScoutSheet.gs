@@ -2,8 +2,10 @@
  * Flip Scout Agent -> Google Sheets sync.
  *
  * Pulls the latest leads from Juan's Flip Scout Agent repo (a public GitHub
- * repo) and writes them into this spreadsheet, either on demand (menu item)
- * or on a schedule (time-driven trigger you install once).
+ * repo) and APPENDS new ones into this spreadsheet - it never re-adds a
+ * listing that's already a row here. Dedup key is the Redfin link (each
+ * distinct listing has its own URL, so a relisting of the same address
+ * later shows up as new, but the same still-active listing never repeats).
  *
  * SETUP (one time):
  *   1. Open your Google Sheet -> Extensions -> Apps Script.
@@ -46,7 +48,10 @@ var COLUMNS = [
   { key: 'adu_potential', header: 'ADU Potential', format: '@' },
   { key: 'risks', header: 'Risks', format: '@' },
   { key: 'url', header: 'Redfin Link', format: '@' },
+  { key: 'first_added', header: 'First Added', format: '@' },
 ];
+
+var URL_COL_INDEX = COLUMNS.findIndex(function (c) { return c.key === 'url'; }) + 1; // 1-based
 
 function onOpen() {
   SpreadsheetApp.getUi()
@@ -69,45 +74,60 @@ function refreshFlipScoutSheet() {
 
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(SHEET_NAME);
-  if (!sheet) {
+  var isNewSheet = !sheet;
+  if (isNewSheet) {
     sheet = ss.insertSheet(SHEET_NAME);
   }
-  sheet.clear();
 
-  // header row
   var headers = COLUMNS.map(function (c) { return c.header; });
-  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-  sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-  sheet.setFrozenRows(1);
+  if (isNewSheet || sheet.getLastRow() === 0) {
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+    sheet.setFrozenRows(1);
+  }
 
-  if (leads.length === 0) {
-    sheet.getRange(2, 1).setValue('No qualifying leads in the feed right now.');
-    writeTimestamp(sheet, feed.generated_at, headers.length);
+  // build the set of listings already in the sheet (by Redfin link), so a
+  // still-active listing is never appended twice
+  var existingUrls = {};
+  var lastRow = sheet.getLastRow();
+  if (lastRow > 1) {
+    var existing = sheet.getRange(2, URL_COL_INDEX, lastRow - 1, 1).getValues();
+    existing.forEach(function (row) {
+      if (row[0]) existingUrls[row[0]] = true;
+    });
+  }
+
+  var newLeads = leads.filter(function (lead) { return !existingUrls[lead.url]; });
+
+  ss.toast(newLeads.length + ' new lead(s) found, ' + Object.keys(existingUrls).length + ' already in sheet.', 'Flip Scout', 5);
+
+  if (newLeads.length === 0) {
+    sheet.getRange(1, 1).setNote('Last checked: ' + new Date().toString() +
+      '\nFeed generated: ' + feed.generated_at + '\nNo new leads this check.');
     return;
   }
 
-  var rows = leads.map(function (lead) {
+  var now = new Date().toString();
+  var rows = newLeads.map(function (lead) {
     return COLUMNS.map(function (c) {
+      if (c.key === 'first_added') return now;
       var v = lead[c.key];
       if (c.key === 'adu_potential') return v ? 'Yes' : 'No';
       return v === undefined || v === null ? '' : v;
     });
   });
-  sheet.getRange(2, 1, rows.length, headers.length).setValues(rows);
 
-  // number formats per column
+  var startRow = sheet.getLastRow() + 1;
+  sheet.getRange(startRow, 1, rows.length, headers.length).setValues(rows);
+
   COLUMNS.forEach(function (c, i) {
-    sheet.getRange(2, i + 1, rows.length, 1).setNumberFormat(c.format);
+    sheet.getRange(startRow, i + 1, rows.length, 1).setNumberFormat(c.format);
   });
 
   sheet.autoResizeColumns(1, headers.length);
-  writeTimestamp(sheet, feed.generated_at, headers.length);
-}
-
-function writeTimestamp(sheet, generatedAt, lastCol) {
-  var noteRow = sheet.getLastRow() + 2;
-  sheet.getRange(noteRow, 1).setValue('Feed generated: ' + generatedAt);
-  sheet.getRange(noteRow + 1, 1).setValue('Sheet last refreshed: ' + new Date().toString());
+  sheet.getRange(1, 1).setNote('Last checked: ' + now +
+    '\nFeed generated: ' + feed.generated_at +
+    '\n' + newLeads.length + ' new lead(s) added this check.');
 }
 
 var TRIGGER_HANDLER = 'refreshFlipScoutSheet';
@@ -115,7 +135,7 @@ var TRIGGER_HANDLER = 'refreshFlipScoutSheet';
 function enableHourlyTrigger() {
   disableHourlyTrigger(); // avoid duplicates if clicked more than once
   ScriptApp.newTrigger(TRIGGER_HANDLER).timeBased().everyHours(1).create();
-  SpreadsheetApp.getUi().alert('Hourly auto-refresh enabled. This sheet will pull fresh leads every hour.');
+  SpreadsheetApp.getUi().alert('Hourly auto-refresh enabled. New leads will be appended every hour - existing rows are never touched or duplicated.');
 }
 
 function disableHourlyTrigger() {
