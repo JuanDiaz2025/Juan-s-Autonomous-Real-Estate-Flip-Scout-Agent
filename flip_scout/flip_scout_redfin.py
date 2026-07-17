@@ -42,9 +42,29 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 CONFIG = {
     "max_price": 1_500_000,
     "min_price": 400_000,
+    # SF (94124 Bayview, 94112 Excelsior, 94134 Portola, 94118 Inner Richmond,
+    #     94116/94122 Sunset, 94110 Mission), San Mateo (94401-94403),
+    # Sunnyvale (94085-94088), Daly City (94014/94015), South SF (94080),
+    # SF Outer Richmond (94121) - all a distinct, expensive Peninsula/SF
+    # market that's largely already-renovated or thin on inventory. See
+    # East Bay block below for a genuinely different (cheaper, more
+    # distressed) submarket.
     "target_zips": ["94124", "94112", "94134", "94118", "94116", "94122", "94110",
                      "94401", "94402", "94403", "94085", "94086", "94087", "94088",
-                     "94014", "94015", "94080"],
+                     "94014", "94015", "94080", "94121",
+                     # Oakland (94601 Fruitvale, 94602 Redwood Heights/Laurel,
+                     #  94603 Elmhurst, 94605 Eastmont/Hills, 94606 San Antonio,
+                     #  94609 Temescal, 94610 Grand Lake, 94619 Redwood Heights,
+                     #  94621 Deep East Oakland)
+                     "94601", "94602", "94603", "94605", "94606", "94609", "94610",
+                     "94619", "94621",
+                     # Richmond, CA (East Bay - a different, cheaper city than
+                     # SF's "Richmond District" neighborhood above)
+                     "94801", "94804", "94805", "94806",
+                     # Berkeley (94702/94703 - South/West, more affordable)
+                     "94702", "94703",
+                     # San Leandro
+                     "94577", "94578"],
     "min_spread_percent": 0.20,
     "preferred_spread_percent": 0.25,
     "reno_cost_per_sqft": 350,
@@ -77,6 +97,23 @@ ALREADY_RENOVATED_FLAGS = [
     'extensive interior updates', 'extensive updates', 'studs-up', 'beautifully reimagined',
     'updated kitchen', 'updated bath', 'remodeled kitchen', 'remodeled chef', 'designer finishes',
     'newly remodeled', 'refurbished kitchen', 'reimagined home', 'contemporary design',
+    'in great condition', 'in move-in condition', 'move-in condition', 'has been updated',
+    'turnkey', 'tastefully remodeled', 'recently updated', 'recently renovated',
+    'recently remodeled', 'were remodeled', 'was remodeled',
+]
+# Deliberately NOT included: "refreshed" alone - sellers routinely do light
+# cosmetic staging (paint, cleaning) before listing a genuine fixer, and that
+# alone doesn't mean the real reno work (kitchen/bath/systems) is done. Only
+# flag it if paired with something specific ("kitchen was refreshed", etc);
+# a bare "thoughtfully refreshed" is too ambiguous to exclude on.
+
+# Listing describes a vacant lot, teardown, or development/entitlement play -
+# there's no existing structure to renovate, so the reno-cost-per-sqft model
+# doesn't apply and this isn't the buy-fixer-sell-renovated thesis at all.
+VACANT_LAND_FLAGS = [
+    'planned for a', 'existing plans', 'development project', 'vacant lot',
+    'build your dream home on this lot', 'proposed floor plan', 'lot for sale',
+    'buildable lot',
 ]
 
 # ================================
@@ -141,6 +178,7 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
                 'status': 'Active',
                 'is_multi_unit': False,
                 'is_already_renovated': False,
+                'is_vacant_land': False,
             }
             if CONFIG['min_price'] <= price <= CONFIG['max_price'] and sqft > 0 and beds > 0:
                 listings.append(listing)
@@ -173,6 +211,7 @@ def enrich_detail(listing: Dict) -> Dict:
         # Checked against the listing's OWN description only (not the wider
         # page) to avoid false positives from unrelated nearby-homes copy.
         listing['is_already_renovated'] = any(flag in desc.lower() for flag in ALREADY_RENOVATED_FLAGS)
+        listing['is_vacant_land'] = any(flag in desc.lower() for flag in VACANT_LAND_FLAGS)
 
         if lot:
             listing['lot_sqft'] = lot
@@ -428,7 +467,7 @@ def run_redfin_scout() -> List[Dict]:
 
     analyzed = []
     for l in shortlist:
-        if l.get('is_multi_unit') or l.get('is_already_renovated'):
+        if l.get('is_multi_unit') or l.get('is_already_renovated') or l.get('is_vacant_land'):
             continue
         financials = calculate_spread(l)
         if financials is None or financials['spread_percent'] < 0.10:

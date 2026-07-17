@@ -42,7 +42,35 @@ markup. `flip_scout_redfin.py` now:
   or move-in ready (`ALREADY_RENOVATED_FLAGS`) - a big spread on an
   already-updated house just means it's underpriced vs. comps (a wholesale
   play), not a flip opportunity, since there's no renovation left to add
-  value through
+  value through. Only unambiguous phrasing counts ("fully renovated",
+  "remodeled kitchen", "recently remodeled") - a bare "refreshed" is
+  deliberately NOT flagged, since sellers routinely do light cosmetic
+  staging on a genuine fixer without having done the real reno work
+- Also excludes listings describing a vacant lot or development/entitlement
+  play (`VACANT_LAND_FLAGS`, e.g. "planned for a 5-bedroom residence...
+  existing plans may be transferable") - there's no existing structure for
+  the reno-cost model to apply to
+
+## Buy box
+
+Covers 9 cities / 35 zips: San Francisco, San Mateo, Sunnyvale, Daly City,
+South San Francisco, **Oakland, Richmond CA, Berkeley, and San Leandro**.
+Richmond CA (East Bay, zips 94801/94804-94806) is a different city than SF's
+"Richmond District" neighborhood (zip 94118/94121) - don't confuse the two.
+
+Oakland/Berkeley/East Bay was added because it's a genuinely different,
+cheaper submarket than the Peninsula/SF: real comps there run $510-$1,241/sqft
+vs. $860-$1,928/sqft on the Peninsula/SF side, and SF's own Richmond District
+turned out to have the priciest comps in the whole scan with almost no
+inventory under $1.5M - checking a market against its own comps rather than
+assuming similarity to a neighboring one is exactly why the East Bay run
+surfaced 8 genuine fixer candidates.
+
+One open ARV caveat found in the East Bay run: the flat $/sqft-percentile
+model overstates value for outlier-large homes (a 5,000+ sqft house priced
+off the same $/sqft as typical 1,800 sqft comps in its zip) - manually verify
+against size-matched comps before trusting a spread on anything unusually
+large for its zip.
 
 ## ARV methodology
 

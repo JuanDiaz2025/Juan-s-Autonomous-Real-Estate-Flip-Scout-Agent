@@ -1,0 +1,75 @@
+Juan's Flip Scout Report - July 17, 2026
+============================================================
+
+LEAD #1 - Score: 9/10
+Address: 533 31st St, Oakland, CA 94609
+Price: $799,000
+ARV (comp-based): $3,256,000
+Net Spread: $1,153,000 (54.9%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/Oakland/533-31st-St-94609/home/569809
+----------------------------------------
+
+LEAD #2 - Score: 9/10
+Address: 604 56th St, Oakland, CA 94609
+Price: $725,000
+ARV (comp-based): $2,785,000
+Net Spread: $941,000 (51.0%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/Oakland/604-56th-St-94609/home/1575850
+----------------------------------------
+
+LEAD #3 - Score: 8/10
+Address: 2745 Butters Dr, Oakland, CA 94602
+Price: $1,175,000
+ARV (comp-based): $5,537,000
+Net Spread: $2,564,000 (86.3%)
+Risks: 
+Link: https://www.redfin.com/CA/Oakland/2745-Butters-Dr-94602/home/168852884
+----------------------------------------
+
+LEAD #4 - Score: 8/10
+Address: 2775 Butters Dr, Oakland, CA 94602
+Price: $1,049,900
+ARV (comp-based): $3,370,000
+Net Spread: $1,197,000 (55.1%)
+Risks: 
+Link: https://www.redfin.com/CA/Oakland/2775-Butters-Dr-94602/home/1516594
+----------------------------------------
+
+LEAD #5 - Score: 7/10
+Address: 6437 Telegraph Ave, Oakland, CA 94609
+Price: $1,325,000
+ARV (comp-based): $3,223,000
+Net Spread: $559,000 (21.0%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/Oakland/6437-Telegraph-Ave-94609/home/1641411
+----------------------------------------
+
+LEAD #6 - Score: 4/10
+Address: 617 Boulevard Way, Piedmont, CA 94610
+Price: $1,199,000
+ARV (comp-based): $2,403,000
+Net Spread: $318,000 (15.3%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/Piedmont/617-Boulevard-Way-94610/home/1494784
+----------------------------------------
+
+LEAD #7 - Score: 3/10
+Address: 635 Longridge Rd, Oakland, CA 94610
+Price: $1,275,000
+ARV (comp-based): $2,955,000
+Net Spread: $296,000 (11.1%)
+Risks: 
+Link: https://www.redfin.com/CA/Oakland/635-Longridge-Rd-94610/home/1403592
+----------------------------------------
+
+LEAD #8 - Score: 2/10
+Address: 1134 Chatham Rd, Oakland, CA 94610
+Price: $875,000
+ARV (comp-based): $1,697,000
+Net Spread: $194,000 (12.9%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/Oakland/1134-Chatham-Rd-94610/home/1576365
+----------------------------------------
+
