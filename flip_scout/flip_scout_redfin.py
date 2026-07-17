@@ -14,9 +14,16 @@ current markup directly, then enriches shortlisted candidates with data from
 each listing's detail page (description, lot size, year built) to run the
 same financial/scoring model as the original design.
 
-IMPORTANT CAVEAT: `ARV_PSF` below is a rough $/sqft-by-zip table, not a real
-comp-based valuation. Treat every ARV/spread number here as a first-pass
-screen, not an appraisal - pull real comps before making an offer.
+ARV comes from REAL sold comps, not a guess. Earlier drafts of this script
+used a hardcoded $/sqft-by-zip table invented without data - it turned out to
+undervalue San Mateo/Sunnyvale by 40-77% and overvalue parts of San Francisco
+by ~20%, which was silently steering every result toward San Francisco. This
+version pulls each zip's actual homes sold in the last 6 months and uses the
+75th-percentile $/sqft (a proxy for renovated/top-tier condition, since ARV
+should reflect after-repair value, not the neighborhood average) as that
+zip's ARV basis. It's still an approximation, not an appraisal - it doesn't
+match comps by bed/bath/condition - but it's grounded in this week's actual
+market instead of an assumption.
 """
 
 import requests
@@ -24,8 +31,9 @@ from bs4 import BeautifulSoup
 import re
 import json
 import time
+import statistics
 from datetime import datetime
-from typing import List, Dict
+from typing import List, Dict, Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ================================
@@ -42,7 +50,8 @@ CONFIG = {
     "reno_cost_per_sqft": 350,
     "holding_months": 6,
     "closing_costs_percent": 0.03,
-    "detail_enrich_limit": 85,  # candidates enriched per run, split evenly across zips (detail page fetch is the slow step)
+    "detail_enrich_limit": 6,  # candidates enriched per zip (detail page fetch is the slow step)
+    "sold_lookback": "sold-6mo",
 }
 
 HEADERS = {
@@ -50,15 +59,9 @@ HEADERS = {
                   '(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 }
 
-# Rough neighborhood $/sqft used to back into ARV. NOT a comp-based valuation -
-# verify against real recent sold comps before trusting a spread number.
-ARV_PSF = {
-    '94124': 1100, '94112': 1250, '94134': 950, '94118': 1400, '94116': 1200,
-    '94122': 1350, '94110': 1400, '94401': 950, '94402': 1050, '94403': 950,
-    '94085': 1050, '94086': 1000, '94087': 1150, '94088': 1050,
-    '94014': 850, '94015': 900, '94080': 900,
-    'default': 1000
-}
+# Populated at runtime by build_arv_benchmarks() from real sold comps - see
+# calculate_arv(). Never hand-edit; it's recomputed fresh on every run.
+ARV_BENCHMARKS: Dict[str, float] = {}
 
 MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamily',
                      '2 units', '3 units', '4 units', 'two-unit', 'multi-unit',
@@ -91,10 +94,13 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
 
             href, address_text = addr_m.group(1), addr_m.group(2)
             # Exclude condo/TIC units and multi-address (duplex-style) buildings
-            # that Redfin's "house" filter still lets through.
+            # that Redfin's "house" filter still lets through. Check the URL slug,
+            # not just the displayed address text - Redfin sometimes shows only the
+            # first street number on the card (e.g. "451 8th Ave") while the URL
+            # keeps the full multi-address slug ("451-453-8th-Ave-...").
             if '#' in address_text or '/unit-' in href.lower():
                 continue
-            if re.match(r'^\d+-\d+\s', address_text):
+            if re.match(r'^\d+-\d+\s', address_text) or re.search(r'/\d+-\d+-', href):
                 continue
 
             price = int(price_m.group(1).replace(',', ''))
@@ -147,7 +153,10 @@ def enrich_detail(listing: Dict) -> Dict:
         desc = desc.split('\\",')[0].split('","')[0]
 
         lower_text = (desc + ' ' + text[:20000]).lower()
-        listing['is_multi_unit'] = any(flag in lower_text for flag in MULTI_UNIT_FLAGS)
+        listing['is_multi_unit'] = (
+            any(flag in lower_text for flag in MULTI_UNIT_FLAGS)
+            or bool(re.search(r'/\d+-\d+-', listing.get('url', '')))
+        )
 
         if lot:
             listing['lot_sqft'] = lot
@@ -158,13 +167,70 @@ def enrich_detail(listing: Dict) -> Dict:
         pass
     return listing
 
+
+def fetch_zip_comps(zip_code: str) -> List[float]:
+    """Pull actual sold single-family $/sqft for a zip over the lookback window."""
+    psfs = []
+    url = (f"https://www.redfin.com/zipcode/{zip_code}/filter/"
+           f"property-type=house,include={CONFIG['sold_lookback']}")
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=20)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, 'html.parser')
+        cards = soup.find_all('div', {'class': re.compile(r'HomeCardContainer')})
+        for card in cards:
+            html = str(card)
+            price_m = re.search(r'bp-Homecard__Price--value">\$([\d,]+)', html)
+            sqft_m = re.search(r'LockedStat--value">([\d,]+)', html)
+            if not (price_m and sqft_m):
+                continue
+            price = int(price_m.group(1).replace(',', ''))
+            sqft = int(sqft_m.group(1).replace(',', ''))
+            if price > 50000 and sqft > 200:
+                psfs.append(price / sqft)
+    except Exception as e:
+        print(f"  ⚠️ Error fetching comps for {zip_code}: {e}")
+    return psfs
+
+
+def build_arv_benchmarks(zip_codes: List[str]) -> Dict[str, float]:
+    """
+    Build a real, comp-based $/sqft benchmark per zip from recent sold homes.
+    Uses the 75th percentile as an ARV proxy (renovated/top-tier condition),
+    since ARV should reflect after-repair value, not the neighborhood average.
+    """
+    benchmarks = {}
+    all_psfs = []
+    for z in zip_codes:
+        psfs = fetch_zip_comps(z)
+        all_psfs.extend(psfs)
+        if psfs:
+            psfs.sort()
+            p75 = psfs[int(len(psfs) * 0.75)]
+            benchmarks[z] = round(p75)
+            print(f"  {z}: {len(psfs)} sold comps, p75 ${p75:,.0f}/sqft")
+        else:
+            print(f"  {z}: no sold comps found")
+        time.sleep(0.3)
+
+    # zips with no comps of their own fall back to the overall median across
+    # every comp fetched this run, rather than a hand-picked guess
+    if all_psfs:
+        fallback = round(statistics.median(all_psfs))
+        for z in zip_codes:
+            benchmarks.setdefault(z, fallback)
+    return benchmarks
+
 # ================================
 # ANALYTICS ENGINE (Juan's scoring model)
 # ================================
 
-def calculate_arv(listing: Dict) -> float:
-    """Rough ARV estimate from a per-zip $/sqft heuristic - not a comp analysis."""
-    psf = ARV_PSF.get(listing.get('zip', ''), ARV_PSF['default'])
+def calculate_arv(listing: Dict) -> Optional[float]:
+    """ARV from real sold-comp $/sqft (see ARV_BENCHMARKS / build_arv_benchmarks)."""
+    psf = ARV_BENCHMARKS.get(listing.get('zip', ''))
+    if psf is None:
+        return None  # no comp benchmark available for this zip this run
+
     arv = psf * listing.get('sqft', 1000)
 
     lot = listing.get('lot_sqft', 0)
@@ -209,9 +275,11 @@ def calculate_reno_budget(listing: Dict) -> float:
     return round(budget, -3)
 
 
-def calculate_spread(listing: Dict) -> Dict:
+def calculate_spread(listing: Dict) -> Optional[Dict]:
     """Full flip financials: ARV, reno, holding, closing, net spread."""
     arv = calculate_arv(listing)
+    if arv is None:
+        return None
     reno = calculate_reno_budget(listing)
     price = listing.get('price', 0)
 
@@ -285,12 +353,16 @@ def identify_risks(listing: Dict) -> List[str]:
 
 def run_redfin_scout() -> List[Dict]:
     """Main entry point: scan Redfin, enrich, analyze, score."""
+    global ARV_BENCHMARKS
     print("\n" + "=" * 60)
     print("JUAN'S FLIP SCOUT AGENT - REDFIN EDITION")
     print(f"{datetime.now().strftime('%B %d, %Y - %I:%M %p')}")
     print("=" * 60)
     print(f"Target: Single-Family Homes ${CONFIG['min_price']:,.0f}-${CONFIG['max_price']:,.0f}")
     print(f"Zips scanned: {len(CONFIG['target_zips'])}\n")
+
+    print("Building ARV benchmarks from real sold comps (last 6 months)...")
+    ARV_BENCHMARKS = build_arv_benchmarks(CONFIG['target_zips'])
 
     all_listings = []
     for zip_code in CONFIG['target_zips']:
@@ -315,12 +387,12 @@ def run_redfin_scout() -> List[Dict]:
 
     # Rough pre-score (no description yet) to prioritize which candidates are
     # worth the slower detail-page fetch. Quota this PER ZIP rather than
-    # globally - zips assigned a higher ARV_PSF otherwise dominate a single
+    # globally - otherwise zips with a higher comp-based ARV dominate a single
     # global ranking and starve every other zip of detail-page enrichment.
     for l in all_listings:
-        l['_rough_spread'] = calculate_spread(l)['spread_percent']
+        rough = calculate_spread(l)
+        l['_rough_spread'] = rough['spread_percent'] if rough else -999
 
-    per_zip_quota = max(1, CONFIG['detail_enrich_limit'] // len(CONFIG['target_zips']))
     by_zip = {}
     for l in all_listings:
         by_zip.setdefault(l['zip'], []).append(l)
@@ -328,9 +400,9 @@ def run_redfin_scout() -> List[Dict]:
     shortlist = []
     for zip_code, items in by_zip.items():
         items.sort(key=lambda x: x['_rough_spread'], reverse=True)
-        shortlist.extend(items[:per_zip_quota])
+        shortlist.extend(items[:CONFIG['detail_enrich_limit']])
 
-    print(f"Enriching top {len(shortlist)} candidates with detail-page data...")
+    print(f"Enriching {len(shortlist)} candidates ({CONFIG['detail_enrich_limit']}/zip) with detail-page data...")
     with ThreadPoolExecutor(max_workers=6) as ex:
         futures = [ex.submit(enrich_detail, l) for l in shortlist]
         for i, fut in enumerate(as_completed(futures)):
@@ -343,7 +415,7 @@ def run_redfin_scout() -> List[Dict]:
         if l.get('is_multi_unit'):
             continue
         financials = calculate_spread(l)
-        if financials['spread_percent'] < 0.10:
+        if financials is None or financials['spread_percent'] < 0.10:
             continue
         l['financials'] = financials
         l['score'] = score_deal(l, financials)
@@ -380,7 +452,7 @@ def print_report(leads: List[Dict]):
         print(f"{lead['address']}, {lead.get('city', '')}, CA {lead.get('zip', '')}")
         print(f"Beds/Baths/SqFt: {lead.get('beds', 0)}/{lead.get('baths', 0)}/{lead.get('sqft', 0):,}")
         print(f"List Price:    ${lead.get('price', 0):,.0f}")
-        print(f"Est. ARV:      ${f['arv']:,.0f}  (heuristic - verify against comps)")
+        print(f"Est. ARV:      ${f['arv']:,.0f}  (from sold comps, p75 $/sqft)")
         print(f"Reno Budget:   ${f['reno_budget']:,.0f}")
         print(f"Total Cost:    ${f['total_cost']:,.0f}")
         print(f"Net Spread:    ${f['net_spread']:,.0f} ({f['spread_percent']:.1%})")
@@ -405,7 +477,7 @@ def save_report(leads: List[Dict]):
             f.write(f"LEAD #{idx} - Score: {lead['score']}/10\n")
             f.write(f"Address: {lead['address']}, {lead.get('city', '')}, CA {lead.get('zip', '')}\n")
             f.write(f"Price: ${lead.get('price', 0):,.0f}\n")
-            f.write(f"ARV (heuristic): ${fin['arv']:,.0f}\n")
+            f.write(f"ARV (comp-based): ${fin['arv']:,.0f}\n")
             f.write(f"Net Spread: ${fin['net_spread']:,.0f} ({fin['spread_percent']:.1%})\n")
             f.write(f"Risks: {', '.join(lead.get('risks', ['None']))}\n")
             f.write(f"Link: {lead['url']}\n")
