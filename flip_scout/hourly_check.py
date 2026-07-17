@@ -121,10 +121,46 @@ def main(now_iso, now_ts, parse_iso):
         for d in qualified:
             print(f"  {d['score']}/10  {d['address']}, {d['city']} {d['zip']}  "
                   f"${d['price']:,}  spread {d['financials']['spread_percent']:.1%}  {d['url']}")
+        merge_into_sheets_feed(qualified, now_iso)
     else:
         if os.path.exists(os.path.join(HERE, "new_leads.json")):
             os.remove(os.path.join(HERE, "new_leads.json"))
         print("\nNo new leads cleared the filters this run.")
+
+
+FEED_PATH = os.path.join(HERE, "leads_for_sheets.json")
+
+
+def merge_into_sheets_feed(new_qualified, now_iso):
+    """Append newly-qualified leads into the consolidated feed the Google
+    Apps Script reads (leads_for_sheets.json), deduped by URL. This is the
+    file that drives Juan's spreadsheet - keep it in this flat, sheet-ready
+    row shape, not the raw nested listing dicts."""
+    feed = {"generated_at": now_iso, "leads": []}
+    if os.path.exists(FEED_PATH):
+        feed = json.load(open(FEED_PATH))
+
+    existing_urls = {row["url"] for row in feed["leads"]}
+    for d in new_qualified:
+        if d["url"] in existing_urls:
+            continue
+        f = d["financials"]
+        feed["leads"].append({
+            "score": d["score"], "address": d["address"], "city": d["city"], "zip": d["zip"],
+            "beds": d["beds"], "baths": d["baths"], "sqft": d["sqft"],
+            "lot_sqft": d.get("lot_sqft", 0), "year_built": d.get("year_built", ""),
+            "price": d["price"], "arv": f["arv"], "reno_budget": f["reno_budget"],
+            "holding_costs": f["holding_costs"], "total_cost": f["total_cost"],
+            "net_spread": f["net_spread"], "spread_percent": round(f["spread_percent"], 4),
+            "adu_potential": bool(d.get("adu_potential")),
+            "risks": "; ".join(d.get("risks", [])) or "None",
+            "url": d["url"],
+        })
+
+    feed["leads"].sort(key=lambda r: (r["score"], r["spread_percent"]), reverse=True)
+    feed["generated_at"] = now_iso
+    json.dump(feed, open(FEED_PATH, "w"), indent=2)
+    print(f"leads_for_sheets.json updated - {len(feed['leads'])} total leads in feed")
 
 
 if __name__ == "__main__":
