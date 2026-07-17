@@ -56,6 +56,12 @@ CONFIG = {
                      "94010", "94014", "94015", "94030", "94061", "94062", "94063",
                      "94065", "94066", "94070", "94080",
                      "94401", "94402", "94403", "94404",
+                     # Rest of San Mateo Co. for full Peninsula coverage:
+                     # 94002 Belmont, 94005 Brisbane, 94044 Pacifica,
+                     # 94025 Menlo Park, 94027 Atherton, 94019 Half Moon Bay
+                     # (Hillsborough shares 94010 w/ Burlingame, Woodside
+                     # shares 94062 w/ Redwood City - already covered above)
+                     "94002", "94005", "94044", "94025", "94027", "94019",
                      # Sunnyvale
                      "94085", "94086", "94087", "94088",
                      # Oakland - split into Juan's own sub-regions:

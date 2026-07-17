@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T21:41:27.229187Z",
+  "generated_at": "2026-07-17T23:21:32.391420Z",
   "leads": [
     {
       "score": 10,
@@ -147,6 +147,48 @@
       "adu_potential": true,
       "risks": "Pre-1940 construction - expect old wiring/plumbing",
       "url": "https://www.redfin.com/CA/San-Francisco/1135-Naples-St-94112/home/2034856"
+    },
+    {
+      "score": 8,
+      "address": "189 Kent Rd",
+      "city": "Pacifica",
+      "zip": "94044",
+      "beds": 6.0,
+      "baths": 4.5,
+      "sqft": 3910,
+      "lot_sqft": 9180,
+      "year_built": 2003,
+      "price": 1500000,
+      "arv": 4030000.0,
+      "reno_budget": 1150000.0,
+      "holding_costs": 90000.0,
+      "total_cost": 2906000.0,
+      "net_spread": 1124000.0,
+      "spread_percent": 0.3868,
+      "adu_potential": true,
+      "risks": "LOW CONFIDENCE - no fixer/distress language in listing; large home vs. zip comps, flat $/sqft ARV likely overstated",
+      "url": "https://www.redfin.com/CA/Pacifica/189-Kent-Rd-94044/home/1086239"
+    },
+    {
+      "score": 8,
+      "address": "100 Palmetto Ave",
+      "city": "Pacifica",
+      "zip": "94044",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 3000,
+      "lot_sqft": 190357,
+      "year_built": 0,
+      "price": 1200000,
+      "arv": 2945000.0,
+      "reno_budget": 882000.0,
+      "holding_costs": 72000.0,
+      "total_cost": 2278000.0,
+      "net_spread": 667000.0,
+      "spread_percent": 0.2926,
+      "adu_potential": true,
+      "risks": "LOW CONFIDENCE - no fixer/distress language in listing; large home vs. zip comps, flat $/sqft ARV likely overstated",
+      "url": "https://www.redfin.com/CA/Pacifica/100-Palmetto-Ave-94044/home/1290732"
     },
     {
       "score": 7,

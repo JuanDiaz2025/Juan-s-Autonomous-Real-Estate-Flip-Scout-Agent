@@ -53,11 +53,31 @@ markup. `flip_scout_redfin.py` now:
 
 ## Buy box
 
-Covers 58 zips across San Francisco, the Peninsula (San Mateo Co.),
-Sunnyvale, Oakland (incl. West/North Oakland sub-regions), Richmond CA,
-Berkeley, San Leandro, and San Jose. Richmond CA (East Bay, zips
+Covers 64 zips across San Francisco, the full Peninsula (all of San Mateo
+Co.), Sunnyvale, Oakland (incl. West/North Oakland sub-regions), Richmond
+CA, Berkeley, San Leandro, and San Jose. Richmond CA (East Bay, zips
 94801/94804-94806) is a different city than SF's "Richmond District"
 neighborhood (zip 94118/94121) - don't confuse the two.
+
+Rounded out San Mateo Co. to full coverage: Belmont (94002), Brisbane
+(94005), Pacifica (94044), Menlo Park (94025), Atherton (94027), Half Moon
+Bay (94019). Hillsborough and Woodside don't get their own zips - they
+share 94010 (with Burlingame) and 94062 (with Redwood City) respectively,
+both already covered.
+
+Two findings from this pass worth knowing:
+- **Atherton (94027) has zero single-family listings under $1.5M at all**
+  right now - every "candidate" Redfin's zip search returned actually
+  belonged to a neighboring zip once its real address was parsed. Real
+  comps there run $2,567/sqft (the most expensive zip in the whole scan),
+  so a $1.5M cap effectively excludes the entire town. Not a scraping gap.
+- The only two leads that cleared the filters here (189 Kent Rd, 100
+  Palmetto Ave, both Pacifica) have **no fixer/distress language at all**
+  in their listings - they read as oceanfront luxury copy ("gourmet
+  kitchen," "iconic residence") - and both are oversized for their zip's
+  typical comp (3,000-3,900 sqft), which is the exact pattern where the
+  flat $/sqft ARV model is known to overstate value. Flagged low-confidence
+  in the feed rather than presented as solid picks.
 
 Juan's own Peninsula/Oakland regional list (added directly to
 `target_zips`, verbatim zips): Peninsula (San Mateo Co.) 94010, 94014,
