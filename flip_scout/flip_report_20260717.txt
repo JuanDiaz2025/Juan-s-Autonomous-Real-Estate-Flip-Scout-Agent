@@ -1,0 +1,66 @@
+Juan's Flip Scout Report - July 17, 2026
+============================================================
+
+LEAD #1 - Score: 8/10
+Address: 1135 Naples St, San Francisco, CA 94112
+Price: $1,099,000
+ARV (heuristic): $3,392,000
+Net Spread: $1,388,000 (69.3%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/1135-Naples-St-94112/home/2034856
+----------------------------------------
+
+LEAD #2 - Score: 8/10
+Address: 759 Lakeview Ave, San Francisco, CA 94112
+Price: $1,399,000
+ARV (heuristic): $2,887,000
+Net Spread: $676,000 (30.6%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/759-Lakeview-Ave-94112/home/827183
+----------------------------------------
+
+LEAD #3 - Score: 3/10
+Address: 208 Harkness Ave, San Francisco, CA 94134
+Price: $950,000
+ARV (heuristic): $1,685,000
+Net Spread: $244,000 (16.9%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Francisco/208-Harkness-Ave-94134/home/780052
+----------------------------------------
+
+LEAD #4 - Score: 2/10
+Address: 1 Mccarthy Ave, San Francisco, CA 94134
+Price: $850,000
+ARV (heuristic): $1,721,000
+Net Spread: $236,000 (15.9%)
+Risks: Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/1-McCarthy-Ave-94134/home/2001460
+----------------------------------------
+
+LEAD #5 - Score: 2/10
+Address: 1231 Silver Ave, San Francisco, CA 94134
+Price: $717,000
+ARV (heuristic): $1,211,000
+Net Spread: $-143,000 (-10.6%)
+Risks: Pre-1940 construction - expect old wiring/plumbing, Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/1231-Silver-Ave-94134/home/1981453
+----------------------------------------
+
+LEAD #6 - Score: 1/10
+Address: 473 Leland Ave, San Francisco, CA 94134
+Price: $1,349,000
+ARV (heuristic): $2,594,000
+Net Spread: $282,000 (12.2%)
+Risks: Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/473-Leland-Ave-94134/home/1141557
+----------------------------------------
+
+LEAD #7 - Score: 1/10
+Address: 78 Tioga Ave, San Francisco, CA 94134
+Price: $898,000
+ARV (heuristic): $1,471,000
+Net Spread: $138,000 (10.4%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/78-Tioga-Ave-94134/home/1544094
+----------------------------------------
+
