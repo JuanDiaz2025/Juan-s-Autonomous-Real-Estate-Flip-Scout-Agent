@@ -42,7 +42,7 @@ CONFIG = {
     "reno_cost_per_sqft": 350,
     "holding_months": 6,
     "closing_costs_percent": 0.03,
-    "detail_enrich_limit": 60,  # candidates enriched per run (detail page fetch is the slow step)
+    "detail_enrich_limit": 85,  # candidates enriched per run, split evenly across zips (detail page fetch is the slow step)
 }
 
 HEADERS = {
@@ -314,11 +314,21 @@ def run_redfin_scout() -> List[Dict]:
         return []
 
     # Rough pre-score (no description yet) to prioritize which candidates are
-    # worth the slower detail-page fetch.
+    # worth the slower detail-page fetch. Quota this PER ZIP rather than
+    # globally - zips assigned a higher ARV_PSF otherwise dominate a single
+    # global ranking and starve every other zip of detail-page enrichment.
     for l in all_listings:
         l['_rough_spread'] = calculate_spread(l)['spread_percent']
-    all_listings.sort(key=lambda x: x['_rough_spread'], reverse=True)
-    shortlist = all_listings[:CONFIG['detail_enrich_limit']]
+
+    per_zip_quota = max(1, CONFIG['detail_enrich_limit'] // len(CONFIG['target_zips']))
+    by_zip = {}
+    for l in all_listings:
+        by_zip.setdefault(l['zip'], []).append(l)
+
+    shortlist = []
+    for zip_code, items in by_zip.items():
+        items.sort(key=lambda x: x['_rough_spread'], reverse=True)
+        shortlist.extend(items[:per_zip_quota])
 
     print(f"Enriching top {len(shortlist)} candidates with detail-page data...")
     with ThreadPoolExecutor(max_workers=6) as ex:

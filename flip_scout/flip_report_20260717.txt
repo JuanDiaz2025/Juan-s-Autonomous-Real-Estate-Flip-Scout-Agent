@@ -19,7 +19,43 @@ Risks: Pre-1940 construction - expect old wiring/plumbing
 Link: https://www.redfin.com/CA/San-Francisco/759-Lakeview-Ave-94112/home/827183
 ----------------------------------------
 
-LEAD #3 - Score: 3/10
+LEAD #3 - Score: 7/10
+Address: 25 Regent St, San Francisco, CA 94112
+Price: $1,298,000
+ARV (heuristic): $2,840,000
+Net Spread: $734,000 (34.9%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/25-Regent-St-94112/home/2014899
+----------------------------------------
+
+LEAD #4 - Score: 4/10
+Address: 263 Miriam St, Daly City, CA 94014
+Price: $1,188,800
+ARV (heuristic): $2,092,000
+Net Spread: $277,000 (15.3%)
+Risks: 
+Link: https://www.redfin.com/CA/Daly-City/263-Miriam-St-94014/home/1235785
+----------------------------------------
+
+LEAD #5 - Score: 4/10
+Address: 89 Farallones St, San Francisco, CA 94112
+Price: $799,000
+ARV (heuristic): $1,381,000
+Net Spread: $183,000 (15.2%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/89-Farallones-St-94112/home/1346223
+----------------------------------------
+
+LEAD #6 - Score: 4/10
+Address: 8 Nancy Ln, Daly City, CA 94014
+Price: $1,198,000
+ARV (heuristic): $2,101,000
+Net Spread: $-184,000 (-8.0%)
+Risks: 
+Link: https://www.redfin.com/CA/Daly-City/8-Nancy-Ln-94014/home/1945251
+----------------------------------------
+
+LEAD #7 - Score: 3/10
 Address: 208 Harkness Ave, San Francisco, CA 94134
 Price: $950,000
 ARV (heuristic): $1,685,000
@@ -28,7 +64,25 @@ Risks:
 Link: https://www.redfin.com/CA/San-Francisco/208-Harkness-Ave-94134/home/780052
 ----------------------------------------
 
-LEAD #4 - Score: 2/10
+LEAD #8 - Score: 3/10
+Address: 55 Buena Vista Rd, South San Francisco, CA 94080
+Price: $1,398,000
+ARV (heuristic): $2,471,000
+Net Spread: $350,000 (16.5%)
+Risks: 
+Link: https://www.redfin.com/CA/South-San-Francisco/55-Buena-Vista-Rd-94080/home/1017218
+----------------------------------------
+
+LEAD #9 - Score: 3/10
+Address: 2539 Holland St, San Mateo, CA 94403
+Price: $998,000
+ARV (heuristic): $1,088,000
+Net Spread: $-495,000 (-31.3%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Mateo/2539-Holland-St-94403/home/1024670
+----------------------------------------
+
+LEAD #10 - Score: 2/10
 Address: 1 Mccarthy Ave, San Francisco, CA 94134
 Price: $850,000
 ARV (heuristic): $1,721,000
@@ -37,7 +91,43 @@ Risks: Small lot - limited ADU potential
 Link: https://www.redfin.com/CA/San-Francisco/1-McCarthy-Ave-94134/home/2001460
 ----------------------------------------
 
-LEAD #5 - Score: 2/10
+LEAD #11 - Score: 2/10
+Address: 429 Hemlock Ave, South San Francisco, CA 94080
+Price: $1,249,000
+ARV (heuristic): $1,971,000
+Net Spread: $124,000 (6.7%)
+Risks: 
+Link: https://www.redfin.com/CA/South-San-Francisco/429-Hemlock-Ave-94080/home/2035665
+----------------------------------------
+
+LEAD #12 - Score: 2/10
+Address: 465 Verducci Dr, Daly City, CA 94015
+Price: $1,295,000
+ARV (heuristic): $1,827,000
+Net Spread: $-15,000 (-0.8%)
+Risks: 
+Link: https://www.redfin.com/CA/Daly-City/465-Verducci-Dr-94015/home/1017126
+----------------------------------------
+
+LEAD #13 - Score: 2/10
+Address: 4137 Callan Blvd, Daly City, CA 94015
+Price: $1,399,000
+ARV (heuristic): $2,011,000
+Net Spread: $-153,000 (-7.1%)
+Risks: 
+Link: https://www.redfin.com/CA/Daly-City/4137-Callan-Blvd-94015/home/1352216
+----------------------------------------
+
+LEAD #14 - Score: 2/10
+Address: 813 Larch Ave, South San Francisco, CA 94080
+Price: $998,000
+ARV (heuristic): $1,406,000
+Net Spread: $-149,000 (-9.6%)
+Risks: 
+Link: https://www.redfin.com/CA/South-San-Francisco/813-Larch-Ave-94080/home/1356930
+----------------------------------------
+
+LEAD #15 - Score: 2/10
 Address: 1231 Silver Ave, San Francisco, CA 94134
 Price: $717,000
 ARV (heuristic): $1,211,000
@@ -46,7 +136,61 @@ Risks: Pre-1940 construction - expect old wiring/plumbing, Small lot - limited A
 Link: https://www.redfin.com/CA/San-Francisco/1231-Silver-Ave-94134/home/1981453
 ----------------------------------------
 
-LEAD #6 - Score: 1/10
+LEAD #16 - Score: 2/10
+Address: 828 San Saba Ct, Sunnyvale, CA 94085
+Price: $1,249,000
+ARV (heuristic): $1,504,000
+Net Spread: $-293,000 (-16.3%)
+Risks: 
+Link: https://www.redfin.com/CA/Sunnyvale/828-San-Saba-Ct-94085/home/897580
+----------------------------------------
+
+LEAD #17 - Score: 2/10
+Address: 188 Santa Barbara Ave, Daly City, CA 94014
+Price: $999,950
+ARV (heuristic): $1,535,000
+Net Spread: $-341,000 (-18.2%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/Daly-City/188-Santa-Barbara-Ave-94014/home/1878983
+----------------------------------------
+
+LEAD #18 - Score: 2/10
+Address: 1640 Lodi Ave, San Mateo, CA 94401
+Price: $1,499,888
+ARV (heuristic): $1,555,000
+Net Spread: $-487,000 (-23.8%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Mateo/1640-Lodi-Ave-94401/home/1122005
+----------------------------------------
+
+LEAD #19 - Score: 2/10
+Address: 2641 Holland St, San Mateo, CA 94403
+Price: $1,295,000
+ARV (heuristic): $1,088,000
+Net Spread: $-579,000 (-34.7%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Mateo/2641-Holland-St-94403/home/1623461
+----------------------------------------
+
+LEAD #20 - Score: 2/10
+Address: 418 N Kingston St, San Mateo, CA 94401
+Price: $1,488,888
+ARV (heuristic): $1,180,000
+Net Spread: $-720,000 (-37.9%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Mateo/418-N-Kingston-St-94401/home/2044105
+----------------------------------------
+
+LEAD #21 - Score: 2/10
+Address: 3801 Orinda Dr, San Mateo, CA 94403
+Price: $1,498,000
+ARV (heuristic): $975,000
+Net Spread: $-897,000 (-47.9%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Mateo/3801-Orinda-Dr-94403/home/748122
+----------------------------------------
+
+LEAD #22 - Score: 1/10
 Address: 473 Leland Ave, San Francisco, CA 94134
 Price: $1,349,000
 ARV (heuristic): $2,594,000
@@ -55,12 +199,57 @@ Risks: Small lot - limited ADU potential
 Link: https://www.redfin.com/CA/San-Francisco/473-Leland-Ave-94134/home/1141557
 ----------------------------------------
 
-LEAD #7 - Score: 1/10
+LEAD #23 - Score: 1/10
 Address: 78 Tioga Ave, San Francisco, CA 94134
 Price: $898,000
 ARV (heuristic): $1,471,000
 Net Spread: $138,000 (10.4%)
 Risks: Pre-1940 construction - expect old wiring/plumbing
 Link: https://www.redfin.com/CA/San-Francisco/78-Tioga-Ave-94134/home/1544094
+----------------------------------------
+
+LEAD #24 - Score: 1/10
+Address: 468 Wyandotte Ave, Daly City, CA 94014
+Price: $1,400,000
+ARV (heuristic): $2,329,000
+Net Spread: $211,000 (10.0%)
+Risks: 
+Link: https://www.redfin.com/CA/Daly-City/468-Wyandotte-Ave-94014/home/1990094
+----------------------------------------
+
+LEAD #25 - Score: 1/10
+Address: 688 Morse St, San Francisco, CA 94112
+Price: $1,499,000
+ARV (heuristic): $2,233,000
+Net Spread: $192,000 (9.4%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/688-Morse-St-94112/home/1655747
+----------------------------------------
+
+LEAD #26 - Score: 1/10
+Address: 105 Mountain Rd, South San Francisco, CA 94080
+Price: $1,198,000
+ARV (heuristic): $1,593,000
+Net Spread: $-133,000 (-7.7%)
+Risks: 
+Link: https://www.redfin.com/CA/South-San-Francisco/105-Mountain-Rd-94080/home/1758419
+----------------------------------------
+
+LEAD #27 - Score: 1/10
+Address: 997 Ocean View Ave, Daly City, CA 94014
+Price: $1,349,000
+ARV (heuristic): $1,925,000
+Net Spread: $-269,000 (-12.3%)
+Risks: Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/Daly-City/997-Ocean-View-Ave-94014/home/109581644
+----------------------------------------
+
+LEAD #28 - Score: 1/10
+Address: 2637 Bantry Ct, South San Francisco, CA 94080
+Price: $1,287,999
+ARV (heuristic): $1,382,000
+Net Spread: $-386,000 (-21.8%)
+Risks: Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/South-San-Francisco/2637-Bantry-Ct-94080/home/172812534
 ----------------------------------------
 
