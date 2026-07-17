@@ -53,11 +53,32 @@ markup. `flip_scout_redfin.py` now:
 
 ## Buy box
 
-Covers 10 cities / 45 zips: San Francisco, San Mateo, Sunnyvale, Daly City,
-South San Francisco, Oakland, Richmond CA, Berkeley, San Leandro, and
-**San Jose**. Richmond CA (East Bay, zips 94801/94804-94806) is a different
-city than SF's "Richmond District" neighborhood (zip 94118/94121) - don't
-confuse the two.
+Covers 58 zips across San Francisco, the Peninsula (San Mateo Co.),
+Sunnyvale, Oakland (incl. West/North Oakland sub-regions), Richmond CA,
+Berkeley, San Leandro, and San Jose. Richmond CA (East Bay, zips
+94801/94804-94806) is a different city than SF's "Richmond District"
+neighborhood (zip 94118/94121) - don't confuse the two.
+
+Juan's own Peninsula/Oakland regional list (added directly to
+`target_zips`, verbatim zips): Peninsula (San Mateo Co.) 94010, 94014,
+94015, 94030, 94061, 94062, 94063, 94065, 94066, 94070, 94080, 94401,
+94402, 94403, 94404; West Oakland 94607, 94608, 94609; North Oakland
+94610, 94611, 94618, 94619. 94066 (San Bruno) and 94404 (San Mateo/Foster
+City) had zero single-family sold comps in the last 6 months under this
+script's search, so their ARV basis falls back to the median $/sqft across
+every other zip checked in the same batch rather than a zip-specific
+number - treat leads there with extra caution.
+
+This run's validation also caught three more gaps: "meticulously
+updated...new plumbing, electrical, roof, foundation" and "tastefully
+modernized" as renovation-completed phrasings (added to
+`ALREADY_RENOVATED_FLAGS`); "two-home Property...Both units have been
+updated" as a multi-unit phrasing (added "two-home", "two separate
+residences", "both units" to `MULTI_UNIT_FLAGS`); and two listings whose
+detail pages returned literally nothing (no description, no year built) -
+these are now excluded automatically (`is_data_incomplete`) rather than
+silently scored off default assumptions with zero listing text to verify
+against.
 
 San Jose's own search (95111/95112/95116/95121/95122/95123/95127/95133/
 95136/95148) turned up only 2 qualifying candidates out of 181 raw active

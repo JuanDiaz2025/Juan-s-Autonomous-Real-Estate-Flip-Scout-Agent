@@ -98,7 +98,8 @@ def main(now_iso, now_ts, parse_iso):
 
     qualified = []
     for l in new_listings:
-        if l.get("is_multi_unit") or l.get("is_already_renovated") or l.get("is_vacant_land"):
+        if (l.get("is_multi_unit") or l.get("is_already_renovated") or l.get("is_vacant_land")
+                or l.get("is_data_incomplete")):
             continue
         financials = fsr.calculate_spread(l)
         if financials is None or financials["spread_percent"] < 0.10:

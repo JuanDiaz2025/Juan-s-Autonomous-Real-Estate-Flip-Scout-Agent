@@ -43,21 +43,32 @@ CONFIG = {
     "max_price": 1_500_000,
     "min_price": 400_000,
     # SF (94124 Bayview, 94112 Excelsior, 94134 Portola, 94118 Inner Richmond,
-    #     94116/94122 Sunset, 94110 Mission), San Mateo (94401-94403),
-    # Sunnyvale (94085-94088), Daly City (94014/94015), South SF (94080),
-    # SF Outer Richmond (94121) - all a distinct, expensive Peninsula/SF
-    # market that's largely already-renovated or thin on inventory. See
-    # East Bay block below for a genuinely different (cheaper, more
-    # distressed) submarket.
-    "target_zips": ["94124", "94112", "94134", "94118", "94116", "94122", "94110",
-                     "94401", "94402", "94403", "94085", "94086", "94087", "94088",
-                     "94014", "94015", "94080", "94121",
-                     # Oakland (94601 Fruitvale, 94602 Redwood Heights/Laurel,
-                     #  94603 Elmhurst, 94605 Eastmont/Hills, 94606 San Antonio,
-                     #  94609 Temescal, 94610 Grand Lake, 94619 Redwood Heights,
-                     #  94621 Deep East Oakland)
-                     "94601", "94602", "94603", "94605", "94606", "94609", "94610",
-                     "94619", "94621",
+    #     94116/94122 Sunset, 94110 Mission, 94121 Outer Richmond) - a
+    # distinct, expensive Peninsula/SF market that's largely already-renovated
+    # or thin on inventory. See East Bay block below for a genuinely
+    # different (cheaper, more distressed) submarket.
+    "target_zips": ["94124", "94112", "94134", "94118", "94116", "94122", "94110", "94121",
+                     # Peninsula (San Mateo Co.) - Juan's full regional list:
+                     # 94010 Burlingame, 94014/94015 Daly City, 94030 Millbrae,
+                     # 94061/94062/94063 Redwood City, 94065 Redwood Shores,
+                     # 94066 San Bruno, 94070 San Carlos, 94080 South SF,
+                     # 94401/94402/94403/94404 San Mateo/Foster City
+                     "94010", "94014", "94015", "94030", "94061", "94062", "94063",
+                     "94065", "94066", "94070", "94080",
+                     "94401", "94402", "94403", "94404",
+                     # Sunnyvale
+                     "94085", "94086", "94087", "94088",
+                     # Oakland - split into Juan's own sub-regions:
+                     # West Oakland (94607, 94608, 94609 Temescal),
+                     # North Oakland (94610 Grand Lake, 94611 Piedmont Ave/
+                     #  Upper Rockridge, 94618 Rockridge, 94619 Redwood Hts),
+                     # plus the rest of Oakland already covered (94601
+                     # Fruitvale, 94602 Redwood Heights/Laurel, 94603
+                     # Elmhurst, 94605 Eastmont/Hills, 94606 San Antonio,
+                     # 94621 Deep East Oakland)
+                     "94607", "94608", "94609",
+                     "94610", "94611", "94618", "94619",
+                     "94601", "94602", "94603", "94605", "94606", "94621",
                      # Richmond, CA (East Bay - a different, cheaper city than
                      # SF's "Richmond District" neighborhood above)
                      "94801", "94804", "94805", "94806",
@@ -90,7 +101,8 @@ ARV_BENCHMARKS: Dict[str, float] = {}
 
 MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamily',
                      '2 units', '3 units', '4 units', 'two-unit', 'multi-unit',
-                     'tenancy in common']
+                     'tenancy in common', 'two-home', 'two separate residences',
+                     'two full residences', 'both units']
 
 # Listing language indicating the flip has effectively already happened - no
 # renovation upside left for this buy box. Excluded regardless of score/spread,
@@ -105,7 +117,8 @@ ALREADY_RENOVATED_FLAGS = [
     'in great condition', 'in move-in condition', 'move-in condition', 'has been updated',
     'turnkey', 'tastefully remodeled', 'recently updated', 'recently renovated',
     'recently remodeled', 'were remodeled', 'was remodeled', 'effectively rebuilt',
-    'newer kitchen', 'newly rebuilt', 'complete rebuild',
+    'newer kitchen', 'newly rebuilt', 'complete rebuild', 'tastefully modernized',
+    'freshly updated', 'meticulously updated', 'have been updated',
 ]
 # Deliberately NOT included: "refreshed" alone - sellers routinely do light
 # cosmetic staging (paint, cleaning) before listing a genuine fixer, and that
@@ -226,6 +239,10 @@ def enrich_detail(listing: Dict) -> Dict:
         listing['description'] = desc
     except Exception:
         pass
+    # If the detail page yielded nothing usable (no description, no year
+    # built), there's no listing text to judge condition against at all -
+    # don't let it get scored with silent default assumptions.
+    listing['is_data_incomplete'] = (not listing.get('description')) and not listing.get('year_built')
     return listing
 
 
@@ -473,7 +490,8 @@ def run_redfin_scout() -> List[Dict]:
 
     analyzed = []
     for l in shortlist:
-        if l.get('is_multi_unit') or l.get('is_already_renovated') or l.get('is_vacant_land'):
+        if (l.get('is_multi_unit') or l.get('is_already_renovated') or l.get('is_vacant_land')
+                or l.get('is_data_incomplete')):
             continue
         financials = calculate_spread(l)
         if financials is None or financials['spread_percent'] < 0.10:
