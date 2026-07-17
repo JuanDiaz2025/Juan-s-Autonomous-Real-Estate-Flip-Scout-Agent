@@ -53,10 +53,24 @@ markup. `flip_scout_redfin.py` now:
 
 ## Buy box
 
-Covers 9 cities / 35 zips: San Francisco, San Mateo, Sunnyvale, Daly City,
-South San Francisco, **Oakland, Richmond CA, Berkeley, and San Leandro**.
-Richmond CA (East Bay, zips 94801/94804-94806) is a different city than SF's
-"Richmond District" neighborhood (zip 94118/94121) - don't confuse the two.
+Covers 10 cities / 45 zips: San Francisco, San Mateo, Sunnyvale, Daly City,
+South San Francisco, Oakland, Richmond CA, Berkeley, San Leandro, and
+**San Jose**. Richmond CA (East Bay, zips 94801/94804-94806) is a different
+city than SF's "Richmond District" neighborhood (zip 94118/94121) - don't
+confuse the two.
+
+San Jose's own search (95111/95112/95116/95121/95122/95123/95127/95133/
+95136/95148) turned up only 2 qualifying candidates out of 181 raw active
+listings and 75 enriched - most of that inventory was already renovated.
+Both survivors carry real caveats: one (657 Woodland Ter) sits right next
+to an identical 2006-built twin explicitly listed as "effectively rebuilt in
+2026," so it's plausibly already-finished too despite lacking the exact
+renovation phrasing this script flags on; the other (538 N White Rd) is a
+court/trustee auction - occupied, no inspection allowed, sold sight-unseen.
+Neither should be treated as a high-confidence pick without manual
+follow-up. This run is also what caught "effectively rebuilt", "newer
+kitchen" as renovation-completed phrasings this script hadn't been
+flagging - now added to `ALREADY_RENOVATED_FLAGS`.
 
 Oakland/Berkeley/East Bay was added because it's a genuinely different,
 cheaper submarket than the Peninsula/SF: real comps there run $510-$1,241/sqft

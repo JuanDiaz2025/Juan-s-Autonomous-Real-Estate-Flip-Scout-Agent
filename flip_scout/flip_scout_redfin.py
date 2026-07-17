@@ -64,7 +64,12 @@ CONFIG = {
                      # Berkeley (94702/94703 - South/West, more affordable)
                      "94702", "94703",
                      # San Leandro
-                     "94577", "94578"],
+                     "94577", "94578",
+                     # San Jose (95111 Blossom Valley, 95112 Central,
+                     #  95116/95122/95127/95133 East San Jose - more affordable,
+                     #  95121/95123/95136/95148 South/Southeast San Jose)
+                     "95111", "95112", "95116", "95121", "95122", "95123",
+                     "95127", "95133", "95136", "95148"],
     "min_spread_percent": 0.20,
     "preferred_spread_percent": 0.25,
     "reno_cost_per_sqft": 350,
@@ -99,7 +104,8 @@ ALREADY_RENOVATED_FLAGS = [
     'newly remodeled', 'refurbished kitchen', 'reimagined home', 'contemporary design',
     'in great condition', 'in move-in condition', 'move-in condition', 'has been updated',
     'turnkey', 'tastefully remodeled', 'recently updated', 'recently renovated',
-    'recently remodeled', 'were remodeled', 'was remodeled',
+    'recently remodeled', 'were remodeled', 'was remodeled', 'effectively rebuilt',
+    'newer kitchen', 'newly rebuilt', 'complete rebuild',
 ]
 # Deliberately NOT included: "refreshed" alone - sellers routinely do light
 # cosmetic staging (paint, cleaning) before listing a genuine fixer, and that
