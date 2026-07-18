@@ -59,9 +59,6 @@ var COLUMNS = [
   { key: 'total_cost_heavy', header: 'Total Cost (Heavy)', format: '$#,##0' },
   { key: 'gross_profit_light', header: 'Gross Profit (Light)', format: '$#,##0' },
   { key: 'gross_profit_heavy', header: 'Gross Profit (Heavy)', format: '$#,##0' },
-  { key: 'min_profit_threshold', header: 'Min. Required Profit', format: '$#,##0' },
-  { key: 'meets_threshold_heavy', header: 'Meets Threshold (Heavy)', format: '@' },
-  { key: 'recommended_max_offer', header: 'Recommended Max Offer', format: '$#,##0' },
   { key: 'risks', header: 'Risks', format: '@' },
   { key: 'url', header: 'Redfin Link', format: '@' },
   { key: 'first_added', header: 'First Added', format: '@' },
@@ -151,7 +148,6 @@ function refreshFlipScoutSheet() {
     return COLUMNS.map(function (c) {
       if (c.key === 'first_added') return now;
       var v = lead[c.key];
-      if (c.key === 'meets_threshold_heavy') return v ? 'Yes' : 'No';
       return v === undefined || v === null ? '' : v;
     });
   });
