@@ -578,11 +578,6 @@ def identify_risks(listing: Dict) -> List[str]:
     risks = []
     desc = listing.get('description', '').lower()
 
-    if 'soft story' in desc or 'foundation' in desc:
-        risks.append('Seismic retrofit likely needed ($40k+)')
-    yb = listing.get('year_built', 0)
-    if yb and yb < 1940:
-        risks.append('Pre-1940 construction - expect old wiring/plumbing')
     if listing.get('price', 0) < 500000 and 'san francisco' in listing.get('city', '').lower():
         risks.append('PRICE ANOMALY - verify title/liens')
     if listing.get('lot_sqft', 0) and listing.get('lot_sqft', 0) < 2500:
