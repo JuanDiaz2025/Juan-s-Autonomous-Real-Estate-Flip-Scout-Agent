@@ -254,8 +254,57 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
     return listings
 
 
+SALE_HISTORY_ROW = re.compile(
+    r'<div class="BasicTable__col date">([^<]+)</div>'
+    r'<div class="BasicTable__col event">([^<]+)</div>'
+)
+
+# Events that mark the start of the CURRENT active listing period. Anything
+# older than the nearest one of these (scanning from today backwards) belongs
+# to a previous ownership/listing cycle and must not be counted.
+LISTING_START_EVENTS = ("Listed", "Relisted")
+# Events that mean the property is (or very recently was) off-market. If one
+# of these shows up before we find a Listed/Relisted marker, Redfin's own
+# history table disagrees with the active-search result that put this
+# listing in front of us - don't guess a days-on-market figure in that case.
+LISTING_BREAK_EVENTS = ("Pending", "Sold", "Listing Removed", "Delisted")
+
+
+def parse_days_on_market(text: str) -> Dict:
+    """
+    Real days-on-market and price-cut count from Redfin's own Sale History
+    table (not the ambiguous "timeOnRedfin" field, which is a raw duration
+    that doesn't distinguish current-listing time from prior cycles).
+
+    Returns {'days_on_market': int, 'price_cuts': int} when the table's most
+    recent event is an unambiguous Listed/Relisted, or {} when it isn't
+    (property plan/new-construction with no history, or the top event is
+    Pending/Sold/Listing Removed - i.e. the table doesn't agree the listing
+    is currently active, so don't fabricate a number).
+    """
+    rows = SALE_HISTORY_ROW.findall(text)
+    price_cuts = 0
+    for date_str, event in rows:
+        event = event.strip()
+        if event == "Price Changed":
+            price_cuts += 1
+            continue
+        if event in LISTING_START_EVENTS:
+            try:
+                listed_date = datetime.strptime(date_str.strip(), "%b %d, %Y")
+            except ValueError:
+                return {}
+            return {
+                "days_on_market": (datetime.now() - listed_date).days,
+                "price_cuts": price_cuts,
+            }
+        if event in LISTING_BREAK_EVENTS:
+            return {}  # ambiguous vs. the active-search result - don't guess
+    return {}  # no history table at all (e.g. a builder "Plan" listing)
+
+
 def enrich_detail(listing: Dict) -> Dict:
-    """Pull description, lot size and year built from the listing's detail page."""
+    """Pull description, lot size, year built, and days-on-market from the listing's detail page."""
     try:
         r = requests.get(listing['url'], headers=HEADERS, timeout=20)
         text = r.text
@@ -285,6 +334,7 @@ def enrich_detail(listing: Dict) -> Dict:
         if year:
             listing['year_built'] = year
         listing['description'] = desc
+        listing.update(parse_days_on_market(text))
     except Exception:
         pass
     # If the detail page yielded nothing usable (no description, no year
@@ -506,12 +556,24 @@ def score_deal(listing: Dict, deal: Dict) -> int:
     return min(10, max(1, score))
 
 
+DAYS_ON_MARKET_STALE_THRESHOLD = 60  # a documented convention, not a given rule - see docstring below
+
+
 def identify_risks(listing: Dict) -> List[str]:
     """
-    Structural/market risk flags available from listing text. Flood zone,
-    code violations, and days-on-market/active-listing-count risk are called
-    for by the methodology but aren't reliably scrapeable from a card/detail
-    page with this method - not fabricated here, flagged as a gap instead.
+    Risk flags built only from data actually verified this scan - either the
+    listing's own description, or (for days-on-market) Redfin's own Sale
+    History table (parse_days_on_market, called from enrich_detail). Nothing
+    here is a guess: if a signal can't be verified for a given listing (e.g.
+    flood zone, code violations, or an ambiguous/missing sale-history table),
+    it's simply left out rather than replaced with a blanket disclaimer.
+
+    Days-on-market threshold (60 days) is a documented convention - real
+    estate practice generally treats a listing as "sitting" past ~60 days -
+    not a number Twin Home Buyer specified. A long time on market for a
+    SPECIFIC listing is used here as the bad-signal proxy for its area,
+    since that's what's cheaply verifiable per-listing from Redfin's own
+    history; it is not a full area-wide average-DOM benchmark.
     """
     risks = []
     desc = listing.get('description', '').lower()
@@ -530,7 +592,13 @@ def identify_risks(listing: Dict) -> List[str]:
     if listing.get('sqft', 0) >= 3000:
         risks.append('Oversized for a flat zip-median $/sqft ARV (known to overstate value on '
                       'outlier-large homes) - verify against size-matched comps manually')
-    risks.append('Market/DOM risk and flood-zone/code-violation status not verified by this scan - check manually')
+
+    dom = listing.get('days_on_market')
+    cuts = listing.get('price_cuts', 0)
+    if dom is not None and (dom >= DAYS_ON_MARKET_STALE_THRESHOLD or cuts >= 2):
+        cut_note = f", {cuts} price cut(s) since listing" if cuts else ""
+        risks.append(f'On market {dom} days{cut_note} - possible sign of soft demand in this '
+                      f'area or an overpriced/undesirable property, not just a fixer discount')
 
     return risks
 
