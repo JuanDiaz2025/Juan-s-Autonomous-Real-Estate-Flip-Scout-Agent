@@ -1,8 +1,9 @@
 # Juan's Autonomous Real Estate Flip Scout Agent
 
 Scans Redfin for single-family fixer-uppers in Juan's target Bay Area zips,
-estimates ARV/reno/spread for each from real sold comps, scores them against
-his buy box, and outputs a ranked list of flip candidates.
+estimates ARV/rehab/profit for each from real sold comps, scores them against
+Twin Home Buyer's flip-analyst methodology (see below), and outputs a ranked
+list of flip candidates.
 
 ## Usage
 
@@ -127,27 +128,60 @@ off the same $/sqft as typical 1,800 sqft comps in its zip) - manually verify
 against size-matched comps before trusting a spread on anything unusually
 large for its zip.
 
-## ARV methodology
+## Twin Home Buyer flip-analyst methodology (current)
 
-`build_arv_benchmarks()` pulls each target zip's actual homes sold in the
-last 6 months and uses the 75th-percentile $/sqft as that zip's ARV basis -
-a proxy for renovated/top-tier condition, since ARV should reflect
-after-repair value rather than the neighborhood average. This replaced an
-earlier hardcoded per-zip $/sqft table that was never validated against
-data; checking it against comps afterward showed it had undervalued San
-Mateo and Sunnyvale by 40-77% and overvalued parts of San Francisco by
-~20% - which was silently steering every result toward San Francisco even
-after the per-zip shortlisting fix above.
+This replaced an earlier spread-percentage/ADU-potential model entirely.
+Nothing below is a guess - it's Juan's given rules, with the few
+non-specified assumptions (property tax rate, flat utilities estimate)
+called out explicitly rather than silently invented:
+
+- **ARV**: median $/sqft of each target zip's actual homes sold in the last
+  6 months (`build_arv_benchmarks()`), times the subject's sqft. No
+  lot-size/bed-count adjustments layered on top. This is a zip-wide
+  aggregate proxy, not 4-8 hand-picked 1-mile-radius comps with sale dates -
+  the automated scraper doesn't pull individual comp addresses, so treat it
+  as a screen and pull real comps before offering. Zips with zero sold
+  comps of their own fall back to the median $/sqft across every other zip
+  checked in the same run.
+- **Rehab cost - two scenarios, always both computed**: Light = $70/sqft
+  (cosmetic only), Heavy = $145/sqft (stated midpoint of the given
+  $140-150/sqft "everything new" range). Flat add-ons for specific items
+  found in the listing description (soft story/foundation +$40k,
+  knob-and-tube/electrical +$20k, roof +$15k) apply to both scenarios,
+  since those are itemized costs, not part of the per-sqft blend. No
+  condition-based rate selection or contingency multiplier beyond that -
+  the two scenarios ARE the range.
+- **Holding costs (3 months)**: 10% annual rate on purchase price, prorated
+  (2.5% of price) + insurance ($2,000 per $1M of price) + property tax
+  (1.25%/year CA-typical estimate, prorated 3 months - not given verbatim,
+  a documented assumption) + a flat $400 utilities estimate for a vacant
+  property (also a documented assumption, not given verbatim).
+- **Profit gate**: minimum required GROSS PROFIT (a dollar figure, not a
+  percentage) tiered by ARV: $1M+ ARV needs $100k min, $500k-$1M needs
+  $70k min, under $500k needs $50k min. A lead only reaches the report/feed
+  if it clears this threshold under the Light rehab scenario at minimum.
+- **Recommended Max Offer**: solved algebraically from ARV, Heavy rehab
+  cost, and the min profit threshold, backing out the holding-cost rate.
+- No "ADU Potential" anywhere (removed from scoring, risks, and output).
+- No "Reno Budget" label - "Rehab Cost (Light)" / "Rehab Cost (Heavy)".
+- **Known limitation, flagged not fixed**: the flat $/sqft model
+  overstates ARV for outlier-large homes (a zip's comps skew toward
+  typical 1,200-2,000 sqft homes, so a 3,000+ sqft subject priced off the
+  same $/sqft looks like a much bigger spread than it really is). Rather
+  than inventing a size adjustment the given rules don't call for,
+  `identify_risks()` flags any listing >=3,000 sqft so it's visibly
+  lower-confidence in the report/sheet rather than silently trusted.
 
 This is still an approximation, not an appraisal - it doesn't match comps
 by bed/bath count or condition, just by zip and percentile. Pull real,
 hand-picked comps before making an offer on anything this script surfaces.
 
-## Recurring check (`hourly_check.py`)
+## Recurring check (`hourly_check.py`) and full scans
 
-A lighter-weight companion script for running on a schedule (Juan asked for
-hourly). It does NOT rebuild comps or re-enrich every listing every run -
-only a full `flip_scout_redfin.py` scan does that. Instead:
+`hourly_check.py` is a lighter-weight companion script for running on a
+schedule (Juan asked for hourly). It does NOT rebuild comps or re-enrich
+every listing every run - only a full `flip_scout_redfin.py` scan does
+that by default. Instead:
 
 - `comp_benchmarks_cache.json` caches ARV benchmarks; only rebuilt if older
   than 7 days (`COMP_CACHE_MAX_AGE_DAYS`), since sold comps don't move
@@ -160,6 +194,14 @@ only a full `flip_scout_redfin.py` scan does that. Instead:
   session) checks for that file's existence to decide whether to update the
   report artifact and notify Juan, or stay silent
 
-Both cache files are committed back to the repo after each run so state
-survives across sessions - **without doing that, every run would think
-everything is "new" again.**
+A full `flip_scout_redfin.py` run also now persists this same state
+(`persist_full_scan_state()`, called from `main()`) - not just the top 10
+leads shown in the console report, but every qualifying lead the run
+found. Before this, only `hourly_check.py` wrote to
+`leads_for_sheets.json`, so a full scan's results never reached Juan's
+spreadsheet unless someone manually converted them afterward.
+
+All three files (`comp_benchmarks_cache.json`, `seen_listings.json`,
+`leads_for_sheets.json`) are committed back to the repo after each run so
+state survives across sessions - **without doing that, every run would
+think everything is "new" again.**

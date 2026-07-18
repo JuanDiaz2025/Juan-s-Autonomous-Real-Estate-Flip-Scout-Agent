@@ -6,9 +6,14 @@
  * listing that's already a row here. Dedup key is the Redfin link (each
  * distinct listing has its own URL, so a relisting of the same address
  * later shows up as new, but the same still-active listing never repeats).
- * Only profitable leads (Spread % >= MIN_SPREAD, 10% by default) are ever
- * added - negative/marginal leads are filtered out before they reach the
- * sheet, not after.
+ *
+ * METHODOLOGY (Twin Home Buyer standard): ARV = median sold $/sqft for the
+ * zip (last 6mo) x sqft. Rehab cost shown as two scenarios - Light ($70/sqft)
+ * and Heavy ($140-150/sqft). Holding = 3 months. Minimum required gross
+ * profit is a DOLLAR amount by ARV tier ($1M+ ARV: $100k, $500k-$1M: $70k,
+ * under $500k: $50k), not a percentage. No ADU Potential column - removed
+ * per standing instruction. Only leads clearing the minimum threshold under
+ * the LIGHT (best-case) rehab scenario ever reach this feed at all.
  *
  * SETUP (one time):
  *   1. Open your Google Sheet -> Extensions -> Apps Script.
@@ -23,8 +28,8 @@
  *      this keeps happening on its own. Run this once; it's idempotent
  *      (safe to click again, won't create duplicate triggers).
  *   7. Flip Scout -> Remove Non-Profitable Leads : a one-time backstop if
- *      any negative/marginal rows are already in the sheet from before this
- *      filter existed. Not needed on an ongoing basis.
+ *      any rows are already in the sheet from before this profitability
+ *      check existed. Not needed on an ongoing basis.
  *
  * If Juan's repo branch ever changes (e.g. after this work merges to
  * main), update FEED_URL below to match - swap "claude/python-code-goal-nn6zec"
@@ -36,6 +41,7 @@ var SHEET_NAME = 'Flip Scout Leads';
 
 var COLUMNS = [
   { key: 'score', header: 'Score', format: '0' },
+  { key: 'recommendation', header: 'Recommendation', format: '@' },
   { key: 'address', header: 'Address', format: '@' },
   { key: 'city', header: 'City', format: '@' },
   { key: 'zip', header: 'Zip', format: '@' },
@@ -44,22 +50,25 @@ var COLUMNS = [
   { key: 'sqft', header: 'SqFt', format: '#,##0' },
   { key: 'lot_sqft', header: 'Lot SqFt', format: '#,##0' },
   { key: 'year_built', header: 'Year Built', format: '0' },
-  { key: 'price', header: 'List Price', format: '$#,##0' },
-  { key: 'arv', header: 'Est. ARV (comp-based)', format: '$#,##0' },
-  { key: 'reno_budget', header: 'Reno Budget', format: '$#,##0' },
-  { key: 'holding_costs', header: 'Holding Costs', format: '$#,##0' },
-  { key: 'total_cost', header: 'Total Cost', format: '$#,##0' },
-  { key: 'net_spread', header: 'Net Spread', format: '$#,##0' },
-  { key: 'spread_percent', header: 'Spread %', format: '0.0%' },
-  { key: 'adu_potential', header: 'ADU Potential', format: '@' },
+  { key: 'price', header: 'Purchase Price', format: '$#,##0' },
+  { key: 'arv', header: 'Estimated ARV', format: '$#,##0' },
+  { key: 'rehab_light', header: 'Rehab Cost (Light)', format: '$#,##0' },
+  { key: 'rehab_heavy', header: 'Rehab Cost (Heavy)', format: '$#,##0' },
+  { key: 'holding_costs', header: 'Holding Costs (3mo)', format: '$#,##0' },
+  { key: 'total_cost_light', header: 'Total Cost (Light)', format: '$#,##0' },
+  { key: 'total_cost_heavy', header: 'Total Cost (Heavy)', format: '$#,##0' },
+  { key: 'gross_profit_light', header: 'Gross Profit (Light)', format: '$#,##0' },
+  { key: 'gross_profit_heavy', header: 'Gross Profit (Heavy)', format: '$#,##0' },
+  { key: 'min_profit_threshold', header: 'Min. Required Profit', format: '$#,##0' },
+  { key: 'meets_threshold_heavy', header: 'Meets Threshold (Heavy)', format: '@' },
+  { key: 'recommended_max_offer', header: 'Recommended Max Offer', format: '$#,##0' },
   { key: 'risks', header: 'Risks', format: '@' },
   { key: 'url', header: 'Redfin Link', format: '@' },
   { key: 'first_added', header: 'First Added', format: '@' },
 ];
 
 var URL_COL_INDEX = COLUMNS.findIndex(function (c) { return c.key === 'url'; }) + 1; // 1-based
-var SPREAD_COL_INDEX = COLUMNS.findIndex(function (c) { return c.key === 'spread_percent'; }) + 1; // 1-based
-var MIN_SPREAD = 0.10; // Juan only wants profitable leads here - never negative/marginal ones
+var PROFIT_COL_INDEX = COLUMNS.findIndex(function (c) { return c.key === 'gross_profit_light'; }) + 1; // 1-based
 
 function onOpen() {
   SpreadsheetApp.getUi()
@@ -106,8 +115,11 @@ function refreshFlipScoutSheet() {
     });
   }
 
+  // gross_profit_light > 0 is a belt-and-suspenders check - the feed itself
+  // should only ever contain leads clearing the minimum profit threshold,
+  // but never let a negative-profit row reach the sheet regardless.
   var newLeads = leads.filter(function (lead) {
-    return !existingUrls[lead.url] && lead.spread_percent >= MIN_SPREAD;
+    return !existingUrls[lead.url] && lead.gross_profit_light > 0;
   });
 
   ss.toast(newLeads.length + ' new lead(s) found, ' + Object.keys(existingUrls).length + ' already in sheet.', 'Flip Scout', 5);
@@ -123,7 +135,7 @@ function refreshFlipScoutSheet() {
     return COLUMNS.map(function (c) {
       if (c.key === 'first_added') return now;
       var v = lead[c.key];
-      if (c.key === 'adu_potential') return v ? 'Yes' : 'No';
+      if (c.key === 'meets_threshold_heavy') return v ? 'Yes' : 'No';
       return v === undefined || v === null ? '' : v;
     });
   });
@@ -142,11 +154,11 @@ function refreshFlipScoutSheet() {
 }
 
 /**
- * One-time cleanup: deletes any row already in the sheet with Spread % below
- * MIN_SPREAD (10%), including negative ones. Only needed if rows were added
- * before this profitability check existed (e.g. from an earlier CSV import,
- * or a feed that hadn't been cleaned up yet) - refreshFlipScoutSheet now
- * filters these out before they're ever added, so this is a backstop, not
+ * One-time cleanup: deletes any row already in the sheet with Gross Profit
+ * (Light) at or below zero. Only needed if rows were added before this
+ * profitability check existed (e.g. from an earlier CSV import, or a feed
+ * built under the old methodology) - refreshFlipScoutSheet now filters
+ * these out before they're ever added, so this is a backstop, not
  * something you need to run regularly.
  */
 function removeNonProfitableLeads() {
@@ -163,11 +175,11 @@ function removeNonProfitableLeads() {
     return;
   }
 
-  var spreadValues = sheet.getRange(2, SPREAD_COL_INDEX, lastRow - 1, 1).getValues();
+  var profitValues = sheet.getRange(2, PROFIT_COL_INDEX, lastRow - 1, 1).getValues();
   var rowsToDelete = [];
-  for (var i = 0; i < spreadValues.length; i++) {
-    var v = spreadValues[i][0];
-    if (typeof v === 'number' && v < MIN_SPREAD) {
+  for (var i = 0; i < profitValues.length; i++) {
+    var v = profitValues[i][0];
+    if (typeof v === 'number' && v <= 0) {
       rowsToDelete.push(i + 2); // +2: 1-based, plus header row
     }
   }

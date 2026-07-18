@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Juan's Flip Scout Agent - Redfin Edition
-Searches Redfin for single-family homes under $1.5M in target Bay Area zips,
-scores them against Juan's buy box, and outputs ranked flip candidates.
+Searches Redfin for single-family homes under $1.5M in target Bay Area /
+Central Valley zips, runs Twin Home Buyer's flip-analyst methodology on
+each, and outputs ranked flip candidates.
 
 Run with: python flip_scout_redfin.py
 
@@ -11,25 +12,45 @@ Redfin's markup has changed since the original scraper was written - it no
 longer exposes a `window.initialState` JSON blob, and the old `HomeCard-*`
 class names have been replaced by `bp-Homecard__*`. This version scrapes the
 current markup directly, then enriches shortlisted candidates with data from
-each listing's detail page (description, lot size, year built) to run the
-same financial/scoring model as the original design.
+each listing's detail page (description, lot size, year built).
 
-ARV comes from REAL sold comps, not a guess. Earlier drafts of this script
-used a hardcoded $/sqft-by-zip table invented without data - it turned out to
-undervalue San Mateo/Sunnyvale by 40-77% and overvalue parts of San Francisco
-by ~20%, which was silently steering every result toward San Francisco. This
-version pulls each zip's actual homes sold in the last 6 months and uses the
-75th-percentile $/sqft (a proxy for renovated/top-tier condition, since ARV
-should reflect after-repair value, not the neighborhood average) as that
-zip's ARV basis. It's still an approximation, not an appraisal - it doesn't
-match comps by bed/bath/condition - but it's grounded in this week's actual
-market instead of an assumption.
+METHODOLOGY (Twin Home Buyer standard, effective this revision):
+Replaces the earlier spread-percentage model entirely. Rules below are
+followed exactly as given - nothing here is a guess:
+
+- ARV: median $/sqft of each zip's actual homes sold in the last 6 months,
+  times the subject's sqft. No lot/bed adjustments layered on top (earlier
+  drafts added some; removed to not add anything beyond the given rule).
+  CAVEAT: this is a zip-wide aggregate proxy, not 4-8 hand-picked 1-mile-
+  radius comps with sale dates - the automated scraper doesn't pull
+  individual comp addresses. Treat as a screen, verify manually before
+  offering.
+- Rehab cost: two explicit scenarios, both always computed -
+  Light = $70/sqft, Heavy = $140-150/sqft (using $145 as the stated
+  midpoint). Plus flat add-ons for specific items mentioned in the listing
+  (soft story/foundation +$40k, knob-and-tube/electrical +$20k, roof
+  +$15k) - applied to both scenarios, since those are itemized costs, not
+  part of the per-sqft blend. No condition-based rate selection or
+  contingency multiplier beyond that - the two scenarios ARE the range.
+- Holding costs: 3 months. 10% annual rate on purchase price, prorated
+  (2.5% of price) + insurance (scaled at $2,000 per $1M of price) +
+  property tax (1.25%/year CA-typical estimate, prorated 3 months) +
+  a flat $400 utilities estimate for a vacant property over 3 months.
+  These last two aren't in the given rules verbatim - "include other
+  typical costs (utilities, taxes) conservatively" was instructed without
+  exact figures, so reasonable, clearly-documented assumptions are used
+  and callable out here rather than silently invented.
+- Profit gate: minimum required GROSS PROFIT (not %) by ARV tier -
+  $1M+ ARV: $100k min. $500k-$1M ARV: $70k min. Under $500k: $50k min.
+- No ADU Potential anywhere (removed from scoring, risks, and output).
+- No "Reno Budget" label - "Rehab Cost (Light)" / "Rehab Cost (Heavy)".
 """
 
 import requests
 from bs4 import BeautifulSoup
 import re
 import json
+import os
 import time
 import statistics
 from datetime import datetime
@@ -87,11 +108,26 @@ CONFIG = {
                      #  95121/95123/95136/95148 South/Southeast San Jose)
                      "95111", "95112", "95116", "95121", "95122", "95123",
                      "95127", "95133", "95136", "95148"],
-    "min_spread_percent": 0.20,
-    "preferred_spread_percent": 0.25,
-    "reno_cost_per_sqft": 350,
-    "holding_months": 6,
-    "closing_costs_percent": 0.03,
+
+    # --- Rehab cost rates (Twin Home Buyer standard - exact, not adjustable
+    # by condition language) ---
+    "light_rehab_psf": 70,
+    "heavy_rehab_psf": 145,  # stated range is $140-150/sqft; 145 is the midpoint
+
+    # --- Holding costs (3-month hold) ---
+    "holding_months": 3,
+    "holding_annual_rate": 0.10,      # prorated for 3 months = 2.5% of price
+    "insurance_per_million": 2000,    # scales with price, per the "scale appropriately" instruction
+    "property_tax_annual_rate": 0.0125,  # CA-typical estimate; not in the given rules verbatim
+    "utilities_holding_flat": 400,       # flat conservative estimate, 3 months vacant
+
+    # --- Minimum required GROSS PROFIT by ARV tier (dollar amounts, not %) ---
+    "profit_thresholds": [
+        (1_000_000, 100_000),   # $1M+ ARV -> min $100k profit (covers the $1M-$1.5M band and above)
+        (500_000, 70_000),      # $500k-$1M ARV -> min $70k profit
+        (0, 50_000),            # under $500k ARV -> min $50k profit
+    ],
+
     "detail_enrich_limit": 6,  # candidates enriched per zip (detail page fetch is the slow step)
     "sold_lookback": "sold-6mo",
 }
@@ -104,6 +140,12 @@ HEADERS = {
 # Populated at runtime by build_arv_benchmarks() from real sold comps - see
 # calculate_arv(). Never hand-edit; it's recomputed fresh on every run.
 ARV_BENCHMARKS: Dict[str, float] = {}
+# Populated by run_redfin_scout() each call - the full qualifying list before
+# the top-10 cut, and every candidate URL seen this scan (qualifying or not).
+# Kept as globals (same pattern as ARV_BENCHMARKS) so main() can persist full
+# state after a run without run_redfin_scout()'s return signature changing.
+LAST_ANALYZED: List[Dict] = []
+LAST_ALL_URLS: List[str] = []
 
 MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamily',
                      '2 units', '3 units', '4 units', 'two-unit', 'multi-unit',
@@ -111,9 +153,9 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
                      'two full residences', 'both units']
 
 # Listing language indicating the flip has effectively already happened - no
-# renovation upside left for this buy box. Excluded regardless of score/spread,
-# since a big "spread" on an already-renovated house just means it's priced
-# below comps (a wholesale play), not a flip opportunity.
+# renovation upside left for this buy box. Excluded regardless of profit
+# math, since a big "profit" on an already-renovated house just means it's
+# priced below comps (a wholesale play), not a flip opportunity.
 ALREADY_RENOVATED_FLAGS = [
     'beautifully updated', 'fully renovated', 'fully updated', 'move-in ready', 'move in ready',
     'previously remodeled', 'thoughtfully updated', 'beautifully remodeled',
@@ -133,7 +175,7 @@ ALREADY_RENOVATED_FLAGS = [
 # a bare "thoughtfully refreshed" is too ambiguous to exclude on.
 
 # Listing describes a vacant lot, teardown, or development/entitlement play -
-# there's no existing structure to renovate, so the reno-cost-per-sqft model
+# there's no existing structure to renovate, so the per-sqft rehab model
 # doesn't apply and this isn't the buy-fixer-sell-renovated thesis at all.
 VACANT_LAND_FLAGS = [
     'planned for a', 'existing plans', 'development project', 'vacant lot',
@@ -280,8 +322,8 @@ def fetch_zip_comps(zip_code: str) -> List[float]:
 def build_arv_benchmarks(zip_codes: List[str]) -> Dict[str, float]:
     """
     Build a real, comp-based $/sqft benchmark per zip from recent sold homes.
-    Uses the 75th percentile as an ARV proxy (renovated/top-tier condition),
-    since ARV should reflect after-repair value, not the neighborhood average.
+    Uses the MEDIAN $/sqft - conservative per the standing rule to use
+    median/lower end of comps, not an upper-percentile proxy.
     """
     benchmarks = {}
     all_psfs = []
@@ -289,10 +331,9 @@ def build_arv_benchmarks(zip_codes: List[str]) -> Dict[str, float]:
         psfs = fetch_zip_comps(z)
         all_psfs.extend(psfs)
         if psfs:
-            psfs.sort()
-            p75 = psfs[int(len(psfs) * 0.75)]
-            benchmarks[z] = round(p75)
-            print(f"  {z}: {len(psfs)} sold comps, p75 ${p75:,.0f}/sqft")
+            med = statistics.median(psfs)
+            benchmarks[z] = round(med)
+            print(f"  {z}: {len(psfs)} sold comps, median ${med:,.0f}/sqft")
         else:
             print(f"  {z}: no sold comps found")
         time.sleep(0.3)
@@ -306,114 +347,172 @@ def build_arv_benchmarks(zip_codes: List[str]) -> Dict[str, float]:
     return benchmarks
 
 # ================================
-# ANALYTICS ENGINE (Juan's scoring model)
+# ANALYTICS ENGINE (Twin Home Buyer flip-analyst methodology)
 # ================================
 
 def calculate_arv(listing: Dict) -> Optional[float]:
-    """ARV from real sold-comp $/sqft (see ARV_BENCHMARKS / build_arv_benchmarks)."""
+    """
+    ARV = median sold $/sqft for the zip (see ARV_BENCHMARKS) x subject sqft.
+    No lot-size/bed-count adjustments - following the given rule exactly,
+    not adding anything beyond it. Still a zip-wide proxy, not matched
+    comps - verify manually before offering.
+    """
     psf = ARV_BENCHMARKS.get(listing.get('zip', ''))
     if psf is None:
         return None  # no comp benchmark available for this zip this run
-
-    arv = psf * listing.get('sqft', 1000)
-
-    lot = listing.get('lot_sqft', 0)
-    if lot >= 3000:
-        arv *= 1.08
-    elif lot >= 2500:
-        arv *= 1.05
-
-    beds = listing.get('beds', 0)
-    if beds >= 4:
-        arv *= 1.05
-    elif beds <= 2:
-        arv *= 0.95
-
-    return round(arv, -3)
+    return round(psf * listing.get('sqft', 0), -3)
 
 
-def calculate_reno_budget(listing: Dict) -> float:
-    """Estimate renovation costs from condition language in the listing description."""
+def calculate_rehab_cost(listing: Dict) -> Dict[str, float]:
+    """
+    Both rehab scenarios, always. Light = $70/sqft, Heavy = $145/sqft
+    (midpoint of the stated $140-150 range). Flat add-ons for specific
+    items mentioned in the listing apply to both scenarios equally.
+    """
+    sqft = listing.get('sqft', 0)
     desc = listing.get('description', '').lower()
-    sqft = listing.get('sqft', 1000)
-    base_rate = CONFIG['reno_cost_per_sqft']
 
-    if any(w in desc for w in ['gut', 'full reno', 'complete overhaul', 'total']):
-        rate = base_rate * 1.2
-    elif any(w in desc for w in ['fixer', 'estate', 'original', 'as-is', 'as is', 'needs work', 'tlc', 'potential']):
-        rate = base_rate
-    elif any(w in desc for w in ['updated', 'remodeled', 'renovated', 'move-in']):
-        rate = base_rate * 0.5
-    else:
-        rate = base_rate * 0.7
-
-    budget = rate * sqft
+    addons = 0
     if 'soft story' in desc or 'foundation' in desc:
-        budget += 40000
+        addons += 40000
     if 'knob' in desc or 'tube' in desc or 'electrical' in desc:
-        budget += 20000
+        addons += 20000
     if 'roof' in desc:
-        budget += 15000
+        addons += 15000
 
-    budget *= 1.2  # contingency
-    return round(budget, -3)
+    light = round(CONFIG['light_rehab_psf'] * sqft + addons, -3)
+    heavy = round(CONFIG['heavy_rehab_psf'] * sqft + addons, -3)
+    return {'light': light, 'heavy': heavy}
 
 
-def calculate_spread(listing: Dict) -> Optional[Dict]:
-    """Full flip financials: ARV, reno, holding, closing, net spread."""
-    arv = calculate_arv(listing)
-    if arv is None:
-        return None
-    reno = calculate_reno_budget(listing)
-    price = listing.get('price', 0)
+def calculate_holding_costs(price: float) -> Dict[str, float]:
+    """
+    3-month hold: 10%/year prorated (2.5% of price) + insurance (scaled per
+    $1M of price) + property tax (1.25%/year CA estimate, prorated 3mo) +
+    a flat utilities estimate. The tax/utilities figures aren't in the
+    given rules verbatim (which only said "include conservatively") - kept
+    as clearly-labeled, reasonable assumptions rather than invented silently.
+    """
+    financing = price * CONFIG['holding_annual_rate'] * (CONFIG['holding_months'] / 12)
+    insurance = CONFIG['insurance_per_million'] * (price / 1_000_000)
+    property_tax = price * CONFIG['property_tax_annual_rate'] * (CONFIG['holding_months'] / 12)
+    utilities = CONFIG['utilities_holding_flat']
 
-    holding = price * 0.10 * (CONFIG['holding_months'] / 12)
-    holding += price * 0.02 * (CONFIG['holding_months'] / 12)
-
-    closing = price * CONFIG['closing_costs_percent'] + arv * CONFIG['closing_costs_percent']
-
-    total_cost = price + reno + holding + closing
-    net_spread = arv - total_cost
-    spread_pct = net_spread / total_cost if total_cost > 0 else 0
-
+    total = financing + insurance + property_tax + utilities
     return {
-        'arv': arv,
-        'reno_budget': reno,
-        'holding_costs': round(holding, -3),
-        'total_cost': round(total_cost, -3),
-        'net_spread': round(net_spread, -3),
-        'spread_percent': spread_pct,
+        'financing': round(financing, -2),
+        'insurance': round(insurance, -2),
+        'property_tax': round(property_tax, -2),
+        'utilities': utilities,
+        'total': round(total, -2),
     }
 
 
-def score_deal(listing: Dict, financials: Dict) -> int:
-    """Score 1-10."""
-    score = 0
+def get_min_profit_threshold(arv: float) -> int:
+    """Minimum required GROSS PROFIT (dollars, not %) by ARV tier."""
+    for floor, threshold in CONFIG['profit_thresholds']:
+        if arv >= floor:
+            return threshold
+    return CONFIG['profit_thresholds'][-1][1]
 
-    if financials['spread_percent'] >= CONFIG['preferred_spread_percent']:
-        score += 6
-    elif financials['spread_percent'] >= CONFIG['min_spread_percent']:
-        score += 4
-    elif financials['spread_percent'] >= 0.15:
-        score += 2
 
-    desc = listing.get('description', '').lower()
-    distress_keywords = ['fixer', 'estate', 'as-is', 'as is', 'contractor', 'original', 'tlc', 'needs work', 'potential']
-    matches = sum(1 for kw in distress_keywords if kw in desc)
-    if matches >= 2:
-        score += 2
-    elif matches >= 1:
-        score += 1
+def calculate_max_offer(arv: float, rehab_heavy: float, min_profit: float) -> float:
+    """
+    Recommended max purchase price: the price at which gross profit under
+    the HEAVY (conservative) rehab scenario exactly equals the minimum
+    required profit for this ARV tier. Solves the holding-cost-on-price
+    relationship algebraically (financing + insurance + property tax scale
+    with price; utilities is flat).
+    """
+    rate = (CONFIG['holding_annual_rate'] * (CONFIG['holding_months'] / 12)
+            + (CONFIG['insurance_per_million'] / 1_000_000)
+            + CONFIG['property_tax_annual_rate'] * (CONFIG['holding_months'] / 12))
+    numerator = arv - min_profit - rehab_heavy - CONFIG['utilities_holding_flat']
+    if numerator <= 0:
+        return 0
+    return round(numerator / (1 + rate), -3)
 
-    if listing.get('lot_sqft', 0) >= 2500:
-        score += 1
-    if listing.get('lot_sqft', 0) >= 3000:
-        score += 1
+
+def calculate_deal(listing: Dict) -> Optional[Dict]:
+    """Full flip financials under both rehab scenarios - the core output block."""
+    arv = calculate_arv(listing)
+    if arv is None:
+        return None
+    price = listing.get('price', 0)
+
+    rehab = calculate_rehab_cost(listing)
+    holding = calculate_holding_costs(price)
+    min_profit = get_min_profit_threshold(arv)
+
+    total_cost_light = price + rehab['light'] + holding['total']
+    total_cost_heavy = price + rehab['heavy'] + holding['total']
+    gross_profit_light = arv - total_cost_light
+    gross_profit_heavy = arv - total_cost_heavy
+
+    meets_threshold_light = gross_profit_light >= min_profit
+    meets_threshold_heavy = gross_profit_heavy >= min_profit
+
+    max_offer = calculate_max_offer(arv, rehab['heavy'], min_profit)
+
+    return {
+        'arv': arv,
+        'rehab_light': rehab['light'],
+        'rehab_heavy': rehab['heavy'],
+        'holding_costs': holding['total'],
+        'holding_breakdown': holding,
+        'total_cost_light': round(total_cost_light, -2),
+        'total_cost_heavy': round(total_cost_heavy, -2),
+        'gross_profit_light': round(gross_profit_light, -2),
+        'gross_profit_heavy': round(gross_profit_heavy, -2),
+        'min_profit_threshold': min_profit,
+        'meets_threshold_light': meets_threshold_light,
+        'meets_threshold_heavy': meets_threshold_heavy,
+        'recommended_max_offer': max_offer,
+    }
+
+
+def classify_deal(deal: Dict) -> str:
+    """Strong Deal / Marginal / Pass, per the required output categories."""
+    if deal['meets_threshold_heavy']:
+        return 'Strong Deal'
+    if deal['meets_threshold_light']:
+        return 'Marginal'
+    return 'Pass'
+
+
+def score_deal(listing: Dict, deal: Dict) -> int:
+    """
+    1-10, for ranking/sorting only (not part of the required output format,
+    but useful to order candidates). Based on how far gross profit under the
+    heavy (conservative) scenario clears its required threshold.
+    """
+    threshold = deal['min_profit_threshold']
+    if threshold <= 0:
+        return 1
+    ratio = deal['gross_profit_heavy'] / threshold
+
+    if ratio >= 1.5:
+        score = 10
+    elif ratio >= 1.2:
+        score = 8
+    elif ratio >= 1.0:
+        score = 7
+    elif deal['meets_threshold_light']:
+        light_ratio = deal['gross_profit_light'] / threshold
+        score = 5 if light_ratio >= 1.2 else 4
+    else:
+        score = 2 if deal['gross_profit_light'] > 0 else 1
 
     return min(10, max(1, score))
 
 
 def identify_risks(listing: Dict) -> List[str]:
+    """
+    Structural/market risk flags available from listing text. Flood zone,
+    code violations, and days-on-market/active-listing-count risk are called
+    for by the methodology but aren't reliably scrapeable from a card/detail
+    page with this method - not fabricated here, flagged as a gap instead.
+    """
     risks = []
     desc = listing.get('description', '').lower()
 
@@ -425,9 +524,13 @@ def identify_risks(listing: Dict) -> List[str]:
     if listing.get('price', 0) < 500000 and 'san francisco' in listing.get('city', '').lower():
         risks.append('PRICE ANOMALY - verify title/liens')
     if listing.get('lot_sqft', 0) and listing.get('lot_sqft', 0) < 2500:
-        risks.append('Small lot - limited ADU potential')
+        risks.append('Small lot')
     if 'bayview' in listing.get('address', '').lower():
         risks.append('Bayview - neighborhood still transitional')
+    if listing.get('sqft', 0) >= 3000:
+        risks.append('Oversized for a flat zip-median $/sqft ARV (known to overstate value on '
+                      'outlier-large homes) - verify against size-matched comps manually')
+    risks.append('Market/DOM risk and flood-zone/code-violation status not verified by this scan - check manually')
 
     return risks
 
@@ -436,8 +539,8 @@ def identify_risks(listing: Dict) -> List[str]:
 # ================================
 
 def run_redfin_scout() -> List[Dict]:
-    """Main entry point: scan Redfin, enrich, analyze, score."""
-    global ARV_BENCHMARKS
+    """Main entry point: scan Redfin, enrich, analyze, classify."""
+    global ARV_BENCHMARKS, LAST_ANALYZED, LAST_ALL_URLS
     print("\n" + "=" * 60)
     print("JUAN'S FLIP SCOUT AGENT - REDFIN EDITION")
     print(f"{datetime.now().strftime('%B %d, %Y - %I:%M %p')}")
@@ -445,7 +548,7 @@ def run_redfin_scout() -> List[Dict]:
     print(f"Target: Single-Family Homes ${CONFIG['min_price']:,.0f}-${CONFIG['max_price']:,.0f}")
     print(f"Zips scanned: {len(CONFIG['target_zips'])}\n")
 
-    print("Building ARV benchmarks from real sold comps (last 6 months)...")
+    print("Building ARV benchmarks from real sold comps (last 6 months, median $/sqft)...")
     ARV_BENCHMARKS = build_arv_benchmarks(CONFIG['target_zips'])
 
     all_listings = []
@@ -469,13 +572,13 @@ def run_redfin_scout() -> List[Dict]:
         print("No listings found. Redfin may be blocking requests, or no zips matched.")
         return []
 
-    # Rough pre-score (no description yet) to prioritize which candidates are
+    # Rough pre-check (no description yet) to prioritize which candidates are
     # worth the slower detail-page fetch. Quota this PER ZIP rather than
     # globally - otherwise zips with a higher comp-based ARV dominate a single
     # global ranking and starve every other zip of detail-page enrichment.
     for l in all_listings:
-        rough = calculate_spread(l)
-        l['_rough_spread'] = rough['spread_percent'] if rough else -999
+        rough = calculate_deal(l)
+        l['_rough_profit'] = rough['gross_profit_light'] if rough else -10**9
 
     by_zip = {}
     for l in all_listings:
@@ -483,7 +586,7 @@ def run_redfin_scout() -> List[Dict]:
 
     shortlist = []
     for zip_code, items in by_zip.items():
-        items.sort(key=lambda x: x['_rough_spread'], reverse=True)
+        items.sort(key=lambda x: x['_rough_profit'], reverse=True)
         shortlist.extend(items[:CONFIG['detail_enrich_limit']])
 
     print(f"Enriching {len(shortlist)} candidates ({CONFIG['detail_enrich_limit']}/zip) with detail-page data...")
@@ -499,19 +602,24 @@ def run_redfin_scout() -> List[Dict]:
         if (l.get('is_multi_unit') or l.get('is_already_renovated') or l.get('is_vacant_land')
                 or l.get('is_data_incomplete')):
             continue
-        financials = calculate_spread(l)
-        if financials is None or financials['spread_percent'] < 0.10:
+        deal = calculate_deal(l)
+        if deal is None or not deal['meets_threshold_light']:
+            # doesn't clear the minimum profit threshold even in the best
+            # (light rehab) case - not a profitable lead, don't surface it
             continue
-        l['financials'] = financials
-        l['score'] = score_deal(l, financials)
+        l['deal'] = deal
+        l['score'] = score_deal(l, deal)
+        l['recommendation'] = classify_deal(deal)
         l['risks'] = identify_risks(l)
-        l['adu_potential'] = l.get('lot_sqft', 0) >= 2500
         analyzed.append(l)
 
-    analyzed.sort(key=lambda x: (x['score'], x['financials']['spread_percent']), reverse=True)
-    top = [d for d in analyzed if d['score'] >= 8][:10]
+    analyzed.sort(key=lambda x: (x['score'], x['deal']['gross_profit_heavy']), reverse=True)
+    top = [d for d in analyzed if d['recommendation'] == 'Strong Deal'][:10]
     if not top:
         top = analyzed[:10]
+
+    LAST_ANALYZED = analyzed
+    LAST_ALL_URLS = [l['url'] for l in all_listings]
 
     return top
 
@@ -531,16 +639,26 @@ def print_report(leads: List[Dict]):
     print("=" * 60 + "\n")
 
     for idx, lead in enumerate(leads, 1):
-        f = lead['financials']
+        d = lead['deal']
         print(f"{'=' * 60}")
-        print(f"LEAD #{idx} — SCORE: {lead['score']}/10")
+        print(f"LEAD #{idx} — {lead['recommendation'].upper()} (score {lead['score']}/10)")
         print(f"{lead['address']}, {lead.get('city', '')}, CA {lead.get('zip', '')}")
         print(f"Beds/Baths/SqFt: {lead.get('beds', 0)}/{lead.get('baths', 0)}/{lead.get('sqft', 0):,}")
-        print(f"List Price:    ${lead.get('price', 0):,.0f}")
-        print(f"Est. ARV:      ${f['arv']:,.0f}  (from sold comps, p75 $/sqft)")
-        print(f"Reno Budget:   ${f['reno_budget']:,.0f}")
-        print(f"Total Cost:    ${f['total_cost']:,.0f}")
-        print(f"Net Spread:    ${f['net_spread']:,.0f} ({f['spread_percent']:.1%})")
+        print()
+        print(f"Purchase Price:      ${lead.get('price', 0):,.0f}")
+        print(f"Estimated ARV:       ${d['arv']:,.0f}  (median sold $/sqft, this zip, last 6mo)")
+        print(f"Rehab Cost (Light):  ${d['rehab_light']:,.0f}  (${CONFIG['light_rehab_psf']}/sqft)")
+        print(f"Rehab Cost (Heavy):  ${d['rehab_heavy']:,.0f}  (${CONFIG['heavy_rehab_psf']}/sqft)")
+        print(f"Holding Costs (3mo): ${d['holding_costs']:,.0f}")
+        print(f"Total Cost (Light):  ${d['total_cost_light']:,.0f}")
+        print(f"Total Cost (Heavy):  ${d['total_cost_heavy']:,.0f}")
+        print(f"Gross Profit (Light):${d['gross_profit_light']:,.0f}")
+        print(f"Gross Profit (Heavy):${d['gross_profit_heavy']:,.0f}")
+        print(f"Min. Required Profit:${d['min_profit_threshold']:,.0f}")
+        print(f"Meets Threshold?     Light: {'Yes' if d['meets_threshold_light'] else 'No'} | "
+              f"Heavy: {'Yes' if d['meets_threshold_heavy'] else 'No'}")
+        print(f"Recommended Max Offer: ${d['recommended_max_offer']:,.0f}")
+        print()
         if lead.get('risks'):
             print("Risks:")
             for risk in lead['risks']:
@@ -552,19 +670,27 @@ def print_report(leads: List[Dict]):
 def save_report(leads: List[Dict]):
     filename = f"flip_report_{datetime.now().strftime('%Y%m%d')}.txt"
     with open(filename, 'w') as f:
-        f.write(f"Juan's Flip Scout Report - {datetime.now().strftime('%B %d, %Y')}\n")
+        f.write(f"Twin Home Buyer - Flip Scout Report - {datetime.now().strftime('%B %d, %Y')}\n")
         f.write("=" * 60 + "\n\n")
         if not leads:
             f.write("No deals found today.\n")
             return
         for idx, lead in enumerate(leads, 1):
-            fin = lead['financials']
-            f.write(f"LEAD #{idx} - Score: {lead['score']}/10\n")
+            d = lead['deal']
+            f.write(f"LEAD #{idx} - {lead['recommendation']} (score {lead['score']}/10)\n")
             f.write(f"Address: {lead['address']}, {lead.get('city', '')}, CA {lead.get('zip', '')}\n")
-            f.write(f"Price: ${lead.get('price', 0):,.0f}\n")
-            f.write(f"ARV (comp-based): ${fin['arv']:,.0f}\n")
-            f.write(f"Net Spread: ${fin['net_spread']:,.0f} ({fin['spread_percent']:.1%})\n")
-            f.write(f"Risks: {', '.join(lead.get('risks', ['None']))}\n")
+            f.write(f"Purchase Price: ${lead.get('price', 0):,.0f}\n")
+            f.write(f"Estimated ARV: ${d['arv']:,.0f}\n")
+            f.write(f"Rehab Cost (Light): ${d['rehab_light']:,.0f}\n")
+            f.write(f"Rehab Cost (Heavy): ${d['rehab_heavy']:,.0f}\n")
+            f.write(f"Holding Costs (3mo): ${d['holding_costs']:,.0f}\n")
+            f.write(f"Gross Profit (Light): ${d['gross_profit_light']:,.0f}\n")
+            f.write(f"Gross Profit (Heavy): ${d['gross_profit_heavy']:,.0f}\n")
+            f.write(f"Meets Minimum Revenue Threshold (${d['min_profit_threshold']:,.0f})? "
+                    f"Light: {'Yes' if d['meets_threshold_light'] else 'No'}, "
+                    f"Heavy: {'Yes' if d['meets_threshold_heavy'] else 'No'}\n")
+            f.write(f"Recommended Max Offer: ${d['recommended_max_offer']:,.0f}\n")
+            f.write(f"Risks: {'; '.join(lead.get('risks', ['None']))}\n")
             f.write(f"Link: {lead['url']}\n")
             f.write("-" * 40 + "\n\n")
     print(f"\nReport saved to: {filename}")
@@ -573,10 +699,67 @@ def save_report(leads: List[Dict]):
 # MAIN
 # ================================
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+CACHE_PATH = os.path.join(HERE, "comp_benchmarks_cache.json")
+SEEN_PATH = os.path.join(HERE, "seen_listings.json")
+FEED_PATH = os.path.join(HERE, "leads_for_sheets.json")
+
+
+def persist_full_scan_state(now_iso: str):
+    """
+    A full scan already does everything hourly_check.py's incremental run
+    does (rebuild comps, search, enrich, analyze) - so it should leave the
+    same state behind, otherwise the next hourly run has no cache/seen data
+    and re-does all of it from scratch. Writes all three files hourly_check
+    also maintains: comp_benchmarks_cache.json, seen_listings.json, and the
+    Sheets feed (leads_for_sheets.json) - using every qualifying lead this
+    scan found (LAST_ANALYZED), not just the top 10 shown in the report.
+    """
+    json.dump({"last_built": now_iso, "benchmarks": ARV_BENCHMARKS}, open(CACHE_PATH, "w"), indent=2)
+
+    seen = set()
+    if os.path.exists(SEEN_PATH):
+        seen = set(json.load(open(SEEN_PATH)))
+    seen |= set(LAST_ALL_URLS)
+    json.dump(sorted(seen), open(SEEN_PATH, "w"), indent=2)
+
+    feed = {"generated_at": now_iso, "leads": []}
+    if os.path.exists(FEED_PATH):
+        feed = json.load(open(FEED_PATH))
+    existing_urls = {row["url"] for row in feed["leads"]}
+    for d in LAST_ANALYZED:
+        if d["url"] in existing_urls or not d["deal"]["meets_threshold_light"]:
+            continue
+        deal = d["deal"]
+        feed["leads"].append({
+            "score": d["score"], "recommendation": d["recommendation"],
+            "address": d["address"], "city": d["city"], "zip": d["zip"],
+            "beds": d["beds"], "baths": d["baths"], "sqft": d["sqft"],
+            "lot_sqft": d.get("lot_sqft", 0), "year_built": d.get("year_built", ""),
+            "price": d["price"], "arv": deal["arv"],
+            "rehab_light": deal["rehab_light"], "rehab_heavy": deal["rehab_heavy"],
+            "holding_costs": deal["holding_costs"],
+            "total_cost_light": deal["total_cost_light"], "total_cost_heavy": deal["total_cost_heavy"],
+            "gross_profit_light": deal["gross_profit_light"], "gross_profit_heavy": deal["gross_profit_heavy"],
+            "min_profit_threshold": deal["min_profit_threshold"],
+            "meets_threshold_heavy": deal["meets_threshold_heavy"],
+            "recommended_max_offer": deal["recommended_max_offer"],
+            "risks": "; ".join(d.get("risks", [])) or "None",
+            "url": d["url"],
+        })
+    feed["leads"].sort(key=lambda r: (r["score"], r["gross_profit_heavy"]), reverse=True)
+    feed["generated_at"] = now_iso
+    json.dump(feed, open(FEED_PATH, "w"), indent=2)
+    print(f"Persisted state: {len(ARV_BENCHMARKS)} zip benchmarks, {len(seen)} seen listings, "
+          f"{len(feed['leads'])} leads in Sheets feed.")
+
+
 def main():
     leads = run_redfin_scout()
     print_report(leads)
     save_report(leads)
+    now_iso = datetime.now().astimezone().isoformat()
+    persist_full_scan_state(now_iso)
     print("\nDone. Run again for fresh deals.")
 
 

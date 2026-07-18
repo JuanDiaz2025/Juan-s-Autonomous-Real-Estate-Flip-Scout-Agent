@@ -101,16 +101,18 @@ def main(now_iso, now_ts, parse_iso):
         if (l.get("is_multi_unit") or l.get("is_already_renovated") or l.get("is_vacant_land")
                 or l.get("is_data_incomplete")):
             continue
-        financials = fsr.calculate_spread(l)
-        if financials is None or financials["spread_percent"] < 0.10:
+        deal = fsr.calculate_deal(l)
+        if deal is None or not deal["meets_threshold_light"]:
+            # doesn't clear the minimum profit threshold even in the best
+            # (light rehab) case - not profitable, don't surface it
             continue
-        l["financials"] = financials
-        l["score"] = fsr.score_deal(l, financials)
+        l["deal"] = deal
+        l["score"] = fsr.score_deal(l, deal)
+        l["recommendation"] = fsr.classify_deal(deal)
         l["risks"] = fsr.identify_risks(l)
-        l["adu_potential"] = l.get("lot_sqft", 0) >= 2500
         qualified.append(l)
 
-    qualified.sort(key=lambda x: (x["score"], x["financials"]["spread_percent"]), reverse=True)
+    qualified.sort(key=lambda x: (x["score"], x["deal"]["gross_profit_heavy"]), reverse=True)
 
     # mark everything we saw this run (qualified or not) so it's never
     # re-flagged as "new" again
@@ -120,8 +122,8 @@ def main(now_iso, now_ts, parse_iso):
         json.dump(qualified, open(os.path.join(HERE, "new_leads.json"), "w"), indent=2)
         print(f"\n{len(qualified)} NEW LEADS CLEARED FILTERS:")
         for d in qualified:
-            print(f"  {d['score']}/10  {d['address']}, {d['city']} {d['zip']}  "
-                  f"${d['price']:,}  spread {d['financials']['spread_percent']:.1%}  {d['url']}")
+            print(f"  {d['score']}/10  {d['recommendation']}  {d['address']}, {d['city']} {d['zip']}  "
+                  f"${d['price']:,}  profit(light) ${d['deal']['gross_profit_light']:,.0f}  {d['url']}")
         merge_into_sheets_feed(qualified, now_iso)
     else:
         if os.path.exists(os.path.join(HERE, "new_leads.json")):
@@ -136,7 +138,8 @@ def merge_into_sheets_feed(new_qualified, now_iso):
     """Append newly-qualified leads into the consolidated feed the Google
     Apps Script reads (leads_for_sheets.json), deduped by URL. This is the
     file that drives Juan's spreadsheet - keep it in this flat, sheet-ready
-    row shape, not the raw nested listing dicts."""
+    row shape, not the raw nested listing dicts. No ADU Potential, no
+    "Reno Budget" - Rehab Cost (Light)/(Heavy) per the standing methodology."""
     feed = {"generated_at": now_iso, "leads": []}
     if os.path.exists(FEED_PATH):
         feed = json.load(open(FEED_PATH))
@@ -145,25 +148,29 @@ def merge_into_sheets_feed(new_qualified, now_iso):
     for d in new_qualified:
         if d["url"] in existing_urls:
             continue
-        f = d["financials"]
-        if f["spread_percent"] < 0.10:
-            # belt-and-suspenders: Juan only wants profitable leads in the
-            # sheet, never negative/marginal ones. Callers should already
-            # filter this before reaching here, but don't rely on that.
+        deal = d["deal"]
+        if not deal["meets_threshold_light"]:
+            # belt-and-suspenders: only profitable leads ever reach the
+            # sheet. Callers should already filter this, but don't rely on it.
             continue
         feed["leads"].append({
-            "score": d["score"], "address": d["address"], "city": d["city"], "zip": d["zip"],
+            "score": d["score"], "recommendation": d["recommendation"],
+            "address": d["address"], "city": d["city"], "zip": d["zip"],
             "beds": d["beds"], "baths": d["baths"], "sqft": d["sqft"],
             "lot_sqft": d.get("lot_sqft", 0), "year_built": d.get("year_built", ""),
-            "price": d["price"], "arv": f["arv"], "reno_budget": f["reno_budget"],
-            "holding_costs": f["holding_costs"], "total_cost": f["total_cost"],
-            "net_spread": f["net_spread"], "spread_percent": round(f["spread_percent"], 4),
-            "adu_potential": bool(d.get("adu_potential")),
+            "price": d["price"], "arv": deal["arv"],
+            "rehab_light": deal["rehab_light"], "rehab_heavy": deal["rehab_heavy"],
+            "holding_costs": deal["holding_costs"],
+            "total_cost_light": deal["total_cost_light"], "total_cost_heavy": deal["total_cost_heavy"],
+            "gross_profit_light": deal["gross_profit_light"], "gross_profit_heavy": deal["gross_profit_heavy"],
+            "min_profit_threshold": deal["min_profit_threshold"],
+            "meets_threshold_heavy": deal["meets_threshold_heavy"],
+            "recommended_max_offer": deal["recommended_max_offer"],
             "risks": "; ".join(d.get("risks", [])) or "None",
             "url": d["url"],
         })
 
-    feed["leads"].sort(key=lambda r: (r["score"], r["spread_percent"]), reverse=True)
+    feed["leads"].sort(key=lambda r: (r["score"], r["gross_profit_heavy"]), reverse=True)
     feed["generated_at"] = now_iso
     json.dump(feed, open(FEED_PATH, "w"), indent=2)
     print(f"leads_for_sheets.json updated - {len(feed['leads'])} total leads in feed")
