@@ -149,7 +149,10 @@ HEADERS = {
 # calculate_arv(). Never hand-edit; it's recomputed fresh on every run.
 ARV_BENCHMARKS: Dict[str, float] = {}
 # Populated by run_redfin_scout() each call - the full qualifying list before
-# the top-10 cut, and every candidate URL seen this scan (qualifying or not).
+# the top-10 cut, and every DETAIL-ENRICHED candidate's URL this scan
+# (qualifying or not) - deliberately NOT every raw card-level candidate, so
+# a candidate the per-zip quota skipped enriching doesn't get marked "seen"
+# and permanently excluded from ever being evaluated (see run_redfin_scout).
 # Kept as globals (same pattern as ARV_BENCHMARKS) so main() can persist full
 # state after a run without run_redfin_scout()'s return signature changing.
 LAST_ANALYZED: List[Dict] = []
@@ -758,7 +761,15 @@ def run_redfin_scout() -> List[Dict]:
         top = analyzed[:10]
 
     LAST_ANALYZED = analyzed
-    LAST_ALL_URLS = [l['url'] for l in all_listings]
+    # Only mark candidates that were actually DETAIL-ENRICHED (shortlist) as
+    # seen - not every raw card-level candidate (all_listings). The per-zip
+    # detail_enrich_limit quota means most candidates in a big zip never get
+    # enriched at all; marking them "seen" anyway would permanently exclude
+    # them from ever being evaluated, since hourly_check.py (which has no
+    # quota and fully enriches every genuinely-new listing) only looks at
+    # URLs NOT already in seen_listings.json. Leaving them unseen here means
+    # the very next hourly run gives them a real, un-quota-limited look.
+    LAST_ALL_URLS = [l['url'] for l in shortlist]
 
     return top
 
