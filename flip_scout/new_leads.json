@@ -1,0 +1,32 @@
+[
+  {
+    "address": "6480 Ascot Dr",
+    "city": "Oakland",
+    "zip": "94611",
+    "price": 995000,
+    "beds": 3.0,
+    "baths": 3.0,
+    "sqft": 1924,
+    "lot_sqft": 6760,
+    "year_built": 1955,
+    "property_type": "Single Family",
+    "description": "Nestled in the desirable Piedmont Pines neighborhood of Oakland's prestigious Montclair District, this spacious residence offers more than 2,000 square feet of versatile living space thoughtfully designed across two levels. The main level features two generously sized bedrooms and two full bathrooms, anchored by an expansive sun-filled living room wrapped in large picture windows that invite an abundance of natural light. Beautiful plank hardwood flooring enhances the warmth and character of the living space, while the oversized kitchen flows seamlessly into a spacious den/family room, creatin",
+    "url": "https://www.redfin.com/CA/Oakland/6480-Ascot-Dr-94611/home/1607840",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_data_incomplete": false,
+    "financials": {
+      "arv": 2115000.0,
+      "reno_budget": 566000.0,
+      "holding_costs": 60000.0,
+      "total_cost": 1714000.0,
+      "net_spread": 401000.0,
+      "spread_percent": 0.2339556592765461
+    },
+    "score": 6,
+    "risks": [],
+    "adu_potential": true
+  }
+]
