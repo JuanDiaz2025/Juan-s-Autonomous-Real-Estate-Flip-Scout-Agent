@@ -236,6 +236,15 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
             city = parts[1] if len(parts) > 1 else ''
             zip_match = re.search(r'(\d{5})', parts[-1]) if parts else None
             real_zip = zip_match.group(1) if zip_match else zip_code
+            # Cross-check against the zip embedded in the URL slug itself
+            # (".../3226-Champion-St-94602/home/1986790") - that's a
+            # structurally anchored value Redfin generates from its own
+            # listing record, vs. free-text parsing of the displayed card,
+            # which has been seen to mis-scrape a digit (94602 -> 92602 on
+            # one listing). Prefer the URL's zip whenever it's available.
+            url_zip_match = re.search(r'-(\d{5})/home/\d+', href)
+            if url_zip_match:
+                real_zip = url_zip_match.group(1)
 
             listing = {
                 'address': parts[0],
