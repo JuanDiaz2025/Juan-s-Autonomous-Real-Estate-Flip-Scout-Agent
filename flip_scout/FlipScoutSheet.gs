@@ -98,7 +98,23 @@ function refreshFlipScoutSheet() {
   }
 
   var headers = COLUMNS.map(function (c) { return c.header; });
-  if (isNewSheet || sheet.getLastRow() === 0) {
+
+  // Detect a stale header row from an earlier methodology (e.g. Spread %,
+  // Reno Budget, ADU Potential) - those columns don't map onto the current
+  // ones at all, so there's nothing to preserve. Clear the sheet and
+  // rebuild fresh under the current schema rather than appending new-schema
+  // rows after an old-schema header, which is what silently left "ADU
+  // Potential"/"Reno Budget" showing even after this script was updated.
+  var hasStaleHeader = false;
+  if (!isNewSheet && sheet.getLastRow() > 0) {
+    var existingHeaderRow = sheet.getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1)).getValues()[0];
+    hasStaleHeader = !headers.every(function (h, i) { return existingHeaderRow[i] === h; });
+  }
+
+  if (isNewSheet || sheet.getLastRow() === 0 || hasStaleHeader) {
+    if (hasStaleHeader) {
+      sheet.clear();
+    }
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
     sheet.setFrozenRows(1);
