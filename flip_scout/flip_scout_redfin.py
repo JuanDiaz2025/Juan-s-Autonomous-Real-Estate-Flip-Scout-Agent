@@ -198,16 +198,64 @@ VACANT_LAND_FLAGS = [
 # REDFIN SCRAPER ENGINE
 # ================================
 
+# Safety cap on pages fetched per zip/search - not a guess at real inventory,
+# just a backstop against ever looping forever if Redfin's pagination links
+# behave unexpectedly. 400+ listings under one zip/price/lookback filter
+# would be extraordinary; if it ever happens, this caps the damage rather
+# than hanging indefinitely.
+MAX_SEARCH_PAGES = 10
+
+
+def _fetch_redfin_page(url: str, retries: int = 2, delay: float = 1.5) -> Optional[str]:
+    """
+    GET with retry - confirmed live that Redfin occasionally answers a real,
+    populated page with an empty/HTTP-202 "checking your browser"-style
+    response, even though an immediate retry of the identical URL returns
+    the real content. Without this, a single transient hiccup would look
+    exactly like "this zip/page has zero listings" rather than what it
+    actually is - a request that needs to be tried again. A short body
+    (<5000 bytes) is treated as that same kind of non-answer, real result
+    pages are consistently hundreds of KB.
+    """
+    for attempt in range(retries + 1):
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=20)
+            r.raise_for_status()
+            if len(r.text) > 5000:
+                return r.text
+        except Exception:
+            pass
+        if attempt < retries:
+            time.sleep(delay)
+    return None
+
+
 def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[Dict]:
-    """Search Redfin's current markup for single-family homes in a ZIP code."""
+    """
+    Search Redfin's current markup for single-family homes in a ZIP code.
+    Paginates through every results page (up to MAX_SEARCH_PAGES) rather
+    than just the first - some zips have more active listings than fit on
+    one page (confirmed live: 94605 had 41 on page 1 and 29 more on page 2,
+    zero overlap between them - page 1 alone was missing 41% of that zip's
+    actual inventory).
+    """
     listings = []
-    url = (f"https://www.redfin.com/zipcode/{zip_code}/filter/"
-           f"property-type=house,max-price={max_price}")
-    try:
-        r = requests.get(url, headers=HEADERS, timeout=20)
-        r.raise_for_status()
-        soup = BeautifulSoup(r.text, 'html.parser')
+    seen_hrefs = set()
+    base_url = (f"https://www.redfin.com/zipcode/{zip_code}/filter/"
+                f"property-type=house,max-price={max_price}")
+
+    for page in range(1, MAX_SEARCH_PAGES + 1):
+        url = base_url if page == 1 else f"{base_url}/page-{page}"
+        text = _fetch_redfin_page(url)
+        if text is None:
+            if page == 1:
+                print(f"  ⚠️ Error fetching ZIP {zip_code}: no usable response after retries")
+            break
+
+        soup = BeautifulSoup(text, 'html.parser')
         cards = soup.find_all('div', {'class': re.compile(r'HomeCardContainer')})
+        if not cards:
+            break  # genuinely no (more) results on this page
 
         for card in cards:
             html = str(card)
@@ -220,6 +268,10 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
                 continue
 
             href, address_text = addr_m.group(1), addr_m.group(2)
+            if href in seen_hrefs:
+                continue  # same listing surfaced again across pages (live reordering)
+            seen_hrefs.add(href)
+
             # Exclude condo/TIC units and multi-address (duplex-style) buildings
             # that Redfin's "house" filter still lets through. Check the URL slug,
             # not just the displayed address text - Redfin sometimes shows only the
@@ -269,8 +321,10 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
             }
             if CONFIG['min_price'] <= price <= CONFIG['max_price'] and sqft > 0 and beds > 0:
                 listings.append(listing)
-    except Exception as e:
-        print(f"  ⚠️ Error fetching ZIP {zip_code}: {e}")
+
+        if page < MAX_SEARCH_PAGES:
+            time.sleep(0.3)  # be respectful between pages, same as between zips
+
     return listings
 
 
@@ -369,16 +423,30 @@ def fetch_zip_comps(zip_code: str) -> List[Dict]:
     Pull actual sold single-family comps for a zip over the lookback window -
     price AND sqft for each (not just a flat $/sqft), so ARV can later be
     computed from comps matched to the SUBJECT's size rather than every
-    sold home in the zip regardless of how comparable it is.
+    sold home in the zip regardless of how comparable it is. Paginates
+    through every results page (up to MAX_SEARCH_PAGES), same reasoning as
+    search_redfin() - confirmed live that 94605 alone has FOUR pages of sold
+    comps, so a single-page fetch was quietly building the ARV benchmark
+    off a fraction of the real comp pool for busier zips.
     """
     comps = []
-    url = (f"https://www.redfin.com/zipcode/{zip_code}/filter/"
-           f"property-type=house,include={CONFIG['sold_lookback']}")
-    try:
-        r = requests.get(url, headers=HEADERS, timeout=20)
-        r.raise_for_status()
-        soup = BeautifulSoup(r.text, 'html.parser')
+    seen_pairs = set()
+    base_url = (f"https://www.redfin.com/zipcode/{zip_code}/filter/"
+                f"property-type=house,include={CONFIG['sold_lookback']}")
+
+    for page in range(1, MAX_SEARCH_PAGES + 1):
+        url = base_url if page == 1 else f"{base_url}/page-{page}"
+        text = _fetch_redfin_page(url)
+        if text is None:
+            if page == 1:
+                print(f"  ⚠️ Error fetching comps for {zip_code}: no usable response after retries")
+            break
+
+        soup = BeautifulSoup(text, 'html.parser')
         cards = soup.find_all('div', {'class': re.compile(r'HomeCardContainer')})
+        if not cards:
+            break
+
         for card in cards:
             html = str(card)
             price_m = re.search(r'bp-Homecard__Price--value">\$([\d,]+)', html)
@@ -388,9 +456,15 @@ def fetch_zip_comps(zip_code: str) -> List[Dict]:
             price = int(price_m.group(1).replace(',', ''))
             sqft = int(sqft_m.group(1).replace(',', ''))
             if price > 50000 and sqft > 200:
+                pair = (price, sqft)  # no per-listing URL scraped here - dedupe on (price, sqft)
+                if pair in seen_pairs:
+                    continue
+                seen_pairs.add(pair)
                 comps.append({'price': price, 'sqft': sqft, 'psf': price / sqft})
-    except Exception as e:
-        print(f"  ⚠️ Error fetching comps for {zip_code}: {e}")
+
+        if page < MAX_SEARCH_PAGES:
+            time.sleep(0.3)
+
     return comps
 
 
