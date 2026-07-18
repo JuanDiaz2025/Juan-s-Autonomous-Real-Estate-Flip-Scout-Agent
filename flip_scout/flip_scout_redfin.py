@@ -19,12 +19,20 @@ Replaces the earlier spread-percentage model entirely. Rules below are
 followed exactly as given - nothing here is a guess:
 
 - ARV: median $/sqft of each zip's actual homes sold in the last 6 months,
-  times the subject's sqft. No lot/bed adjustments layered on top (earlier
-  drafts added some; removed to not add anything beyond the given rule).
-  CAVEAT: this is a zip-wide aggregate proxy, not 4-8 hand-picked 1-mile-
-  radius comps with sale dates - the automated scraper doesn't pull
-  individual comp addresses. Treat as a screen, verify manually before
-  offering.
+  restricted to comps within a similar size band to the subject (+/-20%,
+  widening to +/-40% then +/-60% only if too few comps clear the tighter
+  band - see SIZE_MATCH_BANDS), times the subject's sqft. Bryan flagged the
+  original zip-wide-median version (no size filter at all) as too
+  optimistic - it let a handful of large/luxury sold comps set the $/sqft
+  for a typical-sized fixer that will never sell at that rate. No lot/bed
+  adjustments beyond size-matching. If a zip doesn't have enough
+  size-matched comps even at the widest band, it falls back to that zip's
+  full comp set (flagged _arv_size_matched=False, surfaced as a risk); if
+  the zip has no comps at all, it falls back to every comp fetched this
+  run. CAVEAT: still a zip-wide/size-wide aggregate proxy, not 4-8
+  hand-picked 1-mile-radius comps with sale dates - the automated scraper
+  doesn't pull individual comp addresses. Treat as a screen, verify
+  manually before offering.
 - Rehab cost: two explicit scenarios, both always computed -
   Light = $70/sqft, Heavy = $140-150/sqft (using $145 as the stated
   midpoint). Plus flat add-ons for specific items mentioned in the listing
@@ -344,9 +352,14 @@ def enrich_detail(listing: Dict) -> Dict:
     return listing
 
 
-def fetch_zip_comps(zip_code: str) -> List[float]:
-    """Pull actual sold single-family $/sqft for a zip over the lookback window."""
-    psfs = []
+def fetch_zip_comps(zip_code: str) -> List[Dict]:
+    """
+    Pull actual sold single-family comps for a zip over the lookback window -
+    price AND sqft for each (not just a flat $/sqft), so ARV can later be
+    computed from comps matched to the SUBJECT's size rather than every
+    sold home in the zip regardless of how comparable it is.
+    """
+    comps = []
     url = (f"https://www.redfin.com/zipcode/{zip_code}/filter/"
            f"property-type=house,include={CONFIG['sold_lookback']}")
     try:
@@ -363,54 +376,96 @@ def fetch_zip_comps(zip_code: str) -> List[float]:
             price = int(price_m.group(1).replace(',', ''))
             sqft = int(sqft_m.group(1).replace(',', ''))
             if price > 50000 and sqft > 200:
-                psfs.append(price / sqft)
+                comps.append({'price': price, 'sqft': sqft, 'psf': price / sqft})
     except Exception as e:
         print(f"  ⚠️ Error fetching comps for {zip_code}: {e}")
-    return psfs
+    return comps
 
 
-def build_arv_benchmarks(zip_codes: List[str]) -> Dict[str, float]:
+def build_arv_benchmarks(zip_codes: List[str]) -> Dict[str, List[Dict]]:
     """
-    Build a real, comp-based $/sqft benchmark per zip from recent sold homes.
-    Uses the MEDIAN $/sqft - conservative per the standing rule to use
-    median/lower end of comps, not an upper-percentile proxy.
+    Pull each zip's raw sold comps (price + sqft, not a pre-collapsed
+    number) so calculate_arv() can size-match at analysis time. Storing the
+    scalar median here (like the earlier revision did) baked in every sold
+    home regardless of size, which is exactly what made ARV too optimistic
+    for a typical-sized fixer sitting in a zip whose recent sales skew
+    larger/pricier.
     """
     benchmarks = {}
-    all_psfs = []
+    all_comps = []
     for z in zip_codes:
-        psfs = fetch_zip_comps(z)
-        all_psfs.extend(psfs)
-        if psfs:
-            med = statistics.median(psfs)
-            benchmarks[z] = round(med)
-            print(f"  {z}: {len(psfs)} sold comps, median ${med:,.0f}/sqft")
+        comps = fetch_zip_comps(z)
+        benchmarks[z] = comps
+        all_comps.extend(comps)
+        if comps:
+            med = statistics.median(c['psf'] for c in comps)
+            print(f"  {z}: {len(comps)} sold comps, median ${med:,.0f}/sqft")
         else:
             print(f"  {z}: no sold comps found")
         time.sleep(0.3)
 
-    # zips with no comps of their own fall back to the overall median across
-    # every comp fetched this run, rather than a hand-picked guess
-    if all_psfs:
-        fallback = round(statistics.median(all_psfs))
-        for z in zip_codes:
-            benchmarks.setdefault(z, fallback)
+    # zips with no comps of their own fall back to every comp fetched this
+    # run (still real data, just not zip-specific) - calculate_arv() applies
+    # the same size-matching to this pool, not a hand-picked guess
+    benchmarks['__fallback__'] = all_comps
     return benchmarks
 
 # ================================
 # ANALYTICS ENGINE (Twin Home Buyer flip-analyst methodology)
 # ================================
 
+# Progressive size-match bands, as a fraction of the subject's sqft (e.g.
+# 0.20 = comps within +/-20% of subject sqft). Widens only if the tighter
+# band doesn't have enough comps to be a real median. This convention
+# (not a number Twin Home Buyer specified) mirrors standard appraisal
+# practice of comparing against similarly-sized homes, not the whole zip.
+SIZE_MATCH_BANDS = (0.20, 0.40, 0.60)
+MIN_SIZE_MATCHED_COMPS = 3
+
+
+def _size_matched_psf(comps: List[Dict], sqft: int):
+    """Median $/sqft from comps within the tightest size band that still
+    clears MIN_SIZE_MATCHED_COMPS; widens the band if needed. Returns
+    (psf, comp_count, was_size_matched) or (None, 0, False) if comps is empty."""
+    for band in SIZE_MATCH_BANDS:
+        lo, hi = sqft * (1 - band), sqft * (1 + band)
+        matched = [c['psf'] for c in comps if lo <= c['sqft'] <= hi]
+        if len(matched) >= MIN_SIZE_MATCHED_COMPS:
+            return statistics.median(matched), len(matched), True
+    if comps:
+        # not enough size-matched comps even at the widest band - fall back
+        # to the full pool, flagged as NOT size-matched rather than pretending
+        return statistics.median(c['psf'] for c in comps), len(comps), False
+    return None, 0, False
+
+
 def calculate_arv(listing: Dict) -> Optional[float]:
     """
-    ARV = median sold $/sqft for the zip (see ARV_BENCHMARKS) x subject sqft.
-    No lot-size/bed-count adjustments - following the given rule exactly,
-    not adding anything beyond it. Still a zip-wide proxy, not matched
-    comps - verify manually before offering.
+    ARV = median $/sqft of SIZE-MATCHED sold comps (see SIZE_MATCH_BANDS) x
+    subject sqft. Falls back to the zip's full comp set only if too few
+    similarly-sized comps exist, and to the global comp pool only if the zip
+    has no comps at all - both fallbacks are flagged on the listing
+    (_arv_size_matched=False) so identify_risks() can surface low confidence
+    rather than presenting it as equally solid. No lot-size/bed-count
+    adjustments beyond size-matching - not adding anything past what was
+    approved. Still a zip-wide/size-wide proxy, not hand-picked 1-mile-radius
+    comps with sale dates - verify manually before offering.
     """
-    psf = ARV_BENCHMARKS.get(listing.get('zip', ''))
+    sqft = listing.get('sqft', 0)
+    if not sqft:
+        return None
+
+    comps = ARV_BENCHMARKS.get(listing.get('zip', ''), [])
+    psf, n, size_matched = _size_matched_psf(comps, sqft)
     if psf is None:
-        return None  # no comp benchmark available for this zip this run
-    return round(psf * listing.get('sqft', 0), -3)
+        comps = ARV_BENCHMARKS.get('__fallback__', [])
+        psf, n, size_matched = _size_matched_psf(comps, sqft)
+        if psf is None:
+            return None  # no comp data available anywhere this run
+
+    listing['_arv_comp_count'] = n
+    listing['_arv_size_matched'] = size_matched
+    return round(psf * sqft, -3)
 
 
 def calculate_rehab_cost(listing: Dict) -> Dict[str, float]:
@@ -584,9 +639,11 @@ def identify_risks(listing: Dict) -> List[str]:
         risks.append('Small lot')
     if 'bayview' in listing.get('address', '').lower():
         risks.append('Bayview - neighborhood still transitional')
-    if listing.get('sqft', 0) >= 3000:
-        risks.append('Oversized for a flat zip-median $/sqft ARV (known to overstate value on '
-                      'outlier-large homes) - verify against size-matched comps manually')
+    if listing.get('_arv_size_matched') is False:
+        n = listing.get('_arv_comp_count', 0)
+        risks.append(f'ARV not size-matched - only {n} comp(s) total for this zip, none in a '
+                      f'comparable size band, so this uses the zip\'s full comp set (may skew '
+                      f'high/low vs. a same-size home) - verify against size-matched comps manually')
 
     dom = listing.get('days_on_market')
     cuts = listing.get('price_cuts', 0)
@@ -708,8 +765,11 @@ def print_report(leads: List[Dict]):
         print(f"{lead['address']}, {lead.get('city', '')}, CA {lead.get('zip', '')}")
         print(f"Beds/Baths/SqFt: {lead.get('beds', 0)}/{lead.get('baths', 0)}/{lead.get('sqft', 0):,}")
         print()
+        arv_note = (f"median $/sqft, {lead.get('_arv_comp_count', 0)} size-matched comps, this zip, last 6mo"
+                    if lead.get('_arv_size_matched') else
+                    f"median $/sqft, {lead.get('_arv_comp_count', 0)} comps (NOT size-matched), this zip, last 6mo")
         print(f"Purchase Price:      ${lead.get('price', 0):,.0f}")
-        print(f"Estimated ARV:       ${d['arv']:,.0f}  (median sold $/sqft, this zip, last 6mo)")
+        print(f"Estimated ARV:       ${d['arv']:,.0f}  ({arv_note})")
         print(f"Rehab Cost (Light):  ${d['rehab_light']:,.0f}  (${CONFIG['light_rehab_psf']}/sqft)")
         print(f"Rehab Cost (Heavy):  ${d['rehab_heavy']:,.0f}  (${CONFIG['heavy_rehab_psf']}/sqft)")
         print(f"Holding Costs (3mo): ${d['holding_costs']:,.0f}")
@@ -813,7 +873,8 @@ def persist_full_scan_state(now_iso: str):
     feed["leads"].sort(key=lambda r: (r["score"], r["gross_profit_heavy"]), reverse=True)
     feed["generated_at"] = now_iso
     json.dump(feed, open(FEED_PATH, "w"), indent=2)
-    print(f"Persisted state: {len(ARV_BENCHMARKS)} zip benchmarks, {len(seen)} seen listings, "
+    n_zips = len([k for k in ARV_BENCHMARKS if k != "__fallback__"])
+    print(f"Persisted state: {n_zips} zip benchmarks, {len(seen)} seen listings, "
           f"{len(feed['leads'])} leads in Sheets feed.")
 
 

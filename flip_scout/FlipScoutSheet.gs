@@ -78,6 +78,7 @@ function onOpen() {
     .createMenu('Flip Scout')
     .addItem('Refresh Now', 'refreshFlipScoutSheet')
     .addItem('Resync Existing Leads', 'resyncExistingLeads')
+    .addItem('Clear All Leads', 'clearAllLeads')
     .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
@@ -236,6 +237,38 @@ function resyncExistingLeads() {
 
   SpreadsheetApp.getUi().alert(updated + ' existing lead(s) refreshed with the latest feed data ' +
     '(risks, financials, recommendation). Rows no longer in the feed were left untouched.');
+}
+
+/**
+ * Wipes every lead row (keeps the header) so the next Refresh Now
+ * repopulates from scratch under the current feed/methodology - use this
+ * when the underlying analysis changed enough that you want a clean slate
+ * rather than a row-by-row resync (e.g. a re-scan with a different ARV
+ * basis). Asks for confirmation first since this can't be undone from
+ * inside the script.
+ */
+function clearAllLeads() {
+  var ui = SpreadsheetApp.getUi();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    ui.alert('No "' + SHEET_NAME + '" sheet found - nothing to clear.');
+    return;
+  }
+
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    ui.alert('No leads to clear.');
+    return;
+  }
+
+  var response = ui.alert('Clear All Leads',
+    'This deletes all ' + (lastRow - 1) + ' lead row(s) below the header. This cannot be undone. Continue?',
+    ui.ButtonSet.YES_NO);
+  if (response !== ui.Button.YES) return;
+
+  sheet.deleteRows(2, lastRow - 1);
+  ui.alert('Cleared. Run Refresh Now to repopulate from the current feed.');
 }
 
 /**

@@ -51,7 +51,8 @@ def load_or_rebuild_benchmarks(now_iso, now_ts, parse_iso):
         cache = json.load(open(CACHE_PATH))
         age_days = (now_ts - parse_iso(cache["last_built"])) / 86400
         if age_days < COMP_CACHE_MAX_AGE_DAYS:
-            print(f"Using cached comp benchmarks ({age_days:.1f} days old, {len(cache['benchmarks'])} zips)")
+            n_zips = len([k for k in cache["benchmarks"] if k != "__fallback__"])
+            print(f"Using cached comp benchmarks ({age_days:.1f} days old, {n_zips} zips)")
             return cache["benchmarks"]
         print(f"Comp cache is {age_days:.1f} days old (> {COMP_CACHE_MAX_AGE_DAYS}) - rebuilding")
     else:
