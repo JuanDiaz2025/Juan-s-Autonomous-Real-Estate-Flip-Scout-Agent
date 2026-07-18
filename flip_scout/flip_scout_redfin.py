@@ -161,7 +161,14 @@ LAST_ALL_URLS: List[str] = []
 MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamily',
                      '2 units', '3 units', '4 units', 'two-unit', 'multi-unit',
                      'tenancy in common', 'two-home', 'two separate residences',
-                     'two full residences', 'both units']
+                     'two full residences', 'both units',
+                     # Caught during a manual renovation audit: "718 26th St"
+                     # described an attached ADU + JADU studio ("three
+                     # separate living spaces") with none of the phrases
+                     # above matching - an ADU/JADU-equipped property is a
+                     # multi-unit income play, not a single-family fixer.
+                     'accessory dwelling unit', 'jadu', 'junior adu',
+                     'attached adu', 'three separate living spaces']
 
 # Listing language indicating the flip has effectively already happened - no
 # renovation upside left for this buy box. Excluded regardless of profit
