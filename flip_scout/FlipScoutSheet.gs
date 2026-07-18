@@ -30,6 +30,12 @@
  *   7. Flip Scout -> Remove Non-Profitable Leads : a one-time backstop if
  *      any rows are already in the sheet from before this profitability
  *      check existed. Not needed on an ongoing basis.
+ *   8. Flip Scout -> Resync Existing Leads : Refresh Now only ever ADDS
+ *      new rows - it never rewrites a row already in the sheet, even if
+ *      that lead's risks/financials/recommendation have since changed
+ *      upstream (e.g. a risk category getting removed from the analysis).
+ *      Run this any time you want already-added rows brought current
+ *      without re-adding or duplicating anything.
  *
  * If Juan's repo branch ever changes (e.g. after this work merges to
  * main), update FEED_URL below to match - swap "claude/python-code-goal-nn6zec"
@@ -71,6 +77,7 @@ function onOpen() {
   SpreadsheetApp.getUi()
     .createMenu('Flip Scout')
     .addItem('Refresh Now', 'refreshFlipScoutSheet')
+    .addItem('Resync Existing Leads', 'resyncExistingLeads')
     .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
@@ -163,6 +170,72 @@ function refreshFlipScoutSheet() {
   sheet.getRange(1, 1).setNote('Last checked: ' + now +
     '\nFeed generated: ' + feed.generated_at +
     '\n' + newLeads.length + ' new lead(s) added this check.');
+}
+
+/**
+ * Refresh Now only APPENDS brand-new leads (dedup by URL) - it never
+ * touches a row already in the sheet, even if that lead's data (risks,
+ * financials, recommendation) has since changed upstream, e.g. a risk
+ * criterion getting removed from the analysis. Run this whenever you want
+ * already-added rows brought up to date with the current feed, without
+ * re-adding or duplicating anything.
+ *
+ * Matches existing rows to the feed by Redfin link. Overwrites every
+ * column EXCEPT "First Added" (that date is preserved as-is). Any row
+ * whose URL isn't in the feed anymore (e.g. the listing sold or was
+ * pulled) is left untouched, not deleted - this only updates, never removes.
+ */
+function resyncExistingLeads() {
+  var response = UrlFetchApp.fetch(FEED_URL, { muteHttpExceptions: true });
+  if (response.getResponseCode() !== 200) {
+    throw new Error('Could not fetch leads feed (HTTP ' + response.getResponseCode() + '). ' +
+      'Check FEED_URL still points at a real branch/file in the repo.');
+  }
+
+  var feed = JSON.parse(response.getContentText());
+  var leadsByUrl = {};
+  (feed.leads || []).forEach(function (lead) { leadsByUrl[lead.url] = lead; });
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    SpreadsheetApp.getUi().alert('No "' + SHEET_NAME + '" sheet found yet - run Refresh Now first.');
+    return;
+  }
+
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) {
+    SpreadsheetApp.getUi().alert('No leads to resync.');
+    return;
+  }
+
+  var firstAddedColIdx = COLUMNS.findIndex(function (c) { return c.key === 'first_added'; });
+  var urlColIdx = URL_COL_INDEX - 1;
+
+  var range = sheet.getRange(2, 1, lastRow - 1, COLUMNS.length);
+  var rows = range.getValues();
+  var updated = 0;
+
+  for (var i = 0; i < rows.length; i++) {
+    var lead = leadsByUrl[rows[i][urlColIdx]];
+    if (!lead) continue; // no longer in the feed - leave this row alone
+
+    var firstAdded = rows[i][firstAddedColIdx];
+    rows[i] = COLUMNS.map(function (c) {
+      if (c.key === 'first_added') return firstAdded;
+      var v = lead[c.key];
+      return v === undefined || v === null ? '' : v;
+    });
+    updated++;
+  }
+
+  range.setValues(rows);
+  COLUMNS.forEach(function (c, i) {
+    sheet.getRange(2, i + 1, rows.length, 1).setNumberFormat(c.format);
+  });
+
+  SpreadsheetApp.getUi().alert(updated + ' existing lead(s) refreshed with the latest feed data ' +
+    '(risks, financials, recommendation). Rows no longer in the feed were left untouched.');
 }
 
 /**
