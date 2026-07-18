@@ -453,18 +453,22 @@ def calculate_arv(listing: Dict) -> Optional[float]:
     ARV = median $/sqft of SIZE-MATCHED sold comps (see SIZE_MATCH_BANDS) x
     subject sqft. Falls back to the zip's full comp set only if too few
     similarly-sized comps exist, and to the global comp pool only if the zip
-    has no comps at all - both fallbacks are flagged on the listing
-    (_arv_size_matched=False) so identify_risks() can surface low confidence
-    rather than presenting it as equally solid. No lot-size/bed-count
-    adjustments beyond size-matching - not adding anything past what was
-    approved. Still a zip-wide/size-wide proxy, not hand-picked 1-mile-radius
-    comps with sale dates - verify manually before offering.
+    has no comps at all (or isn't one of the scanned zips, e.g. a
+    neighboring-zip boundary catch) - all of this is flagged on the listing
+    (_arv_size_matched, _arv_zip_benchmarked) so identify_risks() can
+    surface low confidence rather than presenting it as equally solid. No
+    lot-size/bed-count adjustments beyond size-matching - not adding
+    anything past what was approved. Still a zip-wide/size-wide proxy, not
+    hand-picked 1-mile-radius comps with sale dates - verify manually
+    before offering.
     """
     sqft = listing.get('sqft', 0)
     if not sqft:
         return None
 
-    comps = ARV_BENCHMARKS.get(listing.get('zip', ''), [])
+    zip_code = listing.get('zip', '')
+    zip_benchmarked = zip_code in ARV_BENCHMARKS and zip_code != '__fallback__'
+    comps = ARV_BENCHMARKS.get(zip_code, [])
     psf, n, size_matched = _size_matched_psf(comps, sqft)
     if psf is None:
         comps = ARV_BENCHMARKS.get('__fallback__', [])
@@ -474,6 +478,7 @@ def calculate_arv(listing: Dict) -> Optional[float]:
 
     listing['_arv_comp_count'] = n
     listing['_arv_size_matched'] = size_matched
+    listing['_arv_zip_benchmarked'] = zip_benchmarked
     return round(psf * sqft, -3)
 
 
@@ -648,7 +653,12 @@ def identify_risks(listing: Dict) -> List[str]:
         risks.append('Small lot')
     if 'bayview' in listing.get('address', '').lower():
         risks.append('Bayview - neighborhood still transitional')
-    if listing.get('_arv_size_matched') is False:
+    if listing.get('_arv_zip_benchmarked') is False:
+        n = listing.get('_arv_comp_count', 0)
+        risks.append(f'Outside the scanned buy box zips (likely a neighboring-zip search catch) - '
+                      f'ARV uses a citywide comp pool ({n} comps), not this zip\'s own sold homes - '
+                      f'verify local comps manually before trusting this ARV')
+    elif listing.get('_arv_size_matched') is False:
         n = listing.get('_arv_comp_count', 0)
         risks.append(f'ARV not size-matched - only {n} comp(s) total for this zip, none in a '
                       f'comparable size band, so this uses the zip\'s full comp set (may skew '
