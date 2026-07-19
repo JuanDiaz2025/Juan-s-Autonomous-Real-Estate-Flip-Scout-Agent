@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T17:08:45.310635Z",
+  "generated_at": "2026-07-19T21:08:13.117708Z",
   "leads": [
     {
       "score": 10,
@@ -1144,6 +1144,32 @@
       "recommended_max_offer": 794000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Oakland/770-Walker-Ave-94610/home/1249273"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "2628 Yorba St",
+      "city": "San Francisco",
+      "zip": "94116",
+      "beds": 3.0,
+      "baths": 1.0,
+      "sqft": 1362,
+      "lot_sqft": 0,
+      "year_built": 1947,
+      "price": 1398000,
+      "arv": 1811000.0,
+      "rehab_light": 95000,
+      "rehab_heavy": 197000,
+      "holding_costs": 42500.0,
+      "total_cost_light": 1535500.0,
+      "total_cost_heavy": 1637500.0,
+      "gross_profit_light": 275500.0,
+      "gross_profit_heavy": 173500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1469000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Francisco/2628-Yorba-St-94116/home/1652786"
     },
     {
       "score": 10,
