@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T23:12:53.304649Z",
+  "generated_at": "2026-07-19T07:07:55.663168Z",
   "leads": [
     {
       "score": 10,
@@ -2314,6 +2314,32 @@
       "recommended_max_offer": 489000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Oakland/8600-Seneca-St-94605/home/585113"
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "address": "277 Moraga Way",
+      "city": "San Jose",
+      "zip": "95119",
+      "beds": 4.0,
+      "baths": 2.5,
+      "sqft": 2124,
+      "lot_sqft": 6000,
+      "year_built": 1972,
+      "price": 1499888,
+      "arv": 1829000.0,
+      "rehab_light": 149000,
+      "rehab_heavy": 308000,
+      "holding_costs": 45600.0,
+      "total_cost_light": 1694500.0,
+      "total_cost_heavy": 1853500.0,
+      "gross_profit_light": 134500.0,
+      "gross_profit_heavy": -24500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 1379000.0,
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (781 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "url": "https://www.redfin.com/CA/San-Jose/277-Moraga-Way-95119/home/845031"
     },
     {
       "score": 5,
