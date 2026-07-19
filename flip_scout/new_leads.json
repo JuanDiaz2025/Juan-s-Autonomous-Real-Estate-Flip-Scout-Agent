@@ -1,0 +1,50 @@
+[
+  {
+    "address": "627 22nd Ave",
+    "city": "San Francisco",
+    "zip": "94121",
+    "price": 1095000,
+    "beds": 2.0,
+    "baths": 1.0,
+    "sqft": 1075,
+    "lot_sqft": 2996,
+    "year_built": 1922,
+    "property_type": "Single Family",
+    "description": "First Showing TUES 7-21-26  Probate sale subject to court confirmation and possible overbid. Located in the highly desirable Central Richmond neighborhood, this vacant home presents an exceptional opportunity to restore, renovate, or reimagine. The main level features a spacious living room, formal dining room, kitchen, two bedrooms, a sunroom adjoining one bedroom, a full bathroom, and an enclosed laundry porch off the kitchen. With potential for expansion within the existing structure, the generous basement and garage provide additional possibilities for future living space, storage, or othe",
+    "url": "https://www.redfin.com/CA/San-Francisco/627-22nd-Ave-94121/home/1910327",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "days_on_market": 0,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 8,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 1481000.0,
+      "rehab_light": 75000,
+      "rehab_heavy": 156000,
+      "holding_costs": 33400.0,
+      "holding_breakdown": {
+        "financing": 27400.0,
+        "insurance": 2200.0,
+        "property_tax": 3400.0,
+        "utilities": 400,
+        "total": 33400.0
+      },
+      "total_cost_light": 1203400.0,
+      "total_cost_heavy": 1284400.0,
+      "gross_profit_light": 277600.0,
+      "gross_profit_heavy": 196600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1189000.0
+    },
+    "score": 10,
+    "recommendation": "Strong Deal",
+    "risks": []
+  }
+]

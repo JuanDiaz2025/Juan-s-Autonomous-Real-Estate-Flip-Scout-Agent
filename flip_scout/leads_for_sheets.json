@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T07:07:55.663168Z",
+  "generated_at": "2026-07-19T17:08:45.310635Z",
   "leads": [
     {
       "score": 10,
@@ -1040,6 +1040,32 @@
       "recommended_max_offer": 896000.0,
       "risks": "Small lot; Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (944 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
       "url": "https://www.redfin.com/CA/San-Francisco/807-Teresita-Blvd-94127/home/964758"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "627 22nd Ave",
+      "city": "San Francisco",
+      "zip": "94121",
+      "beds": 2.0,
+      "baths": 1.0,
+      "sqft": 1075,
+      "lot_sqft": 2996,
+      "year_built": 1922,
+      "price": 1095000,
+      "arv": 1481000.0,
+      "rehab_light": 75000,
+      "rehab_heavy": 156000,
+      "holding_costs": 33400.0,
+      "total_cost_light": 1203400.0,
+      "total_cost_heavy": 1284400.0,
+      "gross_profit_light": 277600.0,
+      "gross_profit_heavy": 196600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1189000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Francisco/627-22nd-Ave-94121/home/1910327"
     },
     {
       "score": 10,
