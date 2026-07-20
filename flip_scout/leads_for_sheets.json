@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-19T21:08:13.117708Z",
+  "generated_at": "2026-07-20T16:08:30.131352Z",
   "leads": [
     {
       "score": 10,
@@ -1690,6 +1690,32 @@
       "recommended_max_offer": 689000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/San-Francisco/29-Cassandra-Ct-94112/home/1896705"
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "address": "3300 Wilson Pl",
+      "city": "Oakland",
+      "zip": "94602",
+      "beds": 3.0,
+      "baths": 1.0,
+      "sqft": 1136,
+      "lot_sqft": 5160,
+      "year_built": 1924,
+      "price": 649000,
+      "arv": 899000.0,
+      "rehab_light": 80000,
+      "rehab_heavy": 165000,
+      "holding_costs": 20000.0,
+      "total_cost_light": 749000.0,
+      "total_cost_heavy": 834000.0,
+      "gross_profit_light": 150000.0,
+      "gross_profit_heavy": 65000.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 644000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/Oakland/3300-Wilson-Pl-94602/home/528538"
     },
     {
       "score": 5,
