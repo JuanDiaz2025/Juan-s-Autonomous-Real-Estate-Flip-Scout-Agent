@@ -736,6 +736,11 @@ def identify_risks(listing: Dict) -> List[str]:
 
     if listing.get('price', 0) < 500000 and 'san francisco' in listing.get('city', '').lower():
         risks.append('PRICE ANOMALY - verify title/liens')
+    if any(term in desc for term in ('fire damage', 'fire-damaged', 'smoke damage', 'burned')):
+        risks.append('FIRE DAMAGE mentioned in listing - the Light/Heavy rehab estimates are a '
+                      'standard cosmetic/full-remodel model and do NOT price in fire remediation '
+                      '(structural assessment, smoke/soot abatement, possible rebuild) - get a '
+                      'contractor/structural engineer estimate before trusting this profit number')
     if listing.get('lot_sqft', 0) and listing.get('lot_sqft', 0) < 2500:
         risks.append('Small lot')
     if 'bayview' in listing.get('address', '').lower():

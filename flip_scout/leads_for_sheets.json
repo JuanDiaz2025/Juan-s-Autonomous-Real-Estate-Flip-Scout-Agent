@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T17:02:31.966226Z",
+  "generated_at": "2026-07-20T22:08:13.283163Z",
   "leads": [
     {
       "score": 10,
@@ -546,6 +546,32 @@
       "recommended_max_offer": 1229000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Redwood-City/827-Chestnut-St-94063/home/1341408"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "1094 S 2nd St",
+      "city": "San Jose",
+      "zip": "95112",
+      "beds": 3.0,
+      "baths": 1.0,
+      "sqft": 1296,
+      "lot_sqft": 7728,
+      "year_built": 1900,
+      "price": 679000,
+      "arv": 1231000.0,
+      "rehab_light": 91000,
+      "rehab_heavy": 188000,
+      "holding_costs": 20900.0,
+      "total_cost_light": 790900.0,
+      "total_cost_heavy": 887900.0,
+      "gross_profit_light": 440100.0,
+      "gross_profit_heavy": 343100.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 915000.0,
+      "risks": "FIRE DAMAGE mentioned in listing - the Light/Heavy rehab estimates are a standard cosmetic/full-remodel model and do NOT price in fire remediation (structural assessment, smoke/soot abatement, possible rebuild) - get a contractor/structural engineer estimate before trusting this profit number",
+      "url": "https://www.redfin.com/CA/San-Jose/1094-S-2nd-St-95112/home/1124743"
     },
     {
       "score": 10,
