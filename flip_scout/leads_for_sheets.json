@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T22:08:13.283163Z",
+  "generated_at": "2026-07-20T23:08:23.640284Z",
   "leads": [
     {
       "score": 10,
@@ -1040,6 +1040,32 @@
       "recommended_max_offer": 830000.0,
       "risks": "Small lot; On market 138 days - possible sign of soft demand in this area or an overpriced/undesirable property, not just a fixer discount",
       "url": "https://www.redfin.com/CA/San-Francisco/1231-Silver-Ave-94134/home/1981453"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "19574 Stanton Ave",
+      "city": "Castro Valley",
+      "zip": "94546",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 2008,
+      "lot_sqft": 5555,
+      "year_built": 1966,
+      "price": 1195000,
+      "arv": 1736000.0,
+      "rehab_light": 141000,
+      "rehab_heavy": 291000,
+      "holding_costs": 36400.0,
+      "total_cost_light": 1372400.0,
+      "total_cost_heavy": 1522400.0,
+      "gross_profit_light": 363600.0,
+      "gross_profit_heavy": 213600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1305000.0,
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (832 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Description + listing photos show brand-new LVP flooring, new carpet, and a new stove throughout - this reads as a recently comprehensively updated home, not a raw fixer. Combined with the citywide fallback ARV (outside buy box), the modeled profit is likely fictional: verify in person before assuming there's real value-add room left.",
+      "url": "https://www.redfin.com/CA/Castro-Valley/19574-Stanton-Ave-94546/home/1422359"
     },
     {
       "score": 10,
