@@ -24,11 +24,14 @@ how to fix the handful of things that recur.
 
 ## 2. Buy box (current)
 
-64 zips, $400K–$1.5M single-family: San Francisco, full San Mateo Co.
-(Peninsula), Sunnyvale, Oakland (West/North/rest), Richmond CA, Berkeley,
-San Leandro, San Jose. Full list: `CONFIG["target_zips"]` in
-`flip_scout_redfin.py`. Changes to the buy box only happen on Bryan's
-explicit instruction — never expand or shrink it unilaterally.
+64 zips, up to $1.5M single-family, **no price floor** (a motivated seller
+can price well under $400k — the profit gate and PRICE ANOMALY flag already
+catch anything too-good-to-be-true, so a hard floor would only risk cutting
+off real deals): San Francisco, full San Mateo Co. (Peninsula), Sunnyvale,
+Oakland (West/North/rest), Richmond CA, Berkeley, San Leandro, San Jose.
+Full list: `CONFIG["target_zips"]` in `flip_scout_redfin.py`. Changes to the
+buy box only happen on Bryan's explicit instruction — never expand or shrink
+it unilaterally.
 
 ## 3. Methodology (Twin Home Buyer standard)
 
@@ -148,6 +151,9 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Removed the $400k price floor per standing instruction — a motivated
+  seller can price well under that, and the profit gate/anomaly flag already
+  screen out anything that doesn't pencil.
 - Added Apps Script menu items for resync/clear-all to handle schema and
   methodology changes without manual sheet surgery.
 - Added pagination + retry-on-transient-failure to the scraper (a zip's

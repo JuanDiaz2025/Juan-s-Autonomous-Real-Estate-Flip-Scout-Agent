@@ -70,7 +70,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # ================================
 CONFIG = {
     "max_price": 1_500_000,
-    "min_price": 400_000,
+    # No price floor - a motivated seller can price well under $400k, and the
+    # profit gate + PRICE ANOMALY flag (below $500k in SF) already catch
+    # anything actually too-good-to-be-true, so this doesn't need a cutoff.
+    "min_price": 0,
     # SF (94124 Bayview, 94112 Excelsior, 94134 Portola, 94118 Inner Richmond,
     #     94116/94122 Sunset, 94110 Mission, 94121 Outer Richmond) - a
     # distinct, expensive Peninsula/SF market that's largely already-renovated
@@ -768,7 +771,8 @@ def run_redfin_scout() -> List[Dict]:
     print("JUAN'S FLIP SCOUT AGENT - REDFIN EDITION")
     print(f"{datetime.now().strftime('%B %d, %Y - %I:%M %p')}")
     print("=" * 60)
-    print(f"Target: Single-Family Homes ${CONFIG['min_price']:,.0f}-${CONFIG['max_price']:,.0f}")
+    price_floor = f"${CONFIG['min_price']:,.0f}" if CONFIG['min_price'] > 0 else "no floor"
+    print(f"Target: Single-Family Homes {price_floor}-${CONFIG['max_price']:,.0f}")
     print(f"Zips scanned: {len(CONFIG['target_zips'])}\n")
 
     print("Building ARV benchmarks from real sold comps (last 6 months, median $/sqft)...")
