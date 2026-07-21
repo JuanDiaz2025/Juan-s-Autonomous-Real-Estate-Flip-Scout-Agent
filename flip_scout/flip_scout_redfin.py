@@ -178,7 +178,8 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
 # math, since a big "profit" on an already-renovated house just means it's
 # priced below comps (a wholesale play), not a flip opportunity.
 ALREADY_RENOVATED_FLAGS = [
-    'beautifully updated', 'fully renovated', 'fully updated', 'move-in ready', 'move in ready',
+    'beautifully updated', 'fully renovated', 'fully updated', 'fully remodeled',
+    'completely remodeled', 'completely renovated', 'move-in ready', 'move in ready',
     'previously remodeled', 'thoughtfully updated', 'beautifully remodeled',
     'extensive interior updates', 'extensive updates', 'studs-up', 'beautifully reimagined',
     'updated kitchen', 'updated bath', 'remodeled kitchen', 'remodeled chef', 'designer finishes',
