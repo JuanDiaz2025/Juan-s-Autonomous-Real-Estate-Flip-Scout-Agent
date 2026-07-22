@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T21:09:21.509666Z",
+  "generated_at": "2026-07-22T04:07:57.087905Z",
   "leads": [
     {
       "score": 10,
@@ -2132,6 +2132,32 @@
       "recommended_max_offer": 881000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/San-Jose/3382-Mount-Madonna-Dr-95127/home/1254962"
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "address": "2924 Seminary Ave",
+      "city": "Oakland",
+      "zip": "94605",
+      "beds": 2.0,
+      "baths": 1.0,
+      "sqft": 1303,
+      "lot_sqft": 4400,
+      "year_built": 1923,
+      "price": 515000,
+      "arv": 746000.0,
+      "rehab_light": 91000,
+      "rehab_heavy": 189000,
+      "holding_costs": 15900.0,
+      "total_cost_light": 621900.0,
+      "total_cost_heavy": 719900.0,
+      "gross_profit_light": 124100.0,
+      "gross_profit_heavy": 26100.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 472000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/Oakland/2924-Seminary-Ave-94605/home/568656"
     },
     {
       "score": 5,
