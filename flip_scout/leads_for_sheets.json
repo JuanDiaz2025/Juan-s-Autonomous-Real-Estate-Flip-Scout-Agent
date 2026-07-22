@@ -336,7 +336,7 @@
       "min_profit_threshold": 100000,
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1033000.0,
-      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (1001 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (1001 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Redfin's own automated valuation (Redfin Estimate) for this property is $632,896 - essentially the asking price - directly contradicting this model's $1,385,000 ARV (a ~$752k gap). Same root cause as other outside-buy-box false positives: 94564/Pinole isn't a scanned zip, so ARV came from a 1001-comp citywide fallback pool that doesn't reflect real Pinole home values. The listing itself isn't even marketed as a fixer ('Convenience Matters!... Check It Out!'), and exterior photos show a normal, well-kept ranch home, not a distressed property. Treat the $629,700 modeled profit as fictional.",
       "url": "https://www.redfin.com/CA/Pinole/972-Tara-Hills-Dr-94564/home/1802420"
     },
     {
