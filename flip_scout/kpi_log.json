@@ -40,5 +40,21 @@
     "url": "https://www.redfin.com/CA/Castro-Valley/19574-Stanton-Ave-94546/home/1422359",
     "address": "19574 Stanton Ave",
     "reason": "already-updated home, no real value-add room, Redfin estimate confirms no upside"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-22T22:10:04.104136Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
   }
 ]
