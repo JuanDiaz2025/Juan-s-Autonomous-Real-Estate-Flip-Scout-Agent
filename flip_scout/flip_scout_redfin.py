@@ -190,6 +190,16 @@ TENANT_OCCUPIED_FLAGS = [
 # flagged.
 MAX_DAYS_ON_MARKET = 45
 
+# Data-integrity floor, NOT the buy-box price floor (that one was
+# deliberately removed - see CONFIG['min_price'] above). This one exists to
+# catch scraper corruption, not to exclude genuinely cheap deals: caught
+# live on 642 Mississippi St, San Francisco, where the price-card regex
+# grabbed a garbled $14,700 for a property that had actually sold in 2014
+# for $1,230,000 and wasn't for sale at all. No genuine active single-family
+# listing in this buy box will ever really be priced below this - if one
+# is, the scrape is broken, not the deal amazing.
+SANITY_MIN_PRICE = 50_000
+
 # Listing language indicating the flip has effectively already happened - no
 # renovation upside left for this buy box. Excluded regardless of profit
 # math, since a big "profit" on an already-renovated house just means it's
@@ -348,7 +358,8 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
                 'is_already_renovated': False,
                 'is_vacant_land': False,
             }
-            if CONFIG['min_price'] <= price <= CONFIG['max_price'] and sqft > 0 and beds > 0:
+            if (SANITY_MIN_PRICE <= price <= CONFIG['max_price'] and price >= CONFIG['min_price']
+                    and sqft > 0 and beds > 0):
                 listings.append(listing)
 
         if page < MAX_SEARCH_PAGES:

@@ -1,56 +1,5 @@
 [
   {
-    "address": "642 Mississippi St",
-    "city": "San Francisco",
-    "zip": "94107",
-    "price": 14700,
-    "beds": 3.0,
-    "baths": 2.5,
-    "sqft": 2000,
-    "lot_sqft": 2500,
-    "year_built": 1908,
-    "property_type": "Single Family",
-    "description": "Nice 2 story home over garage level. 3 Bedroom 1 Bath on top floor. Dining Room, Living Room + Kitchen on main level. Large Deck.  ",
-    "url": "https://www.redfin.com/CA/San-Francisco/642-Mississippi-St-94107/home/732464",
-    "status": "Active",
-    "is_multi_unit": false,
-    "is_already_renovated": false,
-    "is_vacant_land": false,
-    "days_on_market": 0,
-    "price_cuts": 0,
-    "is_data_incomplete": false,
-    "_arv_comp_count": 842,
-    "_arv_size_matched": true,
-    "_arv_zip_benchmarked": false,
-    "deal": {
-      "arv": 1729000.0,
-      "rehab_light": 140000,
-      "rehab_heavy": 290000,
-      "holding_costs": 800.0,
-      "holding_breakdown": {
-        "financing": 400.0,
-        "insurance": 0.0,
-        "property_tax": 0.0,
-        "utilities": 400,
-        "total": 800.0
-      },
-      "total_cost_light": 155500.0,
-      "total_cost_heavy": 305500.0,
-      "gross_profit_light": 1573500.0,
-      "gross_profit_heavy": 1423500.0,
-      "min_profit_threshold": 100000,
-      "meets_threshold_light": true,
-      "meets_threshold_heavy": true,
-      "recommended_max_offer": 1299000.0
-    },
-    "score": 10,
-    "recommendation": "Strong Deal",
-    "risks": [
-      "PRICE ANOMALY - verify title/liens",
-      "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (842 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV"
-    ]
-  },
-  {
     "address": "5897 Erskine Ct",
     "city": "San Jose",
     "zip": "95123",
