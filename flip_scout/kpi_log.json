@@ -19,5 +19,26 @@
     "url": "https://www.redfin.com/CA/San-Francisco/642-Mississippi-St-94107/home/732464",
     "address": "642 Mississippi St",
     "reason": "scraper price-parsing bug (garbled $14,700 for a 2014-sold property)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:56:44.196094Z",
+    "url": "https://www.redfin.com/CA/El-Sobrante/4140-Garden-Rd-94803/home/612668",
+    "address": "4140 Garden Rd",
+    "reason": "ARV contradicted by Redfin's own estimate ($500k vs modeled $1.24M) - fake deal"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:56:44.196094Z",
+    "url": "https://www.redfin.com/CA/Pinole/972-Tara-Hills-Dr-94564/home/1802420",
+    "address": "972 Tara Hills Dr",
+    "reason": "ARV contradicted by Redfin's own estimate ($633k vs modeled $1.39M) - fake deal"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:56:44.196094Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/19574-Stanton-Ave-94546/home/1422359",
+    "address": "19574 Stanton Ave",
+    "reason": "already-updated home, no real value-add room, Redfin estimate confirms no upside"
   }
 ]
