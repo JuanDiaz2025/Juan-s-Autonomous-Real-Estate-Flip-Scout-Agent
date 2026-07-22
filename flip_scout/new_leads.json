@@ -1,51 +1,52 @@
 [
   {
-    "address": "2013 9th St",
-    "city": "Berkeley",
-    "zip": "94710",
-    "price": 800000,
-    "beds": 4.0,
+    "address": "972 Tara Hills Dr",
+    "city": "Pinole",
+    "zip": "94564",
+    "price": 629900,
+    "beds": 3.0,
     "baths": 2.0,
-    "sqft": 1332,
-    "lot_sqft": 6500,
-    "year_built": 1903,
+    "sqft": 1514,
+    "lot_sqft": 9570,
+    "year_built": 1964,
     "property_type": "Single Family",
-    "description": "Calling all builders, developers, and visionaries! A rare West Berkeley opportunity with substantial upside and development potential. Situated on an approximately 6,500-square-foot lot in an R-3 residential district, the existing home is a true contractor special&mdash;offering the opportunity to renovate and restore for occupancy or explore a larger redevelopment vision. The existing home is positioned toward the front of the lot, leaving significant space through the center and rear of the property for maximum future development. Buyer to investigate the property's development potential, in",
-    "url": "https://www.redfin.com/CA/Berkeley/2013-9th-St-94710/home/914075",
+    "description": "Convenience Matters! Close to everything. Short walk to Shannon Elementary and Pinole Middle School. Near Fitzgerald Drive shopping. Old Town and Pinole Valley (Kaiser, Sprouts, Trader Joe's, PVHS) are just one I-80 exit away. Ranch-style floorplan includes primary bedroom suite and family room addition for comfortable living. Large kitchen with dining area. Fireplace in living room. Interior access to 2-car garage. Extra wide driveway and off-street carport parking. Check It Out! ",
+    "url": "https://www.redfin.com/CA/Pinole/972-Tara-Hills-Dr-94564/home/1802420",
     "status": "Active",
     "is_multi_unit": false,
     "is_already_renovated": false,
     "is_vacant_land": false,
+    "days_on_market": 0,
+    "price_cuts": 0,
     "is_data_incomplete": false,
-    "_arv_comp_count": 945,
+    "_arv_comp_count": 1001,
     "_arv_size_matched": true,
     "_arv_zip_benchmarked": false,
     "deal": {
-      "arv": 1236000.0,
-      "rehab_light": 93000,
-      "rehab_heavy": 193000,
-      "holding_costs": 24500.0,
+      "arv": 1385000.0,
+      "rehab_light": 106000,
+      "rehab_heavy": 220000,
+      "holding_costs": 19400.0,
       "holding_breakdown": {
-        "financing": 20000.0,
-        "insurance": 1600.0,
-        "property_tax": 2500.0,
+        "financing": 15700.0,
+        "insurance": 1300.0,
+        "property_tax": 2000.0,
         "utilities": 400,
-        "total": 24500.0
+        "total": 19400.0
       },
-      "total_cost_light": 917500.0,
-      "total_cost_heavy": 1017500.0,
-      "gross_profit_light": 318500.0,
-      "gross_profit_heavy": 218500.0,
+      "total_cost_light": 755300.0,
+      "total_cost_heavy": 869300.0,
+      "gross_profit_light": 629700.0,
+      "gross_profit_heavy": 515700.0,
       "min_profit_threshold": 100000,
       "meets_threshold_light": true,
       "meets_threshold_heavy": true,
-      "recommended_max_offer": 915000.0
+      "recommended_max_offer": 1033000.0
     },
     "score": 10,
     "recommendation": "Strong Deal",
     "risks": [
-      "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (945 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "Outside the scanned buy box (94710 isn't a scanned zip; ARV uses a 945-comp citywide fallback pool) - and no Redfin Estimate is available yet since this is a 'Coming Soon' listing, so there's no independent sanity-check on the $1,236,000 ARV. Photos also show a second kitchen in what looks like a detached rear structure - verify in person whether that's a permitted second unit (relevant to the listing's own 'development potential' pitch) or an unpermitted addition, before trusting the deal math."
+      "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (1001 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV"
     ]
   }
 ]

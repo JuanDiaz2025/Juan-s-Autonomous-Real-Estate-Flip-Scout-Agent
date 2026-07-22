@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T16:08:35.053301Z",
+  "generated_at": "2026-07-22T18:08:49.709014Z",
   "leads": [
     {
       "score": 10,
@@ -312,6 +312,32 @@
       "recommended_max_offer": 914000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (956 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Redfin's own automated valuation (Redfin Estimate) for this property is $500,320 - essentially the current asking price - directly contradicting this model's $1,239,000 ARV (a ~$738k gap). The ARV here came from the citywide fallback comp pool (956 comps, mostly pricier SF/Peninsula sales) since 94803/El Sobrante isn't a scanned buy-box zip - it does not reflect real El Sobrante home values. Treat the $629,600 modeled profit as fictional until real local comps are pulled by hand.",
       "url": "https://www.redfin.com/CA/El-Sobrante/4140-Garden-Rd-94803/home/612668"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "972 Tara Hills Dr",
+      "city": "Pinole",
+      "zip": "94564",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 1514,
+      "lot_sqft": 9570,
+      "year_built": 1964,
+      "price": 629900,
+      "arv": 1385000.0,
+      "rehab_light": 106000,
+      "rehab_heavy": 220000,
+      "holding_costs": 19400.0,
+      "total_cost_light": 755300.0,
+      "total_cost_heavy": 869300.0,
+      "gross_profit_light": 629700.0,
+      "gross_profit_heavy": 515700.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1033000.0,
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (1001 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "url": "https://www.redfin.com/CA/Pinole/972-Tara-Hills-Dr-94564/home/1802420"
     },
     {
       "score": 10,
