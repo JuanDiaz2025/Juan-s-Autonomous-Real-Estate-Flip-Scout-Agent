@@ -596,7 +596,7 @@
       "min_profit_threshold": 100000,
       "meets_threshold_heavy": true,
       "recommended_max_offer": 915000.0,
-      "risks": "FIRE DAMAGE mentioned in listing - the Light/Heavy rehab estimates are a standard cosmetic/full-remodel model and do NOT price in fire remediation (structural assessment, smoke/soot abatement, possible rebuild) - get a contractor/structural engineer estimate before trusting this profit number",
+      "risks": "FIRE DAMAGE mentioned in listing - the Light/Heavy rehab estimates are a standard cosmetic/full-remodel model and do NOT price in fire remediation (structural assessment, smoke/soot abatement, possible rebuild) - get a contractor/structural engineer estimate before trusting this profit number | Re-verified live: Redfin's current-condition estimate is $748,681 (~10% above the $679,000 asking price) - the market isn't treating this as a deep undervalued bargain even before fire-remediation costs. Doesn't change the core issue: the $91k-$188k rehab estimate still doesn't price in real fire damage repair.",
       "url": "https://www.redfin.com/CA/San-Jose/1094-S-2nd-St-95112/home/1124743"
     },
     {
@@ -1116,7 +1116,7 @@
       "min_profit_threshold": 100000,
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1305000.0,
-      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (832 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Description + listing photos show brand-new LVP flooring, new carpet, and a new stove throughout - this reads as a recently comprehensively updated home, not a raw fixer. Combined with the citywide fallback ARV (outside buy box), the modeled profit is likely fictional: verify in person before assuming there's real value-add room left.",
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (832 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Description + listing photos show brand-new LVP flooring, new carpet, and a new stove throughout - this reads as a recently comprehensively updated home, not a raw fixer. Combined with the citywide fallback ARV (outside buy box), the modeled profit is likely fictional: verify in person before assuming there's real value-add room left. | Re-verified live: Redfin's current-condition estimate is $1,216,667 - barely above the $1,195,000 asking price. That confirms the home is already priced near its current (already-upgraded) market value, with no real gap to the model's $1,736,000 'after-renovation' ARV. Further evidence this is a false positive, not a real flip.",
       "url": "https://www.redfin.com/CA/Castro-Valley/19574-Stanton-Ave-94546/home/1422359"
     },
     {
