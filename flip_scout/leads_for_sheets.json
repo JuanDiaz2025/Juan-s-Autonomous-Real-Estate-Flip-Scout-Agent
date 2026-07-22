@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T18:08:49.709014Z",
+  "generated_at": "2026-07-22T20:08:55.644539Z",
   "leads": [
     {
       "score": 10,
@@ -2444,6 +2444,32 @@
       "recommended_max_offer": 1096000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-A/home/200411608"
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "address": "2062 Evergreen Ave",
+      "city": "San Leandro",
+      "zip": "94577",
+      "beds": 3.0,
+      "baths": 1.5,
+      "sqft": 1935,
+      "lot_sqft": 6050,
+      "year_built": 1953,
+      "price": 899000,
+      "arv": 1208000.0,
+      "rehab_light": 135000,
+      "rehab_heavy": 281000,
+      "holding_costs": 27500.0,
+      "total_cost_light": 1061500.0,
+      "total_cost_heavy": 1207500.0,
+      "gross_profit_light": 146500.0,
+      "gross_profit_heavy": 500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 802000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Leandro/2062-Evergreen-Ave-94577/home/1779704"
     },
     {
       "score": 5,
