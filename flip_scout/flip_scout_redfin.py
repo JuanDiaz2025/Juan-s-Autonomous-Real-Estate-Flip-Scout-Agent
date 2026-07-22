@@ -61,9 +61,10 @@ import json
 import os
 import time
 import statistics
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import kpi
 
 # ================================
 # CONFIGURATION (Juan's Buy Box)
@@ -860,24 +861,51 @@ def run_redfin_scout() -> List[Dict]:
             if (i + 1) % 10 == 0:
                 print(f"  enriched {i + 1}/{len(shortlist)}")
 
+    excluded = {
+        'multi_unit': 0, 'already_renovated': 0, 'vacant_land': 0,
+        'tenant_occupied': 0, 'data_incomplete': 0, 'stale_dom': 0,
+        'below_profit_threshold': 0,
+    }
     analyzed = []
     for l in shortlist:
-        if (l.get('is_multi_unit') or l.get('is_already_renovated') or l.get('is_vacant_land')
-                or l.get('is_data_incomplete') or l.get('is_tenant_occupied')):
+        if l.get('is_multi_unit'):
+            excluded['multi_unit'] += 1
+            continue
+        if l.get('is_already_renovated'):
+            excluded['already_renovated'] += 1
+            continue
+        if l.get('is_vacant_land'):
+            excluded['vacant_land'] += 1
+            continue
+        if l.get('is_tenant_occupied'):
+            excluded['tenant_occupied'] += 1
+            continue
+        if l.get('is_data_incomplete'):
+            excluded['data_incomplete'] += 1
             continue
         dom = l.get('days_on_market')
         if dom is not None and dom > MAX_DAYS_ON_MARKET:
+            excluded['stale_dom'] += 1
             continue
         deal = calculate_deal(l)
         if deal is None or not deal['meets_threshold_light']:
             # doesn't clear the minimum profit threshold even in the best
             # (light rehab) case - not a profitable lead, don't surface it
+            excluded['below_profit_threshold'] += 1
             continue
         l['deal'] = deal
         l['score'] = score_deal(l, deal)
         l['recommendation'] = classify_deal(deal)
         l['risks'] = identify_risks(l)
         analyzed.append(l)
+
+    kpi.log_run(datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'), {
+        'source': 'full_scan',
+        'new_listings_checked': len(shortlist),
+        'qualified': len(analyzed),
+        'excluded_total': sum(excluded.values()),
+        'excluded_by_reason': excluded,
+    })
 
     analyzed.sort(key=lambda x: (x['score'], x['deal']['gross_profit_heavy']), reverse=True)
     top = [d for d in analyzed if d['recommendation'] == 'Strong Deal'][:10]

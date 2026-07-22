@@ -88,9 +88,80 @@ function onOpen() {
     .addItem('Reject Selected Lead(s)', 'rejectSelectedLeads')
     .addItem('Clear All Leads', 'clearAllLeads')
     .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
+    .addItem('Show KPI Tab', 'showKpiTab')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
     .addToUi();
+  updateKpiTab_(); // keep the KPI tab current every time the sheet is opened, no action needed
+}
+
+/** Manual trigger for the KPI tab (also runs automatically after every
+ * Refresh/Reject/Clear/Remove action) - jumps you straight to it. */
+function showKpiTab() {
+  updateKpiTab_();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var kpiSheet = ss.getSheetByName(KPI_SHEET_NAME);
+  if (kpiSheet) ss.setActiveSheet(kpiSheet);
+}
+
+/**
+ * KPI tab - automated, always current, no need to ask anyone to compile it.
+ * Counters are cumulative (survive refreshes/rejects, stored in Script
+ * Properties, not in a cell that could be overwritten), so "Total Added"
+ * and "Total Rejected" are true running totals since this script was
+ * installed, not just what's visible in the sheet right now.
+ */
+var KPI_SHEET_NAME = 'KPI';
+var TOTAL_ADDED_KEY = 'KPI_TOTAL_ADDED';
+var TOTAL_REJECTED_KEY = 'KPI_TOTAL_REJECTED';
+var TOTAL_NONPROFIT_REMOVED_KEY = 'KPI_TOTAL_NONPROFIT_REMOVED';
+
+function incrementCounter_(key, by) {
+  var props = PropertiesService.getScriptProperties();
+  var current = parseInt(props.getProperty(key) || '0', 10);
+  var next = current + by;
+  props.setProperty(key, String(next));
+  return next;
+}
+
+function getCounter_(key) {
+  return parseInt(PropertiesService.getScriptProperties().getProperty(key) || '0', 10);
+}
+
+/**
+ * Rebuilds the KPI tab from current sheet state + the cumulative counters
+ * above. Called automatically at the end of Refresh Now, Reject Selected
+ * Lead(s), Remove Non-Profitable Leads, and Clear All Leads - never needs
+ * to be run manually, but doing so is harmless.
+ */
+function updateKpiTab_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var leadsSheet = ss.getSheetByName(SHEET_NAME);
+  var currentlyKept = leadsSheet ? Math.max(0, leadsSheet.getLastRow() - 1) : 0;
+
+  var totalAdded = getCounter_(TOTAL_ADDED_KEY);
+  var totalRejected = getCounter_(TOTAL_REJECTED_KEY);
+  var totalNonProfitRemoved = getCounter_(TOTAL_NONPROFIT_REMOVED_KEY);
+  var totalRemoved = totalRejected + totalNonProfitRemoved;
+
+  var kpiSheet = ss.getSheetByName(KPI_SHEET_NAME);
+  if (!kpiSheet) {
+    kpiSheet = ss.insertSheet(KPI_SHEET_NAME);
+  }
+  kpiSheet.clear();
+
+  var rows = [
+    ['Metric', 'Value'],
+    ['Currently kept (in sheet now)', currentlyKept],
+    ['Total ever added', totalAdded],
+    ['Total rejected (Reject Selected Lead(s))', totalRejected],
+    ['Total removed (Remove Non-Profitable Leads)', totalNonProfitRemoved],
+    ['Total removed (all reasons)', totalRemoved],
+    ['Last updated', new Date().toString()],
+  ];
+  kpiSheet.getRange(1, 1, rows.length, 2).setValues(rows);
+  kpiSheet.getRange(1, 1, 1, 2).setFontWeight('bold');
+  kpiSheet.autoResizeColumns(1, 2);
 }
 
 /**
@@ -162,11 +233,13 @@ function rejectSelectedLeads() {
   if (response !== ui.Button.YES) return;
 
   addRejectedUrls_(urls);
+  incrementCounter_(TOTAL_REJECTED_KEY, rows.length);
 
   // delete bottom-up so row indices above don't shift as we go
   rows.sort(function (a, b) { return b - a; });
   rows.forEach(function (r) { sheet.deleteRow(r); });
 
+  updateKpiTab_();
   ui.alert(rows.length + ' lead(s) rejected and permanently excluded.');
 }
 
@@ -237,6 +310,7 @@ function refreshFlipScoutSheet() {
   if (newLeads.length === 0) {
     sheet.getRange(1, 1).setNote('Last checked: ' + new Date().toString() +
       '\nFeed generated: ' + feed.generated_at + '\nNo new leads this check.');
+    updateKpiTab_();
     return;
   }
 
@@ -260,6 +334,9 @@ function refreshFlipScoutSheet() {
   sheet.getRange(1, 1).setNote('Last checked: ' + now +
     '\nFeed generated: ' + feed.generated_at +
     '\n' + newLeads.length + ' new lead(s) added this check.');
+
+  incrementCounter_(TOTAL_ADDED_KEY, newLeads.length);
+  updateKpiTab_();
 }
 
 /**
@@ -357,6 +434,7 @@ function clearAllLeads() {
   if (response !== ui.Button.YES) return;
 
   sheet.deleteRows(2, lastRow - 1);
+  updateKpiTab_();
   ui.alert('Cleared. Run Refresh Now to repopulate from the current feed.');
 }
 
@@ -397,6 +475,8 @@ function removeNonProfitableLeads() {
     sheet.deleteRow(rowIndex);
   });
 
+  incrementCounter_(TOTAL_NONPROFIT_REMOVED_KEY, rowsToDelete.length);
+  updateKpiTab_();
   SpreadsheetApp.getUi().alert(rowsToDelete.length + ' non-profitable lead(s) removed.');
 }
 

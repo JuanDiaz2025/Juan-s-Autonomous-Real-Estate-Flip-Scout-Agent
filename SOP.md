@@ -124,7 +124,29 @@ hour. This is not a sign anything is broken unless *every* zip fails.
 | **Clear All Leads** | You want a clean slate after a real methodology change (asks for confirmation first). Run Refresh Now afterward to repopulate. |
 | **Remove Non-Profitable Leads** | One-time backstop for rows added before profitability filtering existed. |
 | **Reject Selected Lead(s)** | Bryan has decided against a lead (garbage, tenant-occupied he doesn't want, whatever). Select the row(s), run this — deletes them AND permanently blacklists those Redfin links (stored in Script Properties) so they never reappear on a future Refresh Now, even though they're still sitting in the upstream feed. **Use this instead of plain manual row deletion** — a plain delete has no way to tell the script a row is gone, so the lead just gets silently re-added next refresh. |
+| **Show KPI Tab** | Jump straight to the auto-updating "KPI" tab (see below). Also runs automatically whenever the sheet is opened, and after every Refresh/Reject/Clear/Remove action — you never need to ask for this number, it's always current. |
 | **Enable/Disable Hourly Auto-Refresh** | Set up once. Idempotent — safe to click again. |
+
+**KPI tab (automated, no manual compiling)**: a "KPI" sheet tab tracks, live:
+Currently kept (rows in the sheet right now), Total ever added, Total
+rejected (via Reject Selected Lead(s)), Total removed (via Remove
+Non-Profitable Leads), and Last updated. Counters persist in Script
+Properties (not a cell), so they're true running totals since setup, not
+just what's visible right now — they survive Clear All Leads, sheet edits,
+anything.
+
+**Pipeline-side KPIs (generated vs. excluded, daily)**: every `hourly_check.py`
+run (and full-scan run) appends a record to `flip_scout/kpi_log.json` —
+how many new listings were checked, how many qualified (generated), and a
+breakdown of why the rest were excluded (multi-unit, already-renovated,
+vacant-land, tenant-occupied, stale >45 days, data-incomplete, below profit
+threshold). Manual corrections (a false positive caught after the fact, like
+an ARV contradicted by Redfin's own estimate) are logged separately as
+`manual_removal` events, distinct from the automated pre-feed exclusions.
+Run `python3 flip_scout/kpi_report.py` for a daily rollup (add `--days N` to
+limit to the last N days, `--json` for raw output) — answers "how many did
+we generate today" and "how many did we remove today, and why" without
+manually tallying hourly-check output by hand.
 
 **Resolved gap:** a lead manually deleted from the sheet used to reappear on
 the next refresh, since Refresh Now only knows "is this URL already a row
@@ -174,6 +196,16 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Added automated KPI tracking: a live "KPI" tab in the Google Sheet
+  (currently kept / total added / total rejected, updates automatically -
+  no need to ask for these numbers), plus `flip_scout/kpi_log.json` +
+  `kpi_report.py` on the pipeline side for a daily generated-vs-excluded
+  rollup (with a reason breakdown). Also fixed a real scraper bug caught
+  along the way: a garbled $14,700 "price" for 642 Mississippi St, which
+  had actually sold in 2014 for $1.23M and wasn't for sale - added
+  `SANITY_MIN_PRICE` as a data-integrity floor (distinct from the
+  deliberately-removed buy-box price floor) to catch this class of
+  corruption automatically.
 - Added a hard 45-day max-days-on-market exclusion and a tenant-occupied
   exclusion (`TENANT_OCCUPIED_FLAGS`), both per standing instruction. Added
   "Reject Selected Lead(s)" to the Apps Script menu so a manually-rejected

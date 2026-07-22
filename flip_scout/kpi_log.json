@@ -1,0 +1,23 @@
+[
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-21T00:27:08Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/263-Hale-St-94134/home/956945",
+    "address": "263 Hale St",
+    "reason": "already-renovated filter gap ('completely remodeled' missing from keyword list)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-21T06:28:43Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2405-Plateau-Dr-95125/home/167457615",
+    "address": "2405 Plateau Dr",
+    "reason": "already-renovated filter gap ('beautifully upgraded'/'extensive upgrades' missing)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:31:23Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/642-Mississippi-St-94107/home/732464",
+    "address": "642 Mississippi St",
+    "reason": "scraper price-parsing bug (garbled $14,700 for a 2014-sold property)"
+  }
+]

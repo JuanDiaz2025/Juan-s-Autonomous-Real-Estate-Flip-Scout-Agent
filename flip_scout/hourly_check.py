@@ -28,6 +28,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 sys.path.insert(0, os.path.dirname(__file__))
 import flip_scout_redfin as fsr
+import kpi
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SEEN_PATH = os.path.join(HERE, "seen_listings.json")
@@ -97,18 +98,40 @@ def main(now_iso, now_ts, parse_iso):
             for fut in as_completed(futures):
                 fut.result()
 
+    # Tally *why* each new listing didn't make it, not just the final count -
+    # this is what makes the KPI log answer "how many are we removing and
+    # for what reason", not just "how many are we removing".
+    excluded = {
+        "multi_unit": 0, "already_renovated": 0, "vacant_land": 0,
+        "tenant_occupied": 0, "data_incomplete": 0, "stale_dom": 0,
+        "below_profit_threshold": 0,
+    }
     qualified = []
     for l in new_listings:
-        if (l.get("is_multi_unit") or l.get("is_already_renovated") or l.get("is_vacant_land")
-                or l.get("is_data_incomplete") or l.get("is_tenant_occupied")):
+        if l.get("is_multi_unit"):
+            excluded["multi_unit"] += 1
+            continue
+        if l.get("is_already_renovated"):
+            excluded["already_renovated"] += 1
+            continue
+        if l.get("is_vacant_land"):
+            excluded["vacant_land"] += 1
+            continue
+        if l.get("is_tenant_occupied"):
+            excluded["tenant_occupied"] += 1
+            continue
+        if l.get("is_data_incomplete"):
+            excluded["data_incomplete"] += 1
             continue
         dom = l.get("days_on_market")
         if dom is not None and dom > fsr.MAX_DAYS_ON_MARKET:
+            excluded["stale_dom"] += 1
             continue
         deal = fsr.calculate_deal(l)
         if deal is None or not deal["meets_threshold_light"]:
             # doesn't clear the minimum profit threshold even in the best
             # (light rehab) case - not profitable, don't surface it
+            excluded["below_profit_threshold"] += 1
             continue
         l["deal"] = deal
         l["score"] = fsr.score_deal(l, deal)
@@ -121,6 +144,16 @@ def main(now_iso, now_ts, parse_iso):
     # mark everything we saw this run (qualified or not) so it's never
     # re-flagged as "new" again
     save_seen(seen | all_current_urls)
+
+    total_excluded = sum(excluded.values())
+    kpi.log_run(now_iso, {
+        "new_listings_checked": len(new_listings),
+        "qualified": len(qualified),
+        "excluded_total": total_excluded,
+        "excluded_by_reason": excluded,
+    })
+    print(f"\nKPI: {len(new_listings)} checked -> {len(qualified)} qualified, "
+          f"{total_excluded} excluded ({', '.join(f'{k}={v}' for k, v in excluded.items() if v)})")
 
     if qualified:
         json.dump(qualified, open(os.path.join(HERE, "new_leads.json"), "w"), indent=2)
