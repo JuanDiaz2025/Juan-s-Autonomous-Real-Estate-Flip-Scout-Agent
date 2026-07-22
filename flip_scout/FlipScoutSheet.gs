@@ -171,20 +171,69 @@ function updateKpiTab_() {
  * record what a deleted row contained - so this only works going forward:
  * use "Reject Selected Lead(s)" instead of manually deleting a row, and
  * that URL is both removed AND permanently blacklisted from future
- * Refresh Now runs. Stored in PropertiesService (script-level key/value
- * store), not a cell, so it can't be accidentally overwritten by a sheet edit.
+ * Refresh Now runs.
+ *
+ * Stored as one URL per row in a dedicated (hidden) sheet tab, NOT in a
+ * PropertiesService key - a single Script Property has a hard 9KB size
+ * limit, and a JSON blob of 100+ rejected URLs lands right at/over that
+ * ceiling, so the old approach silently failed to persist past ~100-120
+ * rejections (confirmed live: 102 rejected leads reappeared on the next
+ * refresh because the write never actually saved). A sheet has no such
+ * limit - it can hold millions of rows.
  */
-var REJECTED_URLS_KEY = 'REJECTED_URLS';
+var REJECTED_SHEET_NAME = 'Rejected (do not edit)';
+var OLD_REJECTED_URLS_KEY = 'REJECTED_URLS'; // pre-fix storage, migrated on first read
+
+function getRejectedSheet_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(REJECTED_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(REJECTED_SHEET_NAME);
+    sheet.hideSheet();
+    sheet.getRange(1, 1).setValue('Rejected Redfin URL');
+  }
+  return sheet;
+}
 
 function getRejectedUrls_() {
-  var raw = PropertiesService.getScriptProperties().getProperty(REJECTED_URLS_KEY);
-  return raw ? JSON.parse(raw) : {};
+  var sheet = getRejectedSheet_();
+  var rejected = {};
+  var lastRow = sheet.getLastRow();
+  if (lastRow > 1) {
+    sheet.getRange(2, 1, lastRow - 1, 1).getValues().forEach(function (row) {
+      if (row[0]) rejected[row[0]] = true;
+    });
+  }
+
+  // One-time migration: pull in anything from the old (size-limited,
+  // possibly-failed) PropertiesService store so nothing already saved
+  // there is lost, then clear it so this only ever runs once.
+  var oldRaw = PropertiesService.getScriptProperties().getProperty(OLD_REJECTED_URLS_KEY);
+  if (oldRaw) {
+    try {
+      var oldRejected = JSON.parse(oldRaw);
+      var newUrls = Object.keys(oldRejected).filter(function (u) { return !rejected[u]; });
+      if (newUrls.length > 0) {
+        sheet.getRange(sheet.getLastRow() + 1, 1, newUrls.length, 1)
+          .setValues(newUrls.map(function (u) { return [u]; }));
+        newUrls.forEach(function (u) { rejected[u] = true; });
+      }
+    } catch (e) {
+      // old value was corrupt/unparseable - nothing to migrate, fall through
+    }
+    PropertiesService.getScriptProperties().deleteProperty(OLD_REJECTED_URLS_KEY);
+  }
+
+  return rejected;
 }
 
 function addRejectedUrls_(urls) {
-  var rejected = getRejectedUrls_();
-  urls.forEach(function (u) { if (u) rejected[u] = true; });
-  PropertiesService.getScriptProperties().setProperty(REJECTED_URLS_KEY, JSON.stringify(rejected));
+  var sheet = getRejectedSheet_();
+  var existing = getRejectedUrls_();
+  var toAdd = urls.filter(function (u) { return u && !existing[u]; });
+  if (toAdd.length === 0) return;
+  sheet.getRange(sheet.getLastRow() + 1, 1, toAdd.length, 1)
+    .setValues(toAdd.map(function (u) { return [u]; }));
 }
 
 /**
