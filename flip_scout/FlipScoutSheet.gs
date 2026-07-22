@@ -36,6 +36,13 @@
  *      upstream (e.g. a risk category getting removed from the analysis).
  *      Run this any time you want already-added rows brought current
  *      without re-adding or duplicating anything.
+ *   9. Flip Scout -> Reject Selected Lead(s) : select a row (or rows) you've
+ *      decided against and run this INSTEAD OF manually deleting the row -
+ *      it deletes it AND permanently blacklists that Redfin link so it
+ *      never comes back on a future refresh, even though it's still sitting
+ *      in the upstream feed. Plain manual row deletion doesn't do this -
+ *      Sheets can't tell the script a row was deleted, so a manually-deleted
+ *      lead will silently reappear next refresh unless you reject it here.
  *
  * If Juan's repo branch ever changes (e.g. after this work merges to
  * main), update FEED_URL below to match - swap "claude/python-code-goal-nn6zec"
@@ -78,11 +85,89 @@ function onOpen() {
     .createMenu('Flip Scout')
     .addItem('Refresh Now', 'refreshFlipScoutSheet')
     .addItem('Resync Existing Leads', 'resyncExistingLeads')
+    .addItem('Reject Selected Lead(s)', 'rejectSelectedLeads')
     .addItem('Clear All Leads', 'clearAllLeads')
     .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
     .addToUi();
+}
+
+/**
+ * Permanent rejection list (survives across refreshes) so a lead you've
+ * decided against never comes back just because it's still in the feed.
+ * Plain row deletion can't be intercepted after the fact - Sheets doesn't
+ * record what a deleted row contained - so this only works going forward:
+ * use "Reject Selected Lead(s)" instead of manually deleting a row, and
+ * that URL is both removed AND permanently blacklisted from future
+ * Refresh Now runs. Stored in PropertiesService (script-level key/value
+ * store), not a cell, so it can't be accidentally overwritten by a sheet edit.
+ */
+var REJECTED_URLS_KEY = 'REJECTED_URLS';
+
+function getRejectedUrls_() {
+  var raw = PropertiesService.getScriptProperties().getProperty(REJECTED_URLS_KEY);
+  return raw ? JSON.parse(raw) : {};
+}
+
+function addRejectedUrls_(urls) {
+  var rejected = getRejectedUrls_();
+  urls.forEach(function (u) { if (u) rejected[u] = true; });
+  PropertiesService.getScriptProperties().setProperty(REJECTED_URLS_KEY, JSON.stringify(rejected));
+}
+
+/**
+ * Select one or more lead rows (the whole row, or any cell within them),
+ * then run this. Deletes those rows AND permanently blacklists their Redfin
+ * links so Refresh Now/hourly auto-refresh never re-adds them, even though
+ * they're still sitting in the underlying feed.
+ */
+function rejectSelectedLeads() {
+  var ui = SpreadsheetApp.getUi();
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  if (!sheet) {
+    ui.alert('No "' + SHEET_NAME + '" sheet found.');
+    return;
+  }
+
+  var selection = sheet.getActiveRangeList();
+  if (!selection) {
+    ui.alert('Select the row(s) you want to reject first (click a row number, or select any cell in each row), then run this again.');
+    return;
+  }
+
+  var rowIndices = {};
+  selection.getRanges().forEach(function (range) {
+    var startRow = range.getRow();
+    var numRows = range.getNumRows();
+    for (var i = 0; i < numRows; i++) {
+      var r = startRow + i;
+      if (r > 1) rowIndices[r] = true; // never touch the header row
+    }
+  });
+
+  var rows = Object.keys(rowIndices).map(Number).sort(function (a, b) { return a - b; });
+  if (rows.length === 0) {
+    ui.alert('No lead rows selected (header row can\'t be rejected).');
+    return;
+  }
+
+  var urlColIdx = URL_COL_INDEX;
+  var urls = rows.map(function (r) { return sheet.getRange(r, urlColIdx).getValue(); });
+
+  var response = ui.alert('Reject Selected Lead(s)',
+    'Delete ' + rows.length + ' row(s) and permanently exclude them from future refreshes? This cannot be undone from inside the script.',
+    ui.ButtonSet.YES_NO);
+  if (response !== ui.Button.YES) return;
+
+  addRejectedUrls_(urls);
+
+  // delete bottom-up so row indices above don't shift as we go
+  rows.sort(function (a, b) { return b - a; });
+  rows.forEach(function (r) { sheet.deleteRow(r); });
+
+  ui.alert(rows.length + ' lead(s) rejected and permanently excluded.');
 }
 
 function refreshFlipScoutSheet() {
@@ -139,8 +224,12 @@ function refreshFlipScoutSheet() {
   // gross_profit_light > 0 is a belt-and-suspenders check - the feed itself
   // should only ever contain leads clearing the minimum profit threshold,
   // but never let a negative-profit row reach the sheet regardless.
+  // rejectedUrls excludes anything permanently rejected via "Reject Selected
+  // Lead(s)" - without this, a rejected lead still sitting in the upstream
+  // feed would just get re-added the next time this runs.
+  var rejectedUrls = getRejectedUrls_();
   var newLeads = leads.filter(function (lead) {
-    return !existingUrls[lead.url] && lead.gross_profit_light > 0;
+    return !existingUrls[lead.url] && !rejectedUrls[lead.url] && lead.gross_profit_light > 0;
   });
 
   ss.toast(newLeads.length + ' new lead(s) found, ' + Object.keys(existingUrls).length + ' already in sheet.', 'Flip Scout', 5);

@@ -173,6 +173,23 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
                      'accessory dwelling unit', 'jadu', 'junior adu',
                      'attached adu', 'three separate living spaces']
 
+# Listing says the property currently has a tenant in place - excluded per
+# standing instruction. A tenant-occupied flip means eviction/buyout
+# complications and no ability to inspect/rehab on a normal timeline, so it
+# doesn't fit the buy-fixer-sell-vacant thesis regardless of the numbers.
+TENANT_OCCUPIED_FLAGS = [
+    'tenant occupied', 'tenant-occupied', 'occupied by tenant', 'currently tenant occupied',
+    'currently rented', 'current tenant', 'existing tenant', 'tenants in place',
+    'subject to existing tenancy', 'subject to existing lease', 'do not disturb tenant',
+    'do not disturb occupants', 'month-to-month tenant', 'leased through', 'occupied - do not disturb',
+]
+
+# Only include listings that are still fresh on market - a standing
+# instruction, not a risk-flag threshold like DAYS_ON_MARKET_STALE_THRESHOLD
+# below. Anything sitting longer than this is excluded outright, not just
+# flagged.
+MAX_DAYS_ON_MARKET = 45
+
 # Listing language indicating the flip has effectively already happened - no
 # renovation upside left for this buy box. Excluded regardless of profit
 # math, since a big "profit" on an already-renovated house just means it's
@@ -414,6 +431,7 @@ def enrich_detail(listing: Dict) -> Dict:
         # page) to avoid false positives from unrelated nearby-homes copy.
         listing['is_already_renovated'] = any(flag in desc.lower() for flag in ALREADY_RENOVATED_FLAGS)
         listing['is_vacant_land'] = any(flag in desc.lower() for flag in VACANT_LAND_FLAGS)
+        listing['is_tenant_occupied'] = any(flag in desc.lower() for flag in TENANT_OCCUPIED_FLAGS)
 
         if lot:
             listing['lot_sqft'] = lot
@@ -834,7 +852,10 @@ def run_redfin_scout() -> List[Dict]:
     analyzed = []
     for l in shortlist:
         if (l.get('is_multi_unit') or l.get('is_already_renovated') or l.get('is_vacant_land')
-                or l.get('is_data_incomplete')):
+                or l.get('is_data_incomplete') or l.get('is_tenant_occupied')):
+            continue
+        dom = l.get('days_on_market')
+        if dom is not None and dom > MAX_DAYS_ON_MARKET:
             continue
         deal = calculate_deal(l)
         if deal is None or not deal['meets_threshold_light']:

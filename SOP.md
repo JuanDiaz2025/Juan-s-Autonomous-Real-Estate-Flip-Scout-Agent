@@ -33,6 +33,16 @@ Full list: `CONFIG["target_zips"]` in `flip_scout_redfin.py`. Changes to the
 buy box only happen on Bryan's explicit instruction — never expand or shrink
 it unilaterally.
 
+**Max days on market: 45.** Anything with a confirmed days-on-market over 45
+is excluded outright (not just flagged) — `MAX_DAYS_ON_MARKET` in
+`flip_scout_redfin.py`. Listings with unverifiable DOM (no usable Sale
+History table) are not excluded on this basis, since there's nothing to
+compare against.
+
+**Tenant-occupied listings are excluded automatically**, same tier as
+already-renovated/multi-unit/vacant-lot — `TENANT_OCCUPIED_FLAGS` in
+`flip_scout_redfin.py`, checked against the listing's own description.
+
 ## 3. Methodology (Twin Home Buyer standard)
 
 - **ARV** = median $/sqft of sold comps **within a similar size band to the
@@ -113,14 +123,16 @@ hour. This is not a sign anything is broken unless *every* zip fails.
 | **Resync Existing Leads** | A lead already in the sheet needs its numbers/risks refreshed from the current feed (e.g. after a methodology fix). Preserves "First Added." Skips rows whose URL isn't in the feed anymore. |
 | **Clear All Leads** | You want a clean slate after a real methodology change (asks for confirmation first). Run Refresh Now afterward to repopulate. |
 | **Remove Non-Profitable Leads** | One-time backstop for rows added before profitability filtering existed. |
+| **Reject Selected Lead(s)** | Bryan has decided against a lead (garbage, tenant-occupied he doesn't want, whatever). Select the row(s), run this — deletes them AND permanently blacklists those Redfin links (stored in Script Properties) so they never reappear on a future Refresh Now, even though they're still sitting in the upstream feed. **Use this instead of plain manual row deletion** — a plain delete has no way to tell the script a row is gone, so the lead just gets silently re-added next refresh. |
 | **Enable/Disable Hourly Auto-Refresh** | Set up once. Idempotent — safe to click again. |
 
-**Known gap:** a lead that gets excluded from the feed *after* it was already
-added to the sheet (e.g. later found to be already-renovated) is never
-auto-removed — Refresh Now only appends, and Resync skips URLs no longer in
-the feed. If Bryan reports a lead that looks wrong, check whether it's still
-in `leads_for_sheets.json`; if not, it needs manual removal from the sheet
-row-by-row (or Clear All Leads + Refresh Now for a full rebuild).
+**Resolved gap:** a lead manually deleted from the sheet used to reappear on
+the next refresh, since Refresh Now only knows "is this URL already a row
+here" — it has no way to know a row existed and was removed. Fixed via
+**Reject Selected Lead(s)** above, which blacklists the URL permanently
+instead of just deleting the row. This only works going forward — anything
+deleted before this existed will still need Reject run on it again if it
+reappears.
 
 ## 7. Before actually making an offer on any lead
 
@@ -162,6 +174,11 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Added a hard 45-day max-days-on-market exclusion and a tenant-occupied
+  exclusion (`TENANT_OCCUPIED_FLAGS`), both per standing instruction. Added
+  "Reject Selected Lead(s)" to the Apps Script menu so a manually-rejected
+  lead is permanently blacklisted instead of just deleted (which used to
+  silently reappear on the next refresh).
 - Added `DEAL_HISTORY.md` — real 56-deal track record and empirical
   win/loss pattern, referenced from §3 as manual context for sanity-checking
   outlier leads.

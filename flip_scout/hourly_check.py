@@ -100,7 +100,10 @@ def main(now_iso, now_ts, parse_iso):
     qualified = []
     for l in new_listings:
         if (l.get("is_multi_unit") or l.get("is_already_renovated") or l.get("is_vacant_land")
-                or l.get("is_data_incomplete")):
+                or l.get("is_data_incomplete") or l.get("is_tenant_occupied")):
+            continue
+        dom = l.get("days_on_market")
+        if dom is not None and dom > fsr.MAX_DAYS_ON_MARKET:
             continue
         deal = fsr.calculate_deal(l)
         if deal is None or not deal["meets_threshold_light"]:
