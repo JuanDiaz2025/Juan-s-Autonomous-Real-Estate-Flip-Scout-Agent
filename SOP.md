@@ -130,8 +130,8 @@ hour. This is not a sign anything is broken unless *every* zip fails.
 **KPI tab (automated, no manual compiling)**: a "KPI" sheet tab tracks, live:
 Currently kept (rows in the sheet right now), Total ever added, Total
 rejected (via Reject Selected Lead(s)), Total removed (via Remove
-Non-Profitable Leads), and Last updated. Counters persist in Script
-Properties (not a cell), so they're true running totals since setup, not
+Non-Profitable Leads), and Last updated. These counters (small integers)
+persist in Script Properties (not a cell), so they're true running totals since setup, not
 just what's visible right now — they survive Clear All Leads, sheet edits,
 anything.
 
@@ -155,6 +155,17 @@ here" — it has no way to know a row existed and was removed. Fixed via
 instead of just deleting the row. This only works going forward — anything
 deleted before this existed will still need Reject run on it again if it
 reappears.
+
+**Second, deeper bug (fixed):** the rejected-URL blacklist was originally
+stored as one JSON blob in a single Script Property, which has a hard ~9KB
+size limit. Once the list grew past roughly 100-120 rejected URLs, the
+write silently failed to persist — so rejecting a large batch (confirmed:
+102 leads) looked like it worked, but they all reappeared on the next
+refresh anyway. Fixed by moving the blacklist to a dedicated hidden sheet
+tab ("Rejected (do not edit)", one URL per row — no comparable size
+limit), with a one-time automatic migration of anything already saved
+under the old Script Property key. After re-pasting the updated script,
+any batch of rejects — no matter how large — persists correctly.
 
 ## 7. Before actually making an offer on any lead
 
@@ -196,6 +207,13 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Fixed a real bug behind "rejected leads keep coming back": the
+  rejected-URL blacklist was stored as one JSON blob in a single Script
+  Property (hard ~9KB limit), which silently failed to persist once the
+  list grew past ~100-120 URLs — confirmed live when 102 rejected leads
+  reappeared after a refresh despite being rejected. Moved storage to a
+  dedicated hidden sheet tab ("Rejected (do not edit)", one URL per row),
+  with an automatic one-time migration from the old Script Property.
 - Added automated KPI tracking: a live "KPI" tab in the Google Sheet
   (currently kept / total added / total rejected, updates automatically -
   no need to ask for these numbers), plus `flip_scout/kpi_log.json` +
