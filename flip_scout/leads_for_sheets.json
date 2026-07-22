@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T20:08:55.644539Z",
+  "generated_at": "2026-07-22T21:08:27.745603Z",
   "leads": [
     {
       "score": 10,
@@ -26,6 +26,32 @@
       "recommended_max_offer": 3412000.0,
       "risks": "On market 65 days, 1 price cut(s) since listing - possible sign of soft demand in this area or an overpriced/undesirable property, not just a fixer discount",
       "url": "https://www.redfin.com/CA/Oakland/6163-Girvin-Dr-94611/home/1981897"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "642 Mississippi St",
+      "city": "San Francisco",
+      "zip": "94107",
+      "beds": 3.0,
+      "baths": 2.5,
+      "sqft": 2000,
+      "lot_sqft": 2500,
+      "year_built": 1908,
+      "price": 14700,
+      "arv": 1729000.0,
+      "rehab_light": 140000,
+      "rehab_heavy": 290000,
+      "holding_costs": 800.0,
+      "total_cost_light": 155500.0,
+      "total_cost_heavy": 305500.0,
+      "gross_profit_light": 1573500.0,
+      "gross_profit_heavy": 1423500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1299000.0,
+      "risks": "PRICE ANOMALY - verify title/liens; Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (842 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "url": "https://www.redfin.com/CA/San-Francisco/642-Mississippi-St-94107/home/732464"
     },
     {
       "score": 10,
@@ -2808,6 +2834,32 @@
       "recommended_max_offer": 245000.0,
       "risks": "Small lot",
       "url": "https://www.redfin.com/CA/Oakland/1440-76th-Ave-94621/home/574988"
+    },
+    {
+      "score": 4,
+      "recommendation": "Marginal",
+      "address": "5897 Erskine Ct",
+      "city": "San Jose",
+      "zip": "95123",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 1675,
+      "lot_sqft": 6510,
+      "year_built": 1971,
+      "price": 1349800,
+      "arv": 1624000.0,
+      "rehab_light": 117000,
+      "rehab_heavy": 243000,
+      "holding_costs": 41100.0,
+      "total_cost_light": 1507900.0,
+      "total_cost_heavy": 1633900.0,
+      "gross_profit_light": 116100.0,
+      "gross_profit_heavy": -9900.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 1243000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Jose/5897-Erskine-Ct-95123/home/876854"
     },
     {
       "score": 4,
