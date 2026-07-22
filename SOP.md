@@ -54,6 +54,17 @@ it unilaterally.
 - No ADU Potential, no "Reno Budget" label, no construction-condition risk
   flags (seismic/pre-1940 wiring) — all removed per standing instruction.
 
+**Real deal-history context**: `DEAL_HISTORY.md` documents Twin Home Buyer's
+actual track record (56 completed deals, 86% win rate) and the empirical
+pattern behind it — East Bay sub-$1M flips with rehab under ~17% of purchase
+are the reliable engine; every historical loss was a high-price
+Peninsula/premium-market buy with heavy rehab (>25-30% of purchase, or
+purchase >$1.5M in cities like Redwood City, Menlo Park, Foster City, San
+Carlos, Walnut Creek). Use it as manual context when sanity-checking outlier
+leads per §5/§7 — a lead matching the historical loss profile is worth
+flagging even if it clears the model's dollar profit gate. This is
+reference context, not (yet) wired into the automated risk-flag logic.
+
 ## 4. Reading the Risk column
 
 Only real, verified signals — nothing is fabricated:
@@ -151,6 +162,9 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Added `DEAL_HISTORY.md` — real 56-deal track record and empirical
+  win/loss pattern, referenced from §3 as manual context for sanity-checking
+  outlier leads.
 - Removed the $400k price floor per standing instruction — a motivated
   seller can price well under that, and the profit gate/anomaly flag already
   screen out anything that doesn't pencil.
