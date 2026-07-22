@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T09:08:13.313496Z",
+  "generated_at": "2026-07-22T16:08:35.053301Z",
   "leads": [
     {
       "score": 10,
@@ -1014,6 +1014,32 @@
       "recommended_max_offer": 1022000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Berkeley/1431-Catherine-Dr-94702/home/686063"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "2013 9th St",
+      "city": "Berkeley",
+      "zip": "94710",
+      "beds": 4.0,
+      "baths": 2.0,
+      "sqft": 1332,
+      "lot_sqft": 6500,
+      "year_built": 1903,
+      "price": 800000,
+      "arv": 1236000.0,
+      "rehab_light": 93000,
+      "rehab_heavy": 193000,
+      "holding_costs": 24500.0,
+      "total_cost_light": 917500.0,
+      "total_cost_heavy": 1017500.0,
+      "gross_profit_light": 318500.0,
+      "gross_profit_heavy": 218500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 915000.0,
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (945 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "url": "https://www.redfin.com/CA/Berkeley/2013-9th-St-94710/home/914075"
     },
     {
       "score": 10,
