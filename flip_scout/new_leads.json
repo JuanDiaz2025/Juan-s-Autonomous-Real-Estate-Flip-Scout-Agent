@@ -44,7 +44,8 @@
     "score": 10,
     "recommendation": "Strong Deal",
     "risks": [
-      "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (945 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV"
+      "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (945 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "Outside the scanned buy box (94710 isn't a scanned zip; ARV uses a 945-comp citywide fallback pool) - and no Redfin Estimate is available yet since this is a 'Coming Soon' listing, so there's no independent sanity-check on the $1,236,000 ARV. Photos also show a second kitchen in what looks like a detached rear structure - verify in person whether that's a permitted second unit (relevant to the listing's own 'development potential' pitch) or an unpermitted addition, before trusting the deal math."
     ]
   }
 ]
