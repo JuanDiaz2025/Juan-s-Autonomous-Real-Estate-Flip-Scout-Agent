@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T04:07:57.087905Z",
+  "generated_at": "2026-07-22T09:08:13.313496Z",
   "leads": [
     {
       "score": 10,
@@ -286,6 +286,32 @@
       "recommended_max_offer": 1391000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Redwood-City/322-1st-Ave-94063/home/1984200"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "4140 Garden Rd",
+      "city": "El Sobrante",
+      "zip": "94803",
+      "beds": 4.0,
+      "baths": 1.5,
+      "sqft": 1356,
+      "lot_sqft": 5009,
+      "year_built": 1952,
+      "price": 499000,
+      "arv": 1239000.0,
+      "rehab_light": 95000,
+      "rehab_heavy": 197000,
+      "holding_costs": 15400.0,
+      "total_cost_light": 609400.0,
+      "total_cost_heavy": 711400.0,
+      "gross_profit_light": 629600.0,
+      "gross_profit_heavy": 527600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 914000.0,
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (956 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Redfin's own automated valuation (Redfin Estimate) for this property is $500,320 - essentially the current asking price - directly contradicting this model's $1,239,000 ARV (a ~$738k gap). The ARV here came from the citywide fallback comp pool (956 comps, mostly pricier SF/Peninsula sales) since 94803/El Sobrante isn't a scanned buy-box zip - it does not reflect real El Sobrante home values. Treat the $629,600 modeled profit as fictional until real local comps are pulled by hand.",
+      "url": "https://www.redfin.com/CA/El-Sobrante/4140-Garden-Rd-94803/home/612668"
     },
     {
       "score": 10,
