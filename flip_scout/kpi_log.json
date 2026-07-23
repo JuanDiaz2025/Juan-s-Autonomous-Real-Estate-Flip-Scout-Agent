@@ -558,5 +558,21 @@
     "url": "https://www.redfin.com/CA/San-Jose/860-N-19th-St-95112/home/662206",
     "address": "860 N 19th St",
     "reason": "aged out (backfill sweep): estimated 49 days on market - standing under-45 rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T17:58:02.205028Z",
+    "new_listings_checked": 20,
+    "qualified": 2,
+    "excluded_total": 18,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 13,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
   }
 ]
