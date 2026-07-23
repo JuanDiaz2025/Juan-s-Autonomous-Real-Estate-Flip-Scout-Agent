@@ -535,5 +535,28 @@
     "url": "https://www.redfin.com/CA/Emeryville/815-45th-St-94608/home/727633",
     "address": "815 45th St",
     "reason": "'extensively remodeled in 2012' (renovated-filter gap, now patched); Redfin estimate $1.049M vs modeled $1.205M ARV collapses profit to ~breakeven"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T16:30:54.749578Z",
+    "new_listings_checked": 29,
+    "qualified": 0,
+    "excluded_total": 29,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 11,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 14,
+      "stale_dom": 1,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T16:50:54.489882Z",
+    "url": "https://www.redfin.com/CA/San-Jose/860-N-19th-St-95112/home/662206",
+    "address": "860 N 19th St",
+    "reason": "aged out (backfill sweep): estimated 49 days on market - standing under-45 rule"
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T15:48:14.695833Z",
+  "generated_at": "2026-07-23T16:50:54.489882Z",
   "leads": [
     {
       "score": 10,
@@ -25,7 +25,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 2108000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/2745-Butters-Dr-94602/home/168852884"
+      "url": "https://www.redfin.com/CA/Oakland/2745-Butters-Dr-94602/home/168852884",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -51,7 +53,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1763000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/2816-23rd-St-94110/home/1939359"
+      "url": "https://www.redfin.com/CA/San-Francisco/2816-23rd-St-94110/home/1939359",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -77,7 +81,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1463000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/El-Cerrito/2328-Carquinez-Ave-94530/home/1136328"
+      "url": "https://www.redfin.com/CA/El-Cerrito/2328-Carquinez-Ave-94530/home/1136328",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -103,7 +109,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1795000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (485 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/Castro-Valley/17208-President-Dr-94546/home/22646842"
+      "url": "https://www.redfin.com/CA/Castro-Valley/17208-President-Dr-94546/home/22646842",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -129,7 +137,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1146000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/483-Ellington-Ave-94112/home/2028263"
+      "url": "https://www.redfin.com/CA/San-Francisco/483-Ellington-Ave-94112/home/2028263",
+      "added_at": "2026-07-18T18:08:18+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -155,7 +165,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1718000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/635-Longridge-Rd-94610/home/1403592"
+      "url": "https://www.redfin.com/CA/Oakland/635-Longridge-Rd-94610/home/1403592",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -181,7 +193,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 943000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94609/home/1842788"
+      "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94609/home/1842788",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -207,7 +221,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1391000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Redwood-City/322-1st-Ave-94063/home/1984200"
+      "url": "https://www.redfin.com/CA/Redwood-City/322-1st-Ave-94063/home/1984200",
+      "added_at": "2026-07-17T21:36:40+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -233,7 +249,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1589000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/2182-40th-Ave-94116/home/1996640"
+      "url": "https://www.redfin.com/CA/San-Francisco/2182-40th-Ave-94116/home/1996640",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -259,7 +277,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1445000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/1135-Naples-St-94112/home/2034856"
+      "url": "https://www.redfin.com/CA/San-Francisco/1135-Naples-St-94112/home/2034856",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -285,7 +305,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1769000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/Berkeley/755-Folger-Ave-94710/home/40133570"
+      "url": "https://www.redfin.com/CA/Berkeley/755-Folger-Ave-94710/home/40133570",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -311,7 +333,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1517000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/8440-Skyline-Blvd-94611/home/1590413"
+      "url": "https://www.redfin.com/CA/Oakland/8440-Skyline-Blvd-94611/home/1590413",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -337,7 +361,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1492000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Piedmont/617-Boulevard-Way-94610/home/1494784"
+      "url": "https://www.redfin.com/CA/Piedmont/617-Boulevard-Way-94610/home/1494784",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -363,7 +389,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1004000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/604-56th-St-94609/home/1575850"
+      "url": "https://www.redfin.com/CA/Oakland/604-56th-St-94609/home/1575850",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -389,7 +417,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1267000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Mateo/2539-Holland-St-94403/home/1024670"
+      "url": "https://www.redfin.com/CA/San-Mateo/2539-Holland-St-94403/home/1024670",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -415,7 +445,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1229000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Redwood-City/827-Chestnut-St-94063/home/1341408"
+      "url": "https://www.redfin.com/CA/Redwood-City/827-Chestnut-St-94063/home/1341408",
+      "added_at": "2026-07-17T21:36:40+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -441,7 +473,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 915000.0,
       "risks": "FIRE DAMAGE mentioned in listing - the Light/Heavy rehab estimates are a standard cosmetic/full-remodel model and do NOT price in fire remediation (structural assessment, smoke/soot abatement, possible rebuild) - get a contractor/structural engineer estimate before trusting this profit number | Re-verified live: Redfin's current-condition estimate is $748,681 (~10% above the $679,000 asking price) - the market isn't treating this as a deep undervalued bargain even before fire-remediation costs. Doesn't change the core issue: the $91k-$188k rehab estimate still doesn't price in real fire damage repair.",
-      "url": "https://www.redfin.com/CA/San-Jose/1094-S-2nd-St-95112/home/1124743"
+      "url": "https://www.redfin.com/CA/San-Jose/1094-S-2nd-St-95112/home/1124743",
+      "added_at": "2026-07-20T23:07:00+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -467,7 +501,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1617000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/1658-34th-Ave-94122/home/923799"
+      "url": "https://www.redfin.com/CA/San-Francisco/1658-34th-Ave-94122/home/923799",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -493,7 +529,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1419000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Piedmont/1001-Park-Ln-94610/home/1476106"
+      "url": "https://www.redfin.com/CA/Piedmont/1001-Park-Ln-94610/home/1476106",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -519,7 +557,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 911000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/East-Palo-Alto/2338-Dumbarton-Ave-94303/home/1232358"
+      "url": "https://www.redfin.com/CA/East-Palo-Alto/2338-Dumbarton-Ave-94303/home/1232358",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -545,7 +585,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1029000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/106-Madrid-St-94112/home/1055569"
+      "url": "https://www.redfin.com/CA/San-Francisco/106-Madrid-St-94112/home/1055569",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -571,7 +613,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1057000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/1834-Macduee-Way-95121/home/968946"
+      "url": "https://www.redfin.com/CA/San-Jose/1834-Macduee-Way-95121/home/968946",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -597,7 +641,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1452000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Redwood-City/313-Dumbarton-Ave-94063/home/1983971"
+      "url": "https://www.redfin.com/CA/Redwood-City/313-Dumbarton-Ave-94063/home/1983971",
+      "added_at": "2026-07-18T18:08:18+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -623,7 +669,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 946000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (961 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/San-Leandro/1282-Chapel-Ave-94579/home/715710"
+      "url": "https://www.redfin.com/CA/San-Leandro/1282-Chapel-Ave-94579/home/715710",
+      "added_at": "2026-07-21T21:34:07+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -649,7 +697,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1149000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/East-Palo-Alto/2719-Xavier-St-94303/home/2055348"
+      "url": "https://www.redfin.com/CA/East-Palo-Alto/2719-Xavier-St-94303/home/2055348",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -675,7 +725,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 997000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Berkeley/1701-Derby-St-94703/home/1098457"
+      "url": "https://www.redfin.com/CA/Berkeley/1701-Derby-St-94703/home/1098457",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -701,7 +753,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1140000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/3631-Victor-Ave-94619/home/1699437"
+      "url": "https://www.redfin.com/CA/Oakland/3631-Victor-Ave-94619/home/1699437",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -727,7 +781,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 886000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Daly-City/91-W-Cavour-St-94014/home/1492017"
+      "url": "https://www.redfin.com/CA/Daly-City/91-W-Cavour-St-94014/home/1492017",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -753,7 +809,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 804000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/3246-Martin-Luther-King-Junior-Way-94609/home/191246073"
+      "url": "https://www.redfin.com/CA/Oakland/3246-Martin-Luther-King-Junior-Way-94609/home/191246073",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -779,7 +837,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1022000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Berkeley/1431-Catherine-Dr-94702/home/686063"
+      "url": "https://www.redfin.com/CA/Berkeley/1431-Catherine-Dr-94702/home/686063",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -805,7 +865,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 915000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (945 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV | Outside the scanned buy box (94710 isn't a scanned zip; ARV uses a 945-comp citywide fallback pool) - and no Redfin Estimate is available yet since this is a 'Coming Soon' listing, so there's no independent sanity-check on the $1,236,000 ARV. Photos also show a second kitchen in what looks like a detached rear structure - verify in person whether that's a permitted second unit (relevant to the listing's own 'development potential' pitch) or an unpermitted addition, before trusting the deal math.",
-      "url": "https://www.redfin.com/CA/Berkeley/2013-9th-St-94710/home/914075"
+      "url": "https://www.redfin.com/CA/Berkeley/2013-9th-St-94710/home/914075",
+      "added_at": "2026-07-22T16:30:11+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -831,7 +893,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1112000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/1849-Brentwood-Rd-94602/home/1716207"
+      "url": "https://www.redfin.com/CA/Oakland/1849-Brentwood-Rd-94602/home/1716207",
+      "added_at": "2026-07-18T23:38:29+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -857,7 +921,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 896000.0,
       "risks": "Small lot; Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (944 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/San-Francisco/807-Teresita-Blvd-94127/home/964758"
+      "url": "https://www.redfin.com/CA/San-Francisco/807-Teresita-Blvd-94127/home/964758",
+      "added_at": "2026-07-18T23:38:29+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -883,7 +949,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1189000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/627-22nd-Ave-94121/home/1910327"
+      "url": "https://www.redfin.com/CA/San-Francisco/627-22nd-Ave-94121/home/1910327",
+      "added_at": "2026-07-19T17:26:08+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -909,7 +977,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 862000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Redwood-City/345-1st-Ave-94063/home/1967565"
+      "url": "https://www.redfin.com/CA/Redwood-City/345-1st-Ave-94063/home/1967565",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -935,7 +1005,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 794000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/770-Walker-Ave-94610/home/1249273"
+      "url": "https://www.redfin.com/CA/Oakland/770-Walker-Ave-94610/home/1249273",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -961,7 +1033,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1469000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/2628-Yorba-St-94116/home/1652786"
+      "url": "https://www.redfin.com/CA/San-Francisco/2628-Yorba-St-94116/home/1652786",
+      "added_at": "2026-07-19T21:23:48+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -987,7 +1061,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 820000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Emeryville/915-39th-St-94608/home/1913324"
+      "url": "https://www.redfin.com/CA/Emeryville/915-39th-St-94608/home/1913324",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -1013,7 +1089,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 867000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/89-Farallones-St-94112/home/1346223"
+      "url": "https://www.redfin.com/CA/San-Francisco/89-Farallones-St-94112/home/1346223",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -1039,7 +1117,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1448000.0,
       "risks": "Small lot; Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (691 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/San-Jose/2400-Plateau-Dr-95125/home/167457591"
+      "url": "https://www.redfin.com/CA/San-Jose/2400-Plateau-Dr-95125/home/167457591",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -1065,7 +1145,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1047000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/6480-Ascot-Dr-94611/home/1607840"
+      "url": "https://www.redfin.com/CA/Oakland/6480-Ascot-Dr-94611/home/1607840",
+      "added_at": "2026-07-18T03:09:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -1091,7 +1173,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 568000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/Oakland/950-Loomis-Ct-94606/home/1742439"
+      "url": "https://www.redfin.com/CA/Oakland/950-Loomis-Ct-94606/home/1742439",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 10,
@@ -1117,7 +1201,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 537000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Emeryville/956-53rd-St-94608/home/1974360"
+      "url": "https://www.redfin.com/CA/Emeryville/956-53rd-St-94608/home/1974360",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 8,
@@ -1143,7 +1229,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1318000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Millbrae/215-Beverly-Ave-94030/home/1441973"
+      "url": "https://www.redfin.com/CA/Millbrae/215-Beverly-Ave-94030/home/1441973",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 8,
@@ -1169,7 +1257,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 598000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/3508-Morcom-Ave-94619/home/1329932"
+      "url": "https://www.redfin.com/CA/Oakland/3508-Morcom-Ave-94619/home/1329932",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 8,
@@ -1195,7 +1285,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 445000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Castro-Valley/Undisclosed-address-94578/home/1500930"
+      "url": "https://www.redfin.com/CA/Castro-Valley/Undisclosed-address-94578/home/1500930",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 8,
@@ -1221,7 +1313,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 366000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94605/home/1881009"
+      "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94605/home/1881009",
+      "added_at": "2026-07-20T17:20:52+00:00",
+      "dom_at_add": null
     },
     {
       "score": 7,
@@ -1247,7 +1341,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 1014000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/132-Rishell-Dr-94619/home/565941"
+      "url": "https://www.redfin.com/CA/Oakland/132-Rishell-Dr-94619/home/565941",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 7,
@@ -1273,7 +1369,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 933000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Berkeley/1349-Hearst-Ave-94702/home/1199413"
+      "url": "https://www.redfin.com/CA/Berkeley/1349-Hearst-Ave-94702/home/1199413",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 7,
@@ -1299,7 +1397,9 @@
       "meets_threshold_heavy": true,
       "recommended_max_offer": 712000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Emeryville/3326-Chestnut-St-94608/home/525162"
+      "url": "https://www.redfin.com/CA/Emeryville/3326-Chestnut-St-94608/home/525162",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1325,7 +1425,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1094000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/42-Seminole-Ave-94112/home/1195396"
+      "url": "https://www.redfin.com/CA/San-Francisco/42-Seminole-Ave-94112/home/1195396",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1351,7 +1453,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 857000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/130-Woolsey-St-94134/home/776071"
+      "url": "https://www.redfin.com/CA/San-Francisco/130-Woolsey-St-94134/home/776071",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1377,7 +1481,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 774000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/7101-Pinehaven-Rd-94611/home/1142827"
+      "url": "https://www.redfin.com/CA/Oakland/7101-Pinehaven-Rd-94611/home/1142827",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1403,7 +1509,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 689000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Francisco/29-Cassandra-Ct-94112/home/1896705"
+      "url": "https://www.redfin.com/CA/San-Francisco/29-Cassandra-Ct-94112/home/1896705",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1429,7 +1537,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 644000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/3300-Wilson-Pl-94602/home/528538"
+      "url": "https://www.redfin.com/CA/Oakland/3300-Wilson-Pl-94602/home/528538",
+      "added_at": "2026-07-20T16:37:40+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1455,7 +1565,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 543000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/1180-Florida-St-94110/home/736276"
+      "url": "https://www.redfin.com/CA/San-Francisco/1180-Florida-St-94110/home/736276",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1481,7 +1593,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1138000.0,
       "risks": "MLS-light listing: auto-generated description, no agent remarks, no Redfin estimate available - verify listing legitimacy and access before pursuing",
-      "url": "https://www.redfin.com/CA/Pacifica/824-Dell-Rd-94044/home/660689"
+      "url": "https://www.redfin.com/CA/Pacifica/824-Dell-Rd-94044/home/660689",
+      "added_at": "2026-07-23T15:48:26+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1507,7 +1621,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1262000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (862 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/Alameda/1112-San-Antonio-Ave-94501/home/713823"
+      "url": "https://www.redfin.com/CA/Alameda/1112-San-Antonio-Ave-94501/home/713823",
+      "added_at": "2026-07-18T19:24:01+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1533,7 +1649,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 687000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Emeryville/6007-San-Pablo-Ave-94608/home/2000216"
+      "url": "https://www.redfin.com/CA/Emeryville/6007-San-Pablo-Ave-94608/home/2000216",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1559,7 +1677,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 928000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/East-Palo-Alto/439-Wisteria-Dr-94303/home/1882414"
+      "url": "https://www.redfin.com/CA/East-Palo-Alto/439-Wisteria-Dr-94303/home/1882414",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1585,7 +1705,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1346000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/San-Francisco/187-Elsie-St-94110/home/1167158"
+      "url": "https://www.redfin.com/CA/San-Francisco/187-Elsie-St-94110/home/1167158",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1611,7 +1733,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 749000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/216-N-25th-St-95116/home/871190"
+      "url": "https://www.redfin.com/CA/San-Jose/216-N-25th-St-95116/home/871190",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1637,7 +1761,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 795000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (834 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/Alameda/1811-Lincoln-Ave-94501/home/1994153"
+      "url": "https://www.redfin.com/CA/Alameda/1811-Lincoln-Ave-94501/home/1994153",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1663,7 +1789,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 939000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/South-San-Francisco/813-Larch-Ave-94080/home/1356930"
+      "url": "https://www.redfin.com/CA/South-San-Francisco/813-Larch-Ave-94080/home/1356930",
+      "added_at": "2026-07-17T21:13:28+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1689,7 +1817,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1232000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/6032-Salida-del-Sol-95123/home/989066"
+      "url": "https://www.redfin.com/CA/San-Jose/6032-Salida-del-Sol-95123/home/989066",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1715,7 +1845,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 881000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/3382-Mount-Madonna-Dr-95127/home/1254962"
+      "url": "https://www.redfin.com/CA/San-Jose/3382-Mount-Madonna-Dr-95127/home/1254962",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1741,7 +1873,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 472000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/2924-Seminary-Ave-94605/home/568656"
+      "url": "https://www.redfin.com/CA/Oakland/2924-Seminary-Ave-94605/home/568656",
+      "added_at": "2026-07-22T04:28:13+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1767,7 +1901,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1143000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/221-Beegum-Way-95123/home/1611289"
+      "url": "https://www.redfin.com/CA/San-Jose/221-Beegum-Way-95123/home/1611289",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1793,7 +1929,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1153000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (953 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/San-Jose/2258-Golden-Crest-Cmns-95125/home/167457401"
+      "url": "https://www.redfin.com/CA/San-Jose/2258-Golden-Crest-Cmns-95125/home/167457401",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1819,7 +1957,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 380000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Richmond/247-S-5th-St-94804/home/1055893"
+      "url": "https://www.redfin.com/CA/Richmond/247-S-5th-St-94804/home/1055893",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1845,7 +1985,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1209000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/La-Honda/6975-La-Honda-Rd-94020/home/17309096"
+      "url": "https://www.redfin.com/CA/La-Honda/6975-La-Honda-Rd-94020/home/17309096",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1871,7 +2013,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1096000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-A/home/200411608"
+      "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-A/home/200411608",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1897,7 +2041,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 802000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Leandro/2062-Evergreen-Ave-94577/home/1779704"
+      "url": "https://www.redfin.com/CA/San-Leandro/2062-Evergreen-Ave-94577/home/1779704",
+      "added_at": "2026-07-22T20:28:00+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1923,7 +2069,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1178000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/5815-Falon-Way-95123/home/994859"
+      "url": "https://www.redfin.com/CA/San-Jose/5815-Falon-Way-95123/home/994859",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1949,7 +2097,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 345000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/5362-Foothill-Blvd-94601/home/678390"
+      "url": "https://www.redfin.com/CA/Oakland/5362-Foothill-Blvd-94601/home/678390",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -1975,7 +2125,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 340000.0,
       "risks": "On market 33 days, 4 price cut(s) since listing - possible sign of soft demand in this area or an overpriced/undesirable property, not just a fixer discount",
-      "url": "https://www.redfin.com/CA/Oakland/901-92nd-Ave-94603/home/1533246"
+      "url": "https://www.redfin.com/CA/Oakland/901-92nd-Ave-94603/home/1533246",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": 33
     },
     {
       "score": 5,
@@ -2001,7 +2153,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1063000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/2710-Gay-Ave-95127/home/203166381"
+      "url": "https://www.redfin.com/CA/San-Jose/2710-Gay-Ave-95127/home/203166381",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -2027,7 +2181,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1339000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-2276-Modeled/home/199087052"
+      "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-2276-Modeled/home/199087052",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -2053,7 +2209,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 489000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/8600-Seneca-St-94605/home/585113"
+      "url": "https://www.redfin.com/CA/Oakland/8600-Seneca-St-94605/home/585113",
+      "added_at": "2026-07-18T18:15:56+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -2079,7 +2237,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1379000.0,
       "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (781 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
-      "url": "https://www.redfin.com/CA/San-Jose/277-Moraga-Way-95119/home/845031"
+      "url": "https://www.redfin.com/CA/San-Jose/277-Moraga-Way-95119/home/845031",
+      "added_at": "2026-07-19T12:09:06+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -2105,7 +2265,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 664000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/3500-Seminary-Ave-94605/home/2025775"
+      "url": "https://www.redfin.com/CA/Oakland/3500-Seminary-Ave-94605/home/2025775",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 5,
@@ -2131,7 +2293,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1105000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/6105-Oakdale-Ave-94605/home/22683679"
+      "url": "https://www.redfin.com/CA/Oakland/6105-Oakdale-Ave-94605/home/22683679",
+      "added_at": "2026-07-18T19:20:24+00:00",
+      "dom_at_add": null
     },
     {
       "score": 4,
@@ -2157,7 +2321,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 821000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/124-E-Humboldt-St-95112/home/1129403"
+      "url": "https://www.redfin.com/CA/San-Jose/124-E-Humboldt-St-95112/home/1129403",
+      "added_at": "2026-07-18T19:24:01+00:00",
+      "dom_at_add": null
     },
     {
       "score": 4,
@@ -2183,7 +2349,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 999000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/Oakland/741-Apgar-St-94609/home/174710321"
+      "url": "https://www.redfin.com/CA/Oakland/741-Apgar-St-94609/home/174710321",
+      "added_at": "2026-07-18T22:44:55+00:00",
+      "dom_at_add": null
     },
     {
       "score": 4,
@@ -2209,7 +2377,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 245000.0,
       "risks": "Small lot",
-      "url": "https://www.redfin.com/CA/Oakland/1440-76th-Ave-94621/home/574988"
+      "url": "https://www.redfin.com/CA/Oakland/1440-76th-Ave-94621/home/574988",
+      "added_at": "2026-07-20T17:20:52+00:00",
+      "dom_at_add": null
     },
     {
       "score": 4,
@@ -2235,7 +2405,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 373000.0,
       "risks": "Gross profit clears the minimum threshold by under $1,500 - zero cushion; Redfin estimate ($449.6k) matches asking almost exactly",
-      "url": "https://www.redfin.com/CA/Oakland/2333-81st-Ave-94605/home/1716634"
+      "url": "https://www.redfin.com/CA/Oakland/2333-81st-Ave-94605/home/1716634",
+      "added_at": "2026-07-23T15:48:26+00:00",
+      "dom_at_add": null
     },
     {
       "score": 4,
@@ -2261,33 +2433,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1243000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/San-Jose/5897-Erskine-Ct-95123/home/876854"
-    },
-    {
-      "score": 4,
-      "recommendation": "Marginal",
-      "address": "860 N 19th St",
-      "city": "San Jose",
-      "zip": "95112",
-      "beds": 3.0,
-      "baths": 1.0,
-      "sqft": 1559,
-      "lot_sqft": 12722,
-      "year_built": 1901,
-      "price": 999000,
-      "arv": 1242000.0,
-      "rehab_light": 109000,
-      "rehab_heavy": 226000,
-      "holding_costs": 30500.0,
-      "total_cost_light": 1138500.0,
-      "total_cost_heavy": 1255500.0,
-      "gross_profit_light": 103500.0,
-      "gross_profit_heavy": -13500.0,
-      "min_profit_threshold": 100000,
-      "meets_threshold_heavy": false,
-      "recommended_max_offer": 889000.0,
-      "risks": "On market 45 days, 2 price cut(s) since listing - possible sign of soft demand in this area or an overpriced/undesirable property, not just a fixer discount",
-      "url": "https://www.redfin.com/CA/San-Jose/860-N-19th-St-95112/home/662206"
+      "url": "https://www.redfin.com/CA/San-Jose/5897-Erskine-Ct-95123/home/876854",
+      "added_at": "2026-07-22T21:28:14+00:00",
+      "dom_at_add": null
     },
     {
       "score": 4,
@@ -2313,7 +2461,9 @@
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1035000.0,
       "risks": "None",
-      "url": "https://www.redfin.com/CA/Oakland/4105-Gregory-St-94619/home/1630979"
+      "url": "https://www.redfin.com/CA/Oakland/4105-Gregory-St-94619/home/1630979",
+      "added_at": "2026-07-18T20:25:10+00:00",
+      "dom_at_add": null
     }
   ]
 }

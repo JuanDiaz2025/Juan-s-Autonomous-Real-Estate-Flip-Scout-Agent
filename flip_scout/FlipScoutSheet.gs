@@ -106,15 +106,26 @@ function showKpiTab() {
 
 /**
  * KPI tab - automated, always current, no need to ask anyone to compile it.
- * Counters are cumulative (survive refreshes/rejects, stored in Script
- * Properties, not in a cell that could be overwritten), so "Total Added"
- * and "Total Rejected" are true running totals since this script was
- * installed, not just what's visible in the sheet right now.
+ *
+ * COUNTS ARE DERIVED FROM DURABLE DATA, NOT INCREMENTING COUNTERS. The
+ * original version incremented a Script Property on every action, which
+ * drifts from reality: rejecting the same rows twice counted twice
+ * (confirmed live - the 102-lead reject ran once under the broken
+ * PropertiesService storage and again after the fix, double-counting all
+ * 102), and any action that half-failed still counted. Now:
+ *   - Currently kept  = live row count of the leads sheet
+ *   - Total rejected  = row count of the hidden rejected-URLs sheet
+ *                       (deduped by URL, so re-rejecting never inflates it)
+ *   - Non-profit removed = the one remaining counter (those rows are
+ *                       genuinely deleted each time, no dedup needed)
+ *   - Total ever added = kept + rejected + non-profit-removed (self-
+ *                       consistent by construction)
  */
 var KPI_SHEET_NAME = 'KPI';
-var TOTAL_ADDED_KEY = 'KPI_TOTAL_ADDED';
-var TOTAL_REJECTED_KEY = 'KPI_TOTAL_REJECTED';
 var TOTAL_NONPROFIT_REMOVED_KEY = 'KPI_TOTAL_NONPROFIT_REMOVED';
+// Legacy drift-prone counters, deleted on next KPI update:
+var OLD_TOTAL_ADDED_KEY = 'KPI_TOTAL_ADDED';
+var OLD_TOTAL_REJECTED_KEY = 'KPI_TOTAL_REJECTED';
 
 function incrementCounter_(key, by) {
   var props = PropertiesService.getScriptProperties();
@@ -129,20 +140,29 @@ function getCounter_(key) {
 }
 
 /**
- * Rebuilds the KPI tab from current sheet state + the cumulative counters
- * above. Called automatically at the end of Refresh Now, Reject Selected
- * Lead(s), Remove Non-Profitable Leads, and Clear All Leads - never needs
- * to be run manually, but doing so is harmless.
+ * Rebuilds the KPI tab from live sheet state. Called automatically at the
+ * end of Refresh Now, Reject Selected Lead(s), Remove Non-Profitable
+ * Leads, and Clear All Leads - never needs to be run manually, but doing
+ * so is harmless.
  */
 function updateKpiTab_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var leadsSheet = ss.getSheetByName(SHEET_NAME);
   var currentlyKept = leadsSheet ? Math.max(0, leadsSheet.getLastRow() - 1) : 0;
 
-  var totalAdded = getCounter_(TOTAL_ADDED_KEY);
-  var totalRejected = getCounter_(TOTAL_REJECTED_KEY);
+  // Rejected = rows in the hidden rejected-URLs sheet (URL-deduped source
+  // of truth), NOT an incrementing counter.
+  var rejectedSheet = ss.getSheetByName(REJECTED_SHEET_NAME);
+  var totalRejected = rejectedSheet ? Math.max(0, rejectedSheet.getLastRow() - 1) : 0;
+
   var totalNonProfitRemoved = getCounter_(TOTAL_NONPROFIT_REMOVED_KEY);
   var totalRemoved = totalRejected + totalNonProfitRemoved;
+  var totalAdded = currentlyKept + totalRemoved;
+
+  // clean up the legacy drift-prone counters so no one reads them again
+  var props = PropertiesService.getScriptProperties();
+  props.deleteProperty(OLD_TOTAL_ADDED_KEY);
+  props.deleteProperty(OLD_TOTAL_REJECTED_KEY);
 
   var kpiSheet = ss.getSheetByName(KPI_SHEET_NAME);
   if (!kpiSheet) {
@@ -153,7 +173,7 @@ function updateKpiTab_() {
   var rows = [
     ['Metric', 'Value'],
     ['Currently kept (in sheet now)', currentlyKept],
-    ['Total ever added', totalAdded],
+    ['Total ever added (kept + removed)', totalAdded],
     ['Total rejected (Reject Selected Lead(s))', totalRejected],
     ['Total removed (Remove Non-Profitable Leads)', totalNonProfitRemoved],
     ['Total removed (all reasons)', totalRemoved],
@@ -282,7 +302,7 @@ function rejectSelectedLeads() {
   if (response !== ui.Button.YES) return;
 
   addRejectedUrls_(urls);
-  incrementCounter_(TOTAL_REJECTED_KEY, rows.length);
+
 
   // delete bottom-up so row indices above don't shift as we go
   rows.sort(function (a, b) { return b - a; });
@@ -384,7 +404,7 @@ function refreshFlipScoutSheet() {
     '\nFeed generated: ' + feed.generated_at +
     '\n' + newLeads.length + ' new lead(s) added this check.');
 
-  incrementCounter_(TOTAL_ADDED_KEY, newLeads.length);
+
   updateKpiTab_();
 }
 
