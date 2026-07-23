@@ -625,5 +625,42 @@
     "url": "https://www.redfin.com/CA/Foster-City/815-Rigel-Ln-94404/home/1996224",
     "address": "815 Rigel Ln",
     "reason": "attached unit in Foster City Edgewater community (photo: shared-roofline townhouse) + Redfin Hot Home + estimate $1.079M ~ asking $1.098M - ARV gap is a comp-mix illusion"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T20:08:44.579772Z",
+    "new_listings_checked": 42,
+    "qualified": 4,
+    "excluded_total": 38,
+    "excluded_by_reason": {
+      "multi_unit": 6,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 26,
+      "stale_dom": 1,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T20:32:36.113298Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1614-Russell-St-94703/home/195848578",
+    "address": "1614 Russell St",
+    "reason": "5-unit property across three buildings - multi-unit filter gap ('5 units' missing), now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T20:32:36.113298Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2843-Buena-Knoll-Ct-95121/home/1324072",
+    "address": "2843 Buena Knoll Ct",
+    "reason": "'end-unit' attached townhome - hyphenated variant missed by 'end unit' flag, now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T20:32:36.113298Z",
+    "url": "https://www.redfin.com/CA/Oakland/1101-Mountain-Blvd-94611/home/1097396",
+    "address": "1101 Mountain Blvd",
+    "reason": "photo review: fully renovated turnkey storybook cottage (fresh paint, staged, manicured) + estimate 18% above asking = bid-up teaser; already-clean rule"
   }
 ]

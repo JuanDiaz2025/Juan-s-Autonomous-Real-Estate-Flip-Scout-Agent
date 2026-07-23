@@ -163,7 +163,9 @@ LAST_ANALYZED: List[Dict] = []
 LAST_ALL_URLS: List[str] = []
 
 MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamily',
-                     '2 units', '3 units', '4 units', 'two-unit', 'multi-unit',
+                     '2 units', '3 units', '4 units', '5 units', '6 units',
+                     '2-units', '3-units', '4-units', '5-units', '6-units',
+                     'units spread across', 'two-unit', 'multi-unit',
                      'tenancy in common', 'two-home', 'two separate residences',
                      'two full residences', 'both units',
                      # Caught during a manual renovation audit: "718 26th St"
@@ -181,7 +183,9 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
                      # buy-fixer-sell thesis anyway - same exclusion path as
                      # multi-unit.
                      'townhome', 'town home', 'townhouse', '(pud)', 'pud)',
-                     'walk-in unit', 'end unit', 'corner unit', 'hoa dues']
+                     'walk-in unit', 'end unit', 'corner unit', 'hoa dues',
+                     # hyphenated variants - 'end unit' missed "end-unit" live
+                     'walk-in-unit', 'end-unit', 'corner-unit']
 
 # Listing says the property currently has a tenant in place - excluded per
 # standing instruction. A tenant-occupied flip means eviction/buyout
