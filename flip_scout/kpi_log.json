@@ -319,5 +319,21 @@
     "url": "https://www.redfin.com/CA/El-Cerrito/1329-Everett-St-94530/home/1138945",
     "address": "1329 Everett St",
     "reason": "ARV contradicted by Redfin's own estimate ($885,333 vs modeled $1.457M); zip 94530 not in configured buy box, ARV used unbenchmarked fallback comp pool - fake deal"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T14:09:07.424843Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
   }
 ]
