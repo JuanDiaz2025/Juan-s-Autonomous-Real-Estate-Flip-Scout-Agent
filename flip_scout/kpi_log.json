@@ -678,5 +678,19 @@
       "stale_dom": 2,
       "below_profit_threshold": 3
     }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T21:55:11.122889Z",
+    "url": "https://www.redfin.com/CA/Oakland/8910-Burr-St-94605/home/1330333",
+    "address": "8910 Burr St",
+    "reason": "interior never photo-verified + polished marketing + estimate exactly at asking (no distress discount) - per standing rule, unverifiable-as-fixer means excluded"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T21:55:11.122889Z",
+    "url": "https://www.redfin.com/CA/San-Jose/1750-Hillmont-Ave-95127/home/749088",
+    "address": "1750 Hillmont Ave",
+    "reason": "photo verified AFTER being fed (process violation - was 'pending'): freshly renovated (new paint, garage door, landscaping) - already-clean rule"
   }
 ]
