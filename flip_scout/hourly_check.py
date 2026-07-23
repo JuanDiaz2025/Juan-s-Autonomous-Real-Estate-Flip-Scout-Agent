@@ -124,7 +124,7 @@ def main(now_iso, now_ts, parse_iso):
             excluded["data_incomplete"] += 1
             continue
         dom = l.get("days_on_market")
-        if dom is not None and dom > fsr.MAX_DAYS_ON_MARKET:
+        if dom is not None and dom >= fsr.MAX_DAYS_ON_MARKET:
             excluded["stale_dom"] += 1
             continue
         deal = fsr.calculate_deal(l)
@@ -176,8 +176,49 @@ def main(now_iso, now_ts, parse_iso):
             os.remove(os.path.join(HERE, "new_leads.json"))
         print("\nNo new leads cleared the filters this run.")
 
+    # every run, not just runs with new leads - leads age whether or not
+    # anything new qualified this hour
+    age_out_stale_feed_leads(now_iso, now_ts, parse_iso)
+
 
 FEED_PATH = os.path.join(HERE, "leads_for_sheets.json")
+
+
+def age_out_stale_feed_leads(now_iso, now_ts, parse_iso):
+    """Drop feed leads whose days-on-market has aged past the 45-day cutoff
+    SINCE they were added. Qualification only checks DOM once, on the day a
+    lead qualifies - but the listing keeps sitting on the market after that,
+    so a lead added at DOM 20 is at DOM 50+ a month later and violates the
+    standing under-45 rule. Estimated current DOM = dom_at_add (worst case 1
+    if unknown) + whole days elapsed since added_at. Conservative lower
+    bound - only drops leads that are provably past the cutoff."""
+    if not os.path.exists(FEED_PATH):
+        return
+    feed = json.load(open(FEED_PATH))
+    keep, dropped = [], []
+    for row in feed["leads"]:
+        added_at = row.get("added_at")
+        if not added_at:
+            keep.append(row)  # no timestamp - backfill handles these once
+            continue
+        days_in_feed = int((now_ts - parse_iso(added_at)) // 86400)
+        est_dom = (row.get("dom_at_add") or 1) + days_in_feed
+        if est_dom >= fsr.MAX_DAYS_ON_MARKET:
+            dropped.append((est_dom, row))
+        else:
+            keep.append(row)
+    if not dropped:
+        return
+    for est_dom, row in dropped:
+        kpi.log_manual_removal(
+            now_iso, row["url"], row["address"],
+            f"aged out: estimated {est_dom} days on market "
+            f"(dom {row.get('dom_at_add') or 1} at add + time in feed) - standing under-45 rule")
+    feed["leads"] = keep
+    feed["generated_at"] = now_iso
+    json.dump(feed, open(FEED_PATH, "w"), indent=2)
+    print(f"Aged out {len(dropped)} feed lead(s) past the {fsr.MAX_DAYS_ON_MARKET}-day cutoff "
+          f"- {len(keep)} remain")
 
 
 def merge_into_sheets_feed(new_qualified, now_iso):
@@ -201,6 +242,7 @@ def merge_into_sheets_feed(new_qualified, now_iso):
             continue
         feed["leads"].append({
             "score": d["score"], "recommendation": d["recommendation"],
+            "added_at": now_iso, "dom_at_add": d.get("days_on_market"),
             "address": d["address"], "city": d["city"], "zip": d["zip"],
             "beds": d["beds"], "baths": d["baths"], "sqft": d["sqft"],
             "lot_sqft": d.get("lot_sqft", 0), "year_built": d.get("year_built", ""),

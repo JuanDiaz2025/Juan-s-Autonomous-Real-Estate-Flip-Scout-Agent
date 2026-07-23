@@ -187,8 +187,12 @@ TENANT_OCCUPIED_FLAGS = [
 
 # Only include listings that are still fresh on market - a standing
 # instruction, not a risk-flag threshold like DAYS_ON_MARKET_STALE_THRESHOLD
-# below. Anything sitting longer than this is excluded outright, not just
-# flagged.
+# below. STRICTLY UNDER this many days (45+ is excluded, per Juan
+# 2026-07-23: "I only need 45 below, not +"), excluded outright, not just
+# flagged. Enforced both at qualification time and by the hourly aging
+# sweep in hourly_check.py (a lead that qualified fresh but then sat
+# unsold past the cutoff gets dropped too - DOM keeps counting after we
+# add a lead, so a one-time check at qualification isn't enough).
 MAX_DAYS_ON_MARKET = 45
 
 # Data-integrity floor, NOT the buy-box price floor (that one was
@@ -994,7 +998,7 @@ def run_redfin_scout() -> List[Dict]:
             excluded['data_incomplete'] += 1
             continue
         dom = l.get('days_on_market')
-        if dom is not None and dom > MAX_DAYS_ON_MARKET:
+        if dom is not None and dom >= MAX_DAYS_ON_MARKET:
             excluded['stale_dom'] += 1
             continue
         deal = calculate_deal(l)
