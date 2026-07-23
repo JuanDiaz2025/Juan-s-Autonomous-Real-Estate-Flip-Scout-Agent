@@ -335,5 +335,152 @@
       "stale_dom": 0,
       "below_profit_threshold": 1
     }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/6163-Girvin-Dr-94611/home/1981897",
+    "address": "6163 Girvin Dr",
+    "reason": "stale-DOM purge: recorded 65 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/533-31st-St-94609/home/569809",
+    "address": "533 31st St",
+    "reason": "stale-DOM purge: recorded 65 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Pacifica/189-Kent-Rd-94044/home/1086239",
+    "address": "189 Kent Rd",
+    "reason": "stale-DOM purge: recorded 561 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/3226-Champion-St-94602/home/1986790",
+    "address": "3226 Champion St",
+    "reason": "stale-DOM purge: recorded 139 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1000-Crescent-Ave-94110/home/768120",
+    "address": "1000 Crescent Ave",
+    "reason": "stale-DOM purge: recorded 120 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/1134-Chatham-Rd-94610/home/1576365",
+    "address": "1134 Chatham Rd",
+    "reason": "stale-DOM purge: recorded 82 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/3422-Kansas-St-94602/home/1543322",
+    "address": "3422 Kansas St",
+    "reason": "stale-DOM purge: recorded 122 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Woodside/155-Native-Sons-Rd-94062/home/1361857",
+    "address": "155 Native Sons Rd",
+    "reason": "stale-DOM purge: recorded 127 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1-McCarthy-Ave-94134/home/2001460",
+    "address": "1 Mccarthy Ave",
+    "reason": "stale-DOM purge: recorded 129 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1231-Silver-Ave-94134/home/1981453",
+    "address": "1231 Silver Ave",
+    "reason": "stale-DOM purge: recorded 138 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/La-Honda/8946-Alpine-Rd-94020/home/1390186",
+    "address": "8946 Alpine Rd",
+    "reason": "stale-DOM purge: recorded 50 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/6437-Telegraph-Ave-94609/home/1641411",
+    "address": "6437 Telegraph Ave",
+    "reason": "stale-DOM purge: recorded 78 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/685-Capp-St-94110/home/18471591",
+    "address": "685 Capp St",
+    "reason": "stale-DOM purge: recorded 72 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Jose/6034-Admiralty-Pl-95123/home/1092899",
+    "address": "6034 Admiralty Pl",
+    "reason": "stale-DOM purge: recorded 72 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/420-Harkness-Ave-94134/home/1807740",
+    "address": "420 Harkness Ave",
+    "reason": "stale-DOM purge: recorded 79 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/2735-Truman-Ave-94605/home/1457182",
+    "address": "2735 Truman",
+    "reason": "stale-DOM purge: recorded 124 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Richmond/5601-Doremus-Ave-94805/home/1634138",
+    "address": "5601 Doremus Ave",
+    "reason": "stale-DOM purge: recorded 87 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Jose/521-Santa-Ana-Ave-95112/home/857175",
+    "address": "521 Santa Ana Ave",
+    "reason": "stale-DOM purge: recorded 75 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/9850-Elmar-Ave-94603/home/1607506",
+    "address": "9850 Elmar Ave",
+    "reason": "stale-DOM purge: recorded 557 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Jose/14-Silver-Elm-CT-95127/home/201702251",
+    "address": "14 Silver Elm Ct",
+    "reason": "stale-DOM purge: recorded 74 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/209-Dabner-St-94577/home/1653093",
+    "address": "209 Dabner St",
+    "reason": "stale-DOM purge: recorded 123 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
   }
 ]
