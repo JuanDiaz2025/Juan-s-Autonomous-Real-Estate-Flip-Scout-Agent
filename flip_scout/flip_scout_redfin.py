@@ -218,6 +218,7 @@ ALREADY_RENOVATED_FLAGS = [
     'newer kitchen', 'newly rebuilt', 'complete rebuild', 'tastefully modernized',
     'freshly updated', 'meticulously updated', 'have been updated',
     'beautifully upgraded', 'extensive upgrades', 'extensive interior upgrades',
+    'extensively remodeled', 'updated eat-in kitchen', 'newer cabinets',
 ]
 # Deliberately NOT included: "refreshed" alone - sellers routinely do light
 # cosmetic staging (paint, cleaning) before listing a genuine fixer, and that

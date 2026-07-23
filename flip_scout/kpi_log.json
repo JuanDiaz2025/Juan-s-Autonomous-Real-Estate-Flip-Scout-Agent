@@ -498,5 +498,42 @@
       "stale_dom": 0,
       "below_profit_threshold": 0
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T15:26:56.206096Z",
+    "new_listings_checked": 61,
+    "qualified": 5,
+    "excluded_total": 56,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 12,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 26,
+      "stale_dom": 0,
+      "below_profit_threshold": 17
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:48:14.695833Z",
+    "url": "https://www.redfin.com/CA/Oakland/1265-Holman-Rd-94610/home/1483100",
+    "address": "1265 Holman Rd",
+    "reason": "Redfin 'Hot Home' badge + already-clean interior (updated eat-in kitchen, newer cabinets, quartz) per standing hot/clean exclusion rule; also listed ~$450k under Redfin's own $1.74M estimate - list-low bid strategy, profit at list price not achievable"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:48:14.695833Z",
+    "url": "https://www.redfin.com/CA/Oakland/5656-Buena-Vista-Ave-94618/home/836441",
+    "address": "5656 Buena Vista Ave",
+    "reason": "finished luxury home ('meticulous engineering, refined finishes'), not a fixer; Redfin estimate $1.60M vs $1.495M asking leaves no flip margin"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:48:14.695833Z",
+    "url": "https://www.redfin.com/CA/Emeryville/815-45th-St-94608/home/727633",
+    "address": "815 45th St",
+    "reason": "'extensively remodeled in 2012' (renovated-filter gap, now patched); Redfin estimate $1.049M vs modeled $1.205M ARV collapses profit to ~breakeven"
   }
 ]
