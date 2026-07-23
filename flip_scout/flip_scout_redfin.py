@@ -296,9 +296,17 @@ def _save_region_id(zip_code: str, region_id: int) -> None:
 
 
 def _harvest_region_id(zip_code: str, html: str) -> None:
-    m = re.search(r'region_id=(\d+)&(?:amp;)?region_type=2', html)
-    if m:
-        _save_region_id(zip_code, int(m.group(1)))
+    # Search pages contain multiple region_id-shaped params; some links embed
+    # the LITERAL ZIP as the region_id value, which is NOT the internal id
+    # (confirmed live: harvesting that made the stingray API return the same
+    # wrong region's listings for every zip). A real internal region id never
+    # equals the zip itself - skip any candidate that does, and take the
+    # first one that doesn't.
+    for m in re.finditer(r'region_id=(\d+)&(?:amp;)?region_type=2', html):
+        rid = int(m.group(1))
+        if rid != int(zip_code):
+            _save_region_id(zip_code, rid)
+            return
 
 
 def search_redfin_stingray(zip_code: str, max_price: int = CONFIG["max_price"]) -> Optional[List[Dict]]:
