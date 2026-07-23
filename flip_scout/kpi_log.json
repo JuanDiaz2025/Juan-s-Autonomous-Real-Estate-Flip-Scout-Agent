@@ -692,5 +692,42 @@
     "url": "https://www.redfin.com/CA/San-Jose/1750-Hillmont-Ave-95127/home/749088",
     "address": "1750 Hillmont Ave",
     "reason": "photo verified AFTER being fed (process violation - was 'pending'): freshly renovated (new paint, garage door, landscaping) - already-clean rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T22:08:43.083447Z",
+    "new_listings_checked": 87,
+    "qualified": 3,
+    "excluded_total": 84,
+    "excluded_by_reason": {
+      "multi_unit": 23,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 49,
+      "stale_dom": 3,
+      "below_profit_threshold": 5
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T22:33:46.557535Z",
+    "url": "https://www.redfin.com/CA/South-San-Francisco/3731-Fairfax-Way-94080/home/2030203",
+    "address": "3731 Fairfax Way",
+    "reason": "photo review: attached row townhouse (shared-wall units visible) despite 'fixer-upper' text - SFH comps invalid on attached product"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T22:33:46.557535Z",
+    "url": "https://www.redfin.com/CA/Foster-City/816-Balboa-Ln-94404/home/1627831",
+    "address": "816 Balboa Ln",
+    "reason": "description says 'Foster City condo' - 'condo' added to exclusion flags"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T22:33:46.557535Z",
+    "url": "https://www.redfin.com/CA/Daly-City/725-Clarinada-Ave-94015/home/578053",
+    "address": "725 Clarinada Ave",
+    "reason": "photo review: fully renovated (new paint/garage/staging) + Redfin Hot Home badge - already-clean rule"
   }
 ]

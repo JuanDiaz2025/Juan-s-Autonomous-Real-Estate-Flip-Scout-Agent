@@ -185,7 +185,9 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
                      'townhome', 'town home', 'townhouse', '(pud)', 'pud)',
                      'walk-in unit', 'end unit', 'corner unit', 'hoa dues',
                      # hyphenated variants - 'end unit' missed "end-unit" live
-                     'walk-in-unit', 'end-unit', 'corner-unit']
+                     'walk-in-unit', 'end-unit', 'corner-unit',
+                     # 'condo' slipped through via a no-unit-number Foster City listing
+                     'condo', 'condominium']
 
 # Listing says the property currently has a tenant in place - excluded per
 # standing instruction. A tenant-occupied flip means eviction/buyout
