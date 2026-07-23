@@ -574,5 +574,56 @@
       "stale_dom": 0,
       "below_profit_threshold": 2
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T19:08:22.489497Z",
+    "new_listings_checked": 75,
+    "qualified": 7,
+    "excluded_total": 68,
+    "excluded_by_reason": {
+      "multi_unit": 11,
+      "already_renovated": 9,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 41,
+      "stale_dom": 2,
+      "below_profit_threshold": 5
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Sunnyvale/351-Santa-Diana-Ter-94085/home/95957064",
+    "address": "351 Santa Diana Ter",
+    "reason": "2016 townhome (PUD) - attached product mis-valued by detached-SFH comps; townhome filter gap now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Sunnyvale/390-Camarillo-Ter-94085/home/174686360",
+    "address": "390 Camarillo Ter",
+    "reason": "2021 townhome with builder upgrades - new + attached, not a fixer; filter gap now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Foster-City/601-Portofino-Ln-94404/home/1030315",
+    "address": "601 Portofino Ln",
+    "reason": "'walk-in unit' in Foster City Islands community - attached unit, not detached SFH"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Foster-City/801-Norma-Ln-94404/home/1858720",
+    "address": "801 Norma Ln",
+    "reason": "listing opens 'Renovated, European-style home' - already renovated"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:31:16.013742Z",
+    "url": "https://www.redfin.com/CA/Foster-City/815-Rigel-Ln-94404/home/1996224",
+    "address": "815 Rigel Ln",
+    "reason": "attached unit in Foster City Edgewater community (photo: shared-roofline townhouse) + Redfin Hot Home + estimate $1.079M ~ asking $1.098M - ARV gap is a comp-mix illusion"
   }
 ]
