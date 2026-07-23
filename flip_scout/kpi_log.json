@@ -662,5 +662,21 @@
     "url": "https://www.redfin.com/CA/Oakland/1101-Mountain-Blvd-94611/home/1097396",
     "address": "1101 Mountain Blvd",
     "reason": "photo review: fully renovated turnkey storybook cottage (fresh paint, staged, manicured) + estimate 18% above asking = bid-up teaser; already-clean rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T21:08:00.115249Z",
+    "new_listings_checked": 76,
+    "qualified": 0,
+    "excluded_total": 76,
+    "excluded_by_reason": {
+      "multi_unit": 21,
+      "already_renovated": 7,
+      "vacant_land": 0,
+      "tenant_occupied": 1,
+      "data_incomplete": 42,
+      "stale_dom": 2,
+      "below_profit_threshold": 3
+    }
   }
 ]
