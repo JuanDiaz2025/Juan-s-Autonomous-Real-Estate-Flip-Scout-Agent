@@ -729,5 +729,299 @@
     "url": "https://www.redfin.com/CA/Daly-City/725-Clarinada-Ave-94015/home/578053",
     "address": "725 Clarinada Ave",
     "reason": "photo review: fully renovated (new paint/garage/staging) + Redfin Hot Home badge - already-clean rule"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/El-Cerrito/2328-Carquinez-Ave-94530/home/1136328",
+    "address": "2328 Carquinez Ave",
+    "reason": "photo audit: fully remodeled flip-finish (fresh paint, new windows/landscaping/garage)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/17208-President-Dr-94546/home/22646842",
+    "address": "17208 President Dr",
+    "reason": "photo audit: staged designer deck, fresh paint, renovated"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94609/home/1842788",
+    "address": "Undisclosed address",
+    "reason": "photo audit: address withheld, cannot photo-verify the specific property"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/2182-40th-Ave-94116/home/1996640",
+    "address": "2182 40th Ave",
+    "reason": "photo audit: flip-finished exterior (fresh two-tone paint, modern glass garage door)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/755-Folger-Ave-94710/home/40133570",
+    "address": "755 Folger Ave",
+    "reason": "photo audit: modern corrugated loft-style building, finished, not a fixer"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/8440-Skyline-Blvd-94611/home/1590413",
+    "address": "8440 Skyline Blvd",
+    "reason": "photo audit: staged deck/furniture, polished presentation, no visible distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Piedmont/617-Boulevard-Way-94610/home/1494784",
+    "address": "617 Boulevard Way",
+    "reason": "photo audit: large maintained traditional, manicured, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1658-34th-Ave-94122/home/923799",
+    "address": "1658 34th Ave",
+    "reason": "photo audit: freshly painted, newer garage door, updated exterior"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Piedmont/1001-Park-Ln-94610/home/1476106",
+    "address": "1001 Park Ln",
+    "reason": "photo audit: large maintained traditional, manicured, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/1834-Macduee-Way-95121/home/968946",
+    "address": "1834 Macduee Way",
+    "reason": "photo audit: immaculate hedges/turf, well-maintained, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/1282-Chapel-Ave-94579/home/715710",
+    "address": "1282 Chapel Ave",
+    "reason": "photo audit: twilight pro shoot, tidy/maintained, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1701-Derby-St-94703/home/1098457",
+    "address": "1701 Derby St",
+    "reason": "photo audit: tidy maintained bungalow, branded marketing, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/3631-Victor-Ave-94619/home/1699437",
+    "address": "3631 Victor Ave",
+    "reason": "photo audit: twilight-staged Tudor, lush/immaculate, nice house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Daly-City/91-W-Cavour-St-94014/home/1492017",
+    "address": "91 W Cavour St",
+    "reason": "photo audit: no photos extractable, cannot verify condition (tightened rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1431-Catherine-Dr-94702/home/686063",
+    "address": "1431 Catherine Dr",
+    "reason": "photo audit: newer paint, tidy, no visible distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/1849-Brentwood-Rd-94602/home/1716207",
+    "address": "1849 Brentwood Rd",
+    "reason": "photo audit: listing photo is an artist RENDERING, not a real photo; condition unverifiable = out per rule"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/2628-Yorba-St-94116/home/1652786",
+    "address": "2628 Yorba St",
+    "reason": "photo audit: fully staged remodeled interior, designer staging"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/89-Farallones-St-94112/home/1346223",
+    "address": "89 Farallones St",
+    "reason": "photo audit: freshly repainted exterior + new garage door, no visible distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2400-Plateau-Dr-95125/home/167457591",
+    "address": "2400 Plateau Dr",
+    "reason": "photo audit: modern 3-story attached townhome row"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Millbrae/215-Beverly-Ave-94030/home/1441973",
+    "address": "215 Beverly Ave",
+    "reason": "photo audit: full flip-finish (white/black, teal door, new landscaping/garage)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/Undisclosed-address-94578/home/1500930",
+    "address": "Undisclosed address",
+    "reason": "photo audit: address withheld, cannot photo-verify the specific property"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94605/home/1881009",
+    "address": "Undisclosed address",
+    "reason": "photo audit: address withheld, cannot photo-verify the specific property"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/132-Rishell-Dr-94619/home/565941",
+    "address": "132 Rishell Dr",
+    "reason": "photo audit: maintained mid-century, manicured flowers, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1349-Hearst-Ave-94702/home/1199413",
+    "address": "1349 Hearst Ave",
+    "reason": "photo audit: digitally-altered twilight staging, fresh paint, staged porch"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Emeryville/3326-Chestnut-St-94608/home/525162",
+    "address": "3326 Chestnut St",
+    "reason": "photo audit: photo shows finished designer home (new roof/landscaping); possibly mismatched photo, unverifiable = out"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/42-Seminole-Ave-94112/home/1195396",
+    "address": "42 Seminole Ave",
+    "reason": "photo audit: freshly painted, twilight staged, refreshed presentation"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/3300-Wilson-Pl-94602/home/528538",
+    "address": "3300 Wilson Pl",
+    "reason": "photo audit: maintained charming craftsman, tidy landscaping, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Alameda/1112-San-Antonio-Ave-94501/home/713823",
+    "address": "1112 San Antonio Ave",
+    "reason": "photo audit: tidy maintained ranch, newer garage door, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/East-Palo-Alto/439-Wisteria-Dr-94303/home/1882414",
+    "address": "439 Wisteria Dr",
+    "reason": "photo audit: maintained ranch, manicured hedges, newer garage, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/187-Elsie-St-94110/home/1167158",
+    "address": "187 Elsie St",
+    "reason": "photo audit: restored ornate Victorian, good condition, nice house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/South-San-Francisco/813-Larch-Ave-94080/home/1356930",
+    "address": "813 Larch Ave",
+    "reason": "photo audit: fresh paint, new mulch/flower landscaping, flip-finished"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/6032-Salida-del-Sol-95123/home/989066",
+    "address": "6032 Salida Del Sol",
+    "reason": "photo audit: digitally altered, fresh paint, new stone veneer, manicured"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/221-Beegum-Way-95123/home/1611289",
+    "address": "221 Beegum Way",
+    "reason": "photo audit: freshly painted, staged patio, tidy, nice house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2258-Golden-Crest-Cmns-95125/home/167457401",
+    "address": "2258 Golden Crest Cmn",
+    "reason": "photo audit: \"Cmn\"=common (attached) + staged clean updated interior"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-A/home/200411608",
+    "address": "Plan A Plan",
+    "reason": "photo audit: new-construction model plan, not a real distressed house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/2062-Evergreen-Ave-94577/home/1779704",
+    "address": "2062 Evergreen Ave",
+    "reason": "photo audit: digitally altered, fresh paint, stamped concrete, fountain, manicured"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2710-Gay-Ave-95127/home/203166381",
+    "address": "2710 Gay Ave",
+    "reason": "photo audit: \"Artistic Rendering, does not depict actual property\" - unverifiable"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-2276-Modeled/home/199087052",
+    "address": "Plan 2276 Modeled Plan",
+    "reason": "photo audit: new-construction model plan, not a real house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/277-Moraga-Way-95119/home/845031",
+    "address": "277 Moraga Way",
+    "reason": "photo audit: maintained 70s two-story, manicured hedges, tidy, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/3500-Seminary-Ave-94605/home/2025775",
+    "address": "3500 Seminary Ave",
+    "reason": "photo audit: twilight shoot, manicured topiary, gated, well-maintained large home"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/6105-Oakdale-Ave-94605/home/22683679",
+    "address": "6105 Oakdale Ave",
+    "reason": "photo audit: freshly finished 3-story, new paint + red-mulch landscaping, flipped"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/741-Apgar-St-94609/home/174710321",
+    "address": "741 Apgar St",
+    "reason": "photo audit: freshly painted green bungalow, manicured lawn, tidy, nice house"
   }
 ]
