@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-23T21:55:11.122889Z",
+  "generated_at": "2026-07-23T22:13:45.474036Z",
   "leads": [
     {
       "score": 10,
@@ -584,7 +584,7 @@
       "min_profit_threshold": 100000,
       "meets_threshold_heavy": true,
       "recommended_max_offer": 911000.0,
-      "risks": "None",
+      "risks": "VERIFIED 7/23: photo-confirmed genuine fixer, asking $94k under Redfin's $844k as-is estimate - real deal. BUT zip 94303 is outside the buy box so the $1.233M ARV used a fallback comp pool and is overstated; realistic EPA ARV ~$1.0-1.1M -> realistic light-rehab profit ~$130k-$230k, not $366k",
       "url": "https://www.redfin.com/CA/East-Palo-Alto/2338-Dumbarton-Ave-94303/home/1232358",
       "added_at": "2026-07-18T19:20:24+00:00",
       "dom_at_add": null
