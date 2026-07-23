@@ -271,6 +271,102 @@ def _fetch_redfin_page(url: str, retries: int = 2, delay: float = 1.5) -> Option
     return None
 
 
+# zip -> Redfin internal region_id, harvested opportunistically from every
+# successful HTML search fetch and persisted, so the stingray-API fallback
+# below can cover a zip even while its HTML page route is being 403-blocked.
+REGION_ID_CACHE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "zip_region_ids.json")
+
+
+def _load_region_ids() -> Dict[str, int]:
+    if os.path.exists(REGION_ID_CACHE_PATH):
+        return json.load(open(REGION_ID_CACHE_PATH))
+    return {}
+
+
+def _save_region_id(zip_code: str, region_id: int) -> None:
+    ids = _load_region_ids()
+    if ids.get(zip_code) != region_id:
+        ids[zip_code] = region_id
+        json.dump(ids, open(REGION_ID_CACHE_PATH, "w"), indent=2, sort_keys=True)
+
+
+def _harvest_region_id(zip_code: str, html: str) -> None:
+    m = re.search(r'region_id=(\d+)&(?:amp;)?region_type=2', html)
+    if m:
+        _save_region_id(zip_code, int(m.group(1)))
+
+
+def search_redfin_stingray(zip_code: str, max_price: int = CONFIG["max_price"]) -> Optional[List[Dict]]:
+    """
+    Fallback search via Redfin's internal stingray GIS API (JSON). Confirmed
+    live (2026-07-23): while CloudFront was 403-blocking the HTML search
+    pages, this endpoint still answered 200 with full listing data - the
+    block applies per-route, not per-site. Needs the zip's internal
+    region_id, which _harvest_region_id() collects from successful HTML
+    fetches. Returns None (not []) when the zip's region_id is unknown or
+    the API call fails, so callers can tell "fallback unavailable" apart
+    from "zip genuinely has zero listings".
+    """
+    region_id = _load_region_ids().get(zip_code)
+    if not region_id:
+        return None
+
+    url = (f"https://www.redfin.com/stingray/api/gis?al=1&region_id={region_id}"
+           f"&region_type=2&status=9&uipt=1&num_homes=350&max_price={max_price}&v=8")
+    try:
+        r = requests.get(url, headers=HEADERS, timeout=20)
+        if r.status_code != 200:
+            return None
+        text = r.text[4:] if r.text.startswith("{}&&") else r.text
+        homes = json.loads(text).get("payload", {}).get("homes", [])
+    except Exception:
+        return None
+
+    listings = []
+    for h in homes:
+        href = h.get("url") or ""
+        street = (h.get("streetLine") or {}).get("value") or ""
+        price = (h.get("price") or {}).get("value") or 0
+        sqft = (h.get("sqFt") or {}).get("value") or 0
+        beds = h.get("beds") or 0
+        baths = h.get("baths") or 0
+        if not (href and street and price):
+            continue
+        # same unit/multi-address exclusions as the HTML path
+        if "#" in street or "/unit-" in href.lower():
+            continue
+        if re.match(r"^\d+-\d+\s", street) or re.search(r"/\d+-\d+-", href):
+            continue
+        real_zip = h.get("zip") or zip_code
+        url_zip_match = re.search(r"-(\d{5})/home/\d+", href)
+        if url_zip_match:
+            real_zip = url_zip_match.group(1)
+        listing = {
+            "address": street,
+            "city": h.get("city") or "",
+            "zip": real_zip,
+            "price": int(price),
+            "beds": float(beds),
+            "baths": float(baths),
+            "sqft": int(sqft),
+            "lot_sqft": 0,
+            "year_built": 0,
+            "property_type": "Single Family",
+            "description": "",
+            "url": f"https://www.redfin.com{href}",
+            "status": "Active",
+            "is_multi_unit": False,
+            "is_already_renovated": False,
+            "is_vacant_land": False,
+        }
+        if (SANITY_MIN_PRICE <= listing["price"] <= max_price
+                and listing["price"] >= CONFIG["min_price"]
+                and listing["sqft"] > 0 and listing["beds"] > 0):
+            listings.append(listing)
+    return listings
+
+
 def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[Dict]:
     """
     Search Redfin's current markup for single-family homes in a ZIP code.
@@ -279,6 +375,11 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
     one page (confirmed live: 94605 had 41 on page 1 and 29 more on page 2,
     zero overlap between them - page 1 alone was missing 41% of that zip's
     actual inventory).
+
+    If the HTML page route is blocked (rate-limiting), falls back to the
+    stingray JSON API for this zip (see search_redfin_stingray) before
+    giving up - per standing instruction, a block means "try another way",
+    not "skip the zip this hour".
     """
     listings = []
     seen_hrefs = set()
@@ -290,8 +391,16 @@ def search_redfin(zip_code: str, max_price: int = CONFIG["max_price"]) -> List[D
         text = _fetch_redfin_page(url)
         if text is None:
             if page == 1:
-                print(f"  ⚠️ Error fetching ZIP {zip_code}: no usable response after retries")
+                fallback = search_redfin_stingray(zip_code, max_price)
+                if fallback is not None:
+                    print(f"  ZIP {zip_code}: HTML route blocked - used stingray API fallback "
+                          f"({len(fallback)} listings)")
+                    return fallback
+                print(f"  ⚠️ Error fetching ZIP {zip_code}: no usable response after retries "
+                      f"(no region_id cached yet for API fallback)")
             break
+        if page == 1:
+            _harvest_region_id(zip_code, text)
 
         soup = BeautifulSoup(text, 'html.parser')
         cards = soup.find_all('div', {'class': re.compile(r'HomeCardContainer')})
