@@ -142,8 +142,17 @@ def main(now_iso, now_ts, parse_iso):
     qualified.sort(key=lambda x: (x["score"], x["deal"]["gross_profit_heavy"]), reverse=True)
 
     # mark everything we saw this run (qualified or not) so it's never
-    # re-flagged as "new" again
-    save_seen(seen | all_current_urls)
+    # re-flagged as "new" again - EXCEPT listings whose enrichment came back
+    # empty (is_data_incomplete = no description AND no year built). A
+    # rate-limited/blocked detail fetch is indistinguishable from a genuinely
+    # blank listing, so marking those as seen would silently drop a real
+    # lead forever just because Redfin 403'd one request. Leave them unseen
+    # so the next hourly run re-fetches and re-scores them.
+    failed_enrichment = {l["url"] for l in new_listings if l.get("is_data_incomplete")}
+    save_seen((seen | all_current_urls) - failed_enrichment)
+    if failed_enrichment:
+        print(f"{len(failed_enrichment)} listing(s) had empty enrichment "
+              f"(likely rate-limited detail fetch) - left unseen for retry next run")
 
     total_excluded = sum(excluded.values())
     kpi.log_run(now_iso, {
