@@ -167,6 +167,29 @@ limit), with a one-time automatic migration of anything already saved
 under the old Script Property key. After re-pasting the updated script,
 any batch of rejects — no matter how large — persists correctly.
 
+## 6b. Photo review — mandatory before any new lead is processed (standing rule)
+
+Per Juan's instruction (2026-07-23): every new qualified lead gets a VISUAL
+photo review before it reaches the sheet feed or a notification — keyword
+filters alone repeatedly missed finished homes ("updated eat-in kitchen"
+slipped past 'updated kitchen'; "Hot Home" badges aren't in descriptions).
+
+Procedure per new lead:
+1. `python3 flip_scout/fetch_photos.py <redfin_url> <scratch_dir> 6` —
+   downloads the subject listing's own photos (the script excludes the
+   "similar homes" carousel photos, which are other properties).
+2. Review each photo (homescout rubric): Keep = Yes only when the property
+   shows visible distress, dated finishes, deferred maintenance, vacancy,
+   or clear value-add potential. Keep = No when it looks renovated, staged-
+   clean, or luxury-finished — regardless of what the profit math says.
+   Also check the listing page for Redfin's "Hot Home" badge: hot + clean
+   = automatic No (bid-war teaser pricing makes list-price profit fake).
+3. "NO PHOTOS extractable" (exit code 2) is itself a signal — MLS-light /
+   auction / off-market listing. Keep only with an explicit caution note.
+4. Note: the environment's browser cannot reach Google Maps/Street View;
+   Redfin's own listing photos (fetched via the data channel) are the
+   visual source. A single stale low-res photo = treat like case 3.
+
 ## 7. Before actually making an offer on any lead
 
 This system is a **screen, not an appraisal**. Always, before writing an
