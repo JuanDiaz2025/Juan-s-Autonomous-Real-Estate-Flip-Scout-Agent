@@ -1122,5 +1122,28 @@
     "url": "https://www.redfin.com/CA/San-Francisco/2704-Pine-St-94115/home/187662302",
     "address": "2704 Pine St",
     "reason": "photo: beautifully staged move-in-ready Pac Heights Victorian (nice house) + outside buy box (94115) + fallback ARV, no Redfin estimate to verify - triple disqualified"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T04:08:45.243731Z",
+    "new_listings_checked": 87,
+    "qualified": 1,
+    "excluded_total": 86,
+    "excluded_by_reason": {
+      "multi_unit": 24,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 56,
+      "stale_dom": 1,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T04:25:48.818383Z",
+    "url": "https://www.redfin.com/CA/Oakland/9100-Thermal-St-94605/home/596855",
+    "address": "9100 Thermal St",
+    "reason": "$170k 'price' is an equity-loan/hard-money bait listing not a clean sale (desc: 'home with Equity for Loans, $600k equity, $34k back taxes'); photo shows large 3-story multi-car building inconsistent with listed 2bd/1222sqft - fictional $437k profit, disqualified"
   }
 ]
