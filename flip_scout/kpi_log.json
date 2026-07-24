@@ -1083,5 +1083,21 @@
     "url": "https://www.redfin.com/CA/Oakland/2808-Carmel-St-94602/home/1465377",
     "address": "2808 Carmel St",
     "reason": "photo: freshly painted flip, new landscaping; desc 'totally remodeled...all you have to do is move in' + Hot Home + estimate = asking (flags now patched)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T02:08:14.623864Z",
+    "new_listings_checked": 47,
+    "qualified": 1,
+    "excluded_total": 46,
+    "excluded_by_reason": {
+      "multi_unit": 10,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 31,
+      "stale_dom": 1,
+      "below_profit_threshold": 3
+    }
   }
 ]

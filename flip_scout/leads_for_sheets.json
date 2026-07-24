@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T01:28:27.191211Z",
+  "generated_at": "2026-07-24T02:08:14.623864Z",
   "leads": [
     {
       "score": 10,
@@ -588,6 +588,34 @@
       "url": "https://www.redfin.com/CA/Oakland/770-Walker-Ave-94610/home/1249273",
       "added_at": "2026-07-18T18:15:56+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-24T02:27:04.142367Z",
+      "dom_at_add": 1,
+      "address": "7526 Greenly Dr",
+      "city": "Oakland",
+      "zip": "94605",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 2168,
+      "lot_sqft": 5460,
+      "year_built": 1941,
+      "price": 600000,
+      "arv": 1116000.0,
+      "rehab_light": 152000,
+      "rehab_heavy": 314000,
+      "holding_costs": 18500.0,
+      "total_cost_light": 770500.0,
+      "total_cost_heavy": 932500.0,
+      "gross_profit_light": 345500.0,
+      "gross_profit_heavy": 183500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 681000.0,
+      "risks": "Photo-verified genuine fixer (dated siding, patchy yard, unstaged). Redfin estimate $602,647 ~ $600k asking - profit is renovation upside on a large 2,168 sqft home; verify rehab scope.",
+      "url": "https://www.redfin.com/CA/Oakland/7526-Greenly-Dr-94605/home/578823"
     },
     {
       "score": 10,
