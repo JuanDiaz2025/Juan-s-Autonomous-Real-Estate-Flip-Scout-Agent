@@ -1099,5 +1099,28 @@
       "stale_dom": 1,
       "below_profit_threshold": 3
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T03:08:38.402281Z",
+    "new_listings_checked": 83,
+    "qualified": 1,
+    "excluded_total": 82,
+    "excluded_by_reason": {
+      "multi_unit": 36,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 40,
+      "stale_dom": 4,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T03:28:07.006430Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/2704-Pine-St-94115/home/187662302",
+    "address": "2704 Pine St",
+    "reason": "photo: beautifully staged move-in-ready Pac Heights Victorian (nice house) + outside buy box (94115) + fallback ARV, no Redfin estimate to verify - triple disqualified"
   }
 ]
