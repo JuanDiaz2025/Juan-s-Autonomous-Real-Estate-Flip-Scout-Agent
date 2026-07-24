@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T00:27:08.333199Z",
+  "generated_at": "2026-07-24T01:28:27.191211Z",
   "leads": [
     {
       "score": 10,
@@ -1008,6 +1008,34 @@
       "url": "https://www.redfin.com/CA/San-Jose/3382-Mount-Madonna-Dr-95127/home/1254962",
       "added_at": "2026-07-18T19:20:24+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "added_at": "2026-07-24T01:28:27.191211Z",
+      "dom_at_add": 35,
+      "address": "3431 Helen St",
+      "city": "Emeryville",
+      "zip": "94608",
+      "beds": 4.0,
+      "baths": 2.0,
+      "sqft": 1440,
+      "lot_sqft": 6650,
+      "year_built": 1906,
+      "price": 800000,
+      "arv": 1062000.0,
+      "rehab_light": 101000,
+      "rehab_heavy": 209000,
+      "holding_costs": 24500.0,
+      "total_cost_light": 925500.0,
+      "total_cost_heavy": 1033500.0,
+      "gross_profit_light": 136500.0,
+      "gross_profit_heavy": 28500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 731000.0,
+      "risks": "Photo-verified genuine fixer (worn paint, security bars, yard debris). CAUTION: Redfin estimate $773,521 is BELOW $800k asking - model ARV $1.062M relies on renovated comps; verify ARV hard before offering. 'Developer's Special'.",
+      "url": "https://www.redfin.com/CA/Emeryville/3431-Helen-St-94608/home/1585390"
     },
     {
       "score": 5,

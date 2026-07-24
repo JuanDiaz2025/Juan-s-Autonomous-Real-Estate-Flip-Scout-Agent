@@ -1,0 +1,51 @@
+[
+  {
+    "address": "3431 Helen St",
+    "city": "Emeryville",
+    "zip": "94608",
+    "price": 800000,
+    "beds": 4.0,
+    "baths": 2.0,
+    "sqft": 1440,
+    "lot_sqft": 6650,
+    "year_built": 1906,
+    "property_type": "Single Family",
+    "description": "Developer's or Builder's Special! The lots are large and it is really close to shopping area, Property is located on the Oakland/Emeryville border ",
+    "url": "https://www.redfin.com/CA/Emeryville/3431-Helen-St-94608/home/1585390",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "days_on_market": 35,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 17,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 1062000.0,
+      "rehab_light": 101000,
+      "rehab_heavy": 209000,
+      "holding_costs": 24500.0,
+      "holding_breakdown": {
+        "financing": 20000.0,
+        "insurance": 1600.0,
+        "property_tax": 2500.0,
+        "utilities": 400,
+        "total": 24500.0
+      },
+      "total_cost_light": 925500.0,
+      "total_cost_heavy": 1033500.0,
+      "gross_profit_light": 136500.0,
+      "gross_profit_heavy": 28500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 731000.0
+    },
+    "score": 5,
+    "recommendation": "Marginal",
+    "risks": []
+  }
+]

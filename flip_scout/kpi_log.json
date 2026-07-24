@@ -1060,5 +1060,28 @@
     "url": "https://www.redfin.com/CA/San-Francisco/1478-21st-Ave-94122/home/912554",
     "address": "1478 21st Ave",
     "reason": "photo review: freshly painted clean white stucco, newer garage door, no visible distress - nice house, already-clean rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T01:08:13.478418Z",
+    "new_listings_checked": 76,
+    "qualified": 2,
+    "excluded_total": 74,
+    "excluded_by_reason": {
+      "multi_unit": 21,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 47,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T01:27:56.383288Z",
+    "url": "https://www.redfin.com/CA/Oakland/2808-Carmel-St-94602/home/1465377",
+    "address": "2808 Carmel St",
+    "reason": "photo: freshly painted flip, new landscaping; desc 'totally remodeled...all you have to do is move in' + Hot Home + estimate = asking (flags now patched)"
   }
 ]
