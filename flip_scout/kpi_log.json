@@ -1145,5 +1145,21 @@
     "url": "https://www.redfin.com/CA/Oakland/9100-Thermal-St-94605/home/596855",
     "address": "9100 Thermal St",
     "reason": "$170k 'price' is an equity-loan/hard-money bait listing not a clean sale (desc: 'home with Equity for Loans, $600k equity, $34k back taxes'); photo shows large 3-story multi-car building inconsistent with listed 2bd/1222sqft - fictional $437k profit, disqualified"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T05:08:07.040103Z",
+    "new_listings_checked": 84,
+    "qualified": 0,
+    "excluded_total": 84,
+    "excluded_by_reason": {
+      "multi_unit": 21,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 56,
+      "stale_dom": 4,
+      "below_profit_threshold": 0
+    }
   }
 ]
