@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T04:25:48.818383Z",
+  "generated_at": "2026-07-24T15:09:18.230976Z",
   "leads": [
     {
       "score": 10,
@@ -616,6 +616,34 @@
       "recommended_max_offer": 681000.0,
       "risks": "Photo-verified genuine fixer (dated siding, patchy yard, unstaged). Redfin estimate $602,647 ~ $600k asking - profit is renovation upside on a large 2,168 sqft home; verify rehab scope.",
       "url": "https://www.redfin.com/CA/Oakland/7526-Greenly-Dr-94605/home/578823"
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-24T15:27:27.675553Z",
+      "dom_at_add": 0,
+      "address": "1055 Cayuga Ave",
+      "city": "San Francisco",
+      "zip": "94112",
+      "beds": 2.0,
+      "baths": 1.5,
+      "sqft": 1265,
+      "lot_sqft": 2548,
+      "year_built": 1928,
+      "price": 859000,
+      "arv": 1247000.0,
+      "rehab_light": 89000,
+      "rehab_heavy": 183000,
+      "holding_costs": 26300.0,
+      "total_cost_light": 974300.0,
+      "total_cost_heavy": 1068300.0,
+      "gross_profit_light": 272700.0,
+      "gross_profit_heavy": 178700.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 935000.0,
+      "risks": "Photo-verified genuine dated fixer (Mission Terrace). CAUTION: carries Redfin 'Hot Home' badge - expect flipper competition/bidding; estimate $881,952 is ~$23k ABOVE $859k asking, so buy-price discipline is critical to protect the spread.",
+      "url": "https://www.redfin.com/CA/San-Francisco/1055-Cayuga-Ave-94112/home/1776175"
     },
     {
       "score": 10,
