@@ -1376,5 +1376,21 @@
     "url": "https://www.redfin.com/CA/San-Leandro/1686-Grand-Ave-94577/home/1082928",
     "address": "1686 Grand Ave",
     "reason": "listing describes a 'cute Guest House with additional 1BR/1BA' = ADU/second unit -> multi-unit income play, not SF fixer (guest-house flag now patched); also Back-on-Market + Hot Home"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T19:08:58.285008Z",
+    "new_listings_checked": 30,
+    "qualified": 0,
+    "excluded_total": 30,
+    "excluded_by_reason": {
+      "multi_unit": 13,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 1,
+      "data_incomplete": 13,
+      "stale_dom": 2,
+      "below_profit_threshold": 0
+    }
   }
 ]
