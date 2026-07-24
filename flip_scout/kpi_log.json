@@ -1392,5 +1392,28 @@
       "stale_dom": 2,
       "below_profit_threshold": 0
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T20:09:59.936928Z",
+    "new_listings_checked": 35,
+    "qualified": 1,
+    "excluded_total": 34,
+    "excluded_by_reason": {
+      "multi_unit": 14,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 19,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T20:31:49.908102Z",
+    "url": "https://www.redfin.com/CA/Daly-City/377-Hillside-Blvd-94014/home/1922946",
+    "address": "377 Hillside Blvd",
+    "reason": "photo: freshly painted move-in-ready home, new windows, manicured; desc 'gorgeously refinished hardwood floors, dual-pane windows, recessed lighting' + estimate=asking -> already updated, not a fixer (added 'refinished hardwood' flag)"
   }
 ]
