@@ -1023,5 +1023,42 @@
     "url": "https://www.redfin.com/CA/Oakland/741-Apgar-St-94609/home/174710321",
     "address": "741 Apgar St",
     "reason": "photo audit: freshly painted green bungalow, manicured lawn, tidy, nice house"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T00:08:28.297441Z",
+    "new_listings_checked": 126,
+    "qualified": 3,
+    "excluded_total": 123,
+    "excluded_by_reason": {
+      "multi_unit": 24,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 88,
+      "stale_dom": 3,
+      "below_profit_threshold": 4
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T00:27:08.333199Z",
+    "url": "https://www.redfin.com/CA/Berkeley/2840-Stanton-St-94702/home/1777786",
+    "address": "2840 Stanton St",
+    "reason": "'beautifully refreshed Craftsman' + Redfin Hot Home badge - renovated/nice, already-clean rule"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T00:27:08.333199Z",
+    "url": "https://www.redfin.com/CA/Oakland/753-Warfield-Ave-94610/home/1647859",
+    "address": "753 Warfield Ave",
+    "reason": "description says 'Updated multi unit' - both multi-unit (space-variant flag gap, now patched) and updated"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T00:28:32.393122Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1478-21st-Ave-94122/home/912554",
+    "address": "1478 21st Ave",
+    "reason": "photo review: freshly painted clean white stucco, newer garage door, no visible distress - nice house, already-clean rule"
   }
 ]

@@ -163,6 +163,7 @@ LAST_ANALYZED: List[Dict] = []
 LAST_ALL_URLS: List[str] = []
 
 MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamily',
+                     'multi unit', 'multi units', 'multiunit',
                      '2 units', '3 units', '4 units', '5 units', '6 units',
                      '2-units', '3-units', '4-units', '5-units', '6-units',
                      'units spread across', 'two-unit', 'multi-unit',
