@@ -1,0 +1,49 @@
+[
+  {
+    "address": "139 Longford Dr",
+    "city": "South San Francisco",
+    "zip": "94080",
+    "price": 1400000,
+    "beds": 4.0,
+    "baths": 2.0,
+    "sqft": 2500,
+    "lot_sqft": 5000,
+    "year_built": 1952,
+    "property_type": "Single Family",
+    "description": "Enjoy hilltop living with gorgeous views in South San Francisco! Built in 1952, this 3-bedroom property features a newly installed roof (2025), new gutters, and double-pane windows. Parquet hardwood floors grace the living and dining areas. The main level offers white appliances, Formica countertops, and abundant storage. Outside, relax in a large yard, perfect for outdoor living. Includes a 1-car attached garage, a second bath with a walk-in shower, wall furnace heating, and crawlspace storage. Set in a welcoming neighborhood with low $6/year HOA fees! ",
+    "url": "https://www.redfin.com/CA/South-San-Francisco/139-Longford-Dr-94080/home/1492667",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 4,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 1775000.0,
+      "rehab_light": 190000,
+      "rehab_heavy": 378000,
+      "holding_costs": 42600.0,
+      "holding_breakdown": {
+        "financing": 35000.0,
+        "insurance": 2800.0,
+        "property_tax": 4400.0,
+        "utilities": 400,
+        "total": 42600.0
+      },
+      "total_cost_light": 1632600.0,
+      "total_cost_heavy": 1820600.0,
+      "gross_profit_light": 142400.0,
+      "gross_profit_heavy": -45600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 1259000.0
+    },
+    "score": 5,
+    "recommendation": "Marginal",
+    "risks": []
+  }
+]
