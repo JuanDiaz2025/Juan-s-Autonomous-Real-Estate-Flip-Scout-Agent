@@ -75,6 +75,35 @@ leads per §5/§7 — a lead matching the historical loss profile is worth
 flagging even if it clears the model's dollar profit gate. This is
 reference context, not (yet) wired into the automated risk-flag logic.
 
+**Acquisition playbook (human-side, post-lead)**: `MLS_ACQUISITION_TRAINING.md`
+is Twin Home Buyer's canonical training for what happens AFTER a lead clears
+this pipeline — the end-to-end path from a spreadsheet row to a closed,
+profitable purchase. Core principle: the end result is not a full spreadsheet
+or a long report, it is *a profitable acquisition that closes* — every step is
+judged by "does this move us closer to closing?" Key points that bear directly
+on how this agent should behave:
+  - **Report patterns, don't just delete.** When leads keep getting removed
+    for the same reason (stale >150 days, outside area, already renovated,
+    unrealistic price), that's a signal to improve the search criteria and
+    flag it to Bryan — not to silently drop rows. This agent already does this
+    (KPI log + filter patches + notifications); keep doing it and surface
+    recurring patterns explicitly.
+  - **Equity ≠ profit.** Apparent spread (ARV − price) must still absorb
+    rehab, closing, commissions, financing, taxes, insurance, holding,
+    permits, surprises, and company profit before a deal is real. The model's
+    "gross profit" is a screen, never the decision.
+  - **The screen is step 1 of ~13.** After a lead surfaces: comp-analysis
+    across multiple AI tools → Paragon/MLS remarks (offer instructions,
+    court-confirmation, probate, tenant occupancy, as-is, multiple offers) →
+    ownership/liens via PropertyRadar → REI BlackBook profile → offer strategy
+    (terms often matter more than price: cash, as-is, fast/flex close,
+    rent-back) → credible-buyer agent contact → documented next action +
+    follow-up. This agent owns step 1 (sourcing + initial equity screen);
+    everything downstream is the human acquisition team's playbook.
+  - **Every surfaced lead should point toward a next action**, not just sit
+    on the sheet. The photo-verified keepers this agent sends already carry
+    caution notes and a "verify X before offering" — that's the right shape.
+
 ## 4. Reading the Risk column
 
 Only real, verified signals — nothing is fabricated:
@@ -230,6 +259,14 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Added `MLS_ACQUISITION_TRAINING.md` — Twin Home Buyer's canonical playbook
+  for the human acquisition process after a lead clears this pipeline
+  (comp-analysis → MLS/Paragon remarks → ownership/liens → REI BlackBook →
+  offer strategy → agent contact → follow-up to close). Referenced from §3.
+  Reinforces this agent's existing behavior: report recurring exclusion
+  patterns rather than silently deleting, treat model "profit" as a screen
+  (equity ≠ profit), and attach a concrete next-action/verify note to every
+  surfaced lead.
 - Fixed a real bug behind "rejected leads keep coming back": the
   rejected-URL blacklist was stored as one JSON blob in a single Script
   Property (hard ~9KB limit), which silently failed to persist once the
