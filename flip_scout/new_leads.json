@@ -1,0 +1,53 @@
+[
+  {
+    "address": "1430 Shafter Ave",
+    "city": "San Francisco",
+    "zip": "94124",
+    "price": 788000,
+    "beds": 4.0,
+    "baths": 2.0,
+    "sqft": 2240,
+    "lot_sqft": 2495,
+    "year_built": 1966,
+    "property_type": "Single Family",
+    "description": "Spacious mid-century home with a tunnel entrance providing access to both the main and lower levels. A formal entry leads to a light-filled living room with parquet hardwood floors, an open brick fireplace, and hillside views. The living room flows into the dining area, creating an inviting space for everyday living and entertaining. The main level offers three bedrooms, a full bath with a double-sink vanity, and a spacious eat-in kitchen with abundant cabinetry and counter space. The lower level features two additional bedrooms, a full bath, and a large family room with two French doors openi",
+    "url": "https://www.redfin.com/CA/San-Francisco/1430-Shafter-Ave-94124/home/1767859",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "days_on_market": 0,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 8,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 1250000.0,
+      "rehab_light": 157000,
+      "rehab_heavy": 325000,
+      "holding_costs": 24100.0,
+      "holding_breakdown": {
+        "financing": 19700.0,
+        "insurance": 1600.0,
+        "property_tax": 2500.0,
+        "utilities": 400,
+        "total": 24100.0
+      },
+      "total_cost_light": 969100.0,
+      "total_cost_heavy": 1137100.0,
+      "gross_profit_light": 280900.0,
+      "gross_profit_heavy": 112900.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 800000.0
+    },
+    "score": 7,
+    "recommendation": "Strong Deal",
+    "risks": [
+      "Small lot"
+    ]
+  }
+]

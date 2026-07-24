@@ -175,7 +175,7 @@ MULTI_UNIT_FLAGS = ['duplex', 'triplex', 'fourplex', 'multi-family', 'multifamil
                      # above matching - an ADU/JADU-equipped property is a
                      # multi-unit income play, not a single-family fixer.
                      'accessory dwelling unit', 'jadu', 'junior adu',
-                     'attached adu', 'three separate living spaces',
+                     'attached adu', 'three separate living spaces', 'guest house', 'guest cottage', 'in-law', 'second unit', 'second dwelling',
                      # Townhomes/PUDs slip through Redfin's "house" filter
                      # (confirmed live 2026-07-23: two brand-new Sunnyvale
                      # townhomes + a Foster City "walk-in unit" qualified with

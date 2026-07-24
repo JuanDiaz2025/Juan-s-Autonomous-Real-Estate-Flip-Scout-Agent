@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T15:09:18.230976Z",
+  "generated_at": "2026-07-24T18:27:49.145174Z",
   "leads": [
     {
       "score": 10,
@@ -784,6 +784,34 @@
       "url": "https://www.redfin.com/CA/Oakland/3508-Morcom-Ave-94619/home/1329932",
       "added_at": "2026-07-18T19:20:24+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 7,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-24T18:27:49.145174Z",
+      "dom_at_add": 0,
+      "address": "1430 Shafter Ave",
+      "city": "San Francisco",
+      "zip": "94124",
+      "beds": 4.0,
+      "baths": 2.0,
+      "sqft": 2240,
+      "lot_sqft": 2495,
+      "year_built": 1966,
+      "price": 788000,
+      "arv": 1250000.0,
+      "rehab_light": 157000,
+      "rehab_heavy": 325000,
+      "holding_costs": 24100.0,
+      "total_cost_light": 969100.0,
+      "total_cost_heavy": 1137100.0,
+      "gross_profit_light": 280900.0,
+      "gross_profit_heavy": 112900.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 800000.0,
+      "risks": "Small lot; Photo-verified genuine mid-century fixer (Bayview). CAUTION: Redfin Hot Home badge (expect competition) + estimate $801,476 ~$13k ABOVE $788k asking - hold buy discipline.",
+      "url": "https://www.redfin.com/CA/San-Francisco/1430-Shafter-Ave-94124/home/1767859"
     },
     {
       "score": 5,
