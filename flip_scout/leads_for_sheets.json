@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T20:31:49.908102Z",
+  "generated_at": "2026-07-24T21:27:02.196540Z",
   "leads": [
     {
       "score": 10,
@@ -56,6 +56,34 @@
       "url": "https://www.redfin.com/CA/San-Francisco/2816-23rd-St-94110/home/1939359",
       "added_at": "2026-07-17T21:13:28+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-24T21:27:02.196540Z",
+      "dom_at_add": 0,
+      "address": "814 Potrero Ave",
+      "city": "San Francisco",
+      "zip": "94110",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 1831,
+      "lot_sqft": 2395,
+      "year_built": 1884,
+      "price": 1195000,
+      "arv": 2156000.0,
+      "rehab_light": 128000,
+      "rehab_heavy": 265000,
+      "holding_costs": 36400.0,
+      "total_cost_light": 1359400.0,
+      "total_cost_heavy": 1496400.0,
+      "gross_profit_light": 796600.0,
+      "gross_profit_heavy": 659600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1738000.0,
+      "risks": "Small lot; Genuine value-add Mission Victorian (original plank floors, 'contemporary potential'); photo is VIRTUALLY STAGED so verify true interior in person. CAUTIONS: Hot Home (heavy Mission competition); Redfin estimate $1,276,454 is ~$81k ABOVE $1.195M asking = priced to bid up, hold discipline; aggressive ARV $2.156M (~$1,177/sqft) drives the $797k profit - MUST confirm with hand-picked renovated Mission comps before trusting.",
+      "url": "https://www.redfin.com/CA/San-Francisco/814-Potrero-Ave-94110/home/730455"
     },
     {
       "score": 10,

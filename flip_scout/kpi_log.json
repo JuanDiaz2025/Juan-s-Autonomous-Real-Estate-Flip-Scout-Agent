@@ -1415,5 +1415,21 @@
     "url": "https://www.redfin.com/CA/Daly-City/377-Hillside-Blvd-94014/home/1922946",
     "address": "377 Hillside Blvd",
     "reason": "photo: freshly painted move-in-ready home, new windows, manicured; desc 'gorgeously refinished hardwood floors, dual-pane windows, recessed lighting' + estimate=asking -> already updated, not a fixer (added 'refinished hardwood' flag)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T21:09:17.934793Z",
+    "new_listings_checked": 32,
+    "qualified": 1,
+    "excluded_total": 31,
+    "excluded_by_reason": {
+      "multi_unit": 8,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 18,
+      "stale_dom": 1,
+      "below_profit_threshold": 1
+    }
   }
 ]
