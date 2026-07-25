@@ -1530,5 +1530,21 @@
     "url": "https://www.redfin.com/CA/Oakland/2830-E-29th-St-94601/home/203275253",
     "address": "2830 E 29th St",
     "reason": "photo: freshly painted/tidy home (not distressed); estimate $497,714 ~ $495k asking (no equity cushion); thin 4/10 marginal - not a clear value-add fixer"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T02:08:35.994700Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
   }
 ]
