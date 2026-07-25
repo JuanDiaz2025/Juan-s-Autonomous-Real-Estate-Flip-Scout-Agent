@@ -1500,5 +1500,35 @@
       "stale_dom": 0,
       "below_profit_threshold": 0
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T01:08:24.368180Z",
+    "new_listings_checked": 17,
+    "qualified": 2,
+    "excluded_total": 15,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 12,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-25T01:28:36.370390Z",
+    "url": "https://www.redfin.com/CA/Half-Moon-Bay/220-Main-St-94019/home/21858029",
+    "address": "220 Main St",
+    "reason": "property type = Multi-Family (2-4 Unit) -> multi-unit exclusion (blank desc slipped past keyword filter; now caught by property-type check). ARV $2.75M fake - Redfin estimate $1.26M ~ asking; single-family comps applied to a multi-unit building"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-25T01:28:36.370390Z",
+    "url": "https://www.redfin.com/CA/Oakland/2830-E-29th-St-94601/home/203275253",
+    "address": "2830 E 29th St",
+    "reason": "photo: freshly painted/tidy home (not distressed); estimate $497,714 ~ $495k asking (no equity cushion); thin 4/10 marginal - not a clear value-add fixer"
   }
 ]

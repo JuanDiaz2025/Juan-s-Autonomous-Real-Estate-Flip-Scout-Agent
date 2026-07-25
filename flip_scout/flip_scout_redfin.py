@@ -575,9 +575,24 @@ def enrich_detail(listing: Dict) -> Dict:
         desc = desc.split('\\",')[0].split('","')[0]
 
         lower_text = (desc + ' ' + text[:20000]).lower()
+        # Redfin's own property-type/style field is authoritative and catches
+        # multi-unit buildings whose description is empty or generic, which the
+        # keyword scan alone misses (confirmed live: 220 Main St, Half Moon Bay
+        # had a blank description but Style="Multi-Family (2-4 Unit)" and a
+        # single-family ARV inflated it to a fake $1.2M profit). Read the
+        # Public Facts "Style" value and any "Multi-Family"/"2-4 Unit"/"Duplex"
+        # property-type marker directly.
+        style_m = re.search(r'Style</span><div class="table-value">([^<]+)', text)
+        style_val = (style_m.group(1) if style_m else '').lower()
+        is_multi_type = (
+            'multi' in style_val or 'multi-family' in lower_text
+            or bool(re.search(r'\b(?:2-4|two to four|multi[-\s]?family|multifamily)\b', style_val))
+            or bool(re.search(r'"propertyType\\?":\s*"?(?:multi|MULTIFAMILY|3)', text, re.I))
+        )
         listing['is_multi_unit'] = (
             any(flag in lower_text for flag in MULTI_UNIT_FLAGS)
             or bool(re.search(r'/\d+-\d+-', listing.get('url', '')))
+            or is_multi_type
         )
         # Checked against the listing's OWN description only (not the wider
         # page) to avoid false positives from unrelated nearby-homes copy.
