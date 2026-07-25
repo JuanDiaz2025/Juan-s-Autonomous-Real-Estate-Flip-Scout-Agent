@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T01:28:36.370390Z",
+  "generated_at": "2026-07-25T15:26:26+00:00",
   "leads": [
     {
       "score": 10,
@@ -1540,6 +1540,34 @@
       "url": "https://www.redfin.com/CA/Oakland/4105-Gregory-St-94619/home/1630979",
       "added_at": "2026-07-18T20:25:10+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "address": "460 5th Ave",
+      "city": "Redwood City",
+      "zip": "94063",
+      "beds": 3.0,
+      "baths": 1.0,
+      "sqft": 1000,
+      "lot_sqft": 5999,
+      "year_built": 1953,
+      "price": 899000,
+      "arv": 1348000.0,
+      "rehab_light": 70000,
+      "rehab_heavy": 145000,
+      "holding_costs": 27500.0,
+      "total_cost_light": 996500.0,
+      "total_cost_heavy": 1071500.0,
+      "gross_profit_light": 351500.0,
+      "gross_profit_heavy": 276500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1070000.0,
+      "risks": "Manual add (Redwood City 94063, outside standard buy box). Living area ~1,000 sqft estimated - confirm exact sqft. 1-bath; renovated comps are 2+ bath, adding a bath is part of value-add. 94063 spans mixed pockets - hand-pick comps at offer.",
+      "url": "https://www.redfin.com/CA/Redwood-City/460-5th-Ave-94063/home/1379270",
+      "added_at": "2026-07-25T15:26:26+00:00",
+      "dom_at_add": 0
     }
   ]
 }

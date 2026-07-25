@@ -584,10 +584,22 @@ def enrich_detail(listing: Dict) -> Dict:
         # property-type marker directly.
         style_m = re.search(r'Style</span><div class="table-value">([^<]+)', text)
         style_val = (style_m.group(1) if style_m else '').lower()
+        # The subject's own Public Facts "Style" is authoritative and singular.
+        # When it explicitly reads "Single Family Residential" the property is
+        # NOT multi-unit, no matter what stray markers appear elsewhere on the
+        # page (confirmed live: 460 5th Ave, Redwood City - a genuine SFR fixer
+        # wrongly flagged because a similar-homes carousel entry carried
+        # "propertyType":3). Redfin's numeric propertyType code is unreliable
+        # here: it appears for every carousel home too, and code 3 is actually
+        # Townhouse - so trust only the explicit "MULTIFAMILY" marker, and never
+        # over an authoritative single-family Style.
+        style_says_sfr = 'single family' in style_val
         is_multi_type = (
-            'multi' in style_val or 'multi-family' in lower_text
-            or bool(re.search(r'\b(?:2-4|two to four|multi[-\s]?family|multifamily)\b', style_val))
-            or bool(re.search(r'"propertyType\\?":\s*"?(?:multi|MULTIFAMILY|3)', text, re.I))
+            'multi' in style_val
+            or bool(re.search(r'\b(?:2-4|two to four|multi[-\s]?family|multifamily|duplex|triplex|fourplex)\b', style_val))
+            or 'multi-family' in desc.lower()
+            or (not style_says_sfr
+                and bool(re.search(r'"propertyType\\?":\s*"?MULTIFAMILY', text, re.I)))
         )
         listing['is_multi_unit'] = (
             any(flag in lower_text for flag in MULTI_UNIT_FLAGS)
