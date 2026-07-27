@@ -21,6 +21,24 @@ When reviewing a listing (a manual add, or a lead where photos are available):
   (unless Bryan explicitly asks — e.g. 445 Lawton St, added as a flagged
   multifamily exception), and **vacant land / entitlement** listings.
 
+## ARV methodology preference — 1-mile-radius comps (Bryan, 2026-07-27)
+
+Bryan wants the **After-Repair Value (ARV)** — "how much the property is worth
+after repair" — estimated from **comparable sold homes within a ~1-mile radius**
+of the subject (true nearby comps, ~4–8 recent sold, similar size/beds/baths),
+**not** the current zip-wide size-matched median $/sqft proxy.
+
+- **Current state:** `flip_scout_redfin.py` derives ARV from a zip-wide,
+  size-matched median $/sqft (`build_arv_benchmarks` / `calculate_arv`). It is a
+  zip-level proxy, not radius-based — the report footer already says as much.
+- **Desired:** geocode the subject, pull sold comps within ~1 mile over the
+  lookback window, size/bed/bath match, derive ARV from those. This is a real
+  rework of the ARV engine and adds per-property geo/comp queries, so it must be
+  scoped for rate limits before running on the hourly cadence (don't hammer
+  Redfin every hour). Until implemented, keep labeling ARV as a zip-wide
+  estimate so it's never mistaken for hand-picked radius comps.
+- Always surface ARV clearly as **the estimated worth after renovation**.
+
 ## How manual adds reach Bryan's live spreadsheet
 
 - Bryan's Google Sheet runs `flip_scout/FlipScoutSheet.gs`, which fetches
