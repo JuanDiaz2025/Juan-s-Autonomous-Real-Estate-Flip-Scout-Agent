@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-27T19:08:52.862168Z",
+  "generated_at": "2026-07-27T20:09:54.891442Z",
   "leads": [
     {
       "score": 10,
@@ -896,6 +896,34 @@
       "recommended_max_offer": 800000.0,
       "risks": "Small lot; Photo-verified genuine mid-century fixer (Bayview). CAUTION: Redfin Hot Home badge (expect competition) + estimate $801,476 ~$13k ABOVE $788k asking - hold buy discipline.",
       "url": "https://www.redfin.com/CA/San-Francisco/1430-Shafter-Ave-94124/home/1767859"
+    },
+    {
+      "score": 7,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-27T20:09:54.891442Z",
+      "dom_at_add": 0,
+      "address": "510 Maine Ave",
+      "city": "Richmond",
+      "zip": "94804",
+      "beds": 3.0,
+      "baths": 2.0,
+      "sqft": 1078,
+      "lot_sqft": 5000,
+      "year_built": 1963,
+      "price": 340000,
+      "arv": 581000.0,
+      "rehab_light": 75000,
+      "rehab_heavy": 156000,
+      "holding_costs": 10600.0,
+      "total_cost_light": 425600.0,
+      "total_cost_heavy": 506600.0,
+      "gross_profit_light": 155400.0,
+      "gross_profit_heavy": 74400.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 344000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/Richmond/510-Maine-Ave-94804/home/1804265"
     },
     {
       "score": 5,
