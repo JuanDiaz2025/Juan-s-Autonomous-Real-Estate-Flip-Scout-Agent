@@ -2154,5 +2154,21 @@
       "stale_dom": 0,
       "below_profit_threshold": 1
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T18:09:41.573428Z",
+    "new_listings_checked": 5,
+    "qualified": 0,
+    "excluded_total": 5,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
   }
 ]
