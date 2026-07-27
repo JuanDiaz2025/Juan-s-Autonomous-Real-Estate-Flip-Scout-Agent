@@ -1,0 +1,51 @@
+[
+  {
+    "address": "5948 Howell St",
+    "city": "Oakland",
+    "zip": "94609",
+    "price": 739000,
+    "beds": 2.0,
+    "baths": 2.0,
+    "sqft": 980,
+    "lot_sqft": 2500,
+    "year_built": 1912,
+    "property_type": "Single Family",
+    "description": "Welcome to 5948 Howell Street. This home is tucked into one of North Oakland's most desirable pockets near the Berkeley border. This 2 bedroom, 2 bathroom home offers the kind of classic bones and original charm that's becoming harder to find.   A brick walkway leads you to the front porch framed by windows. Upon entry, you are greeted by a cozy living room, complete with a fireplace. The home is filled with natural light, thanks to windows throughout that bring in a warm, easy glow all day long. Beautiful hardwood floors and detailed trim run throughout, giving it a timeless character that's ",
+    "url": "https://www.redfin.com/CA/Oakland/5948-Howell-St-94609/home/1861815",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "days_on_market": 0,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 9,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 915000.0,
+      "rehab_light": 69000,
+      "rehab_heavy": 142000,
+      "holding_costs": 22700.0,
+      "holding_breakdown": {
+        "financing": 18500.0,
+        "insurance": 1500.0,
+        "property_tax": 2300.0,
+        "utilities": 400,
+        "total": 22700.0
+      },
+      "total_cost_light": 830700.0,
+      "total_cost_heavy": 903700.0,
+      "gross_profit_light": 84300.0,
+      "gross_profit_heavy": 11300.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 682000.0
+    },
+    "score": 5,
+    "recommendation": "Marginal",
+    "risks": []
+  }
+]
