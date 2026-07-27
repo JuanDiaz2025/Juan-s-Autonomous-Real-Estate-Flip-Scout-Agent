@@ -371,7 +371,13 @@ function refreshFlipScoutSheet() {
   // feed would just get re-added the next time this runs.
   var rejectedUrls = getRejectedUrls_();
   var newLeads = leads.filter(function (lead) {
-    return !existingUrls[lead.url] && !rejectedUrls[lead.url] && lead.gross_profit_light > 0;
+    if (existingUrls[lead.url] || rejectedUrls[lead.url]) return false;
+    // Manual reno candidates added by Bryan come through regardless of flip
+    // margin: cosmetic fixers he wants on the list even when the spread is thin
+    // or negative, plus non-flip assets (e.g. a fourplex) with blank profit.
+    // Automated scanner leads still must clear the positive-profit guard.
+    if (lead.manual_include === true) return true;
+    return lead.gross_profit_light > 0;
   });
 
   ss.toast(newLeads.length + ' new lead(s) found, ' + Object.keys(existingUrls).length + ' already in sheet.', 'Flip Scout', 5);

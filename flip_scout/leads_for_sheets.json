@@ -1623,7 +1623,8 @@
       "risks": "MANUAL ADD (Bryan) \u2014 RENOVATION CANDIDATE. Photos confirm a genuine cosmetic fixer: dated wood kitchen, original baths, old carpet, structurally sound and NOT renovated. Bryan wants homes like this on the list regardless of thin flip margin. Honest math caveat: at the $1.3M ask the fix-and-flip spread is negative (~$1,300/sqft as-is vs ~$1,387/sqft renovated ARV); it pencils to the $100k gate only near a ~$1.10M purchase (max offer $1,108,000). 94122 is in the buy box.",
       "url": "https://www.redfin.com/CA/San-Francisco/1470-25th-Ave-94122/home/1733021",
       "added_at": "2026-07-27T15:46:41.390320+00:00",
-      "dom_at_add": 1
+      "dom_at_add": 1,
+      "manual_include": true
     },
     {
       "score": 1,
@@ -1651,7 +1652,8 @@
       "risks": "MANUAL ADD (Bryan). FOURPLEX (4x 1bd/1ba, detached, Inner Sunset) and units 2-4 are already renovated \u2014 the scout auto-excludes multi-unit AND already-renovated listings, which is why it never surfaced. The single-family ARV/flip-profit model does NOT apply here, so ARV/profit are intentionally blank. Priced $1,190,000, 3,240 sqft total. Evaluate as a multifamily/rental play (cap rate / rents), not a fix-and-flip.",
       "url": "https://www.redfin.com/CA/San-Francisco/445-Lawton-St-94122/home/1894703",
       "added_at": "2026-07-27T15:46:41.390320+00:00",
-      "dom_at_add": 0
+      "dom_at_add": 0,
+      "manual_include": true
     }
   ]
 }
