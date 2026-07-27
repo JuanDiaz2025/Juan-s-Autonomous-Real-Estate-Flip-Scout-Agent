@@ -1599,7 +1599,7 @@
     },
     {
       "score": 1,
-      "recommendation": "Pass \u2014 watch (underwater at ask)",
+      "recommendation": "Renovation candidate (Bryan) \u2014 cosmetic fixer",
       "address": "1470 25th Ave",
       "city": "San Francisco",
       "zip": "94122",
@@ -1620,7 +1620,7 @@
       "min_profit_threshold": 100000,
       "meets_threshold_heavy": false,
       "recommended_max_offer": 1108000.0,
-      "risks": "MANUAL ADD (Bryan) \u2014 WATCH. No flip spread at the $1.3M ask (~$1,300/sqft AS-IS for a 1,000 sqft home needing work vs ~$1,387/sqft renovated ARV). Clears the $100k profit gate only near a ~$1.10M purchase (recommended max offer $1,108,000). 94122 IS in the buy box \u2014 it fails on profit at ask, not on coverage. Re-scores automatically if the price drops.",
+      "risks": "MANUAL ADD (Bryan) \u2014 RENOVATION CANDIDATE. Photos confirm a genuine cosmetic fixer: dated wood kitchen, original baths, old carpet, structurally sound and NOT renovated. Bryan wants homes like this on the list regardless of thin flip margin. Honest math caveat: at the $1.3M ask the fix-and-flip spread is negative (~$1,300/sqft as-is vs ~$1,387/sqft renovated ARV); it pencils to the $100k gate only near a ~$1.10M purchase (max offer $1,108,000). 94122 is in the buy box.",
       "url": "https://www.redfin.com/CA/San-Francisco/1470-25th-Ave-94122/home/1733021",
       "added_at": "2026-07-27T15:46:41.390320+00:00",
       "dom_at_add": 1
