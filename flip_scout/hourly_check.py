@@ -103,7 +103,7 @@ def main(now_iso, now_ts, parse_iso):
     # for what reason", not just "how many are we removing".
     excluded = {
         "multi_unit": 0, "already_renovated": 0, "vacant_land": 0,
-        "tenant_occupied": 0, "data_incomplete": 0, "stale_dom": 0,
+        "tenant_occupied": 0, "fire_damaged": 0, "data_incomplete": 0, "stale_dom": 0,
         "below_profit_threshold": 0,
     }
     qualified = []
@@ -119,6 +119,11 @@ def main(now_iso, now_ts, parse_iso):
             continue
         if l.get("is_tenant_occupied"):
             excluded["tenant_occupied"] += 1
+            continue
+        if l.get("is_fire_damaged"):
+            # fire remediation isn't priced by the per-sqft rehab model, and
+            # Bryan doesn't want fire-damaged homes on the list at all (2026-07-27)
+            excluded["fire_damaged"] += 1
             continue
         if l.get("is_data_incomplete"):
             excluded["data_incomplete"] += 1

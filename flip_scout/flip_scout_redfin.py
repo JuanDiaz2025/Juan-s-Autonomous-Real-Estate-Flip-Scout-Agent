@@ -257,6 +257,18 @@ VACANT_LAND_FLAGS = [
     'buildable lot',
 ]
 
+# Fire-damaged homes are excluded per Bryan (2026-07-27): the per-sqft rehab
+# model doesn't price fire remediation (structural/smoke/soot, possible rebuild),
+# so the profit math is unreliable and Bryan doesn't want them on the list at all.
+# Phrases are deliberately specific so they never match the very common
+# "fireplace"/"fire pit"/"firehouse" - never flag on a bare "fire".
+FIRE_DAMAGE_FLAGS = [
+    'fire damage', 'fire-damage', 'fire damaged', 'fire-damaged', 'damaged by fire',
+    'damaged in a fire', 'damaged in fire', 'fire remediation', 'smoke damage',
+    'smoke-damaged', 'fire-affected', 'fire affected', 'partially burned',
+    'burned down', 'destroyed by fire', 'fire restoration', 'post-fire',
+]
+
 # ================================
 # REDFIN SCRAPER ENGINE
 # ================================
@@ -611,6 +623,7 @@ def enrich_detail(listing: Dict) -> Dict:
         listing['is_already_renovated'] = any(flag in desc.lower() for flag in ALREADY_RENOVATED_FLAGS)
         listing['is_vacant_land'] = any(flag in desc.lower() for flag in VACANT_LAND_FLAGS)
         listing['is_tenant_occupied'] = any(flag in desc.lower() for flag in TENANT_OCCUPIED_FLAGS)
+        listing['is_fire_damaged'] = any(flag in desc.lower() for flag in FIRE_DAMAGE_FLAGS)
 
         if lot:
             listing['lot_sqft'] = lot
@@ -1030,7 +1043,7 @@ def run_redfin_scout() -> List[Dict]:
 
     excluded = {
         'multi_unit': 0, 'already_renovated': 0, 'vacant_land': 0,
-        'tenant_occupied': 0, 'data_incomplete': 0, 'stale_dom': 0,
+        'tenant_occupied': 0, 'fire_damaged': 0, 'data_incomplete': 0, 'stale_dom': 0,
         'below_profit_threshold': 0,
     }
     analyzed = []
@@ -1046,6 +1059,11 @@ def run_redfin_scout() -> List[Dict]:
             continue
         if l.get('is_tenant_occupied'):
             excluded['tenant_occupied'] += 1
+            continue
+        if l.get('is_fire_damaged'):
+            # fire remediation isn't priced by the per-sqft rehab model, and
+            # Bryan doesn't want fire-damaged homes on the list at all (2026-07-27)
+            excluded['fire_damaged'] += 1
             continue
         if l.get('is_data_incomplete'):
             excluded['data_incomplete'] += 1

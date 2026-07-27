@@ -21,6 +21,17 @@ When reviewing a listing (a manual add, or a lead where photos are available):
   (unless Bryan explicitly asks — e.g. 445 Lawton St, added as a flagged
   multifamily exception), and **vacant land / entitlement** listings.
 
+## Exclude fire-damaged listings (Bryan, 2026-07-27)
+
+**Never put a fire-damaged home on the list.** Fire remediation (structural,
+smoke/soot, possible rebuild) isn't priced by the per-sqft rehab model, so the
+profit math is unreliable — and Bryan doesn't want them regardless. The scanner
+now detects this via `FIRE_DAMAGE_FLAGS` in `flip_scout_redfin.py`
+(sets `is_fire_damaged`), and both `hourly_check.py` and the full scan exclude
+it. Flags are worded specifically so they never match "fireplace"/"fire pit".
+If one is ever spotted on the list (manual add or older lead), remove it from
+`leads_for_sheets.json` and the published board.
+
 ## ARV methodology preference — 1-mile-radius comps (Bryan, 2026-07-27)
 
 Bryan wants the **After-Repair Value (ARV)** — "how much the property is worth
