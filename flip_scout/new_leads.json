@@ -1,0 +1,54 @@
+[
+  {
+    "address": "663 25th St",
+    "city": "Oakland",
+    "zip": "94612",
+    "price": 655000,
+    "beds": 4.0,
+    "baths": 3.0,
+    "sqft": 1725,
+    "lot_sqft": 5000,
+    "year_built": 1900,
+    "property_type": "Single Family",
+    "description": "Timeless Victorian charm meets modern-day convenience in this spacious and well-maintained home. Soaring ceilings, abundant natural light, and generous living and dining areas create a warm and inviting atmosphere throughout. Thoughtful details, including under-stair storage and a versatile floor plan, maximize both comfort and functionality.  The lower level features a well-equipped kitchen with ample cabinetry, expansive living and dining spaces, a private primary suite with en-suite bath, a second bedroom, and an additional full bath with in-unit laundry. Upstairs offers two spacious bedroo",
+    "url": "https://www.redfin.com/CA/Oakland/663-25th-St-94612/home/1249076",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "is_fire_damaged": false,
+    "days_on_market": 0,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 2347,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": false,
+    "deal": {
+      "arv": 1590000.0,
+      "rehab_light": 121000,
+      "rehab_heavy": 250000,
+      "holding_costs": 20100.0,
+      "holding_breakdown": {
+        "financing": 16400.0,
+        "insurance": 1300.0,
+        "property_tax": 2000.0,
+        "utilities": 400,
+        "total": 20100.0
+      },
+      "total_cost_light": 796100.0,
+      "total_cost_heavy": 925100.0,
+      "gross_profit_light": 793900.0,
+      "gross_profit_heavy": 664900.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1203000.0
+    },
+    "score": 10,
+    "recommendation": "Strong Deal",
+    "risks": [
+      "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (2347 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV"
+    ]
+  }
+]

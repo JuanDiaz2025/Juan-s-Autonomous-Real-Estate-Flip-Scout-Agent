@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T04:09:22.134142Z",
+  "generated_at": "2026-07-28T16:08:59.070276Z",
   "leads": [
     {
       "score": 10,
@@ -56,6 +56,34 @@
       "url": "https://www.redfin.com/CA/San-Francisco/2816-23rd-St-94110/home/1939359",
       "added_at": "2026-07-17T21:13:28+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-28T16:08:59.070276Z",
+      "dom_at_add": 0,
+      "address": "663 25th St",
+      "city": "Oakland",
+      "zip": "94612",
+      "beds": 4.0,
+      "baths": 3.0,
+      "sqft": 1725,
+      "lot_sqft": 5000,
+      "year_built": 1900,
+      "price": 655000,
+      "arv": 1590000.0,
+      "rehab_light": 121000,
+      "rehab_heavy": 250000,
+      "holding_costs": 20100.0,
+      "total_cost_light": 796100.0,
+      "total_cost_heavy": 925100.0,
+      "gross_profit_light": 793900.0,
+      "gross_profit_heavy": 664900.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1203000.0,
+      "risks": "Outside the scanned buy box zips (likely a neighboring-zip search catch) - ARV uses a citywide comp pool (2347 comps), not this zip's own sold homes - verify local comps manually before trusting this ARV",
+      "url": "https://www.redfin.com/CA/Oakland/663-25th-St-94612/home/1249076"
     },
     {
       "score": 10,
