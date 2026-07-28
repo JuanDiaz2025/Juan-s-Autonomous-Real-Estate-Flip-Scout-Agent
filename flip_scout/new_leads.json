@@ -1,0 +1,52 @@
+[
+  {
+    "address": "2309 83rd Ave",
+    "city": "Oakland",
+    "zip": "94605",
+    "price": 340000,
+    "beds": 3.0,
+    "baths": 1.0,
+    "sqft": 1812,
+    "lot_sqft": 5131,
+    "year_built": 1939,
+    "property_type": "Single Family",
+    "description": "Calling all investors and first time homebuyers with a vision! This is your opportunity to unlock the potential of this Oakland property and create the home you've always imagined. Situated on a spacious lot in an established neighborhood, 2309 83rd Ave offers endless possibilities for renovation, customization, or investment. Whether you're looking to design your dream home, flip, or build long term equity, this property is full of opportunity. Conveniently located near schools, shopping, freeways, and public transportation, this fixer is ready for its next chapter. Bring your creativity, too",
+    "url": "https://www.redfin.com/CA/Oakland/2309-83rd-Ave-94605/home/1618990",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "is_fire_damaged": false,
+    "days_on_market": 15,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 55,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 847000.0,
+      "rehab_light": 127000,
+      "rehab_heavy": 263000,
+      "holding_costs": 10600.0,
+      "holding_breakdown": {
+        "financing": 8500.0,
+        "insurance": 700.0,
+        "property_tax": 1100.0,
+        "utilities": 400,
+        "total": 10600.0
+      },
+      "total_cost_light": 477600.0,
+      "total_cost_heavy": 613600.0,
+      "gross_profit_light": 369400.0,
+      "gross_profit_heavy": 233400.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 499000.0
+    },
+    "score": 10,
+    "recommendation": "Strong Deal",
+    "risks": []
+  }
+]

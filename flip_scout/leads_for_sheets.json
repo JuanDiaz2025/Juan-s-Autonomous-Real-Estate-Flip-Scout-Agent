@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T00:09:59.631489Z",
+  "generated_at": "2026-07-28T02:08:36.051415Z",
   "leads": [
     {
       "score": 10,
@@ -476,6 +476,34 @@
       "url": "https://www.redfin.com/CA/Oakland/3246-Martin-Luther-King-Junior-Way-94609/home/191246073",
       "added_at": "2026-07-18T18:15:56+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-28T02:08:36.051415Z",
+      "dom_at_add": 15,
+      "address": "2309 83rd Ave",
+      "city": "Oakland",
+      "zip": "94605",
+      "beds": 3.0,
+      "baths": 1.0,
+      "sqft": 1812,
+      "lot_sqft": 5131,
+      "year_built": 1939,
+      "price": 340000,
+      "arv": 847000.0,
+      "rehab_light": 127000,
+      "rehab_heavy": 263000,
+      "holding_costs": 10600.0,
+      "total_cost_light": 477600.0,
+      "total_cost_heavy": 613600.0,
+      "gross_profit_light": 369400.0,
+      "gross_profit_heavy": 233400.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 499000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/Oakland/2309-83rd-Ave-94605/home/1618990"
     },
     {
       "score": 10,
