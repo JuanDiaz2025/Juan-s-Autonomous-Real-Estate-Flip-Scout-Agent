@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-28T01:00:00Z",
+ "generated_at": "2026-07-28T01:30:00Z",
  "leads": [
   {
    "score": 10,
@@ -1907,6 +1907,35 @@
    "url": "https://www.redfin.com/CA/San-Francisco/300-Burrows-St-94134/home/1912283",
    "added_at": "2026-07-28T01:00:00+00:00",
    "dom_at_add": 4,
+   "manual_include": true
+  },
+  {
+   "score": 10,
+   "recommendation": "Strong Deal",
+   "address": "2002 167th Ave",
+   "city": "Castro Valley",
+   "zip": "94578",
+   "beds": 2.0,
+   "baths": 1.0,
+   "sqft": 861,
+   "lot_sqft": null,
+   "year_built": 1961,
+   "price": 425000,
+   "arv": 672202.0,
+   "rehab_light": 60270,
+   "rehab_heavy": 124845,
+   "holding_costs": 13203.12,
+   "total_cost_light": 498473.12,
+   "total_cost_heavy": 563048.12,
+   "gross_profit_light": 173728.88,
+   "gross_profit_heavy": 109153.88,
+   "min_profit_threshold": 70000,
+   "meets_threshold_heavy": true,
+   "recommended_max_offer": 528728.88,
+   "risks": "STRONG DEAL \u2014 small AS-IS fixer, rehab ~14% of purchase (East Bay engine profile); clears $70k gate under Light ($174k) AND Heavy ($109k). Owner-occupied (confirm delivered vacant). Listing photos include AI 'digitally altered for inspiration' renders; actual is dated/original. ARV = median $781/sf of 21 size-matched 94578 solds last 12mo (small-home set-verify). 94578 = Ashland/West-Castro-Valley pocket. Redfin URL is a best-guess address path-confirm exact listing link (MLS# EB41140854).",
+   "url": "https://www.redfin.com/CA/San-Leandro/2002-167th-Ave-94578",
+   "added_at": "2026-07-28T01:30:00+00:00",
+   "dom_at_add": 21,
    "manual_include": true
   }
  ]
