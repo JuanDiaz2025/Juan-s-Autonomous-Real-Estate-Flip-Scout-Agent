@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T18:08:39.729029Z",
+  "generated_at": "2026-07-29T22:15:28.514056Z",
   "leads": [
     {
       "score": 10,
@@ -336,6 +336,34 @@
       "url": "https://www.redfin.com/CA/Redwood-City/827-Chestnut-St-94063/home/1341408",
       "added_at": "2026-07-17T21:36:40+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 10,
+      "recommendation": "Strong Deal",
+      "added_at": "2026-07-29T22:15:28.514056Z",
+      "dom_at_add": 0,
+      "address": "2447 24th Ave",
+      "city": "San Francisco",
+      "zip": "94116",
+      "beds": 4.0,
+      "baths": 2.0,
+      "sqft": 1850,
+      "lot_sqft": 3001,
+      "year_built": 1923,
+      "price": 1425000,
+      "arv": 2052000.0,
+      "rehab_light": 130000,
+      "rehab_heavy": 268000,
+      "holding_costs": 43300.0,
+      "total_cost_light": 1598300.0,
+      "total_cost_heavy": 1736300.0,
+      "gross_profit_light": 453700.0,
+      "gross_profit_heavy": 315700.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": true,
+      "recommended_max_offer": 1634000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Francisco/2447-24th-Ave-94116/home/2013397"
     },
     {
       "score": 10,
