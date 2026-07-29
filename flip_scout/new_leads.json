@@ -1,0 +1,50 @@
+[
+  {
+    "address": "6824 Paso Robles Dr",
+    "city": "Oakland",
+    "zip": "94611",
+    "price": 1395000,
+    "beds": 5.0,
+    "baths": 3.0,
+    "sqft": 2440,
+    "lot_sqft": 8526,
+    "year_built": 1958,
+    "property_type": "Single Family",
+    "description": "Perched along a peaceful road in sought-after Montclair, this stunning mid-century modern retreat offers exceptional privacy, natural beauty, and a seamless connection to its surroundings.   Designed for effortless entertaining and everyday living, the open-concept floor plan features soaring ceilings, a sleek stone fireplace, and a dramatic wall of windows that floods the home with natural light while framing tranquil Bay and valley views.  The main level is thoughtfully designed for easy living, with two bedrooms and a full bath conveniently located alongside the kitchen and living spaces. S",
+    "url": "https://www.redfin.com/CA/Oakland/6824-Paso-Robles-Dr-94611/home/573097",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "is_fire_damaged": false,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 91,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 1812000.0,
+      "rehab_light": 171000,
+      "rehab_heavy": 354000,
+      "holding_costs": 42400.0,
+      "holding_breakdown": {
+        "financing": 34900.0,
+        "insurance": 2800.0,
+        "property_tax": 4400.0,
+        "utilities": 400,
+        "total": 42400.0
+      },
+      "total_cost_light": 1608400.0,
+      "total_cost_heavy": 1791400.0,
+      "gross_profit_light": 203600.0,
+      "gross_profit_heavy": 20600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 1318000.0
+    },
+    "score": 5,
+    "recommendation": "Marginal",
+    "risks": []
+  }
+]

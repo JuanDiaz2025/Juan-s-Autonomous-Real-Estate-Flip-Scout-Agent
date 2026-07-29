@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-29T16:08:58.653491Z",
+  "generated_at": "2026-07-29T18:08:39.729029Z",
   "leads": [
     {
       "score": 10,
@@ -1544,6 +1544,34 @@
       "recommended_max_offer": 504000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Oakland/2701-Octavia-St-94619/home/1881722"
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "added_at": "2026-07-29T18:08:39.729029Z",
+      "dom_at_add": null,
+      "address": "6824 Paso Robles Dr",
+      "city": "Oakland",
+      "zip": "94611",
+      "beds": 5.0,
+      "baths": 3.0,
+      "sqft": 2440,
+      "lot_sqft": 8526,
+      "year_built": 1958,
+      "price": 1395000,
+      "arv": 1812000.0,
+      "rehab_light": 171000,
+      "rehab_heavy": 354000,
+      "holding_costs": 42400.0,
+      "total_cost_light": 1608400.0,
+      "total_cost_heavy": 1791400.0,
+      "gross_profit_light": 203600.0,
+      "gross_profit_heavy": 20600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 1318000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/Oakland/6824-Paso-Robles-Dr-94611/home/573097"
     },
     {
       "score": 5,
