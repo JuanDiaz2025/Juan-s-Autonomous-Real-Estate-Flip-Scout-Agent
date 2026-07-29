@@ -1,0 +1,52 @@
+[
+  {
+    "address": "1700 Woodhaven Way",
+    "city": "Oakland",
+    "zip": "94611",
+    "price": 729000,
+    "beds": 2.0,
+    "baths": 1.0,
+    "sqft": 1151,
+    "lot_sqft": 5865,
+    "year_built": 1948,
+    "property_type": "Single Family",
+    "description": "Affordable mid-century 2 BR, 1 BA ranch with cottage charm in Montclair's desirable Merriwood neighborhood. This 1151 sq  ft, single-level home offers original character, a functional floor plan and tremendous potential for customization to make it your own. The house enjoys solid construction, large picture windows in the living room provide abundant natural light &amp; architectural appeal. A double-sided woodburning fireplace in the living room/dining area gives the space a warm focal point. A period chandelier in the dining area adds vintage charm. Hardwood floors in both bedrooms. A spaci",
+    "url": "https://www.redfin.com/CA/Oakland/1700-Woodhaven-Way-94611/home/1288151",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "is_fire_damaged": false,
+    "days_on_market": 1,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 26,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 1011000.0,
+      "rehab_light": 81000,
+      "rehab_heavy": 167000,
+      "holding_costs": 22400.0,
+      "holding_breakdown": {
+        "financing": 18200.0,
+        "insurance": 1500.0,
+        "property_tax": 2300.0,
+        "utilities": 400,
+        "total": 22400.0
+      },
+      "total_cost_light": 832400.0,
+      "total_cost_heavy": 918400.0,
+      "gross_profit_light": 178600.0,
+      "gross_profit_heavy": 92600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 722000.0
+    },
+    "score": 5,
+    "recommendation": "Marginal",
+    "risks": []
+  }
+]

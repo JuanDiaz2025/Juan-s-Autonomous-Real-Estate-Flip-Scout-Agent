@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T22:08:31.652184Z",
+  "generated_at": "2026-07-29T16:08:58.653491Z",
   "leads": [
     {
       "score": 10,
@@ -1152,6 +1152,34 @@
       "recommended_max_offer": 743000.0,
       "risks": "None",
       "url": "https://www.redfin.com/CA/Oakland/915-39th-St-94608/home/1913324"
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "added_at": "2026-07-29T16:08:58.653491Z",
+      "dom_at_add": 1,
+      "address": "1700 Woodhaven Way",
+      "city": "Oakland",
+      "zip": "94611",
+      "beds": 2.0,
+      "baths": 1.0,
+      "sqft": 1151,
+      "lot_sqft": 5865,
+      "year_built": 1948,
+      "price": 729000,
+      "arv": 1011000.0,
+      "rehab_light": 81000,
+      "rehab_heavy": 167000,
+      "holding_costs": 22400.0,
+      "total_cost_light": 832400.0,
+      "total_cost_heavy": 918400.0,
+      "gross_profit_light": 178600.0,
+      "gross_profit_heavy": 92600.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 722000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/Oakland/1700-Woodhaven-Way-94611/home/1288151"
     },
     {
       "score": 5,
