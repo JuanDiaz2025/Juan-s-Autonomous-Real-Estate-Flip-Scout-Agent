@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T20:08:29.582129Z",
+  "generated_at": "2026-07-28T22:08:31.652184Z",
   "leads": [
     {
       "score": 10,
@@ -1684,6 +1684,34 @@
       "url": "https://www.redfin.com/CA/Oakland/901-92nd-Ave-94603/home/1533246",
       "added_at": "2026-07-18T19:20:24+00:00",
       "dom_at_add": 33
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "added_at": "2026-07-28T22:08:31.652184Z",
+      "dom_at_add": 0,
+      "address": "1565 Timothy Dr",
+      "city": "San Leandro",
+      "zip": "94577",
+      "beds": 4.0,
+      "baths": 2.0,
+      "sqft": 1615,
+      "lot_sqft": 4970,
+      "year_built": 1943,
+      "price": 749000,
+      "arv": 994000.0,
+      "rehab_light": 113000,
+      "rehab_heavy": 234000,
+      "holding_costs": 23000.0,
+      "total_cost_light": 885000.0,
+      "total_cost_heavy": 1006000.0,
+      "gross_profit_light": 109000.0,
+      "gross_profit_heavy": -12000.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 669000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Leandro/1565-Timothy-Dr-94577/home/767312"
     },
     {
       "score": 5,

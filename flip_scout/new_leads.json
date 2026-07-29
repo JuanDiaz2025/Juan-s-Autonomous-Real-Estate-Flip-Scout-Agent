@@ -1,0 +1,52 @@
+[
+  {
+    "address": "1565 Timothy Dr",
+    "city": "San Leandro",
+    "zip": "94577",
+    "price": 749000,
+    "beds": 4.0,
+    "baths": 2.0,
+    "sqft": 1615,
+    "lot_sqft": 4970,
+    "year_built": 1943,
+    "property_type": "Single Family",
+    "description": "**Location. Value. Opportunity.** Welcome to 1565 Timothy Drive in San Leandro's desirable Davis West neighborhood. This charming 4-bedroom, 2-bath home offers approximately 1,615 sq. ft. of comfortable living space on a 4,970 sq. ft. lot. The functional floor plan features bright living areas, generously sized bedrooms, and plenty of opportunity to update and make it your own.  Enjoy a private, fenced backyard perfect for entertaining, gardening, relaxing, or future possibilities. Ideally located just minutes from downtown  San Leandro, BART, shopping, dining, parks, schools, and convenient a",
+    "url": "https://www.redfin.com/CA/San-Leandro/1565-Timothy-Dr-94577/home/767312",
+    "status": "Active",
+    "is_multi_unit": false,
+    "is_already_renovated": false,
+    "is_vacant_land": false,
+    "is_tenant_occupied": false,
+    "is_fire_damaged": false,
+    "days_on_market": 0,
+    "price_cuts": 0,
+    "is_data_incomplete": false,
+    "_arv_comp_count": 62,
+    "_arv_size_matched": true,
+    "_arv_zip_benchmarked": true,
+    "deal": {
+      "arv": 994000.0,
+      "rehab_light": 113000,
+      "rehab_heavy": 234000,
+      "holding_costs": 23000.0,
+      "holding_breakdown": {
+        "financing": 18700.0,
+        "insurance": 1500.0,
+        "property_tax": 2300.0,
+        "utilities": 400,
+        "total": 23000.0
+      },
+      "total_cost_light": 885000.0,
+      "total_cost_heavy": 1006000.0,
+      "gross_profit_light": 109000.0,
+      "gross_profit_heavy": -12000.0,
+      "min_profit_threshold": 70000,
+      "meets_threshold_light": true,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 669000.0
+    },
+    "score": 5,
+    "recommendation": "Marginal",
+    "risks": []
+  }
+]
