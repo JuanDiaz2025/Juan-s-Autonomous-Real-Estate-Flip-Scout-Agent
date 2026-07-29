@@ -16,11 +16,21 @@ how to fix the handful of things that recur.
   if 7+ days old), searches active listings, and only enriches/scores
   listings not already in `seen_listings.json`. This is what runs every hour.
 - **`FlipScoutSheet.gs`** — Google Apps Script pasted into Bryan's spreadsheet.
-  Pulls `leads_for_sheets.json` from the repo and appends new leads,
-  deduped by Redfin link, on its own hourly trigger inside Google.
+  Pulls `leads_for_sheets.json` from the GitHub **raw URL on branch
+  `claude/python-code-goal-nn6zec`** and appends new leads, deduped by Redfin
+  link, on its own hourly trigger inside Google (and on **Flip Scout → Refresh
+  Now**). The JSON feed is the *only* path into the Sheet — there is no direct
+  cell-write access.
+- **The published field-report board (Artifact)** — a human-readable HTML
+  report of every qualifying lead, hosted at a fixed URL:
+  `https://claude.ai/code/artifact/5a8c2ce2-db7a-4824-8791-cb2288517c94`.
+  This is the visual companion to the Sheet; it is updated (never rebuilt from
+  scratch) each time a new lead qualifies. See §5b.
 - **State files committed to the repo after every run**, so state survives
   across sessions: `comp_benchmarks_cache.json`, `seen_listings.json`,
-  `leads_for_sheets.json`.
+  `leads_for_sheets.json`, `kpi_log.json`. `new_leads.json` is a **transient**
+  hand-off file (only present when the last run produced qualifiers); it is
+  regenerated/deleted each run and is safe to commit or lose.
 
 ## 2. Buy box (current)
 
@@ -138,11 +148,68 @@ never fabricated as a flag either.
    - Message Bryan: address/city/zip, score, price, profit, Redfin link,
      one line per lead. Short — not a full report dump.
 
-**Some zip fetch failures every run are normal** (`⚠️ Error fetching ZIP
-XXXXX: no usable response after retries`) — Redfin occasionally returns an
-empty/challenge response; the script retries automatically and just skips
+**`ZIP XXXXX: HTML route blocked - used stingray API fallback (N listings)`
+is normal, not an error.** Redfin now blocks the plain HTML card route for
+most zips, so the scraper automatically falls back to Redfin's internal
+"stingray" GIS JSON API (`search_redfin_stingray` in `flip_scout_redfin.py`)
+and still gets the listings. Seeing this line for most/all zips every run is
+expected and healthy.
+
+**Some outright zip fetch failures every run are also normal** (`⚠️ Error
+fetching ZIP XXXXX: no usable response after retries`) — when even the
+fallback returns an empty/challenge response the script retries, then skips
 that zip for this run rather than guessing. That zip gets a fresh look next
-hour. This is not a sign anything is broken unless *every* zip fails.
+hour. Not a sign anything is broken unless *every* zip fails.
+
+**`N listing(s) had empty enrichment (likely rate-limited detail fetch) -
+left unseen for retry next run` is also expected.** A listing whose detail
+page couldn't be enriched is deliberately **not** marked seen, so it's
+retried next hour instead of being silently dropped.
+
+### 5b. The published field-report board (Artifact)
+
+The board at `.../artifact/5a8c2ce2-db7a-4824-8791-cb2288517c94` is updated
+**additively** — new leads are inserted, existing ones are never removed.
+Because more than one agent session can hold the board, always update it from
+the *live* copy, not a local memory of it:
+
+1. `WebFetch` the artifact URL. This both shows the current state (lead list,
+   the "Total qualifying leads" stat, the "All N qualifying deals" header,
+   the masthead "Rev." line) **and** saves the full served HTML to a
+   `tool-results/artifact-5a8c2ce2-*.html` file.
+2. Build the new page from that saved file: strip the `<!doctype …>` frame
+   wrapper (keep from `<title>` onward), strip the trailing `</body></html>`,
+   insert the new lead card just after the ranked-list section head, and
+   bump the counts (Total +1, "All N" +1; **Strong Deal** count only if the
+   new lead is a Strong Deal). Append the address to the masthead "Rev." line.
+   Write to the scratchpad `flip_report_published.html`.
+3. Republish with the **Artifact tool, passing `url=` the same board URL** so
+   the link is preserved. If it errors "hasn't viewed the latest version,"
+   re-`WebFetch` and rebuild on top of that — never `force` over another
+   session's changes.
+
+Card conventions: default green left-border for a clean lead; **`var(--warn)`
+(amber) left-border + a "Caveat"/"Risks" chip row** whenever the ARV is
+lower-confidence or overstated (outside-buy-box citywide comps, above-median
+$/sqft, oversized-home distortion). Score chip shows `N / 10 — Strong Deal`
+or `— Marginal`. Match the exact markup of the surrounding cards.
+
+### 5c. Concurrent sessions on the same branch
+
+Several agent sessions can run against `claude/python-code-goal-nn6zec` at
+once, so `git push` is frequently rejected with `(fetch first)` — a routine
+race, not corruption. Resolve by what your run actually produced:
+
+- **Empty run (bookkeeping only — seen/kpi):** your changes are self-healing
+  (any listing you marked seen just gets re-checked and re-excluded next
+  hour), so `git fetch` + `git reset --hard origin/<branch>` to adopt the
+  other session's state is fine. Do not fight a JSON merge.
+- **Real change worth keeping (a genuine new lead, or a code/filter fix):**
+  `git fetch`, then `git rebase -X ours origin/<branch>` — your new lead and
+  code edits apply cleanly while the self-healing data files (`seen_listings`,
+  `kpi_log`) resolve to the remote copy. Because a scanner-added lead only
+  ever existed locally, discarding it by adopting remote would be wrong here.
+- Never `git push --force` over another session's commits.
 
 ## 6. Google Sheet — Apps Script menu
 
@@ -219,6 +286,27 @@ Procedure per new lead:
    Redfin's own listing photos (fetched via the data channel) are the
    visual source. A single stale low-res photo = treat like case 3.
 
+## 6c. Manually adding a listing Bryan sends
+
+Bryan sometimes wants a specific listing on his Sheet that the scanner didn't
+surface. Since the JSON feed is the only path in:
+
+1. Add a row to `leads_for_sheets.json` matching the `COLUMNS` schema in
+   `FlipScoutSheet.gs`, with a `MANUAL ADD (Bryan)` note in `risks`.
+2. For a non-flip asset (e.g. a fourplex kept as a flagged exception), leave
+   ARV/rehab/profit **blank** rather than fabricating single-family numbers.
+3. Add the matching card to the board (§5b), commit + push to
+   `claude/python-code-goal-nn6zec`. Bryan then hits **Refresh Now**.
+
+Per standing rules (see `CLAUDE.md`): **cosmetic renovation candidates go on
+the list even when the strict profit gate is thin or negative** — surface
+them as a "Renovation candidate" with the honest deal math and the price they
+would need to pencil, and let Bryan decide. Keep excluding genuinely
+already-renovated homes, multi-unit (unless Bryan flags an exception),
+vacant land, and **fire-damaged** listings (never listed — the per-sqft rehab
+model can't price fire remediation; `FIRE_DAMAGE_FLAGS` sets `is_fire_damaged`
+and both the hourly check and full scan exclude it).
+
 ## 7. Before actually making an offer on any lead
 
 This system is a **screen, not an appraisal**. Always, before writing an
@@ -259,6 +347,14 @@ offer:
 
 ## 9. Revision history (major changes, most recent first)
 
+- Documented the operational reality of the live pipeline in this SOP: the
+  published field-report **board/Artifact** and its additive update flow
+  (§5b), **concurrent multi-session git handling** on the shared branch (§5c),
+  the **stingray API fallback** as the normal fetch path (§5), the
+  **manual-add** flow and fire-damage exclusion (§6c). Added
+  `fully reimagined` / `reimagined residence` / `waterfall island` to the
+  already-renovated filter after a "fully reimagined" luxury resale
+  (3367 Holderman Dr, San Jose) slipped past the older keyword set.
 - Added `MLS_ACQUISITION_TRAINING.md` — Twin Home Buyer's canonical playbook
   for the human acquisition process after a lead clears this pipeline
   (comp-analysis → MLS/Paragon remarks → ownership/liens → REI BlackBook →
