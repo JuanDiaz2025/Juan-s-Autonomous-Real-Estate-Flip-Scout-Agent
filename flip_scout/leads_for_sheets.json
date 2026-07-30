@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T20:09:14.237239Z",
+  "generated_at": "2026-07-30T21:08:21.631711Z",
   "leads": [
     {
       "score": 10,
@@ -1741,6 +1741,34 @@
       "url": "https://www.redfin.com/CA/La-Honda/6975-La-Honda-Rd-94020/home/17309096",
       "added_at": "2026-07-18T19:20:24+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "added_at": "2026-07-30T21:08:21.631711Z",
+      "dom_at_add": 0,
+      "address": "132 Cedar Ln",
+      "city": "San Jose",
+      "zip": "95127",
+      "beds": 4.0,
+      "baths": 2.0,
+      "sqft": 1760,
+      "lot_sqft": 8100,
+      "year_built": 1948,
+      "price": 1099999,
+      "arv": 1404000.0,
+      "rehab_light": 123000,
+      "rehab_heavy": 255000,
+      "holding_costs": 33500.0,
+      "total_cost_light": 1256500.0,
+      "total_cost_heavy": 1388500.0,
+      "gross_profit_light": 147500.0,
+      "gross_profit_heavy": 15500.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 1018000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Jose/132-Cedar-Ln-95127/home/1090361"
     },
     {
       "score": 5,

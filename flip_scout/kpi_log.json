@@ -2786,5 +2786,22 @@
     "url": "https://www.redfin.com/CA/Oakland/901-92nd-Ave-94603/home/1533246",
     "address": "901 92nd Ave",
     "reason": "aged out: estimated 45 days on market (dom 33 at add + time in feed) - standing under-45 rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T21:08:21.631711Z",
+    "new_listings_checked": 14,
+    "qualified": 1,
+    "excluded_total": 13,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 11,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
   }
 ]
