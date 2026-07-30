@@ -2762,5 +2762,29 @@
       "stale_dom": 0,
       "below_profit_threshold": 1
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T20:09:14.237239Z",
+    "new_listings_checked": 13,
+    "qualified": 2,
+    "excluded_total": 11,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 10,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-30T20:09:14.237239Z",
+    "url": "https://www.redfin.com/CA/Oakland/901-92nd-Ave-94603/home/1533246",
+    "address": "901 92nd Ave",
+    "reason": "aged out: estimated 45 days on market (dom 33 at add + time in feed) - standing under-45 rule"
   }
 ]
