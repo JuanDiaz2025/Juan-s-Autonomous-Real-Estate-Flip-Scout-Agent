@@ -620,7 +620,7 @@
   },
   {
    "score": 10,
-   "recommendation": "Strong Deal",
+   "recommendation": "Disqualified \u2014 multi-unit",
    "address": "2013 9th St",
    "city": "Berkeley",
    "zip": "94710",
@@ -644,7 +644,8 @@
    "risks": "MLS photo review 2026-07-30: LIKELY MULTI-UNIT (buy-box exclusion) - 2+ full kitchens, an exterior staircase to a separate upper entry, and a finished detached rear unit. VERIFY exact unit count + permits before treating as an SFR flip. ARV also leans on a $931/sf West-Berkeley comp band (945-comp fallback) - haircut before trusting the full ARV.",
    "url": "https://www.redfin.com/CA/Berkeley/2013-9th-St-94710/home/914075",
    "added_at": "2026-07-22T16:30:11+00:00",
-   "dom_at_add": null
+   "dom_at_add": null,
+   "disqualified": true
   },
   {
    "score": 10,
