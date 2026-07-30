@@ -71,6 +71,7 @@ def default_state():
         "last_check_started": None,
         "last_check_finished": None,
         "last_check_result": None,   # "new_leads:N" | "no_new_leads" | "error"
+        "last_check_error": None,    # last error line from a failed check
         "last_report": None,
         "last_report_date": None,
         "running_now": False,
@@ -167,11 +168,15 @@ def run_check_once():
             ok = proc.returncode == 0
         except (subprocess.TimeoutExpired, OSError) as e:
             update_state(running_now=False, last_check_finished=_now_iso(),
-                         last_check_result="error: %s" % type(e).__name__)
+                         last_check_result="error",
+                         last_check_error="%s: %s" % (type(e).__name__, str(e)[:200]))
             return "error"
 
+        err_line = None
         if not ok:
             result = "error"
+            tail = (proc.stderr or proc.stdout or "").strip().splitlines()
+            err_line = tail[-1][:300] if tail else "hourly_check.py exited %d" % proc.returncode
         elif os.path.exists(nl):
             found = _read_json(nl, [])
             n = len(found) if isinstance(found, list) else found.get("count", 0)
@@ -179,7 +184,7 @@ def run_check_once():
         else:
             result = "no_new_leads"
         update_state(running_now=False, last_check_finished=_now_iso(),
-                     last_check_result=result)
+                     last_check_result=result, last_check_error=err_line)
         return result
     finally:
         _run_lock.release()
@@ -299,6 +304,46 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, "Not found", "text/plain")
 
 
+def data_health():
+    """Report whether each data file was found at its resolved path, and how
+    many items it holds. Turns a silent 'everything is 0' into an actionable
+    'this file is missing at this exact path'."""
+    checks = [
+        ("leads_for_sheets.json", LEADS_PATH, "leads"),
+        ("rejected_for_sheets.json", REJECTED_PATH, "rejected"),
+        ("kpi_log.json", KPI_LOG_PATH, "log"),
+    ]
+    out = []
+    for name, path, kind in checks:
+        info = {"file": name, "path": path, "found": os.path.exists(path), "count": None, "error": None}
+        if info["found"]:
+            try:
+                d = json.load(open(path))
+                if kind == "leads":
+                    info["count"] = len(d.get("leads", []))
+                elif kind == "rejected":
+                    info["count"] = d.get("count", len(d.get("rejected", [])))
+                else:
+                    info["count"] = len(d)
+            except (ValueError, OSError) as e:
+                info["error"] = str(e)[:200]
+        out.append(info)
+    return out
+
+
+def _own_reports():
+    """Only the reports THIS app generates (report_YYYY-MM-DD.html), so a
+    pre-existing reports/ folder full of other tooling's output doesn't leak
+    into the list."""
+    if not os.path.isdir(REPORTS_DIR):
+        return []
+    return sorted(
+        [f for f in os.listdir(REPORTS_DIR)
+         if f.startswith("report_") and f.endswith(".html")],
+        reverse=True,
+    )
+
+
 def status_payload(state=None):
     s = state or load_state()
     gen, leads = load_leads()
@@ -309,6 +354,7 @@ def status_payload(state=None):
         "last_check_started": s.get("last_check_started"),
         "last_check_finished": s.get("last_check_finished"),
         "last_check_result": s.get("last_check_result"),
+        "last_check_error": s.get("last_check_error"),
         "last_report": s.get("last_report"),
         "last_report_date": s.get("last_report_date"),
         "leads_generated_at": gen,
@@ -318,8 +364,9 @@ def status_payload(state=None):
             "rejected": rejected.get("count", len(rejected.get("rejected", []))),
         },
         "rejected_categories": rejected.get("category_counts", {}),
-        "reports": sorted(os.listdir(REPORTS_DIR), reverse=True)
-        if os.path.isdir(REPORTS_DIR) else [],
+        "data_health": data_health(),
+        "base_dir": HERE,
+        "reports": _own_reports(),
     }
 
 
@@ -389,6 +436,14 @@ def main():
     threading.Thread(target=scheduler_loop, daemon=True).start()
     httpd = ThreadingHTTPServer((HOST, PORT), Handler)
     print("Flip Scout app running at http://%s:%d  (Ctrl+C to stop)" % (HOST, PORT))
+    print("Reading data from: %s" % HERE)
+    for h in data_health():
+        if h["found"] and h["error"] is None:
+            print("  [ok]      %-26s %s items" % (h["file"], h["count"]))
+        elif h["found"]:
+            print("  [BAD JSON] %-25s %s" % (h["file"], h["error"]))
+        else:
+            print("  [MISSING] %-26s expected at %s" % (h["file"], h["path"]))
     print("Scanner starts PAUSED - press Play in the UI to begin hourly scanning.")
     try:
         httpd.serve_forever()
@@ -452,6 +507,11 @@ a{color:var(--accent)}.addr{font-weight:600;white-space:nowrap}
 .reason{color:var(--muted);max-width:44ch;min-width:220px}
 .report-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .report-list a{font-size:.82rem;padding:6px 12px;border:1px solid var(--hairs);border-radius:8px;text-decoration:none;background:var(--surface)}
+.health{border-radius:12px;padding:13px 16px;margin:0 0 18px;font-size:.85rem;border:1px solid var(--hairs);background:var(--surface)}
+.health.bad{border-color:var(--reject);background:color-mix(in srgb,var(--reject) 12%,var(--surface))}
+.health .hd{font-weight:700;margin-bottom:6px}
+.health ul{margin:6px 0 0;padding-left:18px}.health code{font-family:ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--muted)}
+.health .okmark{color:var(--good)}.health .badmark{color:var(--reject);font-weight:700}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(120%);background:var(--ink);color:var(--ground);
 padding:11px 20px;border-radius:10px;font-size:.87rem;font-weight:600;box-shadow:var(--shadow);transition:.3s;z-index:9}
 .toast.show{transform:translateX(-50%) translateY(0)}
@@ -471,6 +531,7 @@ h2{font-size:1rem;margin:30px 0 6px}
     <button id="btnRefresh">↻ Refresh view</button>
   </div>
 
+  <div id="healthbar"></div>
   <div class="kpis" id="kpis"></div>
   <div class="meta" id="meta"></div>
 
@@ -509,7 +570,17 @@ function renderStatus(s){
     ["","",""].length&&["",k.runs,"Hourly runs"],
     ["",k.excluded,"Auto-excluded"],
   ].filter(Boolean).map(([cls,n,l])=>`<div class="kpi ${cls}"><div class="n mono">${(n||0).toLocaleString()}</div><div class="l">${l}</div></div>`).join("");
-  const lc=s.last_check_finished?`Last check ${s.last_check_finished} → ${esc(s.last_check_result||"?")}`:"No check run yet";
+  // data-health strip: only shown when something is wrong (missing/bad feed)
+  const dh=s.data_health||[];
+  const broken=dh.filter(h=>!h.found||h.error);
+  const hb=$("#healthbar");
+  if(broken.length){
+    hb.innerHTML=`<div class="health bad"><div class="hd badmark">⚠ Data not loading — the app can't find its feed files</div>
+    It's looking in <code>${esc(s.base_dir||"")}</code>. That's why the KPIs are 0 and no leads show.
+    <ul>${dh.map(h=>`<li>${h.found&&!h.error?'<span class="okmark">✓</span>':'<span class="badmark">✗</span>'} <code>${esc(h.file)}</code> — ${h.found?(h.error?('bad JSON: '+esc(h.error)):(h.count+' items')):('MISSING at <code>'+esc(h.path)+'</code>')}</li>`).join("")}</ul>
+    <div style="margin-top:8px;color:var(--muted)">Run the app from your repo root: <code>python3 flip_scout/app.py</code> — and make sure the branch is pulled so those JSON files exist.</div></div>`;
+  } else { hb.innerHTML=""; }
+  const lc=s.last_check_finished?`Last check ${s.last_check_finished} → ${esc(s.last_check_result||"?")}${s.last_check_error?(" ("+esc(s.last_check_error)+")"):""}`:"No check run yet";
   const fg=s.leads_generated_at?` · Feed generated ${esc(s.leads_generated_at)}`:"";
   const rp=s.last_report?` · Last report ${esc(s.last_report)}`:"";
   $("#meta").textContent=lc+fg+rp;
