@@ -43,14 +43,34 @@
  *      in the upstream feed. Plain manual row deletion doesn't do this -
  *      Sheets can't tell the script a row was deleted, so a manually-deleted
  *      lead will silently reappear next refresh unless you reject it here.
+ *  10. Flip Scout -> Show Rejected Leads : builds/refreshes a "Rejected
+ *      Leads" tab listing every lead removed by hand after review, with the
+ *      date, address, category, exact reason it was cut, and its Redfin
+ *      link. Read-only mirror of the repo (rebuilt from the feed each run) -
+ *      distinct from the hidden "Rejected (do not edit)" URL blacklist.
  *
  * If Juan's repo branch ever changes (e.g. after this work merges to
- * main), update FEED_URL below to match - swap "claude/python-code-goal-nn6zec"
- * for "main".
+ * main), update FEED_URL (and REJECTED_FEED_URL) below to match - swap
+ * "claude/python-code-goal-nn6zec" for "main".
  */
 
 var FEED_URL = 'https://raw.githubusercontent.com/JuanDiaz2025/Juan-s-Autonomous-Real-Estate-Flip-Scout-Agent/claude/python-code-goal-nn6zec/flip_scout/leads_for_sheets.json';
 var SHEET_NAME = 'Flip Scout Leads';
+
+// Itemized feed of manually-removed leads (address/category/reason/date/link),
+// built by flip_scout/build_rejected_feed.py from kpi_log.json. Rendered into
+// the "Rejected Leads" tab by Show Rejected Leads. Same-branch pairing as
+// FEED_URL - update both together if the branch ever changes.
+var REJECTED_FEED_URL = 'https://raw.githubusercontent.com/JuanDiaz2025/Juan-s-Autonomous-Real-Estate-Flip-Scout-Agent/claude/python-code-goal-nn6zec/flip_scout/rejected_for_sheets.json';
+var REJECTED_LEADS_SHEET_NAME = 'Rejected Leads';
+
+var REJECTED_LEADS_COLUMNS = [
+  { key: 'date', header: 'Date Removed', format: '@' },
+  { key: 'address', header: 'Address', format: '@' },
+  { key: 'category', header: 'Category', format: '@' },
+  { key: 'reason', header: 'Reason Cut', format: '@' },
+  { key: 'url', header: 'Redfin Link', format: '@' },
+];
 
 var COLUMNS = [
   { key: 'score', header: 'Score', format: '0' },
@@ -89,6 +109,7 @@ function onOpen() {
     .addItem('Clear All Leads', 'clearAllLeads')
     .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
     .addItem('Show KPI Tab', 'showKpiTab')
+    .addItem('Show Rejected Leads', 'showRejectedLeads')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
     .addToUi();
@@ -102,6 +123,81 @@ function showKpiTab() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var kpiSheet = ss.getSheetByName(KPI_SHEET_NAME);
   if (kpiSheet) ss.setActiveSheet(kpiSheet);
+}
+
+/**
+ * Show Rejected Leads - builds/refreshes a visible "Rejected Leads" tab from
+ * the itemized rejected feed (rejected_for_sheets.json), then jumps to it.
+ *
+ * This is the human-readable audit list: every lead pulled by hand after
+ * review, with Date Removed, Address, Category, the exact Reason it was cut,
+ * and its Redfin link. It is a READ-ONLY MIRROR of the repo's kpi_log.json -
+ * it's rebuilt from the feed on every run, so don't hand-edit it (your edits
+ * are overwritten next refresh).
+ *
+ * NOT the same as the hidden "Rejected (do not edit)" tab: that one stores
+ * only bare URLs, as the dedup blacklist that stops a rejected lead from
+ * being re-added by Refresh Now. This tab is the explained, categorized view
+ * for reading - it doesn't drive filtering.
+ *
+ * Covers MANUAL removals only. Auto-excluded listings (multi-unit, already-
+ * renovated, rate-limited/incomplete, etc.) are counted per-run in the KPI
+ * tab but aren't itemized upstream, so they can't be listed here.
+ */
+function showRejectedLeads() {
+  var ui = SpreadsheetApp.getUi();
+  var response = UrlFetchApp.fetch(REJECTED_FEED_URL, { muteHttpExceptions: true });
+  if (response.getResponseCode() !== 200) {
+    ui.alert('Could not fetch the rejected-leads feed (HTTP ' + response.getResponseCode() + ').\n\n' +
+      'Check REJECTED_FEED_URL still points at a real branch/file in the repo.');
+    return;
+  }
+
+  var feed = JSON.parse(response.getContentText());
+  var rejected = feed.rejected || [];
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(REJECTED_LEADS_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(REJECTED_LEADS_SHEET_NAME);
+  }
+  sheet.clear(); // derived data - rebuild fresh from the feed every time
+
+  var headers = REJECTED_LEADS_COLUMNS.map(function (c) { return c.header; });
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+  sheet.setFrozenRows(1);
+
+  if (rejected.length > 0) {
+    var rows = rejected.map(function (r) {
+      return REJECTED_LEADS_COLUMNS.map(function (c) {
+        var v = r[c.key];
+        return v === undefined || v === null ? '' : v;
+      });
+    });
+    sheet.getRange(2, 1, rows.length, headers.length).setValues(rows);
+    REJECTED_LEADS_COLUMNS.forEach(function (c, i) {
+      sheet.getRange(2, i + 1, rows.length, 1).setNumberFormat(c.format);
+    });
+    // keep the Reason column readable rather than a single runaway-wide column
+    sheet.getRange(2, 4, rows.length, 1).setWrap(true);
+  }
+
+  sheet.autoResizeColumns(1, headers.length);
+  var reasonCol = 4;
+  if (sheet.getColumnWidth(reasonCol) > 480) sheet.setColumnWidth(reasonCol, 480);
+
+  var counts = feed.category_counts || {};
+  var summary = Object.keys(counts).map(function (k) { return k + ': ' + counts[k]; }).join('\n');
+  sheet.getRange(1, 1).setNote(
+    'Rejected leads (manual removals) - read-only mirror of the repo.\n' +
+    'Total: ' + (feed.count || rejected.length) + '\n' +
+    'Feed generated: ' + (feed.generated_at || '?') + '\n' +
+    'Shown: ' + new Date().toString() + '\n\n' +
+    (summary ? 'By category:\n' + summary : ''));
+
+  ss.setActiveSheet(sheet);
+  ss.toast((feed.count || rejected.length) + ' rejected lead(s) loaded.', 'Flip Scout', 5);
 }
 
 /**

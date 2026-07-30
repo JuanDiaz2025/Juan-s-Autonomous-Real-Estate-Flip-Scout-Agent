@@ -1,0 +1,718 @@
+{
+  "generated_at": "2026-07-30T18:02:38Z",
+  "count": 100,
+  "note": "Manually removed leads only. Auto-excluded listings are recorded in kpi_log.json as per-run counts without addresses and cannot be itemized here.",
+  "category_counts": {
+    "Photo audit - not a fixer": 46,
+    "Stale on market (DOM)": 22,
+    "Photo audit - unverifiable": 10,
+    "Already renovated": 8,
+    "ARV / comp mismatch": 5,
+    "Attached product (townhome/PUD)": 4,
+    "Multi-unit": 3,
+    "Scraper / data bug": 1,
+    "Condo / HOA": 1
+  },
+  "rejected": [
+    {
+      "date": "2026-07-21",
+      "address": "263 Hale St",
+      "category": "Already renovated",
+      "reason": "already-renovated filter gap ('completely remodeled' missing from keyword list)",
+      "url": "https://www.redfin.com/CA/San-Francisco/263-Hale-St-94134/home/956945"
+    },
+    {
+      "date": "2026-07-21",
+      "address": "2405 Plateau Dr",
+      "category": "Already renovated",
+      "reason": "already-renovated filter gap ('beautifully upgraded'/'extensive upgrades' missing)",
+      "url": "https://www.redfin.com/CA/San-Jose/2405-Plateau-Dr-95125/home/167457615"
+    },
+    {
+      "date": "2026-07-22",
+      "address": "642 Mississippi St",
+      "category": "Scraper / data bug",
+      "reason": "scraper price-parsing bug (garbled $14,700 for a 2014-sold property)",
+      "url": "https://www.redfin.com/CA/San-Francisco/642-Mississippi-St-94107/home/732464"
+    },
+    {
+      "date": "2026-07-22",
+      "address": "4140 Garden Rd",
+      "category": "ARV / comp mismatch",
+      "reason": "ARV contradicted by Redfin's own estimate ($500k vs modeled $1.24M) - fake deal",
+      "url": "https://www.redfin.com/CA/El-Sobrante/4140-Garden-Rd-94803/home/612668"
+    },
+    {
+      "date": "2026-07-22",
+      "address": "972 Tara Hills Dr",
+      "category": "ARV / comp mismatch",
+      "reason": "ARV contradicted by Redfin's own estimate ($633k vs modeled $1.39M) - fake deal",
+      "url": "https://www.redfin.com/CA/Pinole/972-Tara-Hills-Dr-94564/home/1802420"
+    },
+    {
+      "date": "2026-07-22",
+      "address": "19574 Stanton Ave",
+      "category": "Already renovated",
+      "reason": "already-updated home, no real value-add room, Redfin estimate confirms no upside",
+      "url": "https://www.redfin.com/CA/Castro-Valley/19574-Stanton-Ave-94546/home/1422359"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1329 Everett St",
+      "category": "ARV / comp mismatch",
+      "reason": "ARV contradicted by Redfin's own estimate ($885,333 vs modeled $1.457M); zip 94530 not in configured buy box, ARV used unbenchmarked fallback comp pool - fake deal",
+      "url": "https://www.redfin.com/CA/El-Cerrito/1329-Everett-St-94530/home/1138945"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "6163 Girvin Dr",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 65 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/6163-Girvin-Dr-94611/home/1981897"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "533 31st St",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 65 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/533-31st-St-94609/home/569809"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "189 Kent Rd",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 561 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Pacifica/189-Kent-Rd-94044/home/1086239"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3226 Champion St",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 139 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/3226-Champion-St-94602/home/1986790"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1000 Crescent Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 120 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Francisco/1000-Crescent-Ave-94110/home/768120"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1134 Chatham Rd",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 82 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/1134-Chatham-Rd-94610/home/1576365"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3422 Kansas St",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 122 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/3422-Kansas-St-94602/home/1543322"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "155 Native Sons Rd",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 127 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Woodside/155-Native-Sons-Rd-94062/home/1361857"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1 Mccarthy Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 129 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Francisco/1-McCarthy-Ave-94134/home/2001460"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1231 Silver Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 138 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Francisco/1231-Silver-Ave-94134/home/1981453"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "8946 Alpine Rd",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 50 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/La-Honda/8946-Alpine-Rd-94020/home/1390186"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "6437 Telegraph Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 78 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/6437-Telegraph-Ave-94609/home/1641411"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "685 Capp St",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 72 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Francisco/685-Capp-St-94110/home/18471591"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "6034 Admiralty Pl",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 72 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Jose/6034-Admiralty-Pl-95123/home/1092899"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "420 Harkness Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 79 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Francisco/420-Harkness-Ave-94134/home/1807740"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2735 Truman",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 124 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/2735-Truman-Ave-94605/home/1457182"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "5601 Doremus Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 87 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Richmond/5601-Doremus-Ave-94805/home/1634138"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "521 Santa Ana Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 75 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Jose/521-Santa-Ana-Ave-95112/home/857175"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "9850 Elmar Ave",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 557 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/Oakland/9850-Elmar-Ave-94603/home/1607506"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "14 Silver Elm Ct",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 74 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Jose/14-Silver-Elm-CT-95127/home/201702251"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "209 Dabner St",
+      "category": "Stale on market (DOM)",
+      "reason": "stale-DOM purge: recorded 123 days on market at add time, violates standing 45-day max rule (pre-dated the rule)",
+      "url": "https://www.redfin.com/CA/San-Leandro/209-Dabner-St-94577/home/1653093"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1265 Holman Rd",
+      "category": "Already renovated",
+      "reason": "Redfin 'Hot Home' badge + already-clean interior (updated eat-in kitchen, newer cabinets, quartz) per standing hot/clean exclusion rule; also listed ~$450k under Redfin's own $1.74M estimate - list-low bid strategy, profit at list price not achievable",
+      "url": "https://www.redfin.com/CA/Oakland/1265-Holman-Rd-94610/home/1483100"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "5656 Buena Vista Ave",
+      "category": "ARV / comp mismatch",
+      "reason": "finished luxury home ('meticulous engineering, refined finishes'), not a fixer; Redfin estimate $1.60M vs $1.495M asking leaves no flip margin",
+      "url": "https://www.redfin.com/CA/Oakland/5656-Buena-Vista-Ave-94618/home/836441"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "815 45th St",
+      "category": "Already renovated",
+      "reason": "'extensively remodeled in 2012' (renovated-filter gap, now patched); Redfin estimate $1.049M vs modeled $1.205M ARV collapses profit to ~breakeven",
+      "url": "https://www.redfin.com/CA/Emeryville/815-45th-St-94608/home/727633"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "860 N 19th St",
+      "category": "Stale on market (DOM)",
+      "reason": "aged out (backfill sweep): estimated 49 days on market - standing under-45 rule",
+      "url": "https://www.redfin.com/CA/San-Jose/860-N-19th-St-95112/home/662206"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "351 Santa Diana Ter",
+      "category": "Attached product (townhome/PUD)",
+      "reason": "2016 townhome (PUD) - attached product mis-valued by detached-SFH comps; townhome filter gap now patched",
+      "url": "https://www.redfin.com/CA/Sunnyvale/351-Santa-Diana-Ter-94085/home/95957064"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "390 Camarillo Ter",
+      "category": "Attached product (townhome/PUD)",
+      "reason": "2021 townhome with builder upgrades - new + attached, not a fixer; filter gap now patched",
+      "url": "https://www.redfin.com/CA/Sunnyvale/390-Camarillo-Ter-94085/home/174686360"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "601 Portofino Ln",
+      "category": "Attached product (townhome/PUD)",
+      "reason": "'walk-in unit' in Foster City Islands community - attached unit, not detached SFH",
+      "url": "https://www.redfin.com/CA/Foster-City/601-Portofino-Ln-94404/home/1030315"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "801 Norma Ln",
+      "category": "Already renovated",
+      "reason": "listing opens 'Renovated, European-style home' - already renovated",
+      "url": "https://www.redfin.com/CA/Foster-City/801-Norma-Ln-94404/home/1858720"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "815 Rigel Ln",
+      "category": "Photo audit - not a fixer",
+      "reason": "attached unit in Foster City Edgewater community (photo: shared-roofline townhouse) + Redfin Hot Home + estimate $1.079M ~ asking $1.098M - ARV gap is a comp-mix illusion",
+      "url": "https://www.redfin.com/CA/Foster-City/815-Rigel-Ln-94404/home/1996224"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1614 Russell St",
+      "category": "Multi-unit",
+      "reason": "5-unit property across three buildings - multi-unit filter gap ('5 units' missing), now patched",
+      "url": "https://www.redfin.com/CA/Berkeley/1614-Russell-St-94703/home/195848578"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2843 Buena Knoll Ct",
+      "category": "Attached product (townhome/PUD)",
+      "reason": "'end-unit' attached townhome - hyphenated variant missed by 'end unit' flag, now patched",
+      "url": "https://www.redfin.com/CA/San-Jose/2843-Buena-Knoll-Ct-95121/home/1324072"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1101 Mountain Blvd",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo review: fully renovated turnkey storybook cottage (fresh paint, staged, manicured) + estimate 18% above asking = bid-up teaser; already-clean rule",
+      "url": "https://www.redfin.com/CA/Oakland/1101-Mountain-Blvd-94611/home/1097396"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "8910 Burr St",
+      "category": "Photo audit - unverifiable",
+      "reason": "interior never photo-verified + polished marketing + estimate exactly at asking (no distress discount) - per standing rule, unverifiable-as-fixer means excluded",
+      "url": "https://www.redfin.com/CA/Oakland/8910-Burr-St-94605/home/1330333"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1750 Hillmont Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo verified AFTER being fed (process violation - was 'pending'): freshly renovated (new paint, garage door, landscaping) - already-clean rule",
+      "url": "https://www.redfin.com/CA/San-Jose/1750-Hillmont-Ave-95127/home/749088"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3731 Fairfax Way",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo review: attached row townhouse (shared-wall units visible) despite 'fixer-upper' text - SFH comps invalid on attached product",
+      "url": "https://www.redfin.com/CA/South-San-Francisco/3731-Fairfax-Way-94080/home/2030203"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "816 Balboa Ln",
+      "category": "Condo / HOA",
+      "reason": "description says 'Foster City condo' - 'condo' added to exclusion flags",
+      "url": "https://www.redfin.com/CA/Foster-City/816-Balboa-Ln-94404/home/1627831"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "725 Clarinada Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo review: fully renovated (new paint/garage/staging) + Redfin Hot Home badge - already-clean rule",
+      "url": "https://www.redfin.com/CA/Daly-City/725-Clarinada-Ave-94015/home/578053"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2328 Carquinez Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: fully remodeled flip-finish (fresh paint, new windows/landscaping/garage)",
+      "url": "https://www.redfin.com/CA/El-Cerrito/2328-Carquinez-Ave-94530/home/1136328"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "17208 President Dr",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: staged designer deck, fresh paint, renovated",
+      "url": "https://www.redfin.com/CA/Castro-Valley/17208-President-Dr-94546/home/22646842"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "Undisclosed address",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: address withheld, cannot photo-verify the specific property",
+      "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94609/home/1842788"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2182 40th Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: flip-finished exterior (fresh two-tone paint, modern glass garage door)",
+      "url": "https://www.redfin.com/CA/San-Francisco/2182-40th-Ave-94116/home/1996640"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "755 Folger Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: modern corrugated loft-style building, finished, not a fixer",
+      "url": "https://www.redfin.com/CA/Berkeley/755-Folger-Ave-94710/home/40133570"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "8440 Skyline Blvd",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: staged deck/furniture, polished presentation, no visible distress",
+      "url": "https://www.redfin.com/CA/Oakland/8440-Skyline-Blvd-94611/home/1590413"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "617 Boulevard Way",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: large maintained traditional, manicured, no distress",
+      "url": "https://www.redfin.com/CA/Piedmont/617-Boulevard-Way-94610/home/1494784"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1658 34th Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: freshly painted, newer garage door, updated exterior",
+      "url": "https://www.redfin.com/CA/San-Francisco/1658-34th-Ave-94122/home/923799"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1001 Park Ln",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: large maintained traditional, manicured, no distress",
+      "url": "https://www.redfin.com/CA/Piedmont/1001-Park-Ln-94610/home/1476106"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1834 Macduee Way",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: immaculate hedges/turf, well-maintained, no distress",
+      "url": "https://www.redfin.com/CA/San-Jose/1834-Macduee-Way-95121/home/968946"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1282 Chapel Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: twilight pro shoot, tidy/maintained, no distress",
+      "url": "https://www.redfin.com/CA/San-Leandro/1282-Chapel-Ave-94579/home/715710"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1701 Derby St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: tidy maintained bungalow, branded marketing, no distress",
+      "url": "https://www.redfin.com/CA/Berkeley/1701-Derby-St-94703/home/1098457"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3631 Victor Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: twilight-staged Tudor, lush/immaculate, nice house",
+      "url": "https://www.redfin.com/CA/Oakland/3631-Victor-Ave-94619/home/1699437"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "91 W Cavour St",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: no photos extractable, cannot verify condition (tightened rule)",
+      "url": "https://www.redfin.com/CA/Daly-City/91-W-Cavour-St-94014/home/1492017"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1431 Catherine Dr",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: newer paint, tidy, no visible distress",
+      "url": "https://www.redfin.com/CA/Berkeley/1431-Catherine-Dr-94702/home/686063"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1849 Brentwood Rd",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: listing photo is an artist RENDERING, not a real photo; condition unverifiable = out per rule",
+      "url": "https://www.redfin.com/CA/Oakland/1849-Brentwood-Rd-94602/home/1716207"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2628 Yorba St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: fully staged remodeled interior, designer staging",
+      "url": "https://www.redfin.com/CA/San-Francisco/2628-Yorba-St-94116/home/1652786"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "89 Farallones St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: freshly repainted exterior + new garage door, no visible distress",
+      "url": "https://www.redfin.com/CA/San-Francisco/89-Farallones-St-94112/home/1346223"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2400 Plateau Dr",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: modern 3-story attached townhome row",
+      "url": "https://www.redfin.com/CA/San-Jose/2400-Plateau-Dr-95125/home/167457591"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "215 Beverly Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: full flip-finish (white/black, teal door, new landscaping/garage)",
+      "url": "https://www.redfin.com/CA/Millbrae/215-Beverly-Ave-94030/home/1441973"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "Undisclosed address",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: address withheld, cannot photo-verify the specific property",
+      "url": "https://www.redfin.com/CA/Castro-Valley/Undisclosed-address-94578/home/1500930"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "Undisclosed address",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: address withheld, cannot photo-verify the specific property",
+      "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94605/home/1881009"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "132 Rishell Dr",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: maintained mid-century, manicured flowers, no distress",
+      "url": "https://www.redfin.com/CA/Oakland/132-Rishell-Dr-94619/home/565941"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1349 Hearst Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: digitally-altered twilight staging, fresh paint, staged porch",
+      "url": "https://www.redfin.com/CA/Berkeley/1349-Hearst-Ave-94702/home/1199413"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3326 Chestnut St",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: photo shows finished designer home (new roof/landscaping); possibly mismatched photo, unverifiable = out",
+      "url": "https://www.redfin.com/CA/Emeryville/3326-Chestnut-St-94608/home/525162"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "42 Seminole Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: freshly painted, twilight staged, refreshed presentation",
+      "url": "https://www.redfin.com/CA/San-Francisco/42-Seminole-Ave-94112/home/1195396"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3300 Wilson Pl",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: maintained charming craftsman, tidy landscaping, no distress",
+      "url": "https://www.redfin.com/CA/Oakland/3300-Wilson-Pl-94602/home/528538"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "1112 San Antonio Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: tidy maintained ranch, newer garage door, no distress",
+      "url": "https://www.redfin.com/CA/Alameda/1112-San-Antonio-Ave-94501/home/713823"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "439 Wisteria Dr",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: maintained ranch, manicured hedges, newer garage, no distress",
+      "url": "https://www.redfin.com/CA/East-Palo-Alto/439-Wisteria-Dr-94303/home/1882414"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "187 Elsie St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: restored ornate Victorian, good condition, nice house",
+      "url": "https://www.redfin.com/CA/San-Francisco/187-Elsie-St-94110/home/1167158"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "813 Larch Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: fresh paint, new mulch/flower landscaping, flip-finished",
+      "url": "https://www.redfin.com/CA/South-San-Francisco/813-Larch-Ave-94080/home/1356930"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "6032 Salida Del Sol",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: digitally altered, fresh paint, new stone veneer, manicured",
+      "url": "https://www.redfin.com/CA/San-Jose/6032-Salida-del-Sol-95123/home/989066"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "221 Beegum Way",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: freshly painted, staged patio, tidy, nice house",
+      "url": "https://www.redfin.com/CA/San-Jose/221-Beegum-Way-95123/home/1611289"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2258 Golden Crest Cmn",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: \"Cmn\"=common (attached) + staged clean updated interior",
+      "url": "https://www.redfin.com/CA/San-Jose/2258-Golden-Crest-Cmns-95125/home/167457401"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "Plan A Plan",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: new-construction model plan, not a real distressed house",
+      "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-A/home/200411608"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2062 Evergreen Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: digitally altered, fresh paint, stamped concrete, fountain, manicured",
+      "url": "https://www.redfin.com/CA/San-Leandro/2062-Evergreen-Ave-94577/home/1779704"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "2710 Gay Ave",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: \"Artistic Rendering, does not depict actual property\" - unverifiable",
+      "url": "https://www.redfin.com/CA/San-Jose/2710-Gay-Ave-95127/home/203166381"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "Plan 2276 Modeled Plan",
+      "category": "Photo audit - unverifiable",
+      "reason": "photo audit: new-construction model plan, not a real house",
+      "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-2276-Modeled/home/199087052"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "277 Moraga Way",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: maintained 70s two-story, manicured hedges, tidy, no distress",
+      "url": "https://www.redfin.com/CA/San-Jose/277-Moraga-Way-95119/home/845031"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "3500 Seminary Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: twilight shoot, manicured topiary, gated, well-maintained large home",
+      "url": "https://www.redfin.com/CA/Oakland/3500-Seminary-Ave-94605/home/2025775"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "6105 Oakdale Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: freshly finished 3-story, new paint + red-mulch landscaping, flipped",
+      "url": "https://www.redfin.com/CA/Oakland/6105-Oakdale-Ave-94605/home/22683679"
+    },
+    {
+      "date": "2026-07-23",
+      "address": "741 Apgar St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo audit: freshly painted green bungalow, manicured lawn, tidy, nice house",
+      "url": "https://www.redfin.com/CA/Oakland/741-Apgar-St-94609/home/174710321"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "2840 Stanton St",
+      "category": "Already renovated",
+      "reason": "'beautifully refreshed Craftsman' + Redfin Hot Home badge - renovated/nice, already-clean rule",
+      "url": "https://www.redfin.com/CA/Berkeley/2840-Stanton-St-94702/home/1777786"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "753 Warfield Ave",
+      "category": "Already renovated",
+      "reason": "description says 'Updated multi unit' - both multi-unit (space-variant flag gap, now patched) and updated",
+      "url": "https://www.redfin.com/CA/Oakland/753-Warfield-Ave-94610/home/1647859"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "1478 21st Ave",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo review: freshly painted clean white stucco, newer garage door, no visible distress - nice house, already-clean rule",
+      "url": "https://www.redfin.com/CA/San-Francisco/1478-21st-Ave-94122/home/912554"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "2808 Carmel St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo: freshly painted flip, new landscaping; desc 'totally remodeled...all you have to do is move in' + Hot Home + estimate = asking (flags now patched)",
+      "url": "https://www.redfin.com/CA/Oakland/2808-Carmel-St-94602/home/1465377"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "2704 Pine St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo: beautifully staged move-in-ready Pac Heights Victorian (nice house) + outside buy box (94115) + fallback ARV, no Redfin estimate to verify - triple disqualified",
+      "url": "https://www.redfin.com/CA/San-Francisco/2704-Pine-St-94115/home/187662302"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "9100 Thermal St",
+      "category": "Photo audit - not a fixer",
+      "reason": "$170k 'price' is an equity-loan/hard-money bait listing not a clean sale (desc: 'home with Equity for Loans, $600k equity, $34k back taxes'); photo shows large 3-story multi-car building inconsistent with listed 2bd/1222sqft - fictional $437k profit, disqualified",
+      "url": "https://www.redfin.com/CA/Oakland/9100-Thermal-St-94605/home/596855"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "1686 Grand Ave",
+      "category": "Multi-unit",
+      "reason": "listing describes a 'cute Guest House with additional 1BR/1BA' = ADU/second unit -> multi-unit income play, not SF fixer (guest-house flag now patched); also Back-on-Market + Hot Home",
+      "url": "https://www.redfin.com/CA/San-Leandro/1686-Grand-Ave-94577/home/1082928"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "377 Hillside Blvd",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo: freshly painted move-in-ready home, new windows, manicured; desc 'gorgeously refinished hardwood floors, dual-pane windows, recessed lighting' + estimate=asking -> already updated, not a fixer (added 'refinished hardwood' flag)",
+      "url": "https://www.redfin.com/CA/Daly-City/377-Hillside-Blvd-94014/home/1922946"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "688 31st St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo: fully restored Edwardian, fresh paint + manicured English garden - already done, not a fixer",
+      "url": "https://www.redfin.com/CA/Oakland/688-31st-St-94609/home/1328258"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "15357 Edgemoor St",
+      "category": "ARV / comp mismatch",
+      "reason": "94579 outside buy box -> fallback ARV, no Redfin estimate to verify; $257k profit unreliable (genuine fixer look but untrustworthy numbers)",
+      "url": "https://www.redfin.com/CA/San-Leandro/15357-Edgemoor-St-94579/home/804037"
+    },
+    {
+      "date": "2026-07-24",
+      "address": "3321 Jordan Rd",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo: twilight-staged, freshly painted, lushly landscaped Redwood Heights home + Hot Home - nice, not a fixer",
+      "url": "https://www.redfin.com/CA/Oakland/3321-Jordan-Rd-94602/home/709990"
+    },
+    {
+      "date": "2026-07-25",
+      "address": "220 Main St",
+      "category": "Multi-unit",
+      "reason": "property type = Multi-Family (2-4 Unit) -> multi-unit exclusion (blank desc slipped past keyword filter; now caught by property-type check). ARV $2.75M fake - Redfin estimate $1.26M ~ asking; single-family comps applied to a multi-unit building",
+      "url": "https://www.redfin.com/CA/Half-Moon-Bay/220-Main-St-94019/home/21858029"
+    },
+    {
+      "date": "2026-07-25",
+      "address": "2830 E 29th St",
+      "category": "Photo audit - not a fixer",
+      "reason": "photo: freshly painted/tidy home (not distressed); estimate $497,714 ~ $495k asking (no equity cushion); thin 4/10 marginal - not a clear value-add fixer",
+      "url": "https://www.redfin.com/CA/Oakland/2830-E-29th-St-94601/home/203275253"
+    }
+  ]
+}
