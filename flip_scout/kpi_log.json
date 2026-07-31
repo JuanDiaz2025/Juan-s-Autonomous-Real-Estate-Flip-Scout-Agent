@@ -2844,5 +2844,29 @@
     "url": "https://www.redfin.com/CA/Redwood-City/1016-Valota-Rd-94061/home/1162219",
     "address": "1016 Valota Rd",
     "reason": "already-renovated filter gap ('updated'/'upscale'/'striking kitchen'/'exquisite stone finishes'/'stainless steel appliances' describe a finished, renovated home - no cosmetic value-add room; also ARV ~24% over 94061 median)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T19:08:12.267555Z",
+    "new_listings_checked": 32,
+    "qualified": 3,
+    "excluded_total": 29,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 16,
+      "stale_dom": 0,
+      "below_profit_threshold": 6
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-31T19:26:29.407085Z",
+    "url": "https://www.redfin.com/CA/El-Sobrante/4334-Santa-Rita-Rd-94803/home/1119010",
+    "address": "4334 Santa Rita Rd",
+    "reason": "citywide-pool ARV overstatement - 94803 El Sobrante is out-of-box, zip_bench=False, ARV $1.99M (=$901/sqft) is absurd for El Sobrante (~$400-500/sqft market); fake $858k profit. Same pattern as 4140 Garden Rd / 972 Tara Hills removals. Also reads maintained, built 2002 (not a fixer)."
   }
 ]
