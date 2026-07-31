@@ -2820,5 +2820,29 @@
       "stale_dom": 0,
       "below_profit_threshold": 4
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T18:25:17.809388Z",
+    "new_listings_checked": 29,
+    "qualified": 1,
+    "excluded_total": 28,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 21,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-31T18:42:17.722596Z",
+    "url": "https://www.redfin.com/CA/Redwood-City/1016-Valota-Rd-94061/home/1162219",
+    "address": "1016 Valota Rd",
+    "reason": "already-renovated filter gap ('updated'/'upscale'/'striking kitchen'/'exquisite stone finishes'/'stainless steel appliances' describe a finished, renovated home - no cosmetic value-add room; also ARV ~24% over 94061 median)"
   }
 ]
