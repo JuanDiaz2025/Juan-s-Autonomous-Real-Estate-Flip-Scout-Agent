@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T21:10:17.247034Z",
+  "generated_at": "2026-07-31T22:08:57.143113Z",
   "leads": [
     {
       "score": 10,
@@ -1573,6 +1573,34 @@
       "url": "https://www.redfin.com/CA/Emeryville/6007-San-Pablo-Ave-94608/home/2000216",
       "added_at": "2026-07-18T19:20:24+00:00",
       "dom_at_add": null
+    },
+    {
+      "score": 5,
+      "recommendation": "Marginal",
+      "added_at": "2026-07-31T22:08:57.143113Z",
+      "dom_at_add": 0,
+      "address": "188 N 18th St",
+      "city": "San Jose",
+      "zip": "95112",
+      "beds": 3.0,
+      "baths": 1.0,
+      "sqft": 1456,
+      "lot_sqft": 3400,
+      "year_built": 1920,
+      "price": 850000,
+      "arv": 1144000.0,
+      "rehab_light": 102000,
+      "rehab_heavy": 211000,
+      "holding_costs": 26000.0,
+      "total_cost_light": 978000.0,
+      "total_cost_heavy": 1087000.0,
+      "gross_profit_light": 166000.0,
+      "gross_profit_heavy": 57000.0,
+      "min_profit_threshold": 100000,
+      "meets_threshold_heavy": false,
+      "recommended_max_offer": 808000.0,
+      "risks": "None",
+      "url": "https://www.redfin.com/CA/San-Jose/188-N-18th-St-95112/home/1195184"
     },
     {
       "score": 5,

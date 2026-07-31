@@ -2892,5 +2892,22 @@
     "url": "https://www.redfin.com/CA/Castro-Valley/18649-Stanton-Ave-94546/home/1721420",
     "address": "18649 Stanton Ave",
     "reason": "out-of-box zip 94546 Castro Valley, zip_bench=False, citywide-pool ARV $1.79M/$894psf is fake (Castro Valley ~$550-700psf); +$516k profit fabricated. Also reads already-updated (granite/stainless, built 2001, 'beautifully maintained') - no value-add. Same street as prior 19574 Stanton removal."
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T22:08:57.143113Z",
+    "new_listings_checked": 14,
+    "qualified": 1,
+    "excluded_total": 13,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 9,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
   }
 ]
