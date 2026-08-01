@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Flip Scout control app (app.py) runtime artifacts - per-machine, not shared
+flip_scout/scanner_state.json
+flip_scout/reports/

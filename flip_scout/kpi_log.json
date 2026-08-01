@@ -1,0 +1,2961 @@
+[
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-21T00:27:08Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/263-Hale-St-94134/home/956945",
+    "address": "263 Hale St",
+    "reason": "already-renovated filter gap ('completely remodeled' missing from keyword list)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-21T06:28:43Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2405-Plateau-Dr-95125/home/167457615",
+    "address": "2405 Plateau Dr",
+    "reason": "already-renovated filter gap ('beautifully upgraded'/'extensive upgrades' missing)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:31:23Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/642-Mississippi-St-94107/home/732464",
+    "address": "642 Mississippi St",
+    "reason": "scraper price-parsing bug (garbled $14,700 for a 2014-sold property)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:56:44.196094Z",
+    "url": "https://www.redfin.com/CA/El-Sobrante/4140-Garden-Rd-94803/home/612668",
+    "address": "4140 Garden Rd",
+    "reason": "ARV contradicted by Redfin's own estimate ($500k vs modeled $1.24M) - fake deal"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:56:44.196094Z",
+    "url": "https://www.redfin.com/CA/Pinole/972-Tara-Hills-Dr-94564/home/1802420",
+    "address": "972 Tara Hills Dr",
+    "reason": "ARV contradicted by Redfin's own estimate ($633k vs modeled $1.39M) - fake deal"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-22T21:56:44.196094Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/19574-Stanton-Ave-94546/home/1422359",
+    "address": "19574 Stanton Ave",
+    "reason": "already-updated home, no real value-add room, Redfin estimate confirms no upside"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-22T22:10:04.104136Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-22T23:00:52.695443Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-22T23:23:30.106061Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-22T23:52:29.769946Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T01:08:24.770754Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T02:08:04.573318Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T03:08:19.896257Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T04:08:12.446811Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T05:08:25.669323Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T06:09:43.281950Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T07:08:36.836939Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T08:08:51.424186Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T09:08:44.558099Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T10:07:54.167971Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T11:08:03.754943Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T12:09:50.765970Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T13:09:50.391384Z",
+    "new_listings_checked": 1,
+    "qualified": 1,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T13:31:00.219939Z",
+    "url": "https://www.redfin.com/CA/El-Cerrito/1329-Everett-St-94530/home/1138945",
+    "address": "1329 Everett St",
+    "reason": "ARV contradicted by Redfin's own estimate ($885,333 vs modeled $1.457M); zip 94530 not in configured buy box, ARV used unbenchmarked fallback comp pool - fake deal"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T14:09:07.424843Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/6163-Girvin-Dr-94611/home/1981897",
+    "address": "6163 Girvin Dr",
+    "reason": "stale-DOM purge: recorded 65 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/533-31st-St-94609/home/569809",
+    "address": "533 31st St",
+    "reason": "stale-DOM purge: recorded 65 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Pacifica/189-Kent-Rd-94044/home/1086239",
+    "address": "189 Kent Rd",
+    "reason": "stale-DOM purge: recorded 561 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/3226-Champion-St-94602/home/1986790",
+    "address": "3226 Champion St",
+    "reason": "stale-DOM purge: recorded 139 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1000-Crescent-Ave-94110/home/768120",
+    "address": "1000 Crescent Ave",
+    "reason": "stale-DOM purge: recorded 120 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/1134-Chatham-Rd-94610/home/1576365",
+    "address": "1134 Chatham Rd",
+    "reason": "stale-DOM purge: recorded 82 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/3422-Kansas-St-94602/home/1543322",
+    "address": "3422 Kansas St",
+    "reason": "stale-DOM purge: recorded 122 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Woodside/155-Native-Sons-Rd-94062/home/1361857",
+    "address": "155 Native Sons Rd",
+    "reason": "stale-DOM purge: recorded 127 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1-McCarthy-Ave-94134/home/2001460",
+    "address": "1 Mccarthy Ave",
+    "reason": "stale-DOM purge: recorded 129 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1231-Silver-Ave-94134/home/1981453",
+    "address": "1231 Silver Ave",
+    "reason": "stale-DOM purge: recorded 138 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/La-Honda/8946-Alpine-Rd-94020/home/1390186",
+    "address": "8946 Alpine Rd",
+    "reason": "stale-DOM purge: recorded 50 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/6437-Telegraph-Ave-94609/home/1641411",
+    "address": "6437 Telegraph Ave",
+    "reason": "stale-DOM purge: recorded 78 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/685-Capp-St-94110/home/18471591",
+    "address": "685 Capp St",
+    "reason": "stale-DOM purge: recorded 72 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Jose/6034-Admiralty-Pl-95123/home/1092899",
+    "address": "6034 Admiralty Pl",
+    "reason": "stale-DOM purge: recorded 72 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/420-Harkness-Ave-94134/home/1807740",
+    "address": "420 Harkness Ave",
+    "reason": "stale-DOM purge: recorded 79 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/2735-Truman-Ave-94605/home/1457182",
+    "address": "2735 Truman",
+    "reason": "stale-DOM purge: recorded 124 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Richmond/5601-Doremus-Ave-94805/home/1634138",
+    "address": "5601 Doremus Ave",
+    "reason": "stale-DOM purge: recorded 87 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Jose/521-Santa-Ana-Ave-95112/home/857175",
+    "address": "521 Santa Ana Ave",
+    "reason": "stale-DOM purge: recorded 75 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/Oakland/9850-Elmar-Ave-94603/home/1607506",
+    "address": "9850 Elmar Ave",
+    "reason": "stale-DOM purge: recorded 557 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Jose/14-Silver-Elm-CT-95127/home/201702251",
+    "address": "14 Silver Elm Ct",
+    "reason": "stale-DOM purge: recorded 74 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:12:18.126045Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/209-Dabner-St-94577/home/1653093",
+    "address": "209 Dabner St",
+    "reason": "stale-DOM purge: recorded 123 days on market at add time, violates standing 45-day max rule (pre-dated the rule)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T15:08:15.295038Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T15:26:56.206096Z",
+    "new_listings_checked": 61,
+    "qualified": 5,
+    "excluded_total": 56,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 12,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 26,
+      "stale_dom": 0,
+      "below_profit_threshold": 17
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:48:14.695833Z",
+    "url": "https://www.redfin.com/CA/Oakland/1265-Holman-Rd-94610/home/1483100",
+    "address": "1265 Holman Rd",
+    "reason": "Redfin 'Hot Home' badge + already-clean interior (updated eat-in kitchen, newer cabinets, quartz) per standing hot/clean exclusion rule; also listed ~$450k under Redfin's own $1.74M estimate - list-low bid strategy, profit at list price not achievable"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:48:14.695833Z",
+    "url": "https://www.redfin.com/CA/Oakland/5656-Buena-Vista-Ave-94618/home/836441",
+    "address": "5656 Buena Vista Ave",
+    "reason": "finished luxury home ('meticulous engineering, refined finishes'), not a fixer; Redfin estimate $1.60M vs $1.495M asking leaves no flip margin"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T15:48:14.695833Z",
+    "url": "https://www.redfin.com/CA/Emeryville/815-45th-St-94608/home/727633",
+    "address": "815 45th St",
+    "reason": "'extensively remodeled in 2012' (renovated-filter gap, now patched); Redfin estimate $1.049M vs modeled $1.205M ARV collapses profit to ~breakeven"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T16:30:54.749578Z",
+    "new_listings_checked": 29,
+    "qualified": 0,
+    "excluded_total": 29,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 11,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 14,
+      "stale_dom": 1,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T16:50:54.489882Z",
+    "url": "https://www.redfin.com/CA/San-Jose/860-N-19th-St-95112/home/662206",
+    "address": "860 N 19th St",
+    "reason": "aged out (backfill sweep): estimated 49 days on market - standing under-45 rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T17:58:02.205028Z",
+    "new_listings_checked": 20,
+    "qualified": 2,
+    "excluded_total": 18,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 13,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T19:08:22.489497Z",
+    "new_listings_checked": 75,
+    "qualified": 7,
+    "excluded_total": 68,
+    "excluded_by_reason": {
+      "multi_unit": 11,
+      "already_renovated": 9,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 41,
+      "stale_dom": 2,
+      "below_profit_threshold": 5
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Sunnyvale/351-Santa-Diana-Ter-94085/home/95957064",
+    "address": "351 Santa Diana Ter",
+    "reason": "2016 townhome (PUD) - attached product mis-valued by detached-SFH comps; townhome filter gap now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Sunnyvale/390-Camarillo-Ter-94085/home/174686360",
+    "address": "390 Camarillo Ter",
+    "reason": "2021 townhome with builder upgrades - new + attached, not a fixer; filter gap now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Foster-City/601-Portofino-Ln-94404/home/1030315",
+    "address": "601 Portofino Ln",
+    "reason": "'walk-in unit' in Foster City Islands community - attached unit, not detached SFH"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:28:59.789073Z",
+    "url": "https://www.redfin.com/CA/Foster-City/801-Norma-Ln-94404/home/1858720",
+    "address": "801 Norma Ln",
+    "reason": "listing opens 'Renovated, European-style home' - already renovated"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T19:31:16.013742Z",
+    "url": "https://www.redfin.com/CA/Foster-City/815-Rigel-Ln-94404/home/1996224",
+    "address": "815 Rigel Ln",
+    "reason": "attached unit in Foster City Edgewater community (photo: shared-roofline townhouse) + Redfin Hot Home + estimate $1.079M ~ asking $1.098M - ARV gap is a comp-mix illusion"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T20:08:44.579772Z",
+    "new_listings_checked": 42,
+    "qualified": 4,
+    "excluded_total": 38,
+    "excluded_by_reason": {
+      "multi_unit": 6,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 26,
+      "stale_dom": 1,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T20:32:36.113298Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1614-Russell-St-94703/home/195848578",
+    "address": "1614 Russell St",
+    "reason": "5-unit property across three buildings - multi-unit filter gap ('5 units' missing), now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T20:32:36.113298Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2843-Buena-Knoll-Ct-95121/home/1324072",
+    "address": "2843 Buena Knoll Ct",
+    "reason": "'end-unit' attached townhome - hyphenated variant missed by 'end unit' flag, now patched"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T20:32:36.113298Z",
+    "url": "https://www.redfin.com/CA/Oakland/1101-Mountain-Blvd-94611/home/1097396",
+    "address": "1101 Mountain Blvd",
+    "reason": "photo review: fully renovated turnkey storybook cottage (fresh paint, staged, manicured) + estimate 18% above asking = bid-up teaser; already-clean rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T21:08:00.115249Z",
+    "new_listings_checked": 76,
+    "qualified": 0,
+    "excluded_total": 76,
+    "excluded_by_reason": {
+      "multi_unit": 21,
+      "already_renovated": 7,
+      "vacant_land": 0,
+      "tenant_occupied": 1,
+      "data_incomplete": 42,
+      "stale_dom": 2,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T21:55:11.122889Z",
+    "url": "https://www.redfin.com/CA/Oakland/8910-Burr-St-94605/home/1330333",
+    "address": "8910 Burr St",
+    "reason": "interior never photo-verified + polished marketing + estimate exactly at asking (no distress discount) - per standing rule, unverifiable-as-fixer means excluded"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T21:55:11.122889Z",
+    "url": "https://www.redfin.com/CA/San-Jose/1750-Hillmont-Ave-95127/home/749088",
+    "address": "1750 Hillmont Ave",
+    "reason": "photo verified AFTER being fed (process violation - was 'pending'): freshly renovated (new paint, garage door, landscaping) - already-clean rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-23T22:08:43.083447Z",
+    "new_listings_checked": 87,
+    "qualified": 3,
+    "excluded_total": 84,
+    "excluded_by_reason": {
+      "multi_unit": 23,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 49,
+      "stale_dom": 3,
+      "below_profit_threshold": 5
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T22:33:46.557535Z",
+    "url": "https://www.redfin.com/CA/South-San-Francisco/3731-Fairfax-Way-94080/home/2030203",
+    "address": "3731 Fairfax Way",
+    "reason": "photo review: attached row townhouse (shared-wall units visible) despite 'fixer-upper' text - SFH comps invalid on attached product"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T22:33:46.557535Z",
+    "url": "https://www.redfin.com/CA/Foster-City/816-Balboa-Ln-94404/home/1627831",
+    "address": "816 Balboa Ln",
+    "reason": "description says 'Foster City condo' - 'condo' added to exclusion flags"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T22:33:46.557535Z",
+    "url": "https://www.redfin.com/CA/Daly-City/725-Clarinada-Ave-94015/home/578053",
+    "address": "725 Clarinada Ave",
+    "reason": "photo review: fully renovated (new paint/garage/staging) + Redfin Hot Home badge - already-clean rule"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/El-Cerrito/2328-Carquinez-Ave-94530/home/1136328",
+    "address": "2328 Carquinez Ave",
+    "reason": "photo audit: fully remodeled flip-finish (fresh paint, new windows/landscaping/garage)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/17208-President-Dr-94546/home/22646842",
+    "address": "17208 President Dr",
+    "reason": "photo audit: staged designer deck, fresh paint, renovated"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94609/home/1842788",
+    "address": "Undisclosed address",
+    "reason": "photo audit: address withheld, cannot photo-verify the specific property"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/2182-40th-Ave-94116/home/1996640",
+    "address": "2182 40th Ave",
+    "reason": "photo audit: flip-finished exterior (fresh two-tone paint, modern glass garage door)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/755-Folger-Ave-94710/home/40133570",
+    "address": "755 Folger Ave",
+    "reason": "photo audit: modern corrugated loft-style building, finished, not a fixer"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/8440-Skyline-Blvd-94611/home/1590413",
+    "address": "8440 Skyline Blvd",
+    "reason": "photo audit: staged deck/furniture, polished presentation, no visible distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Piedmont/617-Boulevard-Way-94610/home/1494784",
+    "address": "617 Boulevard Way",
+    "reason": "photo audit: large maintained traditional, manicured, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1658-34th-Ave-94122/home/923799",
+    "address": "1658 34th Ave",
+    "reason": "photo audit: freshly painted, newer garage door, updated exterior"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Piedmont/1001-Park-Ln-94610/home/1476106",
+    "address": "1001 Park Ln",
+    "reason": "photo audit: large maintained traditional, manicured, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/1834-Macduee-Way-95121/home/968946",
+    "address": "1834 Macduee Way",
+    "reason": "photo audit: immaculate hedges/turf, well-maintained, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/1282-Chapel-Ave-94579/home/715710",
+    "address": "1282 Chapel Ave",
+    "reason": "photo audit: twilight pro shoot, tidy/maintained, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1701-Derby-St-94703/home/1098457",
+    "address": "1701 Derby St",
+    "reason": "photo audit: tidy maintained bungalow, branded marketing, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/3631-Victor-Ave-94619/home/1699437",
+    "address": "3631 Victor Ave",
+    "reason": "photo audit: twilight-staged Tudor, lush/immaculate, nice house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Daly-City/91-W-Cavour-St-94014/home/1492017",
+    "address": "91 W Cavour St",
+    "reason": "photo audit: no photos extractable, cannot verify condition (tightened rule)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1431-Catherine-Dr-94702/home/686063",
+    "address": "1431 Catherine Dr",
+    "reason": "photo audit: newer paint, tidy, no visible distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/1849-Brentwood-Rd-94602/home/1716207",
+    "address": "1849 Brentwood Rd",
+    "reason": "photo audit: listing photo is an artist RENDERING, not a real photo; condition unverifiable = out per rule"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/2628-Yorba-St-94116/home/1652786",
+    "address": "2628 Yorba St",
+    "reason": "photo audit: fully staged remodeled interior, designer staging"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/89-Farallones-St-94112/home/1346223",
+    "address": "89 Farallones St",
+    "reason": "photo audit: freshly repainted exterior + new garage door, no visible distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2400-Plateau-Dr-95125/home/167457591",
+    "address": "2400 Plateau Dr",
+    "reason": "photo audit: modern 3-story attached townhome row"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Millbrae/215-Beverly-Ave-94030/home/1441973",
+    "address": "215 Beverly Ave",
+    "reason": "photo audit: full flip-finish (white/black, teal door, new landscaping/garage)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/Undisclosed-address-94578/home/1500930",
+    "address": "Undisclosed address",
+    "reason": "photo audit: address withheld, cannot photo-verify the specific property"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/Undisclosed-address-94605/home/1881009",
+    "address": "Undisclosed address",
+    "reason": "photo audit: address withheld, cannot photo-verify the specific property"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/132-Rishell-Dr-94619/home/565941",
+    "address": "132 Rishell Dr",
+    "reason": "photo audit: maintained mid-century, manicured flowers, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Berkeley/1349-Hearst-Ave-94702/home/1199413",
+    "address": "1349 Hearst Ave",
+    "reason": "photo audit: digitally-altered twilight staging, fresh paint, staged porch"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Emeryville/3326-Chestnut-St-94608/home/525162",
+    "address": "3326 Chestnut St",
+    "reason": "photo audit: photo shows finished designer home (new roof/landscaping); possibly mismatched photo, unverifiable = out"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/42-Seminole-Ave-94112/home/1195396",
+    "address": "42 Seminole Ave",
+    "reason": "photo audit: freshly painted, twilight staged, refreshed presentation"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/3300-Wilson-Pl-94602/home/528538",
+    "address": "3300 Wilson Pl",
+    "reason": "photo audit: maintained charming craftsman, tidy landscaping, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Alameda/1112-San-Antonio-Ave-94501/home/713823",
+    "address": "1112 San Antonio Ave",
+    "reason": "photo audit: tidy maintained ranch, newer garage door, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/East-Palo-Alto/439-Wisteria-Dr-94303/home/1882414",
+    "address": "439 Wisteria Dr",
+    "reason": "photo audit: maintained ranch, manicured hedges, newer garage, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/187-Elsie-St-94110/home/1167158",
+    "address": "187 Elsie St",
+    "reason": "photo audit: restored ornate Victorian, good condition, nice house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/South-San-Francisco/813-Larch-Ave-94080/home/1356930",
+    "address": "813 Larch Ave",
+    "reason": "photo audit: fresh paint, new mulch/flower landscaping, flip-finished"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/6032-Salida-del-Sol-95123/home/989066",
+    "address": "6032 Salida Del Sol",
+    "reason": "photo audit: digitally altered, fresh paint, new stone veneer, manicured"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/221-Beegum-Way-95123/home/1611289",
+    "address": "221 Beegum Way",
+    "reason": "photo audit: freshly painted, staged patio, tidy, nice house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2258-Golden-Crest-Cmns-95125/home/167457401",
+    "address": "2258 Golden Crest Cmn",
+    "reason": "photo audit: \"Cmn\"=common (attached) + staged clean updated interior"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-A/home/200411608",
+    "address": "Plan A Plan",
+    "reason": "photo audit: new-construction model plan, not a real distressed house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/2062-Evergreen-Ave-94577/home/1779704",
+    "address": "2062 Evergreen Ave",
+    "reason": "photo audit: digitally altered, fresh paint, stamped concrete, fountain, manicured"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/2710-Gay-Ave-95127/home/203166381",
+    "address": "2710 Gay Ave",
+    "reason": "photo audit: \"Artistic Rendering, does not depict actual property\" - unverifiable"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/San-Jose/Plan-2276-Modeled/home/199087052",
+    "address": "Plan 2276 Modeled Plan",
+    "reason": "photo audit: new-construction model plan, not a real house"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/San-Jose/277-Moraga-Way-95119/home/845031",
+    "address": "277 Moraga Way",
+    "reason": "photo audit: maintained 70s two-story, manicured hedges, tidy, no distress"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/3500-Seminary-Ave-94605/home/2025775",
+    "address": "3500 Seminary Ave",
+    "reason": "photo audit: twilight shoot, manicured topiary, gated, well-maintained large home"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/6105-Oakdale-Ave-94605/home/22683679",
+    "address": "6105 Oakdale Ave",
+    "reason": "photo audit: freshly finished 3-story, new paint + red-mulch landscaping, flipped"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-23T23:57:56.479505Z",
+    "url": "https://www.redfin.com/CA/Oakland/741-Apgar-St-94609/home/174710321",
+    "address": "741 Apgar St",
+    "reason": "photo audit: freshly painted green bungalow, manicured lawn, tidy, nice house"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T00:08:28.297441Z",
+    "new_listings_checked": 126,
+    "qualified": 3,
+    "excluded_total": 123,
+    "excluded_by_reason": {
+      "multi_unit": 24,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 88,
+      "stale_dom": 3,
+      "below_profit_threshold": 4
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T00:27:08.333199Z",
+    "url": "https://www.redfin.com/CA/Berkeley/2840-Stanton-St-94702/home/1777786",
+    "address": "2840 Stanton St",
+    "reason": "'beautifully refreshed Craftsman' + Redfin Hot Home badge - renovated/nice, already-clean rule"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T00:27:08.333199Z",
+    "url": "https://www.redfin.com/CA/Oakland/753-Warfield-Ave-94610/home/1647859",
+    "address": "753 Warfield Ave",
+    "reason": "description says 'Updated multi unit' - both multi-unit (space-variant flag gap, now patched) and updated"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T00:28:32.393122Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/1478-21st-Ave-94122/home/912554",
+    "address": "1478 21st Ave",
+    "reason": "photo review: freshly painted clean white stucco, newer garage door, no visible distress - nice house, already-clean rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T01:08:13.478418Z",
+    "new_listings_checked": 76,
+    "qualified": 2,
+    "excluded_total": 74,
+    "excluded_by_reason": {
+      "multi_unit": 21,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 47,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T01:27:56.383288Z",
+    "url": "https://www.redfin.com/CA/Oakland/2808-Carmel-St-94602/home/1465377",
+    "address": "2808 Carmel St",
+    "reason": "photo: freshly painted flip, new landscaping; desc 'totally remodeled...all you have to do is move in' + Hot Home + estimate = asking (flags now patched)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T02:08:14.623864Z",
+    "new_listings_checked": 47,
+    "qualified": 1,
+    "excluded_total": 46,
+    "excluded_by_reason": {
+      "multi_unit": 10,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 31,
+      "stale_dom": 1,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T03:08:38.402281Z",
+    "new_listings_checked": 83,
+    "qualified": 1,
+    "excluded_total": 82,
+    "excluded_by_reason": {
+      "multi_unit": 36,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 40,
+      "stale_dom": 4,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T03:28:07.006430Z",
+    "url": "https://www.redfin.com/CA/San-Francisco/2704-Pine-St-94115/home/187662302",
+    "address": "2704 Pine St",
+    "reason": "photo: beautifully staged move-in-ready Pac Heights Victorian (nice house) + outside buy box (94115) + fallback ARV, no Redfin estimate to verify - triple disqualified"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T04:08:45.243731Z",
+    "new_listings_checked": 87,
+    "qualified": 1,
+    "excluded_total": 86,
+    "excluded_by_reason": {
+      "multi_unit": 24,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 56,
+      "stale_dom": 1,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T04:25:48.818383Z",
+    "url": "https://www.redfin.com/CA/Oakland/9100-Thermal-St-94605/home/596855",
+    "address": "9100 Thermal St",
+    "reason": "$170k 'price' is an equity-loan/hard-money bait listing not a clean sale (desc: 'home with Equity for Loans, $600k equity, $34k back taxes'); photo shows large 3-story multi-car building inconsistent with listed 2bd/1222sqft - fictional $437k profit, disqualified"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T05:08:07.040103Z",
+    "new_listings_checked": 84,
+    "qualified": 0,
+    "excluded_total": 84,
+    "excluded_by_reason": {
+      "multi_unit": 21,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 56,
+      "stale_dom": 4,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T06:08:43.966233Z",
+    "new_listings_checked": 31,
+    "qualified": 0,
+    "excluded_total": 31,
+    "excluded_by_reason": {
+      "multi_unit": 15,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 16,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T07:08:25.030065Z",
+    "new_listings_checked": 24,
+    "qualified": 0,
+    "excluded_total": 24,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 14,
+      "stale_dom": 1,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T08:09:56.281921Z",
+    "new_listings_checked": 43,
+    "qualified": 0,
+    "excluded_total": 43,
+    "excluded_by_reason": {
+      "multi_unit": 11,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 31,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T09:08:45.775130Z",
+    "new_listings_checked": 28,
+    "qualified": 0,
+    "excluded_total": 28,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 20,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T10:09:20.947196Z",
+    "new_listings_checked": 39,
+    "qualified": 0,
+    "excluded_total": 39,
+    "excluded_by_reason": {
+      "multi_unit": 14,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 21,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T11:09:32.361514Z",
+    "new_listings_checked": 25,
+    "qualified": 0,
+    "excluded_total": 25,
+    "excluded_by_reason": {
+      "multi_unit": 9,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 14,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T12:10:56.645311Z",
+    "new_listings_checked": 19,
+    "qualified": 0,
+    "excluded_total": 19,
+    "excluded_by_reason": {
+      "multi_unit": 5,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 11,
+      "stale_dom": 2,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T13:08:33.390645Z",
+    "new_listings_checked": 36,
+    "qualified": 0,
+    "excluded_total": 36,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 28,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T14:09:38.742425Z",
+    "new_listings_checked": 21,
+    "qualified": 0,
+    "excluded_total": 21,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 10,
+      "stale_dom": 3,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T15:09:18.230976Z",
+    "new_listings_checked": 35,
+    "qualified": 1,
+    "excluded_total": 34,
+    "excluded_by_reason": {
+      "multi_unit": 15,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 18,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T16:08:34.461439Z",
+    "new_listings_checked": 17,
+    "qualified": 0,
+    "excluded_total": 17,
+    "excluded_by_reason": {
+      "multi_unit": 5,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 10,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T17:08:15.987584Z",
+    "new_listings_checked": 26,
+    "qualified": 0,
+    "excluded_total": 26,
+    "excluded_by_reason": {
+      "multi_unit": 4,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 16,
+      "stale_dom": 2,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T18:09:05.153242Z",
+    "new_listings_checked": 26,
+    "qualified": 2,
+    "excluded_total": 24,
+    "excluded_by_reason": {
+      "multi_unit": 9,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 10,
+      "stale_dom": 0,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T18:27:49.145174Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/1686-Grand-Ave-94577/home/1082928",
+    "address": "1686 Grand Ave",
+    "reason": "listing describes a 'cute Guest House with additional 1BR/1BA' = ADU/second unit -> multi-unit income play, not SF fixer (guest-house flag now patched); also Back-on-Market + Hot Home"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T19:08:58.285008Z",
+    "new_listings_checked": 30,
+    "qualified": 0,
+    "excluded_total": 30,
+    "excluded_by_reason": {
+      "multi_unit": 13,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 1,
+      "data_incomplete": 13,
+      "stale_dom": 2,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T20:09:59.936928Z",
+    "new_listings_checked": 35,
+    "qualified": 1,
+    "excluded_total": 34,
+    "excluded_by_reason": {
+      "multi_unit": 14,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 19,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T20:31:49.908102Z",
+    "url": "https://www.redfin.com/CA/Daly-City/377-Hillside-Blvd-94014/home/1922946",
+    "address": "377 Hillside Blvd",
+    "reason": "photo: freshly painted move-in-ready home, new windows, manicured; desc 'gorgeously refinished hardwood floors, dual-pane windows, recessed lighting' + estimate=asking -> already updated, not a fixer (added 'refinished hardwood' flag)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T21:09:17.934793Z",
+    "new_listings_checked": 32,
+    "qualified": 1,
+    "excluded_total": 31,
+    "excluded_by_reason": {
+      "multi_unit": 8,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 18,
+      "stale_dom": 1,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T22:08:50.722307Z",
+    "new_listings_checked": 12,
+    "qualified": 0,
+    "excluded_total": 12,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 7,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-24T23:09:15.857054Z",
+    "new_listings_checked": 22,
+    "qualified": 4,
+    "excluded_total": 18,
+    "excluded_by_reason": {
+      "multi_unit": 6,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 11,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T23:27:40.262325Z",
+    "url": "https://www.redfin.com/CA/Oakland/688-31st-St-94609/home/1328258",
+    "address": "688 31st St",
+    "reason": "photo: fully restored Edwardian, fresh paint + manicured English garden - already done, not a fixer"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T23:27:40.262325Z",
+    "url": "https://www.redfin.com/CA/San-Leandro/15357-Edgemoor-St-94579/home/804037",
+    "address": "15357 Edgemoor St",
+    "reason": "94579 outside buy box -> fallback ARV, no Redfin estimate to verify; $257k profit unreliable (genuine fixer look but untrustworthy numbers)"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-24T23:27:40.262325Z",
+    "url": "https://www.redfin.com/CA/Oakland/3321-Jordan-Rd-94602/home/709990",
+    "address": "3321 Jordan Rd",
+    "reason": "photo: twilight-staged, freshly painted, lushly landscaped Redwood Heights home + Hot Home - nice, not a fixer"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T00:09:23.920446Z",
+    "new_listings_checked": 23,
+    "qualified": 0,
+    "excluded_total": 23,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 15,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T01:08:24.368180Z",
+    "new_listings_checked": 17,
+    "qualified": 2,
+    "excluded_total": 15,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 12,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-25T01:28:36.370390Z",
+    "url": "https://www.redfin.com/CA/Half-Moon-Bay/220-Main-St-94019/home/21858029",
+    "address": "220 Main St",
+    "reason": "property type = Multi-Family (2-4 Unit) -> multi-unit exclusion (blank desc slipped past keyword filter; now caught by property-type check). ARV $2.75M fake - Redfin estimate $1.26M ~ asking; single-family comps applied to a multi-unit building"
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-25T01:28:36.370390Z",
+    "url": "https://www.redfin.com/CA/Oakland/2830-E-29th-St-94601/home/203275253",
+    "address": "2830 E 29th St",
+    "reason": "photo: freshly painted/tidy home (not distressed); estimate $497,714 ~ $495k asking (no equity cushion); thin 4/10 marginal - not a clear value-add fixer"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T02:08:35.994700Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T03:08:30.465383Z",
+    "new_listings_checked": 8,
+    "qualified": 0,
+    "excluded_total": 8,
+    "excluded_by_reason": {
+      "multi_unit": 4,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T04:08:44.104234Z",
+    "new_listings_checked": 6,
+    "qualified": 0,
+    "excluded_total": 6,
+    "excluded_by_reason": {
+      "multi_unit": 5,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T05:08:40.054284Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T06:08:47.928666Z",
+    "new_listings_checked": 14,
+    "qualified": 0,
+    "excluded_total": 14,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 7,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T07:08:19.552772Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T08:08:29.396359Z",
+    "new_listings_checked": 5,
+    "qualified": 0,
+    "excluded_total": 5,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T09:08:28.364162Z",
+    "new_listings_checked": 13,
+    "qualified": 0,
+    "excluded_total": 13,
+    "excluded_by_reason": {
+      "multi_unit": 4,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 9,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T10:08:24.879480Z",
+    "new_listings_checked": 5,
+    "qualified": 0,
+    "excluded_total": 5,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 5,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T11:08:24.034643Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 6,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T12:08:51.412474Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 5,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T13:08:09.202252Z",
+    "new_listings_checked": 10,
+    "qualified": 0,
+    "excluded_total": 10,
+    "excluded_by_reason": {
+      "multi_unit": 7,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T14:08:12.205035Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T15:08:04.837877Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 4,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T16:08:22.844364Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T17:09:56.025861Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T18:07:53.328964Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 5,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T19:07:43.565264Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T21:08:08.968247Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T22:07:47.694249Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-25T23:39:54.852809Z",
+    "new_listings_checked": 17,
+    "qualified": 0,
+    "excluded_total": 17,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 14,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T00:08:00.848491Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T02:07:55.927485Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T04:07:52.768323Z",
+    "new_listings_checked": 1,
+    "qualified": 1,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T05:08:59.169763Z",
+    "new_listings_checked": 5,
+    "qualified": 1,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T06:08:34.951429Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T08:07:45.518612Z",
+    "new_listings_checked": 5,
+    "qualified": 1,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T09:08:23.956087Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T10:07:55.278934Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T11:08:14.602059Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T12:09:03.194689Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T14:08:33.515429Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T18:18:36.178926Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T19:08:23.072892Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T20:07:44.068616Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T21:08:06.909731Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T22:09:17.248731Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-26T23:08:41.727043Z",
+    "new_listings_checked": 3,
+    "qualified": 1,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T17:09:10.663516Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T18:09:41.573428Z",
+    "new_listings_checked": 5,
+    "qualified": 0,
+    "excluded_total": 5,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T19:08:52.862168Z",
+    "new_listings_checked": 2,
+    "qualified": 1,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T20:09:54.891442Z",
+    "new_listings_checked": 4,
+    "qualified": 1,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 2,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T21:08:50.575353Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T22:09:32.599400Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-27T23:08:43.086425Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T00:09:59.631489Z",
+    "new_listings_checked": 3,
+    "qualified": 1,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T01:09:00.338988Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 4,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T02:08:36.051415Z",
+    "new_listings_checked": 4,
+    "qualified": 1,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T03:08:19.340946Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T04:09:22.134142Z",
+    "new_listings_checked": 23,
+    "qualified": 3,
+    "excluded_total": 20,
+    "excluded_by_reason": {
+      "multi_unit": 6,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 10,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T05:09:51.758036Z",
+    "new_listings_checked": 7,
+    "qualified": 0,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T06:10:37.516582Z",
+    "new_listings_checked": 8,
+    "qualified": 0,
+    "excluded_total": 8,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 3,
+      "stale_dom": 1,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T07:10:19.698178Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T08:09:16.263304Z",
+    "new_listings_checked": 4,
+    "qualified": 0,
+    "excluded_total": 4,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 2,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T09:10:33.271659Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T10:09:32.175806Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T11:09:55.548907Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T12:11:56.811575Z",
+    "new_listings_checked": 1,
+    "qualified": 0,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T13:10:24.827416Z",
+    "new_listings_checked": 3,
+    "qualified": 0,
+    "excluded_total": 3,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T14:10:28.107936Z",
+    "new_listings_checked": 2,
+    "qualified": 0,
+    "excluded_total": 2,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 1,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T15:10:21.629207Z",
+    "new_listings_checked": 0,
+    "qualified": 0,
+    "excluded_total": 0,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T16:08:59.070276Z",
+    "new_listings_checked": 2,
+    "qualified": 1,
+    "excluded_total": 1,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 0,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T19:08:18.454317Z",
+    "new_listings_checked": 15,
+    "qualified": 0,
+    "excluded_total": 15,
+    "excluded_by_reason": {
+      "multi_unit": 4,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 7,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T20:08:29.582129Z",
+    "new_listings_checked": 8,
+    "qualified": 1,
+    "excluded_total": 7,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 4,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T21:08:38.994766Z",
+    "new_listings_checked": 5,
+    "qualified": 0,
+    "excluded_total": 5,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 2,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-28T22:08:31.652184Z",
+    "new_listings_checked": 10,
+    "qualified": 1,
+    "excluded_total": 9,
+    "excluded_by_reason": {
+      "multi_unit": 3,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 5,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-29T15:25:52.155176Z",
+    "new_listings_checked": 16,
+    "qualified": 0,
+    "excluded_total": 16,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 8,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-29T16:08:58.653491Z",
+    "new_listings_checked": 9,
+    "qualified": 1,
+    "excluded_total": 8,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 3,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-29T17:32:32.781390Z",
+    "new_listings_checked": 10,
+    "qualified": 0,
+    "excluded_total": 10,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 8,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-29T18:08:39.729029Z",
+    "new_listings_checked": 9,
+    "qualified": 1,
+    "excluded_total": 8,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 7,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-29T22:15:28.514056Z",
+    "new_listings_checked": 22,
+    "qualified": 1,
+    "excluded_total": 21,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 10,
+      "stale_dom": 1,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T16:09:12.558355Z",
+    "new_listings_checked": 30,
+    "qualified": 0,
+    "excluded_total": 30,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 4,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 22,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T17:08:41.168618Z",
+    "new_listings_checked": 25,
+    "qualified": 0,
+    "excluded_total": 25,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 6,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 15,
+      "stale_dom": 0,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T18:08:14.557154Z",
+    "new_listings_checked": 20,
+    "qualified": 2,
+    "excluded_total": 18,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 6,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 9,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T19:08:38.435925Z",
+    "new_listings_checked": 16,
+    "qualified": 0,
+    "excluded_total": 16,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 10,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T20:09:14.237239Z",
+    "new_listings_checked": 13,
+    "qualified": 2,
+    "excluded_total": 11,
+    "excluded_by_reason": {
+      "multi_unit": 0,
+      "already_renovated": 0,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 10,
+      "stale_dom": 1,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-30T20:09:14.237239Z",
+    "url": "https://www.redfin.com/CA/Oakland/901-92nd-Ave-94603/home/1533246",
+    "address": "901 92nd Ave",
+    "reason": "aged out: estimated 45 days on market (dom 33 at add + time in feed) - standing under-45 rule"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-30T21:08:21.631711Z",
+    "new_listings_checked": 14,
+    "qualified": 1,
+    "excluded_total": 13,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 11,
+      "stale_dom": 0,
+      "below_profit_threshold": 0
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T12:20:18.352803Z",
+    "new_listings_checked": 26,
+    "qualified": 1,
+    "excluded_total": 25,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 3,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 16,
+      "stale_dom": 0,
+      "below_profit_threshold": 4
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T18:25:17.809388Z",
+    "new_listings_checked": 29,
+    "qualified": 1,
+    "excluded_total": 28,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 21,
+      "stale_dom": 0,
+      "below_profit_threshold": 1
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-31T18:42:17.722596Z",
+    "url": "https://www.redfin.com/CA/Redwood-City/1016-Valota-Rd-94061/home/1162219",
+    "address": "1016 Valota Rd",
+    "reason": "already-renovated filter gap ('updated'/'upscale'/'striking kitchen'/'exquisite stone finishes'/'stainless steel appliances' describe a finished, renovated home - no cosmetic value-add room; also ARV ~24% over 94061 median)"
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T19:08:12.267555Z",
+    "new_listings_checked": 32,
+    "qualified": 3,
+    "excluded_total": 29,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 16,
+      "stale_dom": 0,
+      "below_profit_threshold": 6
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-31T19:26:29.407085Z",
+    "url": "https://www.redfin.com/CA/El-Sobrante/4334-Santa-Rita-Rd-94803/home/1119010",
+    "address": "4334 Santa Rita Rd",
+    "reason": "citywide-pool ARV overstatement - 94803 El Sobrante is out-of-box, zip_bench=False, ARV $1.99M (=$901/sqft) is absurd for El Sobrante (~$400-500/sqft market); fake $858k profit. Same pattern as 4140 Garden Rd / 972 Tara Hills removals. Also reads maintained, built 2002 (not a fixer)."
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T21:10:17.247034Z",
+    "new_listings_checked": 21,
+    "qualified": 1,
+    "excluded_total": 20,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 5,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 11,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-07-31T21:27:57.144084Z",
+    "url": "https://www.redfin.com/CA/Castro-Valley/18649-Stanton-Ave-94546/home/1721420",
+    "address": "18649 Stanton Ave",
+    "reason": "out-of-box zip 94546 Castro Valley, zip_bench=False, citywide-pool ARV $1.79M/$894psf is fake (Castro Valley ~$550-700psf); +$516k profit fabricated. Also reads already-updated (granite/stainless, built 2001, 'beautifully maintained') - no value-add. Same street as prior 19574 Stanton removal."
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-07-31T22:08:57.143113Z",
+    "new_listings_checked": 14,
+    "qualified": 1,
+    "excluded_total": 13,
+    "excluded_by_reason": {
+      "multi_unit": 1,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 9,
+      "stale_dom": 0,
+      "below_profit_threshold": 2
+    }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-08-01T07:23:51.712484Z",
+    "new_listings_checked": 29,
+    "qualified": 5,
+    "excluded_total": 24,
+    "excluded_by_reason": {
+      "multi_unit": 6,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 14,
+      "stale_dom": 0,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-08-01T07:40:16.779348Z",
+    "url": "https://www.redfin.com/CA/Oakland/1555-Mitchell-St-94601/home/538149",
+    "address": "1555 Mitchell St",
+    "reason": "fake ARV - $945/sqft vs 94601 median $444 (2.1x), phantom $465k profit. 94601 is low-value East Oakland; renovated 2/1 nowhere near $1M. year_built=0 data gap. arv/price=2.23x exceeds verify threshold."
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-08-01T07:40:16.779417Z",
+    "url": "https://www.redfin.com/CA/Oakland/610-Prospect-Ave-94610/home/536195",
+    "address": "610 Prospect Ave",
+    "reason": "effectively refurbished - listing says 'refurbished... recently replaced roof, all windows, furnace, sewer, plumbing, electrical' = expensive systems done, no flip value-add (already-renovated rule). Also odd 2bd/4ba config suggests possible unpermitted units."
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-08-01T16:08:52.956953Z",
+    "new_listings_checked": 20,
+    "qualified": 2,
+    "excluded_total": 18,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 9,
+      "stale_dom": 0,
+      "below_profit_threshold": 5
+    }
+  }
+]

@@ -1,0 +1,39 @@
+Juan's Flip Scout Report - July 17, 2026
+============================================================
+
+LEAD #1 - Score: 10/10
+Address: 5917 Balboa, Oakland, CA 94611
+Price: $999,000
+ARV (comp-based): $2,817,000
+Net Spread: $619,000 (28.1%)
+Risks: 
+Link: https://www.redfin.com/CA/Oakland/5917-Balboa-Dr-94611/home/17519291
+----------------------------------------
+
+LEAD #2 - Score: 8/10
+Address: 7420 Skyline Blvd, Oakland, CA 94611
+Price: $1,499,999
+ARV (comp-based): $4,558,000
+Net Spread: $1,625,000 (55.4%)
+Risks: 
+Link: https://www.redfin.com/CA/Oakland/7420-Skyline-Blvd-94611/home/22713719
+----------------------------------------
+
+LEAD #3 - Score: 5/10
+Address: 322 1st Ave, Redwood City, CA 94063
+Price: $975,000
+ARV (comp-based): $1,968,000
+Net Spread: $288,000 (17.2%)
+Risks: 
+Link: https://www.redfin.com/CA/Redwood-City/322-1st-Ave-94063/home/1984200
+----------------------------------------
+
+LEAD #4 - Score: 2/10
+Address: 827 Chestnut St, Redwood City, CA 94063
+Price: $989,000
+ARV (comp-based): $1,633,000
+Net Spread: $165,000 (11.2%)
+Risks: 
+Link: https://www.redfin.com/CA/Redwood-City/827-Chestnut-St-94063/home/1341408
+----------------------------------------
+

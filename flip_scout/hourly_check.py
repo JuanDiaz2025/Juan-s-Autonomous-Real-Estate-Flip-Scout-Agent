@@ -1,0 +1,277 @@
+#!/usr/bin/env python3
+"""
+Lightweight recurring check for Juan's Flip Scout Agent.
+
+Unlike flip_scout_redfin.py (a full scan: rebuild comps for every zip,
+search, enrich N candidates per zip), this script is meant to run often
+(hourly) without hammering Redfin:
+
+- Reuses cached comp benchmarks (comp_benchmarks_cache.json) unless they're
+  older than COMP_CACHE_MAX_AGE_DAYS - sold comps don't meaningfully change
+  hour to hour, so rebuilding them every run would be wasted requests.
+- Only searches active listings (cheap - one request per zip, no detail
+  page fetch) and diffs against previously seen URLs (seen_listings.json).
+- Only enriches + scores listings that are actually NEW since last run.
+
+Run with: python flip_scout/hourly_check.py
+Prints a summary and writes new_leads.json only if something new cleared
+the filters. Updates seen_listings.json and comp_benchmarks_cache.json
+in place - commit these back to the repo after each run so state persists
+across sessions.
+"""
+
+import json
+import os
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+sys.path.insert(0, os.path.dirname(__file__))
+import flip_scout_redfin as fsr
+import kpi
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SEEN_PATH = os.path.join(HERE, "seen_listings.json")
+CACHE_PATH = os.path.join(HERE, "comp_benchmarks_cache.json")
+
+COMP_CACHE_MAX_AGE_DAYS = 7
+
+
+def load_seen():
+    if os.path.exists(SEEN_PATH):
+        return set(json.load(open(SEEN_PATH)))
+    return set()
+
+
+def save_seen(urls):
+    json.dump(sorted(urls), open(SEEN_PATH, "w"), indent=2)
+
+
+def load_or_rebuild_benchmarks(now_iso, now_ts, parse_iso):
+    if os.path.exists(CACHE_PATH):
+        cache = json.load(open(CACHE_PATH))
+        age_days = (now_ts - parse_iso(cache["last_built"])) / 86400
+        if age_days < COMP_CACHE_MAX_AGE_DAYS:
+            n_zips = len([k for k in cache["benchmarks"] if k != "__fallback__"])
+            print(f"Using cached comp benchmarks ({age_days:.1f} days old, {n_zips} zips)")
+            return cache["benchmarks"]
+        print(f"Comp cache is {age_days:.1f} days old (> {COMP_CACHE_MAX_AGE_DAYS}) - rebuilding")
+    else:
+        print("No comp cache found - building fresh")
+
+    benchmarks = fsr.build_arv_benchmarks(fsr.CONFIG["target_zips"])
+    json.dump({"last_built": now_iso, "benchmarks": benchmarks}, open(CACHE_PATH, "w"), indent=2)
+    return benchmarks
+
+
+def main(now_iso, now_ts, parse_iso):
+    """
+    now_iso / now_ts / parse_iso are injected by the caller (Date.now() and
+    new Date() aren't reliably available in every execution context this
+    script might run under - pass real wall-clock values in explicitly).
+    """
+    seen = load_seen()
+    print(f"{len(seen)} previously seen listings")
+
+    fsr.ARV_BENCHMARKS = load_or_rebuild_benchmarks(now_iso, now_ts, parse_iso)
+
+    print(f"Checking {len(fsr.CONFIG['target_zips'])} zips for active listings...")
+    new_listings = []
+    all_current_urls = set()
+    new_seen_urls = set()
+    for z in fsr.CONFIG["target_zips"]:
+        found = fsr.search_redfin(z)
+        for l in found:
+            all_current_urls.add(l["url"])
+            # a listing can appear under more than one zip's search page
+            # (boundary effect) - dedupe so it's only enriched/scored once
+            if l["url"] not in seen and l["url"] not in new_seen_urls:
+                new_seen_urls.add(l["url"])
+                new_listings.append(l)
+        time.sleep(0.3)
+
+    print(f"{len(new_listings)} new listings since last check")
+
+    if new_listings:
+        with ThreadPoolExecutor(max_workers=6) as ex:
+            futures = [ex.submit(fsr.enrich_detail, l) for l in new_listings]
+            for fut in as_completed(futures):
+                fut.result()
+
+    # Tally *why* each new listing didn't make it, not just the final count -
+    # this is what makes the KPI log answer "how many are we removing and
+    # for what reason", not just "how many are we removing".
+    excluded = {
+        "multi_unit": 0, "already_renovated": 0, "vacant_land": 0,
+        "tenant_occupied": 0, "fire_damaged": 0, "data_incomplete": 0, "stale_dom": 0,
+        "below_profit_threshold": 0,
+    }
+    qualified = []
+    for l in new_listings:
+        if l.get("is_multi_unit"):
+            excluded["multi_unit"] += 1
+            continue
+        if l.get("is_already_renovated"):
+            excluded["already_renovated"] += 1
+            continue
+        if l.get("is_vacant_land"):
+            excluded["vacant_land"] += 1
+            continue
+        if l.get("is_tenant_occupied"):
+            excluded["tenant_occupied"] += 1
+            continue
+        if l.get("is_fire_damaged"):
+            # fire remediation isn't priced by the per-sqft rehab model, and
+            # Bryan doesn't want fire-damaged homes on the list at all (2026-07-27)
+            excluded["fire_damaged"] += 1
+            continue
+        if l.get("is_data_incomplete"):
+            excluded["data_incomplete"] += 1
+            continue
+        dom = l.get("days_on_market")
+        if dom is not None and dom >= fsr.MAX_DAYS_ON_MARKET:
+            excluded["stale_dom"] += 1
+            continue
+        deal = fsr.calculate_deal(l)
+        if deal is None or not deal["meets_threshold_light"]:
+            # doesn't clear the minimum profit threshold even in the best
+            # (light rehab) case - not profitable, don't surface it
+            excluded["below_profit_threshold"] += 1
+            continue
+        l["deal"] = deal
+        l["score"] = fsr.score_deal(l, deal)
+        l["recommendation"] = fsr.classify_deal(deal)
+        l["risks"] = fsr.identify_risks(l)
+        qualified.append(l)
+
+    qualified.sort(key=lambda x: (x["score"], x["deal"]["gross_profit_heavy"]), reverse=True)
+
+    # mark everything we saw this run (qualified or not) so it's never
+    # re-flagged as "new" again - EXCEPT listings whose enrichment came back
+    # empty (is_data_incomplete = no description AND no year built). A
+    # rate-limited/blocked detail fetch is indistinguishable from a genuinely
+    # blank listing, so marking those as seen would silently drop a real
+    # lead forever just because Redfin 403'd one request. Leave them unseen
+    # so the next hourly run re-fetches and re-scores them.
+    failed_enrichment = {l["url"] for l in new_listings if l.get("is_data_incomplete")}
+    save_seen((seen | all_current_urls) - failed_enrichment)
+    if failed_enrichment:
+        print(f"{len(failed_enrichment)} listing(s) had empty enrichment "
+              f"(likely rate-limited detail fetch) - left unseen for retry next run")
+
+    total_excluded = sum(excluded.values())
+    kpi.log_run(now_iso, {
+        "new_listings_checked": len(new_listings),
+        "qualified": len(qualified),
+        "excluded_total": total_excluded,
+        "excluded_by_reason": excluded,
+    })
+    print(f"\nKPI: {len(new_listings)} checked -> {len(qualified)} qualified, "
+          f"{total_excluded} excluded ({', '.join(f'{k}={v}' for k, v in excluded.items() if v)})")
+
+    if qualified:
+        json.dump(qualified, open(os.path.join(HERE, "new_leads.json"), "w"), indent=2)
+        print(f"\n{len(qualified)} NEW LEADS CLEARED FILTERS:")
+        for d in qualified:
+            print(f"  {d['score']}/10  {d['recommendation']}  {d['address']}, {d['city']} {d['zip']}  "
+                  f"${d['price']:,}  profit(light) ${d['deal']['gross_profit_light']:,.0f}  {d['url']}")
+        merge_into_sheets_feed(qualified, now_iso)
+    else:
+        if os.path.exists(os.path.join(HERE, "new_leads.json")):
+            os.remove(os.path.join(HERE, "new_leads.json"))
+        print("\nNo new leads cleared the filters this run.")
+
+    # every run, not just runs with new leads - leads age whether or not
+    # anything new qualified this hour
+    age_out_stale_feed_leads(now_iso, now_ts, parse_iso)
+
+
+FEED_PATH = os.path.join(HERE, "leads_for_sheets.json")
+
+
+def age_out_stale_feed_leads(now_iso, now_ts, parse_iso):
+    """Drop feed leads whose days-on-market has aged past the 45-day cutoff
+    SINCE they were added. Qualification only checks DOM once, on the day a
+    lead qualifies - but the listing keeps sitting on the market after that,
+    so a lead added at DOM 20 is at DOM 50+ a month later and violates the
+    standing under-45 rule. Estimated current DOM = dom_at_add (worst case 1
+    if unknown) + whole days elapsed since added_at. Conservative lower
+    bound - only drops leads that are provably past the cutoff."""
+    if not os.path.exists(FEED_PATH):
+        return
+    feed = json.load(open(FEED_PATH))
+    keep, dropped = [], []
+    for row in feed["leads"]:
+        added_at = row.get("added_at")
+        if not added_at:
+            keep.append(row)  # no timestamp - backfill handles these once
+            continue
+        days_in_feed = int((now_ts - parse_iso(added_at)) // 86400)
+        est_dom = (row.get("dom_at_add") or 1) + days_in_feed
+        if est_dom >= fsr.MAX_DAYS_ON_MARKET:
+            dropped.append((est_dom, row))
+        else:
+            keep.append(row)
+    if not dropped:
+        return
+    for est_dom, row in dropped:
+        kpi.log_manual_removal(
+            now_iso, row["url"], row["address"],
+            f"aged out: estimated {est_dom} days on market "
+            f"(dom {row.get('dom_at_add') or 1} at add + time in feed) - standing under-45 rule")
+    feed["leads"] = keep
+    feed["generated_at"] = now_iso
+    json.dump(feed, open(FEED_PATH, "w"), indent=2)
+    print(f"Aged out {len(dropped)} feed lead(s) past the {fsr.MAX_DAYS_ON_MARKET}-day cutoff "
+          f"- {len(keep)} remain")
+
+
+def merge_into_sheets_feed(new_qualified, now_iso):
+    """Append newly-qualified leads into the consolidated feed the Google
+    Apps Script reads (leads_for_sheets.json), deduped by URL. This is the
+    file that drives Juan's spreadsheet - keep it in this flat, sheet-ready
+    row shape, not the raw nested listing dicts. No ADU Potential, no
+    "Reno Budget" - Rehab Cost (Light)/(Heavy) per the standing methodology."""
+    feed = {"generated_at": now_iso, "leads": []}
+    if os.path.exists(FEED_PATH):
+        feed = json.load(open(FEED_PATH))
+
+    existing_urls = {row["url"] for row in feed["leads"]}
+    for d in new_qualified:
+        if d["url"] in existing_urls:
+            continue
+        deal = d["deal"]
+        if not deal["meets_threshold_light"]:
+            # belt-and-suspenders: only profitable leads ever reach the
+            # sheet. Callers should already filter this, but don't rely on it.
+            continue
+        feed["leads"].append({
+            "score": d["score"], "recommendation": d["recommendation"],
+            "added_at": now_iso, "dom_at_add": d.get("days_on_market"),
+            "address": d["address"], "city": d["city"], "zip": d["zip"],
+            "beds": d["beds"], "baths": d["baths"], "sqft": d["sqft"],
+            "lot_sqft": d.get("lot_sqft", 0), "year_built": d.get("year_built", ""),
+            "price": d["price"], "arv": deal["arv"],
+            "rehab_light": deal["rehab_light"], "rehab_heavy": deal["rehab_heavy"],
+            "holding_costs": deal["holding_costs"],
+            "total_cost_light": deal["total_cost_light"], "total_cost_heavy": deal["total_cost_heavy"],
+            "gross_profit_light": deal["gross_profit_light"], "gross_profit_heavy": deal["gross_profit_heavy"],
+            "min_profit_threshold": deal["min_profit_threshold"],
+            "meets_threshold_heavy": deal["meets_threshold_heavy"],
+            "recommended_max_offer": deal["recommended_max_offer"],
+            "risks": "; ".join(d.get("risks", [])) or "None",
+            "url": d["url"],
+        })
+
+    feed["leads"].sort(key=lambda r: (r["score"], r["gross_profit_heavy"]), reverse=True)
+    feed["generated_at"] = now_iso
+    json.dump(feed, open(FEED_PATH, "w"), indent=2)
+    print(f"leads_for_sheets.json updated - {len(feed['leads'])} total leads in feed")
+
+
+if __name__ == "__main__":
+    # Called directly (not from a workflow script) - real wall-clock time is fine here.
+    import datetime as _dt
+    _now = _dt.datetime.now(_dt.timezone.utc)
+    main(_now.isoformat().replace("+00:00", "Z"), _now.timestamp(),
+         lambda s: _dt.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp())

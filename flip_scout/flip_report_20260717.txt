@@ -1,0 +1,93 @@
+Juan's Flip Scout Report - July 17, 2026
+============================================================
+
+LEAD #1 - Score: 8/10
+Address: 1135 Naples St, San Francisco, CA 94112
+Price: $1,099,000
+ARV (comp-based): $2,939,000
+Net Spread: $949,000 (47.7%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/1135-Naples-St-94112/home/2034856
+----------------------------------------
+
+LEAD #2 - Score: 7/10
+Address: 2816 23rd St, San Francisco, CA 94110
+Price: $999,000
+ARV (comp-based): $2,912,000
+Net Spread: $956,000 (48.9%)
+Risks: Pre-1940 construction - expect old wiring/plumbing, Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/2816-23rd-St-94110/home/1939359
+----------------------------------------
+
+LEAD #3 - Score: 6/10
+Address: 2182 40th Ave, San Francisco, CA 94116
+Price: $1,199,000
+ARV (comp-based): $2,401,000
+Net Spread: $540,000 (29.0%)
+Risks: Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/2182-40th-Ave-94116/home/1996640
+----------------------------------------
+
+LEAD #4 - Score: 6/10
+Address: 828 San Saba Ct, Sunnyvale, CA 94085
+Price: $1,249,000
+ARV (comp-based): $2,221,000
+Net Spread: $403,000 (22.2%)
+Risks: 
+Link: https://www.redfin.com/CA/Sunnyvale/828-San-Saba-Ct-94085/home/897580
+----------------------------------------
+
+LEAD #5 - Score: 5/10
+Address: 2471 40th Ave, San Francisco, CA 94116
+Price: $1,098,000
+ARV (comp-based): $2,177,000
+Net Spread: $337,000 (18.3%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Francisco/2471-40th-Ave-94116/home/2008181
+----------------------------------------
+
+LEAD #6 - Score: 4/10
+Address: 106 Madrid St, San Francisco, CA 94112
+Price: $870,000
+ARV (comp-based): $1,890,000
+Net Spread: $372,000 (24.5%)
+Risks: Pre-1940 construction - expect old wiring/plumbing, Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/106-Madrid-St-94112/home/1055569
+----------------------------------------
+
+LEAD #7 - Score: 4/10
+Address: 1000 Crescent Ave, San Francisco, CA 94110
+Price: $1,225,000
+ARV (comp-based): $2,204,000
+Net Spread: $369,000 (20.1%)
+Risks: Small lot - limited ADU potential
+Link: https://www.redfin.com/CA/San-Francisco/1000-Crescent-Ave-94110/home/768120
+----------------------------------------
+
+LEAD #8 - Score: 4/10
+Address: 8 Nancy Ln, Daly City, CA 94014
+Price: $1,198,000
+ARV (comp-based): $2,242,000
+Net Spread: $-47,000 (-2.1%)
+Risks: 
+Link: https://www.redfin.com/CA/Daly-City/8-Nancy-Ln-94014/home/1945251
+----------------------------------------
+
+LEAD #9 - Score: 3/10
+Address: 25 Regent St, San Francisco, CA 94112
+Price: $1,298,000
+ARV (comp-based): $2,461,000
+Net Spread: $366,000 (17.5%)
+Risks: Pre-1940 construction - expect old wiring/plumbing
+Link: https://www.redfin.com/CA/San-Francisco/25-Regent-St-94112/home/2014899
+----------------------------------------
+
+LEAD #10 - Score: 3/10
+Address: 2539 Holland St, San Mateo, CA 94403
+Price: $998,000
+ARV (comp-based): $1,736,000
+Net Spread: $133,000 (8.3%)
+Risks: 
+Link: https://www.redfin.com/CA/San-Mateo/2539-Holland-St-94403/home/1024670
+----------------------------------------
+
