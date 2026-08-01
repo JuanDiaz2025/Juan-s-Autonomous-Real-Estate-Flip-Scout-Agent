@@ -2940,5 +2940,22 @@
     "url": "https://www.redfin.com/CA/Oakland/610-Prospect-Ave-94610/home/536195",
     "address": "610 Prospect Ave",
     "reason": "effectively refurbished - listing says 'refurbished... recently replaced roof, all windows, furnace, sewer, plumbing, electrical' = expensive systems done, no flip value-add (already-renovated rule). Also odd 2bd/4ba config suggests possible unpermitted units."
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-08-01T16:08:52.956953Z",
+    "new_listings_checked": 20,
+    "qualified": 2,
+    "excluded_total": 18,
+    "excluded_by_reason": {
+      "multi_unit": 2,
+      "already_renovated": 2,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 9,
+      "stale_dom": 0,
+      "below_profit_threshold": 5
+    }
   }
 ]
