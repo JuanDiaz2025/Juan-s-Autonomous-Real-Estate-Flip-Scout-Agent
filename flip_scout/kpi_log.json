@@ -2909,5 +2909,36 @@
       "stale_dom": 0,
       "below_profit_threshold": 2
     }
+  },
+  {
+    "kind": "run",
+    "timestamp": "2026-08-01T07:23:51.712484Z",
+    "new_listings_checked": 29,
+    "qualified": 5,
+    "excluded_total": 24,
+    "excluded_by_reason": {
+      "multi_unit": 6,
+      "already_renovated": 1,
+      "vacant_land": 0,
+      "tenant_occupied": 0,
+      "fire_damaged": 0,
+      "data_incomplete": 14,
+      "stale_dom": 0,
+      "below_profit_threshold": 3
+    }
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-08-01T07:40:16.779348Z",
+    "url": "https://www.redfin.com/CA/Oakland/1555-Mitchell-St-94601/home/538149",
+    "address": "1555 Mitchell St",
+    "reason": "fake ARV - $945/sqft vs 94601 median $444 (2.1x), phantom $465k profit. 94601 is low-value East Oakland; renovated 2/1 nowhere near $1M. year_built=0 data gap. arv/price=2.23x exceeds verify threshold."
+  },
+  {
+    "kind": "manual_removal",
+    "timestamp": "2026-08-01T07:40:16.779417Z",
+    "url": "https://www.redfin.com/CA/Oakland/610-Prospect-Ave-94610/home/536195",
+    "address": "610 Prospect Ave",
+    "reason": "effectively refurbished - listing says 'refurbished... recently replaced roof, all windows, furnace, sewer, plumbing, electrical' = expensive systems done, no flip value-add (already-renovated rule). Also odd 2bd/4ba config suggests possible unpermitted units."
   }
 ]
