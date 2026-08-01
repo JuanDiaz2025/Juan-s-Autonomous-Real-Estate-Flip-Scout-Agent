@@ -48,10 +48,15 @@
  *      date, address, category, exact reason it was cut, and its Redfin
  *      link. Read-only mirror of the repo (rebuilt from the feed each run) -
  *      distinct from the hidden "Rejected (do not edit)" URL blacklist.
+ *  11. Flip Scout -> Show SF Fixables : builds/refreshes an "SF Fixables"
+ *      tab from the raw SF pull - every active SF-zip listing that isn't
+ *      renovated/multi-unit/land/fire-damaged, deliberately with NO comping
+ *      or profit math (Bryan 2026-08-01). An inventory to browse, not a
+ *      vetted deal list.
  *
  * If Juan's repo branch ever changes (e.g. after this work merges to
- * main), update FEED_URL (and REJECTED_FEED_URL) below to match - swap
- * "claude/python-code-goal-nn6zec" for "main".
+ * main), update FEED_URL (and REJECTED_FEED_URL / SF_FIXABLES_FEED_URL)
+ * below to match - swap "claude/python-code-goal-nn6zec" for "main".
  */
 
 var FEED_URL = 'https://raw.githubusercontent.com/JuanDiaz2025/Juan-s-Autonomous-Real-Estate-Flip-Scout-Agent/claude/python-code-goal-nn6zec/flip_scout/leads_for_sheets.json';
@@ -70,6 +75,30 @@ var REJECTED_LEADS_COLUMNS = [
   { key: 'category', header: 'Category', format: '@' },
   { key: 'reason', header: 'Reason Cut', format: '@' },
   { key: 'url', header: 'Redfin Link', format: '@' },
+];
+
+// Raw SF "fixables" pull (Bryan, 2026-08-01): every active SF-zip listing
+// that isn't renovated/multi-unit/land/fire-damaged - NO comping, no ARV or
+// profit math, deliberately. Built by flip_scout/sf_pull.py into
+// sf_fixables_for_sheets.json. Rendered into an "SF Fixables" tab by
+// Show SF Fixables. Same-branch pairing as FEED_URL.
+var SF_FIXABLES_FEED_URL = 'https://raw.githubusercontent.com/JuanDiaz2025/Juan-s-Autonomous-Real-Estate-Flip-Scout-Agent/claude/python-code-goal-nn6zec/flip_scout/sf_fixables_for_sheets.json';
+var SF_FIXABLES_SHEET_NAME = 'SF Fixables';
+
+var SF_FIXABLES_COLUMNS = [
+  { key: 'zip', header: 'Zip', format: '@' },
+  { key: 'address', header: 'Address', format: '@' },
+  { key: 'price', header: 'Price', format: '$#,##0' },
+  { key: 'beds', header: 'Beds', format: '0.#' },
+  { key: 'baths', header: 'Baths', format: '0.#' },
+  { key: 'sqft', header: 'SqFt', format: '#,##0' },
+  { key: 'year_built', header: 'Year Built', format: '0' },
+  { key: 'lot_sqft', header: 'Lot SqFt', format: '#,##0' },
+  { key: 'days_on_market', header: 'DOM', format: '0' },
+  { key: 'price_cuts', header: 'Price Cuts', format: '0' },
+  { key: 'condition_unverified', header: 'Condition Verified?', format: '@' },
+  { key: 'url', header: 'Redfin Link', format: '@' },
+  { key: 'desc', header: 'Description (first 200)', format: '@' },
 ];
 
 var COLUMNS = [
@@ -110,6 +139,7 @@ function onOpen() {
     .addItem('Remove Non-Profitable Leads', 'removeNonProfitableLeads')
     .addItem('Show KPI Tab', 'showKpiTab')
     .addItem('Show Rejected Leads', 'showRejectedLeads')
+    .addItem('Show SF Fixables', 'showSfFixables')
     .addItem('Enable Hourly Auto-Refresh', 'enableHourlyTrigger')
     .addItem('Disable Auto-Refresh', 'disableHourlyTrigger')
     .addToUi();
@@ -198,6 +228,84 @@ function showRejectedLeads() {
 
   ss.setActiveSheet(sheet);
   ss.toast((feed.count || rejected.length) + ' rejected lead(s) loaded.', 'Flip Scout', 5);
+}
+
+/**
+ * Show SF Fixables - builds/refreshes an "SF Fixables" tab from the raw SF
+ * pull feed (sf_fixables_for_sheets.json), then jumps to it.
+ *
+ * This list is DELIBERATELY un-comped (Bryan, 2026-08-01): every active
+ * listing in the SF buy-box zips that isn't already-renovated, multi-unit,
+ * vacant land, or fire-damaged - no ARV, no profit gate, no age/size/$psf
+ * screens. It's a raw "what's out there that we could fix" inventory, NOT
+ * a vetted deal list; the main Flip Scout Leads tab stays the deal list.
+ *
+ * "Condition Verified?" = whether the listing description could be fetched
+ * to run the renovated check. "NO - verify" rows may still be flips - check
+ * photos before spending time on them.
+ *
+ * Read-only mirror: rebuilt from the feed on every run (don't hand-edit).
+ * Refreshing the underlying data requires re-running flip_scout/sf_pull.py
+ * in the repo and pushing - the sheet just renders the committed feed.
+ */
+function showSfFixables() {
+  var ui = SpreadsheetApp.getUi();
+  var response = UrlFetchApp.fetch(SF_FIXABLES_FEED_URL, { muteHttpExceptions: true });
+  if (response.getResponseCode() !== 200) {
+    ui.alert('Could not fetch the SF fixables feed (HTTP ' + response.getResponseCode() + ').\n\n' +
+      'Check SF_FIXABLES_FEED_URL still points at a real branch/file in the repo.');
+    return;
+  }
+
+  var feed = JSON.parse(response.getContentText());
+  var fixables = feed.fixables || [];
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(SF_FIXABLES_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(SF_FIXABLES_SHEET_NAME);
+  }
+  sheet.clear(); // derived data - rebuild fresh from the feed every time
+
+  var headers = SF_FIXABLES_COLUMNS.map(function (c) { return c.header; });
+  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+  sheet.setFrozenRows(1);
+
+  if (fixables.length > 0) {
+    var rows = fixables.map(function (r) {
+      return SF_FIXABLES_COLUMNS.map(function (c) {
+        if (c.key === 'condition_unverified') {
+          return r.condition_unverified ? 'NO - verify' : 'yes';
+        }
+        var v = r[c.key];
+        return v === undefined || v === null ? '' : v;
+      });
+    });
+    sheet.getRange(2, 1, rows.length, headers.length).setValues(rows);
+    SF_FIXABLES_COLUMNS.forEach(function (c, i) {
+      sheet.getRange(2, i + 1, rows.length, 1).setNumberFormat(c.format);
+    });
+    // keep the description column readable, not runaway-wide
+    var descCol = SF_FIXABLES_COLUMNS.length;
+    sheet.getRange(2, descCol, rows.length, 1).setWrap(true);
+  }
+
+  sheet.autoResizeColumns(1, headers.length);
+  var descColIdx = SF_FIXABLES_COLUMNS.length;
+  if (sheet.getColumnWidth(descColIdx) > 420) sheet.setColumnWidth(descColIdx, 420);
+
+  sheet.getRange(1, 1).setNote(
+    'SF Fixables - raw pull, NO comping/profit math by design (Bryan 2026-08-01).\n' +
+    'Excluded upstream: already-renovated, multi-unit, vacant land, fire-damaged.\n' +
+    'Total: ' + (feed.count || fixables.length) + '\n' +
+    'Feed generated: ' + (feed.generated_at || '?') + '\n' +
+    'Shown: ' + new Date().toString() + '\n\n' +
+    'Rows marked "NO - verify" could not be condition-checked (description ' +
+    'fetch blocked) - check photos before pursuing.');
+
+  ss.setActiveSheet(sheet);
+  ss.toast((feed.count || fixables.length) + ' SF fixable(s) loaded.', 'Flip Scout', 5);
 }
 
 /**
